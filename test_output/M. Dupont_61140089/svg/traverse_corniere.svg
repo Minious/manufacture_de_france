@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="1820">
+<text x="74.0" y="35.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" >TRAVERSE CORNIERE 30x30x3</text>
+<rect x="74.0" y="10.0" width="372.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<text x="213.5" y="70.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" >QTE = 2</text>
+<rect x="213.5" y="45.0" width="93.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="395.0" y1="200.0" x2="395.0" y2="1690.0" style="stroke-width: 2.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="425.0" y1="170.0" x2="425.0" y2="1720.0" style="stroke-width: 2.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="395.0" y1="200.0" x2="425.0" y2="170.0" style="stroke-width: 2.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="395.0" y1="1690.0" x2="425.0" y2="1720.0" style="stroke-width: 2.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="410.0" y1="170.0" x2="410.0" y2="1720.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="45.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-0.0,-1.0,1.0,0.0,395.0,170.0)" />
+<line x1="0.0" y1="0.0" x2="45.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-0.0,-1.0,1.0,0.0,425.0,170.0)" />
+<line x1="0.0" y1="-15.0" x2="0.0" y2="15.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-0.0,-1.0,1.0,0.0,410.0,125.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(1.0,0.0,0.0,1.0,396.0,120.0)" >30</text>
+<rect x="0.0" y="-25.0" width="28.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,396.0,120.0)" />
+<line x1="0.0" y1="0.0" x2="15.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-0.0,-1.0,1.0,0.0,395.0,170.0)" />
+<line x1="0.0" y1="0.0" x2="15.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-0.0,-1.0,1.0,0.0,410.0,170.0)" />
+<line x1="0.0" y1="-45.5" x2="0.0" y2="7.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-0.0,-1.0,1.0,0.0,402.5,155.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(1.0,0.0,0.0,1.0,357.0,150.0)" >15</text>
+<rect x="0.0" y="-25.0" width="28.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,357.0,150.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1691.0)" />
+<line x1="0.0" y1="-14.5" x2="0.0" y2="28.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,380.0,1705.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,375.0,1705.5)" >29</text>
+<rect x="0.0" y="-25.0" width="28.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,375.0,1705.5)" />
+<ellipse cx="410.0" cy="1691.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="60.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="60.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1668.0)" />
+<line x1="0.0" y1="-26.0" x2="0.0" y2="26.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,350.0,1694.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,345.0,1708.0)" >52</text>
+<rect x="0.0" y="-25.0" width="28.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,345.0,1708.0)" />
+<ellipse cx="410.0" cy="1668.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,410.0,1347.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,410.0,1668.0)" />
+<line x1="0.0" y1="-160.5" x2="0.0" y2="160.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,440.0,1507.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,1.0,-1.0,-0.0,445.0,1486.5)" >321</text>
+<rect x="0.0" y="-25.0" width="42.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,1.0,-1.0,-0.0,445.0,1486.5)" />
+<line x1="0.0" y1="0.0" x2="90.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="90.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1347.0)" />
+<line x1="0.0" y1="-186.5" x2="0.0" y2="186.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,320.0,1533.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,315.0,1554.5)" >373</text>
+<rect x="0.0" y="-25.0" width="42.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,315.0,1554.5)" />
+<ellipse cx="410.0" cy="1347.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="120.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="120.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1303.0)" />
+<line x1="0.0" y1="-208.5" x2="0.0" y2="208.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,290.0,1511.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,285.0,1532.5)" >417</text>
+<rect x="0.0" y="-25.0" width="42.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,285.0,1532.5)" />
+<ellipse cx="410.0" cy="1303.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,410.0,1303.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,410.0,1347.0)" />
+<line x1="0.0" y1="-22.0" x2="0.0" y2="22.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,440.0,1325.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,1.0,-1.0,-0.0,445.0,1311.0)" >44</text>
+<rect x="0.0" y="-25.0" width="28.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,1.0,-1.0,-0.0,445.0,1311.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,410.0,967.0)" />
+<line x1="0.0" y1="0.0" x2="30.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,410.0,1303.0)" />
+<line x1="0.0" y1="-168.0" x2="0.0" y2="168.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(1.0,0.0,0.0,1.0,440.0,1135.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,1.0,-1.0,-0.0,445.0,1114.0)" >336</text>
+<rect x="0.0" y="-25.0" width="42.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,1.0,-1.0,-0.0,445.0,1114.0)" />
+<line x1="0.0" y1="0.0" x2="150.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="150.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,967.0)" />
+<line x1="0.0" y1="-376.5" x2="0.0" y2="376.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,260.0,1343.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,255.0,1364.5)" >753</text>
+<rect x="0.0" y="-25.0" width="42.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,255.0,1364.5)" />
+<ellipse cx="410.0" cy="967.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="180.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="180.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,923.0)" />
+<line x1="0.0" y1="-398.5" x2="0.0" y2="398.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,230.0,1321.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,225.0,1342.5)" >797</text>
+<rect x="0.0" y="-25.0" width="42.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,225.0,1342.5)" />
+<ellipse cx="410.0" cy="923.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="210.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="210.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,587.0)" />
+<line x1="0.0" y1="-566.5" x2="0.0" y2="566.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,200.0,1153.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,195.0,1181.5)" >1133</text>
+<rect x="0.0" y="-25.0" width="56.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,195.0,1181.5)" />
+<ellipse cx="410.0" cy="587.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="240.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="240.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,543.0)" />
+<line x1="0.0" y1="-588.5" x2="0.0" y2="588.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,170.0,1131.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,165.0,1159.5)" >1177</text>
+<rect x="0.0" y="-25.0" width="56.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,165.0,1159.5)" />
+<ellipse cx="410.0" cy="543.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="270.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="270.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,222.0)" />
+<line x1="0.0" y1="-749.0" x2="0.0" y2="749.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,140.0,971.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,135.0,999.0)" >1498</text>
+<rect x="0.0" y="-25.0" width="56.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,135.0,999.0)" />
+<ellipse cx="410.0" cy="222.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="0.0" y2="94.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(0.7071067811865476,-0.7071067811865475,0.7071067811865475,0.7071067811865476,410.0,199.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.7071067811865475,0.7071067811865476,-0.7071067811865476,0.7071067811865475,441.81980515339467,223.74873734152916)" >ØM5</text>
+<rect x="0.0" y="-25.0" width="54.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.7071067811865475,0.7071067811865476,-0.7071067811865476,0.7071067811865475,441.81980515339467,223.74873734152916)" />
+<line x1="0.0" y1="0.0" x2="300.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="300.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,199.0)" />
+<line x1="0.0" y1="-760.5" x2="0.0" y2="760.5" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,110.0,959.5)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,105.0,987.5)" >1521</text>
+<rect x="0.0" y="-25.0" width="56.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,105.0,987.5)" />
+<ellipse cx="410.0" cy="199.0" rx="1.875" ry="1.875" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<line x1="0.0" y1="0.0" x2="330.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,1720.0)" />
+<line x1="0.0" y1="0.0" x2="330.0" y2="0.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,410.0,170.0)" />
+<line x1="0.0" y1="-775.0" x2="0.0" y2="775.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; " transform="matrix(-1.0,0.0,0.0,-1.0,80.0,945.0)" />
+<text x="0.0" y="0.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 25px; " transform="matrix(0.0,-1.0,1.0,-0.0,75.0,973.0)" >1550</text>
+<rect x="0.0" y="-25.0" width="56.0" height="25.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(0.0,-1.0,1.0,-0.0,75.0,973.0)" />
+<text x="10.0" y="1759.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 15px; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" >ARC : 190000310</text>
+<rect x="10.0" y="1744.0" width="115.0" height="15.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<text x="10.0" y="1776.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 15px; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" >Client : M. Dupont</text>
+<rect x="10.0" y="1761.0" width="115.0" height="15.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<text x="10.0" y="1793.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 15px; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" >Ref : 61140089</text>
+<rect x="10.0" y="1778.0" width="99.0" height="15.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<text x="10.0" y="1810.0" style="fill: rgb(0,0,0); fill-opacity: 1.0; font-family: Arial; font-size: 15px; " transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" >Dimensions vitrage : 366.0 x 1058.0</text>
+<rect x="10.0" y="1795.0" width="232.0" height="15.0" style="stroke-width: 1.0; stroke: rgb(0,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+<rect x="10.0" y="10.0" width="487.6812408671319" height="1800.0" style="stroke-width: 1.0; stroke: rgb(255,0,0); stroke-opacity: 1.0; stroke-linecap: square; fill: none;" transform="matrix(1.0,0.0,0.0,1.0,0.0,0.0)" />
+</svg>

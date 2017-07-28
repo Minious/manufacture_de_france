@@ -6,7 +6,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -17,6 +21,7 @@ import java.util.ArrayList;
 
 public class MyCustomSvg {
 	private int width, height;
+	private Rectangle2D bounds;
 	private ArrayList<SvgComponent> svgTree = new ArrayList<SvgComponent>();
 	private StyleContext curSc = new StyleContext(
 		new AffineTransform(),
@@ -28,6 +33,7 @@ public class MyCustomSvg {
 	public MyCustomSvg(int width, int height) {
 		this.width = width;
 		this.height = height;
+		this.bounds = null;
 	}
 
 	public int getWidth() {
@@ -74,21 +80,33 @@ public class MyCustomSvg {
 	public void drawRect(double x, double y, double width, double height) {
 		Rect rect = new Rect(x, y, width, height, curSc);
 		svgTree.add(rect);
+		this.enlargeBounds(new Rectangle2D.Double(x, y, width, height));
 	}
 	
 	public void drawEllipse(double x, double y, double width, double height) {
 		Ellipse el = new Ellipse(x, y, width, height, curSc);
 		svgTree.add(el);
+		this.enlargeBounds(new Ellipse2D.Double(x, y, width, height));
 	}
 	
 	public void drawLine(double x1, double y1, double x2, double y2) {
 		Line line = new Line(x1, y1, x2, y2, curSc);
 		svgTree.add(line);
+		this.enlargeBounds(new Line2D.Double(x1, y1, x2, y2));
 	}
 	
 	public void drawString(String text, double x, double y) {
 		Str str = new Str(text, x, y, curSc);
 		svgTree.add(str);
+		
+		int width = this.getFontMetrics().stringWidth(text);
+		//int height = this.getFontMetrics().getHeight();
+		int height = this.curSc.getFont().getSize();
+		this.enlargeBounds(new Rectangle2D.Double(x, y - height, width, height));
+		
+		///// DEBUG
+		this.drawRect(x, y - height, width, height);
+		/////
 	}
 	
 	public void draw(SvgComponent c) {
@@ -96,6 +114,11 @@ public class MyCustomSvg {
 	}
 	
 	public void writeToSVG(Path outputFilePath) {
+		///// DEBUG
+		this.setColor(Color.RED);
+		this.drawRect(this.bounds.getX(), this.bounds.getY(), this.bounds.getWidth(), this.bounds.getHeight());
+		/////
+		
 		System.out.println(outputFilePath);
 		
 		String svgOpeningTag = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + this.width + "\" height=\"" + this.height + "\">";
@@ -107,11 +130,24 @@ public class MyCustomSvg {
 			svgTreeTags.add(svgComponent.renderTag());
 			//System.out.println(svgComponent.renderTag());
 		}
-		svgTreeTags.add(svgClosingTag);
 
+		System.out.println("fixed dimensions : "+this.width+"x"+this.height);
+		System.out.println("dynamic dimensions : "+this.bounds.getWidth()+"x"+this.bounds.getHeight());
+
+		svgTreeTags.add(svgClosingTag);
+		
 		try {
 			Files.createDirectories(outputFilePath.getParent());
 			Files.write(outputFilePath, svgTreeTags, Charset.forName("UTF-8"));
 		} catch (IOException e) {System.out.println(e);}
+	}
+	
+	private void enlargeBounds(Shape shape) {
+		Shape transformedShape = curSc.getTransform().createTransformedShape(shape);
+		Rectangle2D bounds = transformedShape.getBounds2D();
+		if(this.bounds == null)
+			this.bounds = bounds;
+		else
+			this.bounds.add(bounds);
 	}
 }

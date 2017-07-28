@@ -33,7 +33,7 @@ public abstract class ElementGenerique {
 		g.fillRect(0, 0, g.getWidth(), g.getHeight());
 		*/
 		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, g.getWidth(), g.getHeight());
+		//g.drawRect(0, 0, g.getWidth(), g.getHeight());
 		
 		drawImage(g);
 		
