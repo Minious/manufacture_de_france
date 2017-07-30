@@ -1,4 +1,4 @@
-package generateurCoteVerriere.modeles;
+package generateurCoteVerriere;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,6 @@ import org.apache.batik.apps.rasterizer.SVGConverterException;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.util.PDFMergerUtility;
 
-import generateurCoteVerriere.ElementGenerique;
 import generateurCoteVerriere.modeles.mecanique.Conf;
 
 public abstract class ModeleGenerique {

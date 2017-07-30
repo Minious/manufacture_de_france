@@ -1,9 +1,7 @@
 package generateurCoteVerriere.modeles.mecanique;
 
-import java.nio.file.Path;
-
+import generateurCoteVerriere.ConfGenerique;
 import generateurCoteVerriere.Utils;
-import generateurCoteVerriere.modeles.ConfGenerique;
 
 public class Conf extends ConfGenerique{
 	private String ARC;

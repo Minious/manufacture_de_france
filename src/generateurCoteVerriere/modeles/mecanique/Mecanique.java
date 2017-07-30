@@ -1,7 +1,7 @@
 package generateurCoteVerriere.modeles.mecanique;
 
-import generateurCoteVerriere.modeles.ConfGenerique;
-import generateurCoteVerriere.modeles.ModeleGenerique;
+import generateurCoteVerriere.ConfGenerique;
+import generateurCoteVerriere.ModeleGenerique;
 
 public class Mecanique extends ModeleGenerique {
 	private Conf conf;

@@ -12,10 +12,6 @@ public class Line extends SvgComponent {
 	}
 	
 	public String renderTag() {
-		double tx = this.sc.getTransform().getTranslateX();
-		double ty = this.sc.getTransform().getTranslateY();
-		double rot = Math.atan2(this.sc.getTransform().getShearY(), this.sc.getTransform().getScaleY());
-		
 		String outputStr = "";
 		outputStr += "<line ";
 		outputStr += "x1=\"" + this.x1 + "\" ";
@@ -23,7 +19,6 @@ public class Line extends SvgComponent {
 		outputStr += "x2=\"" + this.x2 + "\" ";
 		outputStr += "y2=\"" + this.y2 + "\" ";
 		outputStr += "style=\"" + this.sc.getStrokeStyle() + "\" ";
-		//outputStr += "transform=\"translate(" + tx + " " + ty + ") rotate(" + rot + ")\" ";
 		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
 		outputStr += "/>";
 		

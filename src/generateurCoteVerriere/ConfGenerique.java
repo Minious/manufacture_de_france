@@ -1,4 +1,4 @@
-package generateurCoteVerriere.modeles;
+package generateurCoteVerriere;
 
 public abstract class ConfGenerique {
 	protected String ARC;

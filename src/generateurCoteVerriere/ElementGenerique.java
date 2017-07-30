@@ -1,21 +1,15 @@
 package generateurCoteVerriere;
 
 import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
 import generateurCoteVerriere.modeles.mecanique.Conf;
-import myCustomSvgLibrary.MyCustomSvg;
+import generateurCoteVerriere.modeles.mecanique.PiedDePage;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
-import myCustomSvgLibraryEnhanced.Point;
-import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
 public abstract class ElementGenerique {
 	protected Conf conf;
-
-	protected final int taillePoliceDonnees = 15;
-	protected final String font = "Arial";
 	
 	public ElementGenerique(Conf conf){
 		this.conf = conf;
@@ -37,14 +31,19 @@ public abstract class ElementGenerique {
 		
 		drawImage(g);
 		
+		/*
 		double margeEntreDonnees = 2;
 		double margeInferieureDonnees = 10;
-		g.setFont(this.taillePoliceDonnees, font);
+		g.setFont(this.taillePoliceDonnees, this.font);
 		g.drawString("ARC : " + conf.getARC(), new Point(0, (double) g.getHeight() - 3 * (taillePoliceDonnees + margeEntreDonnees) - margeInferieureDonnees), 10, ShiftMode.LEFT);
 		g.drawString("Client : " + conf.getClient(), new Point(0, (double) g.getHeight() - 2 * (taillePoliceDonnees + margeEntreDonnees) - margeInferieureDonnees), 10, ShiftMode.LEFT);
 		g.drawString("Ref : " + conf.getReference(), new Point(0, (double) g.getHeight() - (taillePoliceDonnees + margeEntreDonnees) - margeInferieureDonnees), 10, ShiftMode.LEFT);
 		g.drawString("Dimensions vitrage : " + conf.largeurVitrage + " x " + conf.hauteurVitrage, new Point(0, (double) g.getHeight() - margeInferieureDonnees), 10, ShiftMode.LEFT);
-
+		*/
+		
+		PiedDePage pdp = new PiedDePage();
+		pdp.drawImage(g, (Conf) conf);
+		
 		Path outputFilePath = savePath.resolve(getNomFichierDeRendu() + ".svg");
 		g.writeToSVG(outputFilePath);
 	}

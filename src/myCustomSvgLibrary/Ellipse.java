@@ -16,10 +16,7 @@ public class Ellipse extends SvgComponent {
 		double ry = this.height / 2;
 		double cx = this.x + rx;
 		double cy = this.y + ry;
-		double tx = this.sc.getTransform().getTranslateX();
-		double ty = this.sc.getTransform().getTranslateY();
-		double rot = Math.atan2(this.sc.getTransform().getShearY(), this.sc.getTransform().getScaleY());
-		
+
 		String outputStr = "";
 		outputStr += "<ellipse ";
 		outputStr += "cx=\"" + cx + "\" ";
@@ -27,7 +24,6 @@ public class Ellipse extends SvgComponent {
 		outputStr += "rx=\"" + rx + "\" ";
 		outputStr += "ry=\"" + ry + "\" ";
 		outputStr += "style=\"" + this.sc.getStrokeStyle() + "fill: none;\" ";
-		//outputStr += "transform=\"translate(" + tx + " " + ty + ") rotate(" + rot + ")\" ";
 		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
 		outputStr += "/>";
 		

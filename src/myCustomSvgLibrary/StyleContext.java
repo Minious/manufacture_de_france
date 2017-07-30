@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.AffineTransform;
-import java.util.Objects;
 
 public class StyleContext {
 	private AffineTransform curTransform = new AffineTransform();
@@ -56,6 +55,10 @@ public class StyleContext {
 	
 	public void setFont(Font f) {
 		this.curFont = f;
+	}
+	
+	public void setFontSize(float size) {
+		this.curFont = this.curFont.deriveFont(size);
 	}
 	
 	public void setStroke(BasicStroke s) {

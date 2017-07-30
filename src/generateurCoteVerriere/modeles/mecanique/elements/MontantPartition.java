@@ -59,7 +59,7 @@ public class MontantPartition extends ElementGenerique {
 		
 		// Affiche les titres du dessin
 		g.setColor(Color.BLACK);
-		g.setFont(this.taillePoliceTitre, font);
+		g.setFontSize(this.taillePoliceTitre);
 		String titre = "PARTITION PLAT 30x3";
 		g.drawString(titre, new Point((double) g.getWidth() / 2, this.ordonneePremiereLigneTitre), 0, ShiftMode.CENTER);
 		g.drawString("QTE = " + this.nbMontants, new Point((double) g.getWidth() / 2, this.ordonneeDeuxiemeLigneTitre), 0, ShiftMode.CENTER);
@@ -72,7 +72,7 @@ public class MontantPartition extends ElementGenerique {
 	    g.setStroke(new BasicStroke(1));
 	    g.drawLine(this.abscisseAxeMontant, this.ordonneeHautMontant, this.abscisseAxeMontant, this.ordonneeBasMontant);
 
-		g.setFont(this.taillePoliceCote, font);
+		g.setFontSize(this.taillePoliceCote);
 		
 	    // Cote de largeur puis demi largeur de la Partition avant
 		Point p1_1 = new Point(this.abscisseAxeMontant - conf.largeurMontantPartition / 2, this.ordonneeHautMontant);
