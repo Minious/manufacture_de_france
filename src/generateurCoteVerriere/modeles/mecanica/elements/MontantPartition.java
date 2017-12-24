@@ -1,26 +1,27 @@
-package generateurCoteVerriere.modeles.mecanique.elements;
+package generateurCoteVerriere.modeles.mecanica.elements;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.modeles.mecanique.Conf;
+import generateurCoteVerriere.modeles.mecanica.Conf;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
-public class ContreCadreMontantPartition extends ElementGenerique {
+public class MontantPartition extends ElementGenerique {
 	// Initialisation des paramètres
-	private String nomFichierDeRendu = "contre_cadre_montant_partition";
+	private String nomFichierDeRendu = "montant_partition";
 
 	// Parametres de la police
-	private final int taillePoliceCote = 25;
+	private final int taillePoliceTitre = 25;
+	private final int taillePoliceCote = 20;
 	private final int curUnderLineGap = 5;
 
 	// Titre montant Partition
 	private final double margeEntreLignesTitre = 10;
-	private final double ordonneePremiereLigneTitre = this.margeEntreLignesTitre + this.taillePoliceCote;
-	private final double ordonneeDeuxiemeLigneTitre = this.ordonneePremiereLigneTitre + this.margeEntreLignesTitre + this.taillePoliceCote;
+	private final double ordonneePremiereLigneTitre = this.margeEntreLignesTitre + this.taillePoliceTitre;
+	private final double ordonneeDeuxiemeLigneTitre = this.ordonneePremiereLigneTitre + this.margeEntreLignesTitre + this.taillePoliceTitre;
 	private final double margeEntreTitreEtDessin = 10;
 	private final int nbMontants = ((Conf) conf).nbPartitions - 1;
 
@@ -34,13 +35,13 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 	private final double ordonneeBasMontant = this.ordonneeHautMontant + ((Conf) conf).hauteurMontantPartition;
 
 	private final double diametreTrous = ((Conf) conf).largeurMontantPartition / 4; // INCORRECT
-	private final String valeurDiametreTrous = "Ø7";
+	private final String valeurDiametreTrous = "ØM5";
 
 	private final double nbCotesAGauche = ((Conf) this.conf).nbTrousIntermediairesVerticaux + 3;
 	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
 	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	
-	private final double margeLateraleDessin = 150;
+	private final double margeLateraleDessin = 80;
 	private final double margeBasDessin = 100;
 	
 	private final double abscisseAxeMontant = this.margeLateraleDessin + this.distanceEntreCentreMontantEtExtremiteGaucheDessin;
@@ -48,25 +49,21 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 	private final double largeurImage = this.abscisseAxeMontant + this.distanceEntreCentreMontantEtExtremiteDroiteDessin + this.margeLateraleDessin;
 	private final double hauteurImage = this.ordonneeBasMontant + this.margeBasDessin;
 	
-	public ContreCadreMontantPartition(Conf conf){
+	public MontantPartition(Conf conf){
 		super(conf);
 	}
-	
-	protected void drawImage(MyCustomSvgEnhanced g){
-		// Défini la police de caractères par défaut
-		g.setFont(this.taillePoliceCote, "Arial");
-		g.setUnderLineGap(this.curUnderLineGap);
 
-		this.draw(g);
-	}
-	
-	private void draw(MyCustomSvgEnhanced g){		
+	// protected void drawImage(SVGGraphics2D g){
+	protected void drawImage(MyCustomSvgEnhanced g){
+		g.setUnderLineGap(this.curUnderLineGap);
+		
 		// Affiche les titres du dessin
 		g.setColor(Color.BLACK);
-		String titre = "CONTRE CADRE PARTITION PLAT 30x3";
+		g.setFontSize(this.taillePoliceTitre);
+		String titre = "PARTITION PLAT 30x3";
 		g.drawString(titre, new Point((double) g.getWidth() / 2, this.ordonneePremiereLigneTitre), 0, ShiftMode.CENTER);
 		g.drawString("QTE = " + this.nbMontants, new Point((double) g.getWidth() / 2, this.ordonneeDeuxiemeLigneTitre), 0, ShiftMode.CENTER);
-
+		
 		// Trace le montant 
 	    g.setStroke(new BasicStroke(2));
 	    g.drawRect(this.abscisseAxeMontant - ((Conf) conf).largeurMontantPartition / 2, this.ordonneeHautMontant, ((Conf) conf).largeurMontantPartition, ((Conf) conf).hauteurMontantPartition);
@@ -74,7 +71,9 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 	    // Trace l'axe du milieu du montant 
 	    g.setStroke(new BasicStroke(1));
 	    g.drawLine(this.abscisseAxeMontant, this.ordonneeHautMontant, this.abscisseAxeMontant, this.ordonneeBasMontant);
-	    
+
+		g.setFontSize(this.taillePoliceCote);
+		
 	    // Cote de largeur puis demi largeur de la Partition avant
 		Point p1_1 = new Point(this.abscisseAxeMontant - ((Conf) conf).largeurMontantPartition / 2, this.ordonneeHautMontant);
 		Point p1_2 = new Point(this.abscisseAxeMontant + ((Conf) conf).largeurMontantPartition / 2, this.ordonneeHautMontant);

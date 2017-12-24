@@ -23,23 +23,23 @@ public class MontantPartition extends ElementGenerique {
 	private final double ordonneePremiereLigneTitre = this.margeEntreLignesTitre + this.taillePoliceTitre;
 	private final double ordonneeDeuxiemeLigneTitre = this.ordonneePremiereLigneTitre + this.margeEntreLignesTitre + this.taillePoliceTitre;
 	private final double margeEntreTitreEtDessin = 10;
-	private final int nbMontants = conf.nbPartitions - 1;
+	private final int nbMontants = ((Conf) conf).nbPartitions - 1;
 
 	// General
 	private final double ordonneeHautDessinMontant = this.ordonneeDeuxiemeLigneTitre + this.margeEntreTitreEtDessin;
 
 	private final double margeInterCote = 0; // 10;
-	private final double margeEntreMontantEtPremiereCote = conf.largeurMontantPartition / 2; // <--- Empirique
+	private final double margeEntreMontantEtPremiereCote = ((Conf) conf).largeurMontantPartition / 2; // <--- Empirique
 	
 	private final double ordonneeHautMontant = this.ordonneeHautDessinMontant + 2 * (this.taillePoliceCote + this.curUnderLineGap + this.margeEntreMontantEtPremiereCote);
-	private final double ordonneeBasMontant = this.ordonneeHautMontant + conf.hauteurMontantPartition;
+	private final double ordonneeBasMontant = this.ordonneeHautMontant + ((Conf) conf).hauteurMontantPartition;
 
-	private final double diametreTrous = conf.largeurMontantPartition / 4; // INCORRECT
+	private final double diametreTrous = ((Conf) conf).largeurMontantPartition / 4; // INCORRECT
 	private final String valeurDiametreTrous = "ØM5";
 
-	private final double nbCotesAGauche = this.conf.nbTrousIntermediairesVerticaux + 3;
-	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = conf.largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
-	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = conf.largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
+	private final double nbCotesAGauche = ((Conf) this.conf).nbTrousIntermediairesVerticaux + 3;
+	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
+	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	
 	private final double margeLateraleDessin = 80;
 	private final double margeBasDessin = 100;
@@ -66,7 +66,7 @@ public class MontantPartition extends ElementGenerique {
 		
 		// Trace le montant 
 	    g.setStroke(new BasicStroke(2));
-	    g.drawRect(this.abscisseAxeMontant - conf.largeurMontantPartition / 2, this.ordonneeHautMontant, conf.largeurMontantPartition, conf.hauteurMontantPartition);
+	    g.drawRect(this.abscisseAxeMontant - ((Conf) conf).largeurMontantPartition / 2, this.ordonneeHautMontant, ((Conf) conf).largeurMontantPartition, ((Conf) conf).hauteurMontantPartition);
 	    
 	    // Trace l'axe du milieu du montant 
 	    g.setStroke(new BasicStroke(1));
@@ -75,31 +75,31 @@ public class MontantPartition extends ElementGenerique {
 		g.setFontSize(this.taillePoliceCote);
 		
 	    // Cote de largeur puis demi largeur de la Partition avant
-		Point p1_1 = new Point(this.abscisseAxeMontant - conf.largeurMontantPartition / 2, this.ordonneeHautMontant);
-		Point p1_2 = new Point(this.abscisseAxeMontant + conf.largeurMontantPartition / 2, this.ordonneeHautMontant);
+		Point p1_1 = new Point(this.abscisseAxeMontant - ((Conf) conf).largeurMontantPartition / 2, this.ordonneeHautMontant);
+		Point p1_2 = new Point(this.abscisseAxeMontant + ((Conf) conf).largeurMontantPartition / 2, this.ordonneeHautMontant);
 		g.drawDistanceCote(p1_1, p1_2, margeEntreMontantEtPremiereCote + curUnderLineGap + taillePoliceCote, 0, ShiftMode.CENTER);
 		
 		Point p2_1 = p1_1;
 		Point p2_2 = new Point(this.abscisseAxeMontant, this.ordonneeHautMontant);
-		g.drawDistanceCote(p2_1, p2_2, margeEntreMontantEtPremiereCote, - conf.largeurMontantPartition / 4 - 10, ShiftMode.RIGHT);
+		g.drawDistanceCote(p2_1, p2_2, margeEntreMontantEtPremiereCote, - ((Conf) conf).largeurMontantPartition / 4 - 10, ShiftMode.RIGHT);
 		
 		// Cote entre les trous et l'extrémité de la Partition + affichage des trous
 	    Point p3_1 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant);
-	    Point p3_2 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - conf.ecartEntreExtremiteEtPremierTrouMontantPartition);
-		g.drawDistanceCote(p3_1, p3_2, conf.largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote, 0, ShiftMode.LEFT);
+	    Point p3_2 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - ((Conf) conf).ecartEntreExtremiteEtPremierTrouMontantPartition);
+		g.drawDistanceCote(p3_1, p3_2, ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote, 0, ShiftMode.LEFT);
 		g.drawCircle(p3_2, this.diametreTrous);
 		
-		Point pTemp = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - conf.ecartEntreExtremiteEtPremierTrouMontantPartition - conf.entreAxeMontant);
-		double curDistanceCotesLaterales = conf.largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote;
+		Point pTemp = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - ((Conf) conf).ecartEntreExtremiteEtPremierTrouMontantPartition - ((Conf) conf).entreAxeMontant);
+		double curDistanceCotesLaterales = ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote;
 		g.drawDistanceCote(pTemp, p3_2, curDistanceCotesLaterales);
 		curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 		
-		for(int i = 1 ; i <= this.conf.nbTrousIntermediairesVerticaux + 1 ; i++){
+		for(int i = 1 ; i <= ((Conf) this.conf).nbTrousIntermediairesVerticaux + 1 ; i++){
 			g.drawDistanceCote(p3_1, pTemp, curDistanceCotesLaterales);
 			curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 			g.drawCircle(pTemp, this.diametreTrous);
-			if(i != this.conf.nbTrousIntermediairesVerticaux + 1)
-				pTemp.move(0, - conf.entreAxeMontant);
+			if(i != ((Conf) this.conf).nbTrousIntermediairesVerticaux + 1)
+				pTemp.move(0, - ((Conf) conf).entreAxeMontant);
 		}
 		g.drawDiameterCote(this.valeurDiametreTrous, pTemp, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
 

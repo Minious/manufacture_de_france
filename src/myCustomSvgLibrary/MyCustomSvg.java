@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class MyCustomSvg extends SvgComponent{
 	private int width, height;
+	private double x, y;
 	private Rectangle2D bounds;
 	private ArrayList<SvgComponent> svgTree = new ArrayList<SvgComponent>();
 	private Padding padding;
@@ -34,6 +35,8 @@ public class MyCustomSvg extends SvgComponent{
 		this.height = height;
 		this.bounds = null;
 		this.padding = new Padding(100);
+		this.x = 0;
+		this.y = 0;
 	}
 
 	public double getWidth() {
@@ -42,6 +45,11 @@ public class MyCustomSvg extends SvgComponent{
 
 	public double getHeight() {
 		return this.height; // this.bounds.getHeight() + this.padding.getVerticalPadding();
+	}
+	
+	public void setPosition(double x, double y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public FontMetrics getFontMetrics() {
@@ -120,25 +128,23 @@ public class MyCustomSvg extends SvgComponent{
 		/////
 	}
 	
+	public void drawSvg(MyCustomSvg svg, double x, double y) {
+		svgTree.add(svg);
+		svg.setPosition(x, y);
+		Rectangle2D bounds = new Rectangle2D.Double(x, y, svg.getWidth(), svg.getHeight());
+		this.enlargeBounds(bounds);
+	}
+	
 	public String renderTag() {
-		String svgOpeningTag = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + this.width + "\" height=\"" + this.height + "\">";
-		String svgClosingTag = "</svg>";
-		
-		ArrayList<String> svgTreeTags = new ArrayList<String>();
-		svgTreeTags.add(svgOpeningTag);
-		for(SvgComponent svgComponent : this.svgTree) {
-			svgTreeTags.add(svgComponent.renderTag());
-			//System.out.println(svgComponent.renderTag());
-		}
-
 		System.out.println("fixed dimensions : "+this.width+"x"+this.height);
 		System.out.println("dynamic dimensions : "+this.bounds.getWidth()+"x"+this.bounds.getHeight());
-
-		svgTreeTags.add(svgClosingTag);
 		
 		String output = "";
-		for(String currentTag : svgTreeTags)
-			output += currentTag + "\n";
+		output += "<svg x=\""+this.x+"\" y=\""+this.y+"\">\n";
+		for(SvgComponent svgComponent : this.svgTree) {
+			output += svgComponent.renderTag() + "\n";
+		}
+		output += "</svg>\n";
 		
 		return output;
 	}
@@ -151,12 +157,14 @@ public class MyCustomSvg extends SvgComponent{
 		
 		System.out.println(outputFilePath);
 		
-		String tag = this.renderTag();
-		
+		String output = "";
+		output += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + this.width + "\" height=\"" + this.height + "\">\n";
+		output += this.renderTag();
+		output += "</svg>\n";
 		
 		try {
 			Files.createDirectories(outputFilePath.getParent());
-			Files.write(outputFilePath, tag.getBytes(Charset.forName("UTF-8")));
+			Files.write(outputFilePath, output.getBytes(Charset.forName("UTF-8")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

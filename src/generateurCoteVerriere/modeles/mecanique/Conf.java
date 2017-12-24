@@ -4,9 +4,6 @@ import generateurCoteVerriere.ConfGenerique;
 import generateurCoteVerriere.Utils;
 
 public class Conf extends ConfGenerique{
-	private String ARC;
-	private String reference;
-	
 	// Paramètres utilisateur
 	public final double hauteurVerriere;
 	public final double largeurVerriere;
@@ -87,7 +84,7 @@ public class Conf extends ConfGenerique{
 		this.nbPartitions = nbPartitions;
 		
 		// Nb trous
-		this.nbTrousIntermediairesVerticaux = Utils.getNbTrousVerticaux(this.hauteurVerriere);
+		this.nbTrousIntermediairesVerticaux = Utils.getNbTrousVerticauxMecanique(this.hauteurVerriere);
 		this.nbPairesTrousIntermediairesHorizontaux = this.nbPartitions - 1;
 		
 		// Jeux

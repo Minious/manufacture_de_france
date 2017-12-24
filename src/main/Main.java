@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 
+import generateurCoteVerriere.modeles.mecanica.Mecanica;
 import generateurCoteVerriere.modeles.mecanique.Conf;
 import generateurCoteVerriere.modeles.mecanique.Mecanique;
 import generateurCoteVerriere.modeles.mecanique.elements.AttachesTraverseCorniere;
@@ -77,7 +78,7 @@ public class Main {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JComboBox cbBoxModele = new JComboBox();
-		cbBoxModele.setModel(new DefaultComboBoxModel(new String[] {"M\u00E9canique"}));
+		cbBoxModele.setModel(new DefaultComboBoxModel(new String[] {"Mécanique", "Mecanica"}));
 		cbBoxModele.setBounds(85, 8, 478, 25);
 		frame.getContentPane().add(cbBoxModele);
 		
@@ -91,7 +92,7 @@ public class Main {
 		Mécanique.setLayout(null);
 		
 		JLabel lblARC = new JLabel("ARC :");
-		lblARC.setToolTipText("Accus\u00E9 de r\u00E9ception de commance");
+		lblARC.setToolTipText("Accusé de réception de commance");
 		lblARC.setBounds(30, 42, 202, 16);
 		Mécanique.add(lblARC);
 		
@@ -159,7 +160,10 @@ public class Main {
 				
 				// Conf conf = new Conf(savePath, ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions);
 
-				new Mecanique(ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions).generate(savePath);
+				if((cbBoxModele.getSelectedItem()).equals("Mécanique"))
+					new Mecanique(ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions).generate(savePath);
+				if((cbBoxModele.getSelectedItem()).equals("Mecanica"))
+					new Mecanica(ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions).generate(savePath);
 
 				JOptionPane.showMessageDialog(frame, "Opération terminée avec succès !");
 				//JOptionPane.showMessageDialog(frame, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);

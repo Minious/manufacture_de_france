@@ -23,7 +23,16 @@ public class Utils{
 		return angle;
 	}
 	
-	public static int getNbTrousVerticaux(double hauteurVerriere){
+	public static int getNbTrousVerticauxMecanique(double hauteurVerriere){
+		if(hauteurVerriere < 0)
+			return -1;
+		if(hauteurVerriere < 500)
+			return 1;
+		else
+			return (int) Math.floor(hauteurVerriere / 500);
+	}
+	
+	public static int getNbTrousVerticauxMecanica(double hauteurVerriere){
 		if(hauteurVerriere < 0)
 			return -1;
 		if(hauteurVerriere < 500)

@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import generateurCoteVerriere.modeles.mecanique.Conf;
-import generateurCoteVerriere.modeles.mecanique.PiedDePage;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 
 public abstract class ElementGenerique {
-	protected Conf conf;
+	protected ConfGenerique conf;
 	
-	public ElementGenerique(Conf conf){
+	public ElementGenerique(ConfGenerique conf){
 		this.conf = conf;
 	}
 	
@@ -42,7 +40,7 @@ public abstract class ElementGenerique {
 		*/
 		
 		PiedDePage pdp = new PiedDePage();
-		pdp.drawImage(g, (Conf) conf);
+		pdp.drawImage(g, conf);
 		
 		Path outputFilePath = savePath.resolve(getNomFichierDeRendu() + ".svg");
 		g.writeToSVG(outputFilePath);
