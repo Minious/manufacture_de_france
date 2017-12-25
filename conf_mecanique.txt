@@ -32,9 +32,10 @@ demiLargeurGaucheContreCadreTraverseCorniere = largeurContreCadreTraverseCornier
 
 // Attaches traverse corniere
 ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere = 80
-// ValeursAttaches valeursAttaches = calculEntreAxeAttachesTraverseCorniere()
-// entreAxeAttachesTraverseCorniere = valeursAttaches.getEntreAxeAttachesTraverseCorniere()
-// nbAttachesIntermediaires = valeursAttaches.getNbAttachesintermediaires()
+entreAxeAttachesSouhaite = 500
+longueurADiviser = hauteurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere
+nbAttachesIntermediaires = getNbAttachesIntermediairesTraverseCorniere(entreAxeAttachesSouhaite, longueurADiviser)
+entreAxeAttachesTraverseCorniere = longueurADiviser / (nbAttachesIntermediaires + 1)
 
 // Montant generique
 entreAxeMontant = (hauteurMontantPartition - 2 * ecartEntreExtremiteEtPremierTrouMontantPartition) / (nbTrousIntermediairesVerticaux + 1)

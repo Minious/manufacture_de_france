@@ -146,11 +146,14 @@ public class Conf extends ConfGenerique{
 		
 		// Attaches traverse corniere
 		this.ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere = 80;
-		ValeursAttaches valeursAttaches = calculEntreAxeAttachesTraverseCorniere();
-		this.entreAxeAttachesTraverseCorniere = valeursAttaches.getEntreAxeAttachesTraverseCorniere();
-		this.nbAttachesIntermediaires = valeursAttaches.getNbAttachesintermediaires();
+		//ValeursAttaches valeursAttaches = calculEntreAxeAttachesTraverseCorniere();
+		//this.entreAxeAttachesTraverseCorniere = valeursAttaches.getEntreAxeAttachesTraverseCorniere();
+		//this.nbAttachesIntermediaires = valeursAttaches.getNbAttachesintermediaires();
+		this.nbAttachesIntermediaires = getNbAttachesIntermediairesTraverseCorniere();
+		this.entreAxeAttachesTraverseCorniere = (this.hauteurTraverseCorniere - 2 * this.ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere) / (this.nbAttachesIntermediaires + 1);
 	}
 	
+	/*
 	class ValeursAttaches{
 		private double entreAxeAttachesTraverseCorniere;
 		private int nbAttachesintermediaires;
@@ -182,5 +185,18 @@ public class Conf extends ConfGenerique{
 			return new ValeursAttaches(value1, (int) temp2 - 1);
 		else
 			return new ValeursAttaches(value2, (int) temp2);
+	}
+	*/
+	
+	private int getNbAttachesIntermediairesTraverseCorniere() {
+		double entreAxeAttachesSouhaite = 500;
+		double longueurADiviser = this.hauteurTraverseCorniere - 2 * this.ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere;
+		int nbAttaches = (int) Math.floor(longueurADiviser / entreAxeAttachesSouhaite);
+		double entreAxeAttaches1 = longueurADiviser / nbAttaches;
+		double entreAxeAttaches2 = longueurADiviser / (1 + nbAttaches);
+		double ecartEntreSouhaiteEtReel1 = Math.abs(entreAxeAttachesSouhaite - entreAxeAttaches1);
+		double ecartEntreSouhaiteEtReel2 = Math.abs(entreAxeAttachesSouhaite - entreAxeAttaches2);
+		
+		return ecartEntreSouhaiteEtReel1 < ecartEntreSouhaiteEtReel2 ? nbAttaches - 1 : nbAttaches;
 	}
 }

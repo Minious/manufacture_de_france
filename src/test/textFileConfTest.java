@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import generateurCoteVerriere.modeles.mecanique.Conf;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
@@ -48,6 +49,21 @@ public class textFileConfTest {
 					return (int) Math.floor(hauteurVerriere / 500);
 			}
 		});
+		functions.add(new Function("getNbAttachesIntermediairesTraverseCorniere", 2) {
+			@Override
+			public double apply(double... args) {
+				// TODO
+				double entreAxeAttachesSouhaite = args[0];
+				double longueurADiviser = args[1];
+				int nbAttaches = (int) Math.floor(longueurADiviser / entreAxeAttachesSouhaite);
+				double entreAxeAttaches1 = longueurADiviser / nbAttaches;
+				double entreAxeAttaches2 = longueurADiviser / (1 + nbAttaches);
+				double ecartEntreSouhaiteEtReel1 = Math.abs(entreAxeAttachesSouhaite - entreAxeAttaches1);
+				double ecartEntreSouhaiteEtReel2 = Math.abs(entreAxeAttachesSouhaite - entreAxeAttaches2);
+				
+				return ecartEntreSouhaiteEtReel1 < ecartEntreSouhaiteEtReel2 ? nbAttaches - 1 : nbAttaches;
+			}
+		});
 
 		try {
 			HashMap<String, Double> conf = loadConf(fileName, initialMap, functions);
@@ -56,6 +72,11 @@ public class textFileConfTest {
 		} catch (IOException | UnprocessableConfFileException e) {
 			e.printStackTrace();
 		}
+		
+		/*
+		Conf conf = new Conf("","","",5000,3100,6);
+		System.out.println(conf.nbAttachesIntermediaires+" "+conf.entreAxeAttachesTraverseCorniere);
+		*/
 	}
 
 	public static HashMap<String, Double> loadConf(String fileName) throws UnprocessableConfFileException, IOException {
