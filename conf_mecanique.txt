@@ -18,9 +18,9 @@ hauteurTraverseCorniere = largeurVerriere
 largeurTraverseCorniere = 30
 ecartEntreExtremiteEtPremierTrouTraverseCorniere = 29 // 21.5 ???
 ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere = 23
-entreAxeLateralTraverseCorniere =
-	(nbPartitions == 1) * (hauteurTraverseCorniere - 2 * (ecartEntreExtremiteEtPremierTrouTraverseCorniere + ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere)) +
-	(nbPartitions != 1) * (largeurClairDeVitrage + largeurMontantPartition / 2 - entreAxeT / 2 + largeurMontantCorniere - ecartEntreExtremiteEtPremierTrouTraverseCorniere - ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere)
+entreAxeLateralTraverseCorniere = if(nbPartitions == 1,
+	hauteurTraverseCorniere - 2 * (ecartEntreExtremiteEtPremierTrouTraverseCorniere + ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere),
+	largeurClairDeVitrage + largeurMontantPartition / 2 - entreAxeT / 2 + largeurMontantCorniere - ecartEntreExtremiteEtPremierTrouTraverseCorniere - ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere)
 entreAxeCentralTraverseCorniere = largeurClairDeVitrage + largeurMontantPartition / 2 * 2 - entreAxeT / 2 * 2
 
 // Contre cadre traverse corniere

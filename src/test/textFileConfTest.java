@@ -78,7 +78,6 @@ public class textFileConfTest {
 			String exp = line.split("//", -1)[0].replaceAll("\\s", "");
 			if (!exp.isEmpty()) {
 				Matcher mExp = pExp.matcher(exp);
-				//System.out.println(exp+" "+mExp.matches());
 				if (mExp.matches())
 					exps.add(exp);
 				else {
@@ -99,36 +98,39 @@ public class textFileConfTest {
 			ArrayList<String> unprocessedExp = new ArrayList<String>();
 			while (i < exps.size()) {
 				String curExp = exps.get(i);
-				System.out.println(curExp);
 
 				String curAff = curExp.split("=", 2)[0];
 				String curOp = curExp.split("=", 2)[1];
 
 				ExpressionBuilder eb = new ExpressionBuilder(curOp);
 
-				String separator = "[-+*/)(<>]|==|!=|<=|>=";
+				String separator = "[-+*/)(<>,]|==|!=|<=|>=";
 				Pattern pTest = Pattern.compile("(?<="+separator+")|(?="+separator+")");
 
 				String[] curOpArr = pTest.split(curOp);
+				
+				ArrayList<Function> includedFunctions = getIncludedFunctions();
+				
+				ArrayList<String> functionsNames = new ArrayList<String>();
+				functionsNames.addAll(Arrays.asList(builtinFunctions));
+				for(Function curFunc : includedFunctions)
+					functionsNames.add(curFunc.getName());
+				for(Function curFunc : customFunctions)
+					functionsNames.add(curFunc.getName());
 
 				ArrayList<String> vars = new ArrayList<String>();
 				Pattern p = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_]*$");
 				for (String token : curOpArr) {
 					Matcher m = p.matcher(token);
-					boolean isCustomFunction = false;
-					for (Function curFunct : customFunctions)
-						if (curFunct.getName().equals(token)) {
-							isCustomFunction = true;
-							break;
-						}
 
-					if (m.matches() && !Arrays.asList(builtinFunctions).contains(token) && !isCustomFunction)
+					if (m.matches() && !functionsNames.contains(token))
 						vars.add(token);
 				}
-
+				
 				eb.variables(new HashSet<String>(vars));
+				eb.functions(includedFunctions);
 				eb.functions(customFunctions);
-				eb.operator(getBuiltInOperators());
+				eb.operator(getIncludedOperators());
 
 				Expression e = eb.build();
 
@@ -159,8 +161,28 @@ public class textFileConfTest {
 
 		return map;
 	}
+	
+	private static ArrayList<Function> getIncludedFunctions() {
+		ArrayList<Function> functions = new ArrayList<Function>();
+		
+		functions.add(new Function("if", 3) {
+			@Override
+			public double apply(double... args) {
+				// TODO
+				Double condition = args[0];
+				Double instructionsIf = args[1];
+				Double instructionsElse = args[2];
+				if (condition != 0)
+					return instructionsIf;
+				else
+					return instructionsElse;
+			}
+		});
+		
+		return functions;
+	}
 
-	private static ArrayList<Operator> getBuiltInOperators() {
+	private static ArrayList<Operator> getIncludedOperators() {
 		ArrayList<Operator> operators = new ArrayList<Operator>();
 
 		operators.add(new Operator(">=", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
