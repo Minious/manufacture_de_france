@@ -1,4 +1,4 @@
-package test;
+package conf;
 
 import static org.junit.Assert.*;
 
@@ -14,13 +14,10 @@ public class ConfTests {
 
 	@Test
 	public void test() {
-		Double lol = 40.0;
-
-		//String fileName = "confTest.txt";
-		String fileName = "conf_mecanique.txt";
+		String fileName = "confTest.txt";
 		
 		HashMap<String, Double> initialMap = new HashMap<String, Double>();
-		initialMap.put("lol", lol);
+		initialMap.put("e", 40d);
 		
 		ArrayList<Function> functions = new ArrayList<Function>();
 		functions.add(new Function("funcTest", 2) {
@@ -37,7 +34,13 @@ public class ConfTests {
 		});
 		
 		try {
-			HashMap<String, Double> conf = textFileConfTest.loadConf(fileName, initialMap, functions);
+			HashMap<String, Double> conf = TextFileConf.loadConf(fileName, initialMap, functions);
+
+			assertEquals(conf.get("a"), Double.valueOf(5d));
+			assertEquals(conf.get("b"), Double.valueOf(12d));
+			assertEquals(conf.get("c"), Double.valueOf(-50.5d));
+			assertEquals(conf.get("d"), Double.valueOf(0d));
+			assertEquals(conf.get("e"), Double.valueOf(40d));
 		} catch (IOException | UnprocessableConfFileException e) {
 			e.printStackTrace();
 		}

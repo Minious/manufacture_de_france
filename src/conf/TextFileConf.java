@@ -1,4 +1,4 @@
-package test;
+package conf;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -20,7 +20,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 import net.objecthunter.exp4j.operator.Operator;
 
-public class textFileConfTest {
+public class TextFileConf {
 
 	final static Charset ENCODING = Charset.forName("UTF-8");
 

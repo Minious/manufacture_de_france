@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.batik.apps.rasterizer.DestinationType;
 import org.apache.batik.apps.rasterizer.SVGConverter;
@@ -13,8 +14,19 @@ import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.util.PDFMergerUtility;
 
 public abstract class ModeleGenerique {
+	protected HashMap<String, Double> conf;
+	protected String ARC;
+	protected String client;
+	protected String reference;
+	
+	public ModeleGenerique(String ARC, String client, String reference) {
+		this.ARC = ARC;
+		this.client = client;
+		this.reference = reference;
+	}
+	
 	public void generate(Path savePathTemp) {
-		Path savePath = savePathTemp.resolve(getConf().client+"_"+getConf().getReference());
+		Path savePath = savePathTemp.resolve(this.client+"_"+this.reference);
 		
 		System.out.println("\n\tChargement...\n");
 		
@@ -31,14 +43,14 @@ public abstract class ModeleGenerique {
 		for(int i=0;i<classes.size();i++)
 			try {
 				System.out.println(classes.get(i));
-				elems.add((ElementGenerique) classes.get(i).getDeclaredConstructor(new Class[] {ConfGenerique.class}).newInstance(getConf()));
+				elems.add((ElementGenerique) classes.get(i).getDeclaredConstructor(HashMap.class).newInstance(this.conf));
 			} catch (NoSuchMethodException|SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {System.out.println(e);}
 
 		System.out.println(elems);
 		
 		try {
 			for(int i=0;i<elems.size();i++) {
-				elems.get(i).renderImage(savePath.resolve("svg"));
+				elems.get(i).renderImage(savePath.resolve("svg"), ARC, client, reference);
 				System.out.println(elems);
 			}
 		} catch (IOException e) {}
@@ -73,5 +85,5 @@ public abstract class ModeleGenerique {
 
 	protected abstract String[] getElementsClasses();
 	protected abstract String getPackage();
-	protected abstract ConfGenerique getConf();
+	//protected abstract ConfGenerique getConf();
 }

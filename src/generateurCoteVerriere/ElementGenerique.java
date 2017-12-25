@@ -3,17 +3,19 @@ package generateurCoteVerriere;
 import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 
 public abstract class ElementGenerique {
-	protected ConfGenerique conf;
+	//protected ConfGenerique conf;
+	protected HashMap<String, Double> conf;
 	
-	public ElementGenerique(ConfGenerique conf){
+	public ElementGenerique(HashMap<String, Double> conf){
 		this.conf = conf;
 	}
 	
-	public void renderImage(Path savePath) throws IOException{
+	public void renderImage(Path savePath, String ARC, String client, String reference) throws IOException{
 		// Création d'une l'image vierge
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced(getLargeurImage(), getHauteurImage());
 		
@@ -40,7 +42,7 @@ public abstract class ElementGenerique {
 		*/
 		
 		PiedDePage pdp = new PiedDePage();
-		pdp.drawImage(g, conf);
+		pdp.drawImage(g, ARC, client, reference);
 		
 		Path outputFilePath = savePath.resolve(getNomFichierDeRendu() + ".svg");
 		g.writeToSVG(outputFilePath);

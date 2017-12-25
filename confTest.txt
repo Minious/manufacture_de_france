@@ -1,7 +1,8 @@
-a = (bite * zob) + 5 // COUCOU ! 
+f = funcTest(a, c)
+a = (b * d) + 5 // COUCOU ! 
 // oui
-zob = 15 * (c + 7)
+d = 15 * (c + 7)
  == 7
-bite = 
+b = 
 12
-c = -bite + 1.5 - lol
+c = -b + 1.5 - e
