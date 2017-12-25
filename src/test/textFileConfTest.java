@@ -66,17 +66,12 @@ public class textFileConfTest {
 		});
 
 		try {
-			HashMap<String, Double> conf = loadConf(fileName, initialMap, functions);
-			for (String key : conf.keySet())
-				System.out.println(key + " = " + conf.get(key));
+			HashMap<String, Double> confTest = loadConf(fileName, initialMap, functions);
+			for (String key : confTest.keySet())
+				System.out.println(key + " = " + confTest.get(key));
 		} catch (IOException | UnprocessableConfFileException e) {
 			e.printStackTrace();
 		}
-		
-		/*
-		Conf conf = new Conf("","","",5000,3100,6);
-		System.out.println(conf.nbAttachesIntermediaires+" "+conf.entreAxeAttachesTraverseCorniere);
-		*/
 	}
 
 	public static HashMap<String, Double> loadConf(String fileName) throws UnprocessableConfFileException, IOException {
