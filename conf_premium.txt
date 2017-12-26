@@ -2,68 +2,47 @@
 // hauteurVerriere
 // largeurVerriere
 // nbPartitions
-		
-// Nb trous
-nbTrousIntermediairesVerticaux = getNbTrousVerticaux(hauteurVerriere)
-nbPairesTrousIntermediairesHorizontaux = nbPartitions - 1
-
-// Jeux
-jeuEntreTraverseCorniereEtMontantPartition = 0.5
-
-// T
-entreAxeT = 44
 
 // Traverse corniere
-hauteurTraverseCorniere = largeurVerriere
-largeurTraverseCorniere = 30
-ecartEntreExtremiteEtPremierTrouTraverseCorniere = 29 // 21.5 ???
-ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere = 23
-entreAxeLateralTraverseCorniere = if(nbPartitions == 1,
-	hauteurTraverseCorniere - 2 * (ecartEntreExtremiteEtPremierTrouTraverseCorniere + ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere),
-	largeurClairDeVitrage + largeurMontantPartition / 2 - entreAxeT / 2 + largeurMontantCorniere - ecartEntreExtremiteEtPremierTrouTraverseCorniere - ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere)
-entreAxeCentralTraverseCorniere = largeurClairDeVitrage + largeurMontantPartition / 2 * 2 - entreAxeT / 2 * 2
+epaisseurTraverseCorniere = 3
+longueurTraverseCorniere = largeurVerriere
+largeurChampTraverseCorniere = 30
+largeurFaceTraverseCorniere = 20
+demiLargeurDroitChampTraverseCorniere = 20
+demiLargeurGaucheChampTraverseCorniere = largeurChampTraverseCorniere - demiLargeurDroitChampTraverseCorniere
+ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere = largeurClairVitrage + largeurChampMontantCorniere + largeurT / 2
+entreAxePercageMontantTraverseCorniere = (longueurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere) / (nbPartitons - 2)
 
-// Contre cadre traverse corniere
-ecartEntreExtremiteEtPremierTrouContreCadreTraverseCorniere = 24.09
-hauteurContreCadreTraverseCorniere = hauteurTraverseCorniere - 2 * (ecartEntreExtremiteEtPremierTrouTraverseCorniere - ecartEntreExtremiteEtPremierTrouContreCadreTraverseCorniere)
-largeurContreCadreTraverseCorniere = 25
-demiLargeurDroitContreCadreTraverseCorniere = 11.5
-demiLargeurGaucheContreCadreTraverseCorniere = largeurContreCadreTraverseCorniere - demiLargeurDroitContreCadreTraverseCorniere
-
-// Attaches traverse corniere
-ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere = 80
-entreAxeAttachesSouhaite = 500
-longueurADiviser = hauteurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere
-nbAttachesIntermediaires = getNbAttachesIntermediairesTraverseCorniere(entreAxeAttachesSouhaite, longueurADiviser)
-entreAxeAttachesTraverseCorniere = longueurADiviser / (nbAttachesIntermediaires + 1)
+// T
+entreAxeT = 50
 
 // Montant generique
-entreAxeMontant = (hauteurMontantPartition - 2 * ecartEntreExtremiteEtPremierTrouMontantPartition) / (nbTrousIntermediairesVerticaux + 1)
-
-// Montant partition
-hauteurMontantPartition = hauteurVerriere - 2 * jeuEntreTraverseCorniereEtMontantPartition - 2 * largeurTraverseCorniere
-ecartEntreExtremiteEtPremierTrouMontantPartition = 21.5
-largeurMontantPartition = 30
+longueurADiviserMontant = longueurMontantCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantCorniere
+nbPercageIntermediaireMontant = calculNbPercageIntermediaire(longueurADiviserMontant)
+entreAxePercagesMontant = longueurADiviserMontant / (nbPercageIntermediaireMontant - 1)
 
 // Montant corniere
 hauteurMontantCorniere = hauteurVerriere
-ecartEntreExtremiteEtPremierTrouMontantCorniere = 29
-ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere = 23
-largeurMontantCorniere = 30
+largeurChampMontantCorniere = 30
+largeurFaceMontantCorniere = 20
+demiLargeurDroitChampMontantCorniere = 20
+demiLargeurGaucheChampMontantCorniere = largeurChampMontantCorniere - demiLargeurDroitChampMontantCorniere
+ecartEntreExtremiteEtPremierPercageMontantCorniere = 70
 
-// Contre cadre montant corniere
-largeurContreCadreMontantCorniere = 25
-demiLargeurDroitContreCadreMontantCorniere = 11.5
-demiLargeurGaucheContreCadreMontantCorniere = largeurContreCadreMontantCorniere - demiLargeurDroitContreCadreMontantCorniere
-ecartEntreExtremiteEtPremierTrouContreCadreMontantCorniere = 24.09
-hauteurContreCadreMontantCorniere = hauteurMontantCorniere - 2 * (ecartEntreExtremiteEtPremierTrouMontantCorniere - ecartEntreExtremiteEtPremierTrouContreCadreMontantCorniere)
+// Montant intermediaire
+epaisseurMontantIntermedaire = 4
+jeuEpeulement = 1
+longueurEpaulementMontantIntermediaire = largeurFaceTraverseCorniere - epaisseurTraverseCorniere + jeuEpaulement
+hauteurMontantIntermedaire = hauteurVerriere - 2 * epaisseurTraverseCorniere
+largeurFaceMontantIntermediaire = 30
+largeurChampMontantIntermediaire = 30
+ecartEntreExtremiteEtPremierPercageMontantIntermediaire = ecartEntreExtremiteEtPremierPercageMontantCorniere - epaisseurTraverseCorniere
 
 // Vitrage
-penetrationVitrageGaucheDroite = 8
-penetrationVitrageHautBas = 9
-largeurVitrage = largeurClairDeVitrage + 2 * penetrationVitrageGaucheDroite
-hauteurVitrage = hauteurClairDeVitrage + 2 * penetrationVitrageHautBas
+penetrationVitrage = 4
+largeurVitrage = largeurClairDeVitrage + 2 * penetrationVitrage
+hauteurVitrage = hauteurClairDeVitrage + 2 * penetrationVitrage
 
 // ClairDeVitrage
-largeurClairDeVitrage = (hauteurTraverseCorniere - 2 * largeurMontantCorniere - nbPairesTrousIntermediairesHorizontaux * largeurMontantPartition) / nbPartitions
-hauteurClairDeVitrage = hauteurVerriere - 2 * largeurTraverseCorniere
+largeurClairDeVitrage = (largeurVerriere - 2 * largeurFaceMontantCorniere - (nbPartitions - 1) * largeurFaceMontantIntermediaire) / nbPartitions
+hauteurClairDeVitrage = hauteurVerriere - 2 * largeurFaceTraverseCorniere

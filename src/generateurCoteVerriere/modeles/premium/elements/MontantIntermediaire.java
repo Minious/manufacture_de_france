@@ -9,7 +9,7 @@ import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
-public class MontantPartition extends ElementGenerique {
+public class MontantIntermediaire extends ElementGenerique {
 	// Initialisation des paramètres
 	private String nomFichierDeRendu = "montant_partition";
 
@@ -49,7 +49,7 @@ public class MontantPartition extends ElementGenerique {
 	private final double largeurImage = this.abscisseAxeMontant + this.distanceEntreCentreMontantEtExtremiteDroiteDessin + this.margeLateraleDessin;
 	private final double hauteurImage = this.ordonneeBasMontant + this.margeBasDessin;
 	
-	public MontantPartition(HashMap<String, Double> conf){
+	public MontantIntermediaire(HashMap<String, Double> conf){
 		super(conf);
 	}
 
