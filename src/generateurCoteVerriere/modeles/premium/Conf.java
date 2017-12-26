@@ -1,4 +1,4 @@
-package generateurCoteVerriere.modeles.mecanica;
+package generateurCoteVerriere.modeles.premium;
 
 import generateurCoteVerriere.ConfGenerique;
 

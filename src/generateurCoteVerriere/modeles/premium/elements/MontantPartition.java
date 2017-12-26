@@ -1,10 +1,10 @@
-package generateurCoteVerriere.modeles.mecanica.elements;
+package generateurCoteVerriere.modeles.premium.elements;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.modeles.mecanica.Conf;
+import generateurCoteVerriere.modeles.premium.Conf;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;

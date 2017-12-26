@@ -1,12 +1,12 @@
-package generateurCoteVerriere.modeles.mecanica;
+package generateurCoteVerriere.modeles.premium;
 
 import generateurCoteVerriere.ConfGenerique;
 import generateurCoteVerriere.ModeleGenerique;
 
-public class Mecanica extends ModeleGenerique {
+public class Premium extends ModeleGenerique {
 	private Conf conf;
 	
-	public Mecanica(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
+	public Premium(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
 		this.conf = new Conf(ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions);
 	}
 
