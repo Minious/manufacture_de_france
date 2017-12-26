@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 
 import generateurCoteVerriere.modeles.mecanique.Mecanique;
+import generateurCoteVerriere.modeles.premium.Premium;
 
 public class Renderer {
 	public static void render(String modele, Path savePath, HashMap<String, Object> args) {
@@ -18,8 +19,15 @@ public class Renderer {
 					(Integer) args.get("nbPartitions")
 				).generate(savePath);
 				break;
-			case "premium":
-				//new Premium(ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions).generate(savePath);
+			case "Premium":
+				new Premium(
+					(String) args.get("ARC"),
+					(String) args.get("client"),
+					(String) args.get("reference"),
+					(Double) args.get("hauteurVerriere"),
+					(Double) args.get("largeurVerriere"),
+					(Integer) args.get("nbPartitions")
+				).generate(savePath);
 				break;
 		}
 	}

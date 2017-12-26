@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.modeles.mecanique.Conf;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;

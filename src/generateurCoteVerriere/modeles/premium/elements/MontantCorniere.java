@@ -2,9 +2,9 @@ package generateurCoteVerriere.modeles.premium.elements;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.modeles.premium.Conf;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -28,17 +28,17 @@ public class MontantCorniere extends ElementGenerique {
 	private final double ordonneeHautDessinMontant = this.ordonneeDeuxiemeLigneTitre + this.margeEntreTitreEtDessin;
 
 	private final double margeInterCote = 0; // 10;
-	private final double margeEntreMontantEtPremiereCote = ((Conf) conf).largeurMontantCorniere / 2; // <--- Empirique
+	private final double margeEntreMontantEtPremiereCote = conf.get("largeurMontantCorniere") / 2; // <--- Empirique
 	
 	private final double ordonneeHautMontant = this.ordonneeHautDessinMontant + 2 * (this.taillePoliceCote + this.curUnderLineGap + this.margeEntreMontantEtPremiereCote);
-	private final double ordonneeBasMontant = this.ordonneeHautMontant + ((Conf) conf).hauteurMontantCorniere;
+	private final double ordonneeBasMontant = this.ordonneeHautMontant + conf.get("hauteurMontantCorniere");
 
-	private final double diametreTrous = ((Conf) conf).largeurMontantCorniere / 8; // INCORRECT
+	private final double diametreTrous = conf.get("largeurMontantCorniere") / 8; // INCORRECT
 	private final String valeurDiametreTrous = "ØM5";
 
-	private final double nbCotesAGauche = ((Conf) this.conf).nbTrousIntermediairesVerticaux + 5;
-	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = ((Conf) conf).largeurMontantCorniere / 2 + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
-	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = ((Conf) conf).largeurMontantCorniere / 2 + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
+	private final double nbCotesAGauche = conf.get("nbTrousIntermediairesVerticaux") + 5;
+	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = conf.get("largeurMontantCorniere") / 2 + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
+	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = conf.get("largeurMontantCorniere") / 2 + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	
 	private final double margeLateraleDessin = 50;
 	private final double margeBasDessin = 100;
@@ -48,7 +48,7 @@ public class MontantCorniere extends ElementGenerique {
 	private final double largeurImage = this.abscisseAxeMontant + this.distanceEntreCentreMontantEtExtremiteDroiteDessin + this.margeLateraleDessin;
 	private final double hauteurImage = this.ordonneeBasMontant + this.margeBasDessin;
 	
-	public MontantCorniere(Conf conf){
+	public MontantCorniere(HashMap<String, Double> conf){
 		super(conf);
 	}
 	
@@ -69,51 +69,51 @@ public class MontantCorniere extends ElementGenerique {
 
 		// Trace le montant 
 	    g.setStroke(new BasicStroke(2));
-	    g.drawLine(this.abscisseAxeMontant - ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeHautMontant + ((Conf) conf).largeurMontantCorniere, this.abscisseAxeMontant - ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeBasMontant - ((Conf) conf).largeurMontantCorniere);
-	    g.drawLine(this.abscisseAxeMontant + ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeHautMontant, this.abscisseAxeMontant + ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeBasMontant);
-	    g.drawLine(this.abscisseAxeMontant - ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeHautMontant + ((Conf) conf).largeurMontantCorniere, this.abscisseAxeMontant + ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeHautMontant);
-	    g.drawLine(this.abscisseAxeMontant - ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeBasMontant - ((Conf) conf).largeurMontantCorniere, this.abscisseAxeMontant + ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeBasMontant);
+	    g.drawLine(this.abscisseAxeMontant - conf.get("largeurMontantCorniere") / 2, this.ordonneeHautMontant + conf.get("largeurMontantCorniere"), this.abscisseAxeMontant - conf.get("largeurMontantCorniere") / 2, this.ordonneeBasMontant - conf.get("largeurMontantCorniere"));
+	    g.drawLine(this.abscisseAxeMontant + conf.get("largeurMontantCorniere") / 2, this.ordonneeHautMontant, this.abscisseAxeMontant + conf.get("largeurMontantCorniere") / 2, this.ordonneeBasMontant);
+	    g.drawLine(this.abscisseAxeMontant - conf.get("largeurMontantCorniere") / 2, this.ordonneeHautMontant + conf.get("largeurMontantCorniere"), this.abscisseAxeMontant + conf.get("largeurMontantCorniere") / 2, this.ordonneeHautMontant);
+	    g.drawLine(this.abscisseAxeMontant - conf.get("largeurMontantCorniere") / 2, this.ordonneeBasMontant - conf.get("largeurMontantCorniere"), this.abscisseAxeMontant + conf.get("largeurMontantCorniere") / 2, this.ordonneeBasMontant);
 
 	    // Trace l'axe du milieu du montant 
 	    g.setStroke(new BasicStroke(1));
 	    g.drawLine(this.abscisseAxeMontant, this.ordonneeHautMontant, this.abscisseAxeMontant, this.ordonneeBasMontant);
 	    
 	    // Cote de largeur puis demi largeur de la Corniere avant
-		Point p1_1 = new Point(this.abscisseAxeMontant - ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeHautMontant);
-		Point p1_2 = new Point(this.abscisseAxeMontant + ((Conf) conf).largeurMontantCorniere / 2, this.ordonneeHautMontant);
+		Point p1_1 = new Point(this.abscisseAxeMontant - conf.get("largeurMontantCorniere") / 2, this.ordonneeHautMontant);
+		Point p1_2 = new Point(this.abscisseAxeMontant + conf.get("largeurMontantCorniere") / 2, this.ordonneeHautMontant);
 		g.drawDistanceCote(p1_1, p1_2, margeEntreMontantEtPremiereCote + curUnderLineGap + taillePoliceCote, 0, ShiftMode.CENTER);
 		
 		Point p2_1 = p1_1;
 		Point p2_2 = new Point(this.abscisseAxeMontant, this.ordonneeHautMontant);
-		g.drawDistanceCote(p2_1, p2_2, margeEntreMontantEtPremiereCote, - ((Conf) conf).largeurMontantCorniere / 4 - 10, ShiftMode.RIGHT);
+		g.drawDistanceCote(p2_1, p2_2, margeEntreMontantEtPremiereCote, - conf.get("largeurMontantCorniere") / 4 - 10, ShiftMode.RIGHT);
 		
 		// Cote entre les trous et l'extrémité de la Corniere + affichage des trous
-		double curDistanceCotesLaterales = ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote;
+		double curDistanceCotesLaterales = conf.get("largeurMontantPartition") / 2 + this.margeEntreMontantEtPremiereCote;
 		
 		Point p3_1 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant);
-	    Point p3_2 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - ((Conf) conf).ecartEntreExtremiteEtPremierTrouMontantCorniere);
+	    Point p3_2 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - conf.get("ecartEntreExtremiteEtPremierTrouMontantCorniere"));
 		g.drawDistanceCote(p3_1, p3_2, curDistanceCotesLaterales, 0, ShiftMode.LEFT);
 		curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 		g.drawCircle(p3_2, this.diametreTrous);
 		
-		Point p4 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - ((Conf) conf).ecartEntreExtremiteEtPremierTrouMontantCorniere - ((Conf) conf).ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere);
+		Point p4 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - conf.get("ecartEntreExtremiteEtPremierTrouMontantCorniere") - conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere"));
 		g.drawDistanceCote(p3_1, p4, curDistanceCotesLaterales, 0, ShiftMode.LEFT);
 		curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 		g.drawCircle(p4, this.diametreTrous);
 		
-		Point pTemp = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - ((Conf) conf).ecartEntreExtremiteEtPremierTrouMontantCorniere - ((Conf) conf).ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere - ((Conf) conf).entreAxeMontant);
-		g.drawDistanceCote(pTemp, p4, ((Conf) conf).largeurMontantPartition / 2 + this.margeEntreMontantEtPremiereCote);
+		Point pTemp = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant - conf.get("ecartEntreExtremiteEtPremierTrouMontantCorniere") - conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere") - conf.get("entreAxeMontant"));
+		g.drawDistanceCote(pTemp, p4, conf.get("largeurMontantPartition") / 2 + this.margeEntreMontantEtPremiereCote);
 		
-		for(int i = 1 ; i <= ((Conf) conf).nbTrousIntermediairesVerticaux + 1 ; i++){
+		for(int i = 1 ; i <= conf.get("nbTrousIntermediairesVerticaux") + 1 ; i++){
 			g.drawDistanceCote(p3_1, pTemp, curDistanceCotesLaterales);
 			curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 			g.drawCircle(pTemp, this.diametreTrous);
-			if(i != ((Conf) this.conf).nbTrousIntermediairesVerticaux + 1)
-				pTemp.move(0, - ((Conf) conf).entreAxeMontant);
+			if(i != conf.get("nbTrousIntermediairesVerticaux") + 1)
+				pTemp.move(0, - conf.get("entreAxeMontant"));
 		}
 		g.drawDiameterCote(this.valeurDiametreTrous, pTemp, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
 		
-		pTemp.move(0, - ((Conf) conf).ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere);
+		pTemp.move(0, - conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere"));
 		g.drawDistanceCote(p3_1, pTemp, curDistanceCotesLaterales);
 		curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 		g.drawCircle(pTemp, this.diametreTrous);

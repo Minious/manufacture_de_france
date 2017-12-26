@@ -6,15 +6,11 @@ import java.util.HashMap;
 
 import conf.TextFileConf;
 import conf.UnprocessableConfFileException;
-import generateurCoteVerriere.ConfGenerique;
 import generateurCoteVerriere.ModeleGenerique;
 import net.objecthunter.exp4j.function.Function;
 
 public class Mecanique extends ModeleGenerique {
-	//private Conf conf;
-	
 	public Mecanique(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
-		//this.conf = new Conf(ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions);
 		super(ARC, client, reference);
 
 		String fileName = "conf_mecanique.txt";
@@ -69,11 +65,4 @@ public class Mecanique extends ModeleGenerique {
 	protected String getPackage() {
 		return "generateurCoteVerriere.modeles.mecanique.elements";
 	}
-	/*
-	@Override
-	protected ConfGenerique getConf() {
-		// TODO Auto-generated method stub
-		return this.conf;
-	}
-	*/
 }

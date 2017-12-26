@@ -1,13 +1,31 @@
 package generateurCoteVerriere.modeles.premium;
 
-import generateurCoteVerriere.ConfGenerique;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import conf.TextFileConf;
+import conf.UnprocessableConfFileException;
 import generateurCoteVerriere.ModeleGenerique;
+import net.objecthunter.exp4j.function.Function;
 
 public class Premium extends ModeleGenerique {
-	private Conf conf;
-	
 	public Premium(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
-		this.conf = new Conf(ARC, client, reference, hauteurVerriere, largeurVerriere, nbPartitions);
+		super(ARC, client, reference);
+
+		String fileName = "conf_mecanique.txt";
+
+		HashMap<String, Double> initialMap = new HashMap<String, Double>();
+		
+		initialMap.put("hauteurVerriere", hauteurVerriere);
+		initialMap.put("largeurVerriere", largeurVerriere);
+		initialMap.put("nbPartitions", (double) nbPartitions);
+
+		try {
+			this.conf = TextFileConf.loadConf(fileName, initialMap);
+		} catch (IOException | UnprocessableConfFileException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -19,11 +37,4 @@ public class Premium extends ModeleGenerique {
 	protected String getPackage() {
 		return "generateurCoteVerriere.modeles.mecanica.elements";
 	}
-
-	@Override
-	protected ConfGenerique getConf() {
-		// TODO Auto-generated method stub
-		return this.conf;
-	}
-
 }

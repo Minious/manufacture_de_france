@@ -2,9 +2,9 @@ package generateurCoteVerriere.modeles.premium.elements;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.modeles.premium.Conf;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -29,17 +29,17 @@ public class TraverseCorniere extends ElementGenerique {
 	private final double ordonneeHautDessinTraverse = this.ordonneeDeuxiemeLigneTitre + this.margeEntreTitreEtDessin;
 
 	private final double margeInterCote = 0; // 10;
-	private final double margeEntreTraverseEtPremiereCote = ((Conf) conf).largeurTraverseCorniere / 2; // <--- Empirique
+	private final double margeEntreTraverseEtPremiereCote = conf.get("largeurTraverseCorniere") / 2; // <--- Empirique
 	
 	private final double ordonneeHautTraverse = this.ordonneeHautDessinTraverse + 2 * (this.taillePoliceCote + this.curUnderLineGap + this.margeEntreTraverseEtPremiereCote);
-	private final double ordonneeBasTraverse = this.ordonneeHautTraverse + ((Conf) conf).hauteurTraverseCorniere;
+	private final double ordonneeBasTraverse = this.ordonneeHautTraverse + conf.get("hauteurTraverseCorniere");
 
-	private final double diametreTrous = ((Conf) conf).largeurTraverseCorniere / 8; // INCORRECT
+	private final double diametreTrous = conf.get("largeurTraverseCorniere") / 8; // INCORRECT
 	private final String valeurDiametreTrous = "ØM5";
 
-	private final double nbCotesAGauche = ((Conf) conf).nbPairesTrousIntermediairesHorizontaux * 2 + 5;
-	private final double distanceEntreCentreTraverseEtExtremiteGaucheDessin = ((Conf) conf).largeurTraverseCorniere / 2 + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
-	private final double distanceEntreCentreTraverseEtExtremiteDroiteDessin = ((Conf) conf).largeurTraverseCorniere / 2 + this.margeEntreTraverseEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
+	private final double nbCotesAGauche = conf.get("nbPairesTrousIntermediairesHorizontaux") * 2 + 5;
+	private final double distanceEntreCentreTraverseEtExtremiteGaucheDessin = conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
+	private final double distanceEntreCentreTraverseEtExtremiteDroiteDessin = conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	
 	private final double margeLateraleDessin = 50;
 	private final double margeBasDessin = 100;
@@ -49,7 +49,7 @@ public class TraverseCorniere extends ElementGenerique {
 	private final double largeurImage = this.abscisseAxeTraverse + this.distanceEntreCentreTraverseEtExtremiteDroiteDessin + this.margeLateraleDessin;
 	private final double hauteurImage = this.ordonneeBasTraverse + this.margeBasDessin;
 	
-	public TraverseCorniere(Conf conf){
+	public TraverseCorniere(HashMap<String, Double> conf){
 		super(conf);
 	}
 	
@@ -70,47 +70,47 @@ public class TraverseCorniere extends ElementGenerique {
 
 		// Trace la traverse corniere
 	    g.setStroke(new BasicStroke(2));
-	    g.drawLine(this.abscisseAxeTraverse - ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeHautTraverse + ((Conf) conf).largeurTraverseCorniere, this.abscisseAxeTraverse - ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeBasTraverse - ((Conf) conf).largeurTraverseCorniere);
-	    g.drawLine(this.abscisseAxeTraverse + ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeHautTraverse, this.abscisseAxeTraverse + ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeBasTraverse);
-	    g.drawLine(this.abscisseAxeTraverse - ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeHautTraverse + ((Conf) conf).largeurTraverseCorniere, this.abscisseAxeTraverse + ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeHautTraverse);
-	    g.drawLine(this.abscisseAxeTraverse - ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeBasTraverse - ((Conf) conf).largeurTraverseCorniere, this.abscisseAxeTraverse + ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeBasTraverse);
+	    g.drawLine(this.abscisseAxeTraverse - conf.get("largeurTraverseCorniere") / 2, this.ordonneeHautTraverse + conf.get("largeurTraverseCorniere"), this.abscisseAxeTraverse - conf.get("largeurTraverseCorniere") / 2, this.ordonneeBasTraverse - conf.get("largeurTraverseCorniere"));
+	    g.drawLine(this.abscisseAxeTraverse + conf.get("largeurTraverseCorniere") / 2, this.ordonneeHautTraverse, this.abscisseAxeTraverse + conf.get("largeurTraverseCorniere") / 2, this.ordonneeBasTraverse);
+	    g.drawLine(this.abscisseAxeTraverse - conf.get("largeurTraverseCorniere") / 2, this.ordonneeHautTraverse + conf.get("largeurTraverseCorniere"), this.abscisseAxeTraverse + conf.get("largeurTraverseCorniere") / 2, this.ordonneeHautTraverse);
+	    g.drawLine(this.abscisseAxeTraverse - conf.get("largeurTraverseCorniere") / 2, this.ordonneeBasTraverse - conf.get("largeurTraverseCorniere"), this.abscisseAxeTraverse + conf.get("largeurTraverseCorniere") / 2, this.ordonneeBasTraverse);
 	    
 	    // Trace l'axe du milieu du traverse 
 	    g.setStroke(new BasicStroke(1));
 	    g.drawLine(this.abscisseAxeTraverse, this.ordonneeHautTraverse, this.abscisseAxeTraverse, this.ordonneeBasTraverse);
 	    
 	    // Cote de largeur puis demi largeur de la traverse corniere
-		Point p1_1 = new Point(this.abscisseAxeTraverse - ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeHautTraverse);
-		Point p1_2 = new Point(this.abscisseAxeTraverse + ((Conf) conf).largeurTraverseCorniere / 2, this.ordonneeHautTraverse);
+		Point p1_1 = new Point(this.abscisseAxeTraverse - conf.get("largeurTraverseCorniere") / 2, this.ordonneeHautTraverse);
+		Point p1_2 = new Point(this.abscisseAxeTraverse + conf.get("largeurTraverseCorniere") / 2, this.ordonneeHautTraverse);
 		g.drawDistanceCote(p1_1, p1_2, margeEntreTraverseEtPremiereCote + curUnderLineGap + taillePoliceCote, 0, ShiftMode.CENTER);
 		
 		Point p2_1 = p1_1;
 		Point p2_2 = new Point(this.abscisseAxeTraverse, this.ordonneeHautTraverse);
-		g.drawDistanceCote(p2_1, p2_2, margeEntreTraverseEtPremiereCote, - ((Conf) conf).largeurTraverseCorniere / 4 - 10, ShiftMode.RIGHT);
+		g.drawDistanceCote(p2_1, p2_2, margeEntreTraverseEtPremiereCote, - conf.get("largeurTraverseCorniere") / 4 - 10, ShiftMode.RIGHT);
 		
 		// Cote entre les trous et l'extrémité de la traverse corniere + affichage des trous
 		Point p3 = new Point(this.abscisseAxeTraverse, this.ordonneeBasTraverse);
 		Point pTemp = new Point(p3);
 		Point pTemp2 = new Point(pTemp);
-		double curDistanceCotesLaterales = ((Conf) conf).largeurTraverseCorniere / 2 + this.margeEntreTraverseEtPremiereCote;
-		int nbCotes = ((Conf) conf).nbPairesTrousIntermediairesHorizontaux + 5;
+		double curDistanceCotesLaterales = conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote;
+		int nbCotes = (int) (conf.get("nbPairesTrousIntermediairesHorizontaux") + 5);
 		for(int i = 1 ; i <= nbCotes ; i++){
 			if(i == 1 || i == nbCotes)
-				pTemp.move(0, - ((Conf) conf).ecartEntreExtremiteEtPremierTrouTraverseCorniere);
+				pTemp.move(0, - conf.get("ecartEntreExtremiteEtPremierTrouTraverseCorniere"));
 			else if(i == 2 || i == nbCotes - 1){
-				pTemp.move(0, - ((Conf) conf).ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere);
+				pTemp.move(0, - conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere"));
 				if(i == nbCotes - 1)
 					g.drawDiameterCote(this.valeurDiametreTrous, pTemp, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
 			}
 			else if(i == 3 || i == nbCotes - 2){
-				pTemp.move(0, - ((Conf) conf).entreAxeLateralTraverseCorniere);
+				pTemp.move(0, - conf.get("entreAxeLateralTraverseCorniere"));
 				if(i == 3)
-					g.drawDistanceCote(pTemp, pTemp2, ((Conf) conf).largeurTraverseCorniere / 2 + this.margeEntreTraverseEtPremiereCote);
+					g.drawDistanceCote(pTemp, pTemp2, conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote);
 			}
 			else{
-				pTemp.move(0, - ((Conf) conf).entreAxeCentralTraverseCorniere);
+				pTemp.move(0, - conf.get("entreAxeCentralTraverseCorniere"));
 				if(i == 4)
-					g.drawDistanceCote(pTemp, pTemp2, ((Conf) conf).largeurTraverseCorniere / 2 + this.margeEntreTraverseEtPremiereCote);
+					g.drawDistanceCote(pTemp, pTemp2, conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote);
 			}
 			
 			if(i == 1)
@@ -124,12 +124,12 @@ public class TraverseCorniere extends ElementGenerique {
 			pTemp2 = new Point(pTemp);
 			
 			if(i >= 3 && i <= nbCotes - 3){
-				pTemp.move(0, - ((Conf) conf).entreAxeT);
+				pTemp.move(0, - conf.get("entreAxeT"));
 				g.drawDistanceCote(p3, pTemp, curDistanceCotesLaterales);
 				curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 				g.drawCircle(pTemp, this.diametreTrous);
 				if(i == 3)
-					g.drawDistanceCote(pTemp, pTemp2, ((Conf) conf).largeurTraverseCorniere / 2 + this.margeEntreTraverseEtPremiereCote);
+					g.drawDistanceCote(pTemp, pTemp2, conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote);
 				
 				pTemp2 = new Point(pTemp);
 			}
