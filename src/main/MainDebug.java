@@ -1,7 +1,10 @@
 package main;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
+import generateurCoteVerriere.Renderer;
 import generateurCoteVerriere.modeles.mecanique.Mecanique;
 
 public class MainDebug {
@@ -19,12 +22,14 @@ public class MainDebug {
 		sc.close();
 		*/
 		
-		double hauteurVerriere = 1100;
-		double largeurVerriere = 1550;
-		int nbPartitions = 4;
+		HashMap<String, Object> myArgs = new HashMap<String, Object>();
+		myArgs.put("ARC", "190000310");
+		myArgs.put("client", "M. Dupont");
+		myArgs.put("reference", "61140089");
+		myArgs.put("hauteurVerriere", 1100d);
+		myArgs.put("largeurVerriere", 1550d);
+		myArgs.put("nbPartitions", 4);
 		
-		// Conf conf = new Conf(Paths.get("").toAbsolutePath(), "190000310", "M. Dupont", "61140089", hauteurVerriere, largeurVerriere, nbPartitions);
-
-		new Mecanique("190000310", "M. Dupont", "61140089", hauteurVerriere, largeurVerriere, nbPartitions).generate(Paths.get("").toAbsolutePath().resolve("test_output"));
+		Renderer.render("Premium", Paths.get("").toAbsolutePath(), myArgs);
 	}
 }

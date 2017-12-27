@@ -33,10 +33,10 @@ public class MontantCorniere extends ElementGenerique {
 	private final double ordonneeHautMontant = this.ordonneeHautDessinMontant + 2 * (this.taillePoliceCote + this.curUnderLineGap + this.margeEntreMontantEtPremiereCote);
 	private final double ordonneeBasMontant = this.ordonneeHautMontant + conf.get("hauteurMontantCorniere");
 
-	private final double diametreTrous = conf.get("largeurMontantCorniere") / 8; // INCORRECT
-	private final String valeurDiametreTrous = "ØM5";
+	private final double diametrePercage = conf.get("largeurMontantCorniere") / 8; // INCORRECT
+	private final String valeurDiametrePercage = "ØM5";
 
-	private final double nbCotesAGauche = conf.get("nbTrousIntermediairesVerticaux") + 5;
+	private final double nbCotesAGauche = conf.get("nbTrousIntermediairesVerticaux");
 	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = conf.get("largeurMontantCorniere") / 2 + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
 	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = conf.get("largeurMontantCorniere") / 2 + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	

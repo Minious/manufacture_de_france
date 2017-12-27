@@ -13,7 +13,7 @@ public class Premium extends ModeleGenerique {
 	public Premium(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
 		super(ARC, client, reference);
 
-		String fileName = "conf_mecanique.txt";
+		String fileName = "conf_premium.txt";
 
 		HashMap<String, Double> initialMap = new HashMap<String, Double>();
 		
@@ -30,7 +30,7 @@ public class Premium extends ModeleGenerique {
 
 	@Override
 	protected String[] getElementsClasses() {
-		return new String[] {"MontantPartition", "MontantCorniere", "TraverseCorniere"};
+		return new String[] {}; // {"MontantIntermediaire", "MontantCorniere", "TraverseCorniere"};
 	}
 
 	@Override

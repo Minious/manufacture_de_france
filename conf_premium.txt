@@ -11,18 +11,20 @@ largeurFaceTraverseCorniere = 20
 demiLargeurDroitChampTraverseCorniere = 20
 demiLargeurGaucheChampTraverseCorniere = largeurChampTraverseCorniere - demiLargeurDroitChampTraverseCorniere
 ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere = largeurClairVitrage + largeurChampMontantCorniere + largeurT / 2
-entreAxePercageMontantTraverseCorniere = (longueurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere) / (nbPartitons - 2)
+entreAxePercageMontantTraverseCorniere = (longueurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere) / (nbPartitions - 2)
 
 // T
 entreAxeT = 50
+largeurT = 30
 
 // Montant generique
 longueurADiviserMontant = longueurMontantCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantCorniere
-nbPercageIntermediaireMontant = calculNbPercageIntermediaire(longueurADiviserMontant)
-entreAxePercagesMontant = longueurADiviserMontant / (nbPercageIntermediaireMontant - 1)
+entreAxePercagesMax = 500
+nbPercageMontant = ceil(longueurADiviserMontant / entreAxePercagesMax)
+entreAxePercagesMontant = longueurADiviserMontant / (nbPercageMontant - 1)
 
 // Montant corniere
-hauteurMontantCorniere = hauteurVerriere
+longueurMontantCorniere = hauteurVerriere
 largeurChampMontantCorniere = 30
 largeurFaceMontantCorniere = 20
 demiLargeurDroitChampMontantCorniere = 20
@@ -31,7 +33,7 @@ ecartEntreExtremiteEtPremierPercageMontantCorniere = 70
 
 // Montant intermediaire
 epaisseurMontantIntermedaire = 4
-jeuEpeulement = 1
+jeuEpaulement = 1
 longueurEpaulementMontantIntermediaire = largeurFaceTraverseCorniere - epaisseurTraverseCorniere + jeuEpaulement
 hauteurMontantIntermedaire = hauteurVerriere - 2 * epaisseurTraverseCorniere
 largeurFaceMontantIntermediaire = 30
@@ -40,9 +42,9 @@ ecartEntreExtremiteEtPremierPercageMontantIntermediaire = ecartEntreExtremiteEtP
 
 // Vitrage
 penetrationVitrage = 4
-largeurVitrage = largeurClairDeVitrage + 2 * penetrationVitrage
-hauteurVitrage = hauteurClairDeVitrage + 2 * penetrationVitrage
+largeurVitrage = largeurClairVitrage + 2 * penetrationVitrage
+hauteurVitrage = hauteurClairVitrage + 2 * penetrationVitrage
 
 // ClairDeVitrage
-largeurClairDeVitrage = (largeurVerriere - 2 * largeurFaceMontantCorniere - (nbPartitions - 1) * largeurFaceMontantIntermediaire) / nbPartitions
-hauteurClairDeVitrage = hauteurVerriere - 2 * largeurFaceTraverseCorniere
+largeurClairVitrage = (largeurVerriere - 2 * largeurFaceMontantCorniere - (nbPartitions - 1) * largeurFaceMontantIntermediaire) / nbPartitions
+hauteurClairVitrage = hauteurVerriere - 2 * largeurFaceTraverseCorniere
