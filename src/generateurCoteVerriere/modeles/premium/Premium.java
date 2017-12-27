@@ -1,13 +1,11 @@
 package generateurCoteVerriere.modeles.premium;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import conf.TextFileConf;
 import conf.UnprocessableConfFileException;
 import generateurCoteVerriere.ModeleGenerique;
-import net.objecthunter.exp4j.function.Function;
 
 public class Premium extends ModeleGenerique {
 	public Premium(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
@@ -30,11 +28,11 @@ public class Premium extends ModeleGenerique {
 
 	@Override
 	protected String[] getElementsClasses() {
-		return new String[] {}; // {"MontantIntermediaire", "MontantCorniere", "TraverseCorniere"};
+		return new String[] {"MontantCorniere"/*, "MontantIntermediaire", "TraverseCorniere"*/};
 	}
 
 	@Override
 	protected String getPackage() {
-		return "generateurCoteVerriere.modeles.mecanica.elements";
+		return "generateurCoteVerriere.modeles.premium.elements";
 	}
 }

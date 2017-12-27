@@ -2,6 +2,7 @@ package generateurCoteVerriere;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -40,11 +41,15 @@ public abstract class ModeleGenerique {
 			} catch (ClassNotFoundException e1) {}
 
 		ArrayList<ElementGenerique> elems = new ArrayList<ElementGenerique>();
-		for(int i=0;i<classes.size();i++)
+		for(Class curClass : classes)
 			try {
-				System.out.println(classes.get(i));
-				elems.add((ElementGenerique) classes.get(i).getDeclaredConstructor(HashMap.class).newInstance(this.conf));
-			} catch (NoSuchMethodException|SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {System.out.println(e);}
+				System.out.println(curClass);
+				Constructor constructor = curClass.getDeclaredConstructor(HashMap.class);
+				ElementGenerique curElem = (ElementGenerique) constructor.newInstance(this.conf);
+				elems.add(curElem);
+			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
 
 		System.out.println(elems);
 		

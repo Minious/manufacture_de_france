@@ -1,11 +1,9 @@
 package main;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
 import generateurCoteVerriere.Renderer;
-import generateurCoteVerriere.modeles.mecanique.Mecanique;
 
 public class MainDebug {
 	public static void main(String[] args) {
@@ -26,7 +24,7 @@ public class MainDebug {
 		myArgs.put("ARC", "190000310");
 		myArgs.put("client", "M. Dupont");
 		myArgs.put("reference", "61140089");
-		myArgs.put("hauteurVerriere", 1100d);
+		myArgs.put("hauteurVerriere", 1150d);
 		myArgs.put("largeurVerriere", 1550d);
 		myArgs.put("nbPartitions", 4);
 		

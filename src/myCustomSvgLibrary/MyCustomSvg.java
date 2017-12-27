@@ -122,9 +122,11 @@ public class MyCustomSvg extends SvgComponent{
 		this.enlargeBounds(bounds);
 		
 		///// DEBUG
+		/*
 		this.setColor(Color.RED);
 		this.drawRect(bounds);
 		this.setColor(Color.BLACK);
+		*/
 		/////
 	}
 	
@@ -150,9 +152,16 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public void writeToSVG(Path outputFilePath) {
+		// TEMP //
+		double w = Math.max(this.width, this.bounds.getWidth());
+		double h = Math.max(this.getHeight(),  this.bounds.getHeight());
+		//////////
+		
 		///// DEBUG
+		/*
 		this.setColor(Color.RED);
 		this.drawRect(this.bounds.getX(), this.bounds.getY(), this.bounds.getWidth(), this.bounds.getHeight());
+		*/
 		/////
 		
 		System.out.println(outputFilePath);

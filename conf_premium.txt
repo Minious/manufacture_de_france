@@ -20,11 +20,12 @@ largeurT = 30
 // Montant generique
 longueurADiviserMontant = longueurMontantCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantCorniere
 entreAxePercagesMax = 500
-nbPercageMontant = ceil(longueurADiviserMontant / entreAxePercagesMax)
+nbPercageMontant = ceil(longueurADiviserMontant / entreAxePercagesMax) + 1
 entreAxePercagesMontant = longueurADiviserMontant / (nbPercageMontant - 1)
 
 // Montant corniere
 longueurMontantCorniere = hauteurVerriere
+epaisseurMontantCorniere = 3
 largeurChampMontantCorniere = 30
 largeurFaceMontantCorniere = 20
 demiLargeurDroitChampMontantCorniere = 20
