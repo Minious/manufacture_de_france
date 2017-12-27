@@ -29,13 +29,13 @@ public class TraverseCorniere extends ElementGenerique {
 	private final double ordonneeHautDessinTraverse = this.ordonneeDeuxiemeLigneTitre + this.margeEntreTitreEtDessin;
 
 	private final double margeInterCote = 0; // 10;
-	private final double margeEntreTraverseEtPremiereCote = conf.get("largeurTraverseCorniere") / 2; // <--- Empirique
+	private final double margeEntreTraverseEtPremiereCote = conf.get("largeurChampTraverseCorniere") / 2; // <--- Empirique
 	
 	private final double ordonneeHautTraverse = this.ordonneeHautDessinTraverse + 2 * (this.taillePoliceCote + this.curUnderLineGap + this.margeEntreTraverseEtPremiereCote);
-	private final double ordonneeBasTraverse = this.ordonneeHautTraverse + conf.get("hauteurTraverseCorniere");
+	private final double ordonneeBasTraverse = this.ordonneeHautTraverse + conf.get("longueurTraverseCorniere");
 
-	private final double diametreTrous = conf.get("largeurTraverseCorniere") / 8; // INCORRECT
-	private final String valeurDiametreTrous = "ØM5";
+	private final double diametrePercages = conf.get("largeurTraverseCorniere") / 8; // INCORRECT
+	private final String valeurDiametrePercages = "ØM5";
 
 	private final double nbCotesAGauche = conf.get("nbPairesTrousIntermediairesHorizontaux") * 2 + 5;
 	private final double distanceEntreCentreTraverseEtExtremiteGaucheDessin = conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
@@ -100,7 +100,7 @@ public class TraverseCorniere extends ElementGenerique {
 			else if(i == 2 || i == nbCotes - 1){
 				pTemp.move(0, - conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere"));
 				if(i == nbCotes - 1)
-					g.drawDiameterCote(this.valeurDiametreTrous, pTemp, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
+					g.drawDiameterCote(this.valeurDiametrePercages, pTemp, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
 			}
 			else if(i == 3 || i == nbCotes - 2){
 				pTemp.move(0, - conf.get("entreAxeLateralTraverseCorniere"));
@@ -119,7 +119,7 @@ public class TraverseCorniere extends ElementGenerique {
 				g.drawDistanceCote(p3, pTemp, curDistanceCotesLaterales);
 			curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
 			if(i != nbCotes)
-				g.drawCircle(pTemp, this.diametreTrous);
+				g.drawCircle(pTemp, this.diametrePercages);
 			
 			pTemp2 = new Point(pTemp);
 			
@@ -127,7 +127,7 @@ public class TraverseCorniere extends ElementGenerique {
 				pTemp.move(0, - conf.get("entreAxeT"));
 				g.drawDistanceCote(p3, pTemp, curDistanceCotesLaterales);
 				curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
-				g.drawCircle(pTemp, this.diametreTrous);
+				g.drawCircle(pTemp, this.diametrePercages);
 				if(i == 3)
 					g.drawDistanceCote(pTemp, pTemp2, conf.get("largeurTraverseCorniere") / 2 + this.margeEntreTraverseEtPremiereCote);
 				

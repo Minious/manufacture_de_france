@@ -36,9 +36,12 @@ ecartEntreExtremiteEtPremierPercageMontantCorniere = 70
 epaisseurMontantIntermedaire = 4
 jeuEpaulement = 1
 longueurEpaulementMontantIntermediaire = largeurFaceTraverseCorniere - epaisseurTraverseCorniere + jeuEpaulement
-hauteurMontantIntermedaire = hauteurVerriere - 2 * epaisseurTraverseCorniere
+epaisseurEpaulementMontantIntermediaire = epaisseurMontantIntermedaire
+longueurMontantIntermediaire = hauteurVerriere - 2 * epaisseurTraverseCorniere
 largeurFaceMontantIntermediaire = 30
 largeurChampMontantIntermediaire = 30
+demiLargeurDroitChampMontantIntermediaire = 10
+demiLargeurGaucheChampMontantIntermediaire = largeurChampMontantIntermediaire - demiLargeurDroitChampMontantIntermediaire
 ecartEntreExtremiteEtPremierPercageMontantIntermediaire = ecartEntreExtremiteEtPremierPercageMontantCorniere - epaisseurTraverseCorniere
 
 // Vitrage

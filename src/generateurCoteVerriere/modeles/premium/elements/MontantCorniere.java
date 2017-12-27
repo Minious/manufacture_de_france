@@ -106,8 +106,7 @@ public class MontantCorniere extends ElementGenerique {
 		// Cote longueur totale du montant
 		g.drawDistanceCote(p3_1, p2_2, curDistanceCotesLaterales);
 
-	    
-	    // Trave l'onglet
+	    // Trace l'onglet
 		Point p4_1 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant);
 		Point p4_2 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant);
 	    g.drawLine(this.abscisseAxeMontant + conf.get("demiLargeurDroitChampMontantCorniere") - conf.get("epaisseurMontantCorniere"), this.ordonneeHautMontant, this.abscisseAxeMontant + conf.get("demiLargeurDroitChampMontantCorniere") - conf.get("epaisseurMontantCorniere"), this.ordonneeBasMontant);

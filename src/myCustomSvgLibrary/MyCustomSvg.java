@@ -10,12 +10,15 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
+import myCustomSvgLibraryEnhanced.Point;
 
 public class MyCustomSvg extends SvgComponent{
 	private int width, height;
@@ -87,6 +90,11 @@ public class MyCustomSvg extends SvgComponent{
 	
 	public void setTransform(AffineTransform t) {
 		this.sc.setTransform(t);
+	}
+	
+	public void drawPath(Path2D path) {
+		svgTree.add(new MyPath(path, sc));
+		this.enlargeBounds(path);
 	}
 	
 	public void drawRect(double x, double y, double width, double height) {
