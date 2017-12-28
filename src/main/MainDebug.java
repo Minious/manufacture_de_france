@@ -25,8 +25,8 @@ public class MainDebug {
 		myArgs.put("client", "M. Dupont");
 		myArgs.put("reference", "61140089");
 		myArgs.put("hauteurVerriere", 490d);
-		myArgs.put("largeurVerriere", 1550d);
-		myArgs.put("nbPartitions", 4);
+		myArgs.put("largeurVerriere", 750d);
+		myArgs.put("nbPartitions", 1);
 		
 		Renderer.render("Premium", Paths.get("").toAbsolutePath(), myArgs);
 	}

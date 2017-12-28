@@ -46,7 +46,8 @@ public abstract class ModeleGenerique {
 				System.out.println(curClass);
 				Constructor constructor = curClass.getDeclaredConstructor(HashMap.class);
 				ElementGenerique curElem = (ElementGenerique) constructor.newInstance(this.conf);
-				elems.add(curElem);
+				if(curElem.getNbElements() > 0)
+					elems.add(curElem);
 			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}

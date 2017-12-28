@@ -37,7 +37,7 @@ public class TraverseCorniere extends ElementGenerique {
 	private final double diametrePercages = conf.get("largeurChampTraverseCorniere") / 8; // INCORRECT
 	private final String valeurDiametrePercagesMontant = "Ø7";
 	private final String valeurDiametrePercagesParclose = "ØM5";
-	private final String valeurDiametrePercagesFixation = "Ø5.5";
+	private final String valeurDiametrePercagesFixation = "Ø5.5 + fraisage";
 
 	private final double nbCotesAGauche = conf.get("nbPartitions") * 4;
 	private final double distanceEntreCentreTraverseEtExtremiteGaucheDessin = conf.get("demiLargeurGaucheChampTraverseCorniere") + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
@@ -150,6 +150,7 @@ public class TraverseCorniere extends ElementGenerique {
 		pLastParclose2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
 		g.drawDistanceCote(pBasTraverseCornier, pLastParclose2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
 		g.drawCircle(pLastParclose2, this.diametrePercages);
+		g.drawDiameterCote(this.valeurDiametrePercagesParclose, pLastParclose2, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
 		numCurCoteGauche++;
 		
 		g.drawDistanceCote(pBasTraverseCornier, pHautTraverseCornier, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
@@ -199,5 +200,10 @@ public class TraverseCorniere extends ElementGenerique {
 	@Override
 	public String getNomFichierDeRendu() {
 		return this.nomFichierDeRendu;
+	}
+
+	@Override
+	protected int getNbElements() {
+		return this.nbTraverses;
 	}
 }

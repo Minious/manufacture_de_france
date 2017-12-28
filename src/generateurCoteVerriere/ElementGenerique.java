@@ -51,5 +51,6 @@ public abstract class ElementGenerique {
 	protected abstract void drawImage(MyCustomSvgEnhanced g);
 	protected abstract int getLargeurImage();
 	protected abstract int getHauteurImage();
+	protected abstract int getNbElements();
 	public abstract String getNomFichierDeRendu();
 }
