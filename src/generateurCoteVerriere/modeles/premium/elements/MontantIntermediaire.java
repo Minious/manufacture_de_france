@@ -43,7 +43,7 @@ public class MontantIntermediaire extends ElementGenerique {
 	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = conf.get("demiLargeurGaucheChampMontantIntermediaire") + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
 	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = conf.get("demiLargeurDroitChampMontantIntermediaire") + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	
-	private final double margeLateraleDessin = 150;
+	private final double margeLateraleDessin = 60;
 	private final double margeBasDessin = 100;
 	
 	private final double abscisseAxeMontant = this.margeLateraleDessin + this.distanceEntreCentreMontantEtExtremiteGaucheDessin;
@@ -99,7 +99,7 @@ public class MontantIntermediaire extends ElementGenerique {
 		
 		Point p2_1 = new Point(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantIntermediaire"), this.ordonneeHautMontant);
 		Point p2_2 = new Point(this.abscisseAxeMontant, this.ordonneeHautMontant);
-		g.drawDistanceCote(p2_1, p2_2, margeEntreMontantEtPremiereCote, - conf.get("demiLargeurGaucheChampMontantIntermediaire") / 2 - 10, ShiftMode.RIGHT);
+		g.drawDistanceCote(p2_1, p2_2, margeEntreMontantEtPremiereCote, - conf.get("demiLargeurGaucheChampMontantIntermediaire") / 2 - 4, ShiftMode.RIGHT);
 		
 		// Cote entre les trous et l'extrémité de la Corniere + affichage des trous
 		double curDistanceCotesLaterales = conf.get("demiLargeurGaucheChampMontantIntermediaire") / 2 + this.margeEntreMontantEtPremiereCote;

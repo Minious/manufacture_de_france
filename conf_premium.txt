@@ -10,12 +10,9 @@ largeurChampTraverseCorniere = 30
 largeurFaceTraverseCorniere = 20
 demiLargeurDroitChampTraverseCorniere = 20
 demiLargeurGaucheChampTraverseCorniere = largeurChampTraverseCorniere - demiLargeurDroitChampTraverseCorniere
-ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere = largeurClairVitrage + largeurChampMontantCorniere + largeurT / 2
+ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere = largeurClairVitrage + largeurFaceMontantCorniere + largeurFaceMontantIntermediaire / 2
 entreAxePercageMontantTraverseCorniere = (longueurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere) / (nbPartitions - 2)
-
-// T
-entreAxeT = 50
-largeurT = 30
+entreAxePercageMontantEtParcloseTraverseCorniere = 50
 
 // Montant generique
 longueurADiviserMontant = longueurMontantCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantCorniere
