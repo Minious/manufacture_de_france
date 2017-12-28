@@ -154,4 +154,9 @@ public class TraverseCorniere extends ElementGenerique {
 	public String getNomFichierDeRendu() {
 		return this.nomFichierDeRendu;
 	}
+
+	@Override
+	protected int getNbElements() {
+		return this.nbTraverses;
+	}
 }

@@ -41,7 +41,7 @@ public class MontantCorniere extends ElementGenerique {
 	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = conf.get("demiLargeurGaucheChampMontantCorniere") + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
 	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = conf.get("demiLargeurDroitChampMontantCorniere") / 2 + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	
-	private final double margeLateraleDessin = 50;
+	private final double margeLateraleDessin = 90;
 	private final double margeBasDessin = 100;
 	
 	private final double abscisseAxeMontant = this.margeLateraleDessin + this.distanceEntreCentreMontantEtExtremiteGaucheDessin;
@@ -65,7 +65,7 @@ public class MontantCorniere extends ElementGenerique {
 		// Affiche les titres du dessin
 		g.setColor(Color.BLACK);
 		g.setFontSize(this.taillePoliceTitre);
-		String titre = "MONTANT CORNIERE 30x20x3";
+		String titre = "MONTANT LATÉRAUX CORNIERE DE 30x20x3";
 		g.drawString(titre, new Point((double) g.getWidth() / 2, this.ordonneePremiereLigneTitre), 0, ShiftMode.CENTER);
 		g.drawString("QTE = " + this.nbMontants, new Point((double) g.getWidth() / 2, this.ordonneeDeuxiemeLigneTitre), 0, ShiftMode.CENTER);
 

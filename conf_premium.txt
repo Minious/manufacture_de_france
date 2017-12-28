@@ -11,6 +11,7 @@ largeurFaceTraverseCorniere = 20
 demiLargeurDroitChampTraverseCorniere = 20
 demiLargeurGaucheChampTraverseCorniere = largeurChampTraverseCorniere - demiLargeurDroitChampTraverseCorniere
 ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere = largeurClairVitrage + largeurFaceMontantCorniere + largeurFaceMontantIntermediaire / 2
+ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere = 70
 entreAxePercageMontantTraverseCorniere = (longueurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere) / (nbPartitions - 2)
 entreAxePercageMontantEtParcloseTraverseCorniere = 50
 

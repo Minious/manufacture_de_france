@@ -43,7 +43,7 @@ public class MontantIntermediaire extends ElementGenerique {
 	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = conf.get("demiLargeurGaucheChampMontantIntermediaire") + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
 	private final double distanceEntreCentreMontantEtExtremiteDroiteDessin = conf.get("demiLargeurDroitChampMontantIntermediaire") + this.margeEntreMontantEtPremiereCote + this.curUnderLineGap + this.taillePoliceCote;
 	
-	private final double margeLateraleDessin = 60;
+	private final double margeLateraleDessin = 80;
 	private final double margeBasDessin = 100;
 	
 	private final double abscisseAxeMontant = this.margeLateraleDessin + this.distanceEntreCentreMontantEtExtremiteGaucheDessin;
@@ -62,7 +62,7 @@ public class MontantIntermediaire extends ElementGenerique {
 		// Affiche les titres du dessin
 		g.setColor(Color.BLACK);
 		g.setFontSize(this.taillePoliceTitre);
-		String titre = "MONTANT INTERMEDIAIRE 30x30x4";
+		String titre = "MONTANT INTERMEDIAIRE T DE 30x30x4";
 		g.drawString(titre, new Point((double) g.getWidth() / 2, this.ordonneePremiereLigneTitre), 0, ShiftMode.CENTER);
 		g.drawString("QTE = " + this.nbMontants, new Point((double) g.getWidth() / 2, this.ordonneeDeuxiemeLigneTitre), 0, ShiftMode.CENTER);
 		

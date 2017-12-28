@@ -39,7 +39,7 @@ public class TraverseCorniere extends ElementGenerique {
 	private final String valeurDiametrePercagesParclose = "ØM5";
 	private final String valeurDiametrePercagesFixation = "Ø5.5 + fraisage";
 
-	private final double nbCotesAGauche = conf.get("nbPartitions") * 4;
+	private final double nbCotesAGauche = conf.get("nbPartitions") > 1 ? conf.get("nbPartitions") * 4 : 5;
 	private final double distanceEntreCentreTraverseEtExtremiteGaucheDessin = conf.get("demiLargeurGaucheChampTraverseCorniere") + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
 	private final double nbCotesADroite = 3;
 	private final double distanceEntreCentreTraverseEtExtremiteDroiteDessin = conf.get("demiLargeurDroitChampTraverseCorniere") + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesADroite;
@@ -96,95 +96,155 @@ public class TraverseCorniere extends ElementGenerique {
  		Point p2_2 = new Point(this.abscisseAxeTraverse, this.ordonneeHautTraverse);
  		g.drawDistanceCote(p2_1, p2_2, margeEntreTraverseEtPremiereCote, - conf.get("demiLargeurGaucheChampTraverseCorniere") / 2 - 4, ShiftMode.RIGHT);
 	 	
- 		// Cotes gauches
+ 		// Cotes latérales
  		int numCurCoteGauche = 0;
  		Point pBasTraverseCornier = new Point(this.abscisseAxeTraverse, this.ordonneeBasTraverse);
  		Point pHautTraverseCornier = new Point(this.abscisseAxeTraverse, this.ordonneeHautTraverse);
- 		Point pCurPercageMontant = new Point(this.abscisseAxeTraverse, this.ordonneeBasTraverse - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere"));
- 		for(int i=0;i<conf.get("nbPartitions")-1;i++) {
- 			Point pParclose1 = new Point(pCurPercageMontant);
- 			pParclose1.move(0, conf.get("entreAxePercageMontantTraverseCorniere") - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+ 		if(conf.get("nbPartitions") <= 2) {
+ 			Point pParclose1 = new Point(pBasTraverseCornier);
+ 			pParclose1.move(0, - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
  			g.drawDistanceCote(pBasTraverseCornier, pParclose1, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
 			g.drawCircle(pParclose1, this.diametrePercages);
 			numCurCoteGauche++;
 
- 			Point pFixation = new Point(pCurPercageMontant);
- 			pFixation.move(0, conf.get("entreAxePercageMontantTraverseCorniere") / 2);
- 			g.drawDistanceCote(pBasTraverseCornier, pFixation, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
-			g.drawCircle(pFixation, this.diametrePercages);
- 			numCurCoteGauche++;
+			if(conf.get("nbPartitions") == 1) {
+	 			Point pFixation1 = new Point(pBasTraverseCornier);
+	 			pFixation1.move(0, - conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"));
+	 			g.drawDistanceCote(pBasTraverseCornier, pFixation1, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pFixation1, this.diametrePercages);
+	 			numCurCoteGauche++;
+	
+	 			Point pFixation2 = new Point(pHautTraverseCornier);
+	 			pFixation2.move(0, conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"));
+	 			g.drawDistanceCote(pBasTraverseCornier, pFixation2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pFixation2, this.diametrePercages);
+	 			numCurCoteGauche++;
+ 			}
+ 			else if(conf.get("nbPartitions") == 2) {
+ 				Point pMontant = new Point(pBasTraverseCornier);
+ 				pMontant.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere"));
 
- 			Point pParclose2 = new Point(pCurPercageMontant);
+	 			Point pFixation1 = new Point(pMontant);
+	 			pFixation1.move(0, conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") / 2);
+	 			g.drawDistanceCote(pBasTraverseCornier, pFixation1, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pFixation1, this.diametrePercages);
+	 			numCurCoteGauche++;
+	 			
+	 			Point pParclose1_2 = new Point(pMontant);
+	 			pParclose1_2.move(0, conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+	 			g.drawDistanceCote(pBasTraverseCornier, pParclose1_2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pParclose1_2, this.diametrePercages);
+				numCurCoteGauche++;
+
+	 			g.drawDistanceCote(pBasTraverseCornier, pMontant, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pMontant, this.diametrePercages);
+	 			numCurCoteGauche++;
+	 			
+	 			Point pParclose2_2 = new Point(pMontant);
+	 			pParclose2_2.move(0, - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+	 			g.drawDistanceCote(pBasTraverseCornier, pParclose2_2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pParclose2_2, this.diametrePercages);
+				numCurCoteGauche++;
+	
+	 			Point pFixation2 = new Point(pMontant);
+	 			pFixation2.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") / 2);
+	 			g.drawDistanceCote(pBasTraverseCornier, pFixation2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pFixation2, this.diametrePercages);
+	 			numCurCoteGauche++;
+			}
+
+ 			Point pParclose2 = new Point(pHautTraverseCornier);
  			pParclose2.move(0, conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
  			g.drawDistanceCote(pBasTraverseCornier, pParclose2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
 			g.drawCircle(pParclose2, this.diametrePercages);
- 			numCurCoteGauche++;
- 			
- 			g.drawDistanceCote(pBasTraverseCornier, pCurPercageMontant, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
- 			g.drawCircle(pCurPercageMontant, this.diametrePercages);
- 			numCurCoteGauche++;
-
- 			if(i != conf.get("nbPartitions") - 2)
- 				pCurPercageMontant.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
+			numCurCoteGauche++;
+ 		}
+ 		else {
+ 			// Cotes gauches (nbPart > 2)
+	 		Point pCurPercageMontant = new Point(this.abscisseAxeTraverse, this.ordonneeBasTraverse - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere"));
+	 		for(int i=0;i<conf.get("nbPartitions")-1;i++) {
+	 			Point pParclose1 = new Point(pCurPercageMontant);
+	 			pParclose1.move(0, conf.get("entreAxePercageMontantTraverseCorniere") - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+	 			g.drawDistanceCote(pBasTraverseCornier, pParclose1, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pParclose1, this.diametrePercages);
+				numCurCoteGauche++;
+	
+	 			Point pFixation = new Point(pCurPercageMontant);
+	 			pFixation.move(0, conf.get("entreAxePercageMontantTraverseCorniere") / 2);
+	 			g.drawDistanceCote(pBasTraverseCornier, pFixation, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pFixation, this.diametrePercages);
+	 			numCurCoteGauche++;
+	
+	 			Point pParclose2 = new Point(pCurPercageMontant);
+	 			pParclose2.move(0, conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+	 			g.drawDistanceCote(pBasTraverseCornier, pParclose2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+				g.drawCircle(pParclose2, this.diametrePercages);
+	 			numCurCoteGauche++;
+	 			
+	 			g.drawDistanceCote(pBasTraverseCornier, pCurPercageMontant, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+	 			g.drawCircle(pCurPercageMontant, this.diametrePercages);
+	 			numCurCoteGauche++;
+	
+	 			if(i != conf.get("nbPartitions") - 2)
+	 				pCurPercageMontant.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
+	 		}
+	 		
+	 		g.drawDiameterCote(this.valeurDiametrePercagesMontant, pCurPercageMontant, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
+			
+			Point pLastParclose1 = new Point(pCurPercageMontant);
+			pLastParclose1.move(0, - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+			g.drawDistanceCote(pBasTraverseCornier, pLastParclose1, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+			g.drawCircle(pLastParclose1, this.diametrePercages);
+			g.drawDiameterCote(this.valeurDiametrePercagesParclose, pLastParclose1, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
+			numCurCoteGauche++;
+	
+			Point pLastFixation = new Point(pCurPercageMontant);
+			pLastFixation.move(0, - conf.get("entreAxePercageMontantTraverseCorniere") / 2);
+			g.drawDistanceCote(pBasTraverseCornier, pLastFixation, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+			g.drawCircle(pLastFixation, this.diametrePercages);
+			g.drawDiameterCote(this.valeurDiametrePercagesFixation, pLastFixation, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
+			numCurCoteGauche++;
+	
+			Point pLastParclose2 = new Point(pCurPercageMontant);
+			pLastParclose2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+			g.drawDistanceCote(pBasTraverseCornier, pLastParclose2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+			g.drawCircle(pLastParclose2, this.diametrePercages);
+			g.drawDiameterCote(this.valeurDiametrePercagesParclose, pLastParclose2, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
+			numCurCoteGauche++;
+			
+			// Cotes droites (nbPart > 2)
+			int numCurCoteDroite = 0;
+			
+			Point pA1 = new Point(pBasTraverseCornier);
+			pA1.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantTraverseCorniere") - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+			g.drawDistanceCote(pA1, pBasTraverseCornier, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
+		
+			Point pA2 = new Point(pA1);
+			pA2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
+			g.drawDistanceCote(pA2, pA1, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
+		
+			numCurCoteDroite++;
+			
+			Point pB1 = new Point(pBasTraverseCornier);
+			pB1.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantTraverseCorniere") / 2);
+			g.drawDistanceCote(pB1, pBasTraverseCornier, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
+		
+			Point pB2 = new Point(pB1);
+			pB2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
+			g.drawDistanceCote(pB2, pB1, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
+		
+			numCurCoteDroite++;
+			
+			Point pC1 = new Point(pBasTraverseCornier);
+			pC1.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+			g.drawDistanceCote(pC1, pBasTraverseCornier, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
+		
+			Point pC2 = new Point(pC1);
+			pC2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
+			g.drawDistanceCote(pC2, pC1, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
  		}
  		
- 		System.out.println(this.nbCotesAGauche);
- 		
- 		g.drawDiameterCote(this.valeurDiametrePercagesMontant, pCurPercageMontant, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
-		
-		Point pLastParclose1 = new Point(pCurPercageMontant);
-		pLastParclose1.move(0, - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
-		g.drawDistanceCote(pBasTraverseCornier, pLastParclose1, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
-		g.drawCircle(pLastParclose1, this.diametrePercages);
-		g.drawDiameterCote(this.valeurDiametrePercagesParclose, pLastParclose1, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
-		numCurCoteGauche++;
-
-		Point pLastFixation = new Point(pCurPercageMontant);
-		pLastFixation.move(0, - conf.get("entreAxePercageMontantTraverseCorniere") / 2);
-		g.drawDistanceCote(pBasTraverseCornier, pLastFixation, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
-		g.drawCircle(pLastFixation, this.diametrePercages);
-		g.drawDiameterCote(this.valeurDiametrePercagesFixation, pLastFixation, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
-		numCurCoteGauche++;
-
-		Point pLastParclose2 = new Point(pCurPercageMontant);
-		pLastParclose2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
-		g.drawDistanceCote(pBasTraverseCornier, pLastParclose2, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
-		g.drawCircle(pLastParclose2, this.diametrePercages);
-		g.drawDiameterCote(this.valeurDiametrePercagesParclose, pLastParclose2, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
-		numCurCoteGauche++;
-		
-		g.drawDistanceCote(pBasTraverseCornier, pHautTraverseCornier, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
-		
-		// Cotes droites
-		int numCurCoteDroite = 0;
-		
-		Point pA1 = new Point(pBasTraverseCornier);
-		pA1.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantTraverseCorniere") - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
-		g.drawDistanceCote(pA1, pBasTraverseCornier, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
-	
-		Point pA2 = new Point(pA1);
-		pA2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
-		g.drawDistanceCote(pA2, pA1, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
-	
-		numCurCoteDroite++;
-		
-		Point pB1 = new Point(pBasTraverseCornier);
-		pB1.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantTraverseCorniere") / 2);
-		g.drawDistanceCote(pB1, pBasTraverseCornier, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
-	
-		Point pB2 = new Point(pB1);
-		pB2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
-		g.drawDistanceCote(pB2, pB1, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
-	
-		numCurCoteDroite++;
-		
-		Point pC1 = new Point(pBasTraverseCornier);
-		pC1.move(0, - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere") + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
-		g.drawDistanceCote(pC1, pBasTraverseCornier, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
-	
-		Point pC2 = new Point(pC1);
-		pC2.move(0, - conf.get("entreAxePercageMontantTraverseCorniere"));
-		g.drawDistanceCote(pC2, pC1, conf.get("demiLargeurDroitChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteDroite * (curUnderLineGap + taillePoliceCote));
+ 		g.drawDistanceCote(pBasTraverseCornier, pHautTraverseCornier, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
 	}
 
 	@Override

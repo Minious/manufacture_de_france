@@ -61,7 +61,7 @@ public class TextFileConf {
 			ArrayList<String> unprocessedExp = new ArrayList<String>();
 			while (i < exps.size()) {
 				String curExp = exps.get(i);
-
+				System.out.println(curExp);
 				String curAff = curExp.split("=", 2)[0];
 				String curOp = curExp.split("=", 2)[1];
 
@@ -106,8 +106,12 @@ public class TextFileConf {
 				}
 
 				if (processable) {
-					double result = e.evaluate();
-					map.put(curAff, result);
+					try {
+						double result = e.evaluate();
+						map.put(curAff, result);
+					} catch (ArithmeticException exc) {
+						exc.printStackTrace();
+					}
 
 					exps.remove(exps.get(i));
 
