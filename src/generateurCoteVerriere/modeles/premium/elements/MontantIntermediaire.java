@@ -6,6 +6,7 @@ import java.awt.geom.Path2D;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
+import myCustomSvgLibrary.MyPath2D;
 import myCustomSvgLibrary.PathSVG;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
@@ -69,8 +70,9 @@ public class MontantIntermediaire extends ElementGenerique {
 		// Trace le montant 
 		g.setFontSize(this.taillePoliceCote);
 	    g.setStrokeWidth(1);
-	    Path2D path = new Path2D.Double();
+	    MyPath2D path = new MyPath2D();
 	    path.moveTo(this.abscisseAxeMontant + conf.get("demiLargeurDroitChampMontantIntermediaire"), this.ordonneeHautMontant);
+	    /*
 	    path.lineTo(this.abscisseAxeMontant + conf.get("demiLargeurDroitChampMontantIntermediaire"), this.ordonneeBasMontant);
 	    path.lineTo(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantIntermediaire") + conf.get("epaisseurEpaulementMontantIntermediaire"), this.ordonneeBasMontant);
 	    path.lineTo(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantIntermediaire") + conf.get("epaisseurEpaulementMontantIntermediaire"), this.ordonneeBasMontant - conf.get("longueurEpaulementMontantIntermediaire"));
@@ -78,6 +80,14 @@ public class MontantIntermediaire extends ElementGenerique {
 	    path.lineTo(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantIntermediaire"), this.ordonneeHautMontant + conf.get("longueurEpaulementMontantIntermediaire"));
 	    path.lineTo(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantIntermediaire") + conf.get("epaisseurEpaulementMontantIntermediaire"), this.ordonneeHautMontant + conf.get("longueurEpaulementMontantIntermediaire"));
 	    path.lineTo(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantIntermediaire") + conf.get("epaisseurEpaulementMontantIntermediaire"), this.ordonneeHautMontant);
+	    */
+	    path.lineToR(0, conf.get("longueurMontantIntermediaire"));
+	    path.lineToR(- conf.get("largeurChampMontantIntermediaire") + conf.get("epaisseurEpaulementMontantIntermediaire"), 0);
+	    path.lineToR(0, - conf.get("longueurEpaulementMontantIntermediaire"));
+	    path.lineToR(- conf.get("epaisseurEpaulementMontantIntermediaire"), 0);
+	    path.lineToR(0, - conf.get("longueurMontantIntermediaire") + 2 * conf.get("longueurEpaulementMontantIntermediaire"));
+	    path.lineToR(conf.get("epaisseurEpaulementMontantIntermediaire"), 0);
+	    path.lineToR(0, - conf.get("longueurEpaulementMontantIntermediaire"));
 	    path.closePath();
 	    g.drawPath(path);
 	      

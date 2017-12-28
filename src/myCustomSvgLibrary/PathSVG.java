@@ -1,18 +1,17 @@
 package myCustomSvgLibrary;
 
-import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 
 public class PathSVG extends SvgComponent {
-	private Path2D path;
+	private MyPath2D path;
 	
-	public PathSVG(Path2D path, StyleContext sc) {
+	public PathSVG(MyPath2D path2, StyleContext sc) {
 		super(sc);
-		this.path = path;
+		this.path = path2;
 	}
 	
 	public String renderTag() {
-		PathIterator pathIterator = path.getPathIterator(null);
+		PathIterator pathIterator = path.getPathIterator();
 		double[] coords = new double[6];
 		int state;
 		

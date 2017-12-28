@@ -104,9 +104,9 @@ public class MyCustomSvg extends SvgComponent{
 		this.sc.setTransform(t);
 	}
 	
-	public void drawPath(Path2D path) {
+	public void drawPath(MyPath2D path) {
 		svgTree.add(new PathSVG(path, sc));
-		this.enlargeBounds(path);
+		this.enlargeBounds(path.getPath2D());
 	}
 	
 	public void drawRect(double x, double y, double width, double height) {
