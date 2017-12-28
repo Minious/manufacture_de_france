@@ -1,10 +1,10 @@
 package myCustomSvgLibrary;
 
-public class Str extends SvgComponent {
+public class StrSVG extends SvgComponent {
 	private String str;
 	private double x, y, width;
 	
-	public Str(String str, double x, double y, double width, StyleContext sc) {
+	public StrSVG(String str, double x, double y, double width, StyleContext sc) {
 		super(sc);
 		this.str = str;
 		this.x = x;

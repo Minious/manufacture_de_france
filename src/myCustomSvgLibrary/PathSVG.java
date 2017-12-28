@@ -3,10 +3,10 @@ package myCustomSvgLibrary;
 import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 
-public class MyPath extends SvgComponent {
+public class PathSVG extends SvgComponent {
 	private Path2D path;
 	
-	public MyPath(Path2D path, StyleContext sc) {
+	public PathSVG(Path2D path, StyleContext sc) {
 		super(sc);
 		this.path = path;
 	}

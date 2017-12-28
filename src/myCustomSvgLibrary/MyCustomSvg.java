@@ -105,12 +105,12 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public void drawPath(Path2D path) {
-		svgTree.add(new MyPath(path, sc));
+		svgTree.add(new PathSVG(path, sc));
 		this.enlargeBounds(path);
 	}
 	
 	public void drawRect(double x, double y, double width, double height) {
-		Rect rect = new Rect(x, y, width, height, sc);
+		RectSVG rect = new RectSVG(x, y, width, height, sc);
 		svgTree.add(rect);
 		this.enlargeBounds(new Rectangle2D.Double(x, y, width, height));
 	}
@@ -120,13 +120,13 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public void drawEllipse(double x, double y, double width, double height) {
-		Ellipse el = new Ellipse(x, y, width, height, this.sc);
+		EllipseSVG el = new EllipseSVG(x, y, width, height, this.sc);
 		svgTree.add(el);
 		this.enlargeBounds(new Ellipse2D.Double(x, y, width, height));
 	}
 	
 	public void drawLine(double x1, double y1, double x2, double y2) {
-		Line line = new Line(x1, y1, x2, y2, this.sc);
+		LineSVG line = new LineSVG(x1, y1, x2, y2, this.sc);
 		svgTree.add(line);
 		this.enlargeBounds(new Line2D.Double(x1, y1, x2, y2));
 	}
@@ -136,7 +136,7 @@ public class MyCustomSvg extends SvgComponent{
 		Rectangle2D boundsV = this.sc.getFont().createGlyphVector(this.getFontMetrics().getFontRenderContext(), text).getVisualBounds();
 		Rectangle2D bounds = new Rectangle2D.Double(boundsH.getX() + x, boundsV.getY() + y, boundsH.getWidth(), boundsV.getHeight());
 		
-		Str str = new Str(text, x, y, width, this.sc);
+		StrSVG str = new StrSVG(text, x, y, width, this.sc);
 		svgTree.add(str);
 		
 		this.enlargeBounds(bounds);

@@ -1,9 +1,9 @@
 package myCustomSvgLibrary;
 
-public class Ellipse extends SvgComponent {
+public class EllipseSVG extends SvgComponent {
 	private double x, y, width, height;
 	
-	public Ellipse(double x, double y, double width, double height, StyleContext sc) {
+	public EllipseSVG(double x, double y, double width, double height, StyleContext sc) {
 		super(sc);
 		this.x = x;
 		this.y = y;

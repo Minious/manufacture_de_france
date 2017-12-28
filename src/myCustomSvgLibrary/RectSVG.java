@@ -1,9 +1,9 @@
 package myCustomSvgLibrary;
 
-public class Rect extends SvgComponent {
+public class RectSVG extends SvgComponent {
 	private double x, y, width, height;
 	
-	public Rect(double x, double y, double width, double height, StyleContext sc) {
+	public RectSVG(double x, double y, double width, double height, StyleContext sc) {
 		super(sc);
 		this.x = x;
 		this.y = y;
