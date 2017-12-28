@@ -69,12 +69,52 @@ public class StyleContext {
 		this.curTransform = t;
 	}
 	
+	public void setStrokeWidth(float w) {
+		this.curStroke = new BasicStroke(
+				w,
+				this.curStroke.getEndCap(),
+				this.curStroke.getLineJoin(),
+				this.curStroke.getMiterLimit(),
+				this.curStroke.getDashArray(),
+				this.curStroke.getDashPhase()
+			);
+	}
+	
+	public void setDashArray(float[] dashArray) {
+		this.curStroke = new BasicStroke(
+			this.curStroke.getLineWidth(),
+			this.curStroke.getEndCap(),
+			this.curStroke.getLineJoin(),
+			this.curStroke.getMiterLimit(),
+			dashArray,
+			0
+		);
+	}
+	
+	public void removeDashArray() {
+		this.curStroke = new BasicStroke(
+			this.curStroke.getLineWidth(),
+			this.curStroke.getEndCap(),
+			this.curStroke.getLineJoin(),
+			this.curStroke.getMiterLimit()
+		);
+	}
+	
 	public String getStrokeStyle() {
+		float[] dashArray = this.curStroke.getDashArray();
+		
 		String outputStr = "";
 		outputStr += "stroke-width: " + this.curStroke.getLineWidth() + "; ";
 		outputStr += "stroke: rgb(" + this.curColor.getRed() + "," + this.curColor.getGreen() + "," + this.curColor.getBlue() + "); ";
 		outputStr += "stroke-opacity: 1.0; ";
-		outputStr += "stroke-linecap: square; ";
+		outputStr += "stroke-linecap: butt; ";
+		if(dashArray != null) {
+			String dashArrayStr = "";
+			dashArrayStr += dashArray[0];
+			for(int i=1;i<dashArray.length;i++)
+				dashArrayStr += ","+dashArray[i];
+			outputStr += "stroke-dasharray: "+dashArrayStr+"; ";
+		}
 		return outputStr;
 	}
 	

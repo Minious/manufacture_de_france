@@ -33,8 +33,8 @@ public class MontantCorniere extends ElementGenerique {
 	private final double ordonneeHautMontant = this.ordonneeHautDessinMontant + 2 * (this.taillePoliceCote + this.curUnderLineGap + this.margeEntreMontantEtPremiereCote);
 	private final double ordonneeBasMontant = this.ordonneeHautMontant + conf.get("longueurMontantCorniere");
 
-	private final double diametrePercage = conf.get("largeurChampMontantCorniere") / 8; // INCORRECT
-	private final String valeurDiametrePercage = "ØM5";
+	private final double diametrePercages = conf.get("largeurChampMontantCorniere") / 8; // INCORRECT
+	private final String valeurDiametrePercages = "ØM5";
 
 	private final double nbCotesAGauche = conf.get("nbPercageMontant") + 1;
 	private final double distanceEntreCentreMontantEtExtremiteGaucheDessin = conf.get("demiLargeurGaucheChampMontantCorniere") + this.margeEntreMontantEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
@@ -68,12 +68,14 @@ public class MontantCorniere extends ElementGenerique {
 		g.drawString("QTE = " + this.nbMontants, new Point((double) g.getWidth() / 2, this.ordonneeDeuxiemeLigneTitre), 0, ShiftMode.CENTER);
 
 		// Trace le montant 
-	    g.setStroke(new BasicStroke(2));
+	    g.setStrokeWidth(1);
 	    g.drawRect(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantCorniere"), this.ordonneeHautMontant, conf.get("largeurChampMontantCorniere"), conf.get("longueurMontantCorniere"));
 	    
 	    // Trace l'axe du milieu du montant 
-	    g.setStroke(new BasicStroke(1));
+	    g.setStroke(new BasicStroke(0.5f));
+	    g.setDashArray(new float[] {10, 2, 2, 2});
 	    g.drawLine(this.abscisseAxeMontant, this.ordonneeHautMontant, this.abscisseAxeMontant, this.ordonneeBasMontant);
+	    g.removeDashArray();
 	    
 	    // Cote de largeur puis demi largeur de la Corniere avant
 		Point p1_1 = new Point(this.abscisseAxeMontant - conf.get("demiLargeurGaucheChampMontantCorniere"), this.ordonneeHautMontant);
@@ -96,19 +98,18 @@ public class MontantCorniere extends ElementGenerique {
 		for(int i=0;i<conf.get("nbPercageMontant");i++){
 			g.drawDistanceCote(p3_1, pTemp, curDistanceCotesLaterales);
 			curDistanceCotesLaterales = decalerCote(curDistanceCotesLaterales);
-			g.drawCircle(pTemp, this.diametrePercage);
+			g.drawCircle(pTemp, this.diametrePercages);
 			if(i != conf.get("nbPercageMontant")-1)
 				pTemp.move(0, - conf.get("entreAxePercagesMontant"));
 		}
 		
-		g.drawDiameterCote(this.valeurDiametrePercage, pTemp, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
+		g.drawDiameterCote(this.valeurDiametrePercages, pTemp, - Math.PI / 4, 40, ShiftMode.LEFT, 5);
 		
 		// Cote longueur totale du montant
 		g.drawDistanceCote(p3_1, p2_2, curDistanceCotesLaterales);
 
 	    // Trace l'onglet
-		Point p4_1 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant);
-		Point p4_2 = new Point(this.abscisseAxeMontant, this.ordonneeBasMontant);
+	    g.setStrokeWidth(1);
 	    g.drawLine(this.abscisseAxeMontant + conf.get("demiLargeurDroitChampMontantCorniere") - conf.get("epaisseurMontantCorniere"), this.ordonneeHautMontant, this.abscisseAxeMontant + conf.get("demiLargeurDroitChampMontantCorniere") - conf.get("epaisseurMontantCorniere"), this.ordonneeBasMontant);
 	}
 	

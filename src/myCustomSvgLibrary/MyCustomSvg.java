@@ -88,6 +88,18 @@ public class MyCustomSvg extends SvgComponent{
 		this.sc.setStroke(s);
 	}
 	
+	public void setStrokeWidth(float w) {
+		this.sc.setStrokeWidth(w);
+	}
+	
+	public void setDashArray(float[] dashArray) {
+		this.sc.setDashArray(dashArray);
+	}
+	
+	public void removeDashArray() {
+		this.sc.removeDashArray();
+	}
+	
 	public void setTransform(AffineTransform t) {
 		this.sc.setTransform(t);
 	}

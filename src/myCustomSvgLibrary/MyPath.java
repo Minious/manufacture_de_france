@@ -33,7 +33,6 @@ public class MyPath extends SvgComponent {
 		outputStr += "style=\"" + this.sc.getStrokeStyle() + "fill: none;\" ";
 		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
 		outputStr += "/>";
-		System.out.println(outputStr);
 		
 		return outputStr;
 	}
