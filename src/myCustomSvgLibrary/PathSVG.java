@@ -2,6 +2,8 @@ package myCustomSvgLibrary;
 
 import java.awt.geom.PathIterator;
 
+import utils.MyPath2D;
+
 public class PathSVG extends SvgComponent {
 	private MyPath2D path;
 	

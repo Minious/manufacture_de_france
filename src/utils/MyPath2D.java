@@ -1,4 +1,4 @@
-package myCustomSvgLibrary;
+package utils;
 
 import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;

@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 import myCustomSvgLibraryEnhanced.Point;
+import utils.MyPath2D;
 
 public class MyCustomSvg extends SvgComponent{
 	private int width, height;

@@ -6,11 +6,11 @@ import java.awt.geom.Path2D;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import myCustomSvgLibrary.MyPath2D;
 import myCustomSvgLibrary.PathSVG;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
+import utils.MyPath2D;
 
 public class MontantIntermediaire extends ElementGenerique {
 	// Initialisation des paramètres
