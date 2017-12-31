@@ -50,3 +50,10 @@ hauteurVitrage = hauteurClairVitrage + 2 * penetrationVitrage
 // ClairDeVitrage
 largeurClairVitrage = (largeurVerriere - 2 * largeurFaceMontantCorniere - (nbPartitions - 1) * largeurFaceMontantIntermediaire) / nbPartitions
 hauteurClairVitrage = hauteurVerriere - 2 * largeurFaceTraverseCorniere
+
+// Parclose
+jeuParclose = 1
+largeurParclose = 20
+longueurParcloseTraverseLatérale = largeurClairVitrage + largeurFaceMontantCorniere - epaisseurMontantCorniere + (largeurFaceMontantIntermediaire - epaisseurMontantIntermedaire) / 2 - jeuParclose
+longueurParcloseTraverseCentrale = largeurClairVitrage + largeurFaceMontantIntermediaire - epaisseurMontantIntermedaire - jeuParclose
+longueurParcloseMontant = hauteurClairVitrage + 2 * (largeurFaceTraverseCorniere - epaisseurTraverseCorniere - largeurParclose) - jeuParclose

@@ -16,7 +16,6 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.text.JTextComponent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
