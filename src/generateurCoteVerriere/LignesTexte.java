@@ -18,7 +18,7 @@ public class LignesTexte extends MyCustomSvgEnhanced {
 	}
 	
 	public LignesTexte(List<String> lignes, int taillePoliceDonnees, ShiftMode shiftMode) {
-		this(lignes, taillePoliceDonnees, ShiftMode.LEFT, MARGE_ENTRE_LIGNES_PAR_DEFAUT);
+		this(lignes, taillePoliceDonnees, shiftMode, MARGE_ENTRE_LIGNES_PAR_DEFAUT);
 	}
 	
 	public LignesTexte(List<String> lignes, int taillePoliceDonnees, ShiftMode shiftMode, double margeEntreLignes) {

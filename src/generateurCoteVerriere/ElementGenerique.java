@@ -19,22 +19,15 @@ public abstract class ElementGenerique {
 	}
 	
 	public void renderImage(Path savePath) throws IOException{
-		// Création d'une l'image vierge
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 
-		g.drawSvg(this.getEntete(), 0, 0, ShiftMode.CENTER);
-		g.drawSvg(this.getDessin(), 0, 150, ShiftMode.CENTER);
-		g.drawSvg(this.getPiedDePage(), 0, 800, ShiftMode.CENTER);
-		
-		/*
-		double margeEntreDonnees = 2;
-		double margeInferieureDonnees = 10;
-		g.setFont(this.taillePoliceDonnees, this.font);
-		g.drawString("ARC : " + conf.getARC(), new Point(0, (double) g.getHeight() - 3 * (taillePoliceDonnees + margeEntreDonnees) - margeInferieureDonnees), 10, ShiftMode.LEFT);
-		g.drawString("Client : " + conf.getClient(), new Point(0, (double) g.getHeight() - 2 * (taillePoliceDonnees + margeEntreDonnees) - margeInferieureDonnees), 10, ShiftMode.LEFT);
-		g.drawString("Ref : " + conf.getReference(), new Point(0, (double) g.getHeight() - (taillePoliceDonnees + margeEntreDonnees) - margeInferieureDonnees), 10, ShiftMode.LEFT);
-		g.drawString("Dimensions vitrage : " + conf.largeurVitrage + " x " + conf.hauteurVitrage, new Point(0, (double) g.getHeight() - margeInferieureDonnees), 10, ShiftMode.LEFT);
-		*/
+		double marge = 20;
+		MyCustomSvg entete = this.getEntete();
+		MyCustomSvg dessin = this.getDessin();
+		MyCustomSvg piedDePage = this.getPiedDePage();
+		g.drawSvg(entete, 0, 0, ShiftMode.CENTER);
+		g.drawSvg(dessin, 0, entete.getHeight() + marge, ShiftMode.CENTER);
+		g.drawSvg(piedDePage, - entete.getWidth() / 2, entete.getHeight() + marge + dessin.getHeight() + marge, ShiftMode.LEFT);
 		
 		Path outputFilePath = savePath.resolve(getNomFichierDeRendu() + ".svg");
 		g.writeToSVG(outputFilePath);
