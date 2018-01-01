@@ -6,6 +6,7 @@ public abstract class SvgComponent {
 	protected SvgComponent(StyleContext sc) {
 		this.sc = sc.clone();
 	}
-	
+
 	public abstract String renderTag();
+	public abstract SvgComponent clone();
 }

@@ -35,6 +35,9 @@ public class MontantIntermediaire extends ElementGenerique {
 	}
 
 	protected MyCustomSvg getDessin() {
+		System.out.println("entreAxePercageMontantTraverseCorniere = "+ conf.get("entreAxePercageMontantTraverseCorniere"));
+		System.out.println("entreAxePercageMontantTraverseCorniereBIS = "+ conf.get("entreAxePercageMontantTraverseCorniereBIS"));
+		
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 		
 		g.setUnderLineGap(this.curUnderLineGap);
@@ -137,6 +140,10 @@ public class MontantIntermediaire extends ElementGenerique {
 		lignes.add("Client : " + this.data.get("client"));
 		lignes.add("Ref : " + this.data.get("reference"));
 		lignes.add("Dimensions vitrage : " + conf.get("largeurVitrage") + " x " + conf.get("hauteurVitrage"));
+		lignes.add("Parcloses Traverse laterale : " + conf.get("nbParcloseTraverseLaterale").intValue() + " x " + conf.get("longueurParcloseTraverseLaterale"));
+		if(conf.get("nbParcloseTraverseCentrale") > 0)
+			lignes.add("Parcloses Traverse centrale : " + conf.get("nbParcloseTraverseCentrale").intValue() + " x " + conf.get("longueurParcloseTraverseCentrale"));
+		lignes.add("Parcloses Montant : " + conf.get("nbParcloseMontant").intValue() + " x " + conf.get("longueurParcloseMontant"));
 		return new LignesTexte(lignes);
 	}
 }

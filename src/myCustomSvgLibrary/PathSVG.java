@@ -37,4 +37,9 @@ public class PathSVG extends SvgComponent {
 		
 		return outputStr;
 	}
+
+	@Override
+	public SvgComponent clone() {
+		return new PathSVG(this.path.clone(), sc);
+	}
 }

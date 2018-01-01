@@ -13,6 +13,16 @@ public class MyPath2D {
 		this.y = 0;
 	}
 	
+	private MyPath2D(Path2D path, double x, double y) {
+		this.path = (Path2D) path.clone();
+		this.x = x;
+		this.y = y;
+	}
+	
+	public MyPath2D clone() {
+		return new MyPath2D(this.path, this.x, this.y);
+	}
+	
 	public void moveTo(double x, double y) {
 		this.path.moveTo(x, y);
 		this.x = x;

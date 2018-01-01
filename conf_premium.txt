@@ -12,7 +12,7 @@ demiLargeurDroitChampTraverseCorniere = 20
 demiLargeurGaucheChampTraverseCorniere = largeurChampTraverseCorniere - demiLargeurDroitChampTraverseCorniere
 ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere = largeurClairVitrage + largeurFaceMontantCorniere + largeurFaceMontantIntermediaire / 2
 ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere = 70
-entreAxePercageMontantTraverseCorniere = (longueurTraverseCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere) / (nbPartitions - 2)
+entreAxePercageMontantTraverseCorniere = largeurClairVitrage + largeurFaceMontantIntermediaire
 entreAxePercageMontantEtParcloseTraverseCorniere = 50
 
 // Montant generique
@@ -53,7 +53,11 @@ hauteurClairVitrage = hauteurVerriere - 2 * largeurFaceTraverseCorniere
 
 // Parclose
 jeuParclose = 1
-largeurParclose = 20
-longueurParcloseTraverseLaterale = largeurClairVitrage + largeurFaceMontantCorniere - epaisseurMontantCorniere + (largeurFaceMontantIntermediaire - epaisseurMontantIntermedaire) / 2 - jeuParclose
-longueurParcloseTraverseCentrale = largeurClairVitrage + largeurFaceMontantIntermediaire - epaisseurMontantIntermedaire - jeuParclose
-longueurParcloseMontant = hauteurClairVitrage + 2 * (largeurFaceTraverseCorniere - epaisseurTraverseCorniere - largeurParclose) - jeuParclose
+hauteurParcloseCorniere = 16
+hauteurParcloseT = 12
+nbParcloseTraverseLaterale = if(nbPartitions > 1, 4, 2)
+longueurParcloseTraverseLaterale = ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere - epaisseurMontantCorniere - epaisseurMontantIntermedaire / 2 - jeuParclose
+nbParcloseTraverseCentrale = min(0, (nbPartitions - 2) * 2)
+longueurParcloseTraverseCentrale = entreAxePercageMontantTraverseCorniere - epaisseurMontantIntermedaire - jeuParclose
+nbParcloseMontant = nbPartitions + 1
+longueurParcloseMontant = hauteurVerriere - 2 * (epaisseurTraverseCorniere + hauteurParcloseCorniere) - jeuParclose

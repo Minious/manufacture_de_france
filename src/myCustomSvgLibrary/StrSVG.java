@@ -28,4 +28,9 @@ public class StrSVG extends SvgComponent {
 		
 		return outputStr;
 	}
+
+	@Override
+	public SvgComponent clone() {
+		return new StrSVG(this.str, this.x, this.y, this.sc);
+	}
 }

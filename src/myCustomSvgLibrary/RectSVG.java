@@ -24,4 +24,9 @@ public class RectSVG extends SvgComponent {
 		
 		return outputStr;
 	}
+
+	@Override
+	public SvgComponent clone() {
+		return new RectSVG(this.x, this.y, this.width, this.height, this.sc);
+	}
 }

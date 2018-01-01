@@ -29,4 +29,9 @@ public class EllipseSVG extends SvgComponent {
 		
 		return outputStr;
 	}
+
+	@Override
+	public SvgComponent clone() {
+		return new EllipseSVG(this.x, this.y, this.width, this.height, this.sc);
+	}
 }

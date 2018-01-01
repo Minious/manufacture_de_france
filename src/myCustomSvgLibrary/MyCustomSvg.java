@@ -24,10 +24,10 @@ public class MyCustomSvg extends SvgComponent{
 	//private int width, height;
 	private double x, y;
 	private Rectangle2D bounds;
-	private ArrayList<SvgComponent> svgTree = new ArrayList<SvgComponent>();
+	private ArrayList<SvgComponent> svgTree;
 	//private Padding padding;
 	
-	public MyCustomSvg(/*int width, int height*/) {
+	public MyCustomSvg() {
 		super(new StyleContext(
 				new AffineTransform(),
 				Color.BLACK,
@@ -42,6 +42,17 @@ public class MyCustomSvg extends SvgComponent{
 		//this.padding = new Padding(100);
 		this.x = 0;
 		this.y = 0;
+		this.svgTree = new ArrayList<SvgComponent>();
+	}
+	
+	public MyCustomSvg(MyCustomSvg g) {
+		super(g.sc);
+		this.bounds = (Rectangle2D) g.bounds.clone();
+		this.x = g.x;
+		this.y = g.y;
+		this.svgTree = new ArrayList<SvgComponent>();
+		for(SvgComponent c : g.svgTree)
+			this.svgTree.add(c.clone());
 	}
 
 	public double getWidth() {
@@ -189,10 +200,16 @@ public class MyCustomSvg extends SvgComponent{
 				break;
 		}
 		
-		svgTree.add(svg);
-		svg.setPosition(actualX, actualY);
-		Rectangle2D bounds = new Rectangle2D.Double(actualX, actualY, svg.getWidth(), svg.getHeight());
+		MyCustomSvg svgClone = (MyCustomSvg) svg.clone();
+		svgTree.add(svgClone);
+		svgClone.setPosition(actualX, actualY);
+		Rectangle2D bounds = new Rectangle2D.Double(actualX, actualY, svgClone.getWidth(), svgClone.getHeight());
 		this.enlargeBounds(bounds);
+	}
+	
+	// A SUPPRIMER
+	public int getNbTag() {
+		return this.svgTree.size();
 	}
 	
 	public String renderTag() {
@@ -206,6 +223,7 @@ public class MyCustomSvg extends SvgComponent{
 		String output = "";
 		output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" style=\"overflow:visible;\" >\n";
 		//output += "<svg x=\""+this.x+"\" y=\""+this.y+"\" style=\"overflow:visible;\" >\n";
+		System.out.println("nb tag = "+this.svgTree.size());
 		for(SvgComponent svgComponent : this.svgTree) {
 			output += svgComponent.renderTag() + "\n";
 		}
@@ -270,5 +288,9 @@ public class MyCustomSvg extends SvgComponent{
 			this.bounds = bounds;
 		else
 			this.bounds.add(bounds);
+	}
+	
+	public MyCustomSvg clone() {
+		return new MyCustomSvg(this);
 	}
 }

@@ -149,6 +149,32 @@ public class TextFileConf {
 			}
 		});
 		
+		functions.add(new Function("min", 2) {
+			@Override
+			public double apply(double... args) {
+				// TODO
+				Double a = args[0];
+				Double b = args[1];
+				if (a < b)
+					return a;
+				else
+					return b;
+			}
+		});
+		
+		functions.add(new Function("max", 2) {
+			@Override
+			public double apply(double... args) {
+				// TODO
+				Double a = args[0];
+				Double b = args[1];
+				if (a > b)
+					return a;
+				else
+					return b;
+			}
+		});
+		
 		return functions;
 	}
 

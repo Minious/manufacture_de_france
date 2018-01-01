@@ -24,4 +24,9 @@ public class LineSVG extends SvgComponent {
 		
 		return outputStr;
 	}
+
+	@Override
+	public SvgComponent clone() {
+		return new LineSVG(x1, y1, x2, y2, sc);
+	}
 }
