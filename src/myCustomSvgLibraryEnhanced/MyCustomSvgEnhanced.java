@@ -9,11 +9,12 @@ import generateurCoteVerriere.Utils;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
-	public double underLineGap = 0;
 
 	public MyCustomSvgEnhanced(int width, int height) {
 		super(width, height);
 	}
+
+	public double underLineGap = 0;
 	
 	public void setUnderLineGap(double u) {
 		this.underLineGap = u;
@@ -177,6 +178,8 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	public enum ShiftMode{
 		CENTER,
 		LEFT,
-		RIGHT;
+		RIGHT,
+		TOP,
+		BOTTOM;
 	}
 }

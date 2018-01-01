@@ -36,14 +36,12 @@ public abstract class ModeleGenerique {
 		ArrayList<Class> classes = new ArrayList<Class>();
 		for(String classStr : classesStr)
 			try {
-				System.out.println(classStr);
 				classes.add(Class.forName(getPackage() + "." + classStr));
 			} catch (ClassNotFoundException e1) {}
 
 		ArrayList<ElementGenerique> elems = new ArrayList<ElementGenerique>();
 		for(Class curClass : classes)
 			try {
-				System.out.println(curClass);
 				Constructor constructor = curClass.getDeclaredConstructor(HashMap.class);
 				ElementGenerique curElem = (ElementGenerique) constructor.newInstance(this.conf);
 				if(curElem.getNbElements() > 0)
@@ -51,14 +49,10 @@ public abstract class ModeleGenerique {
 			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
-
-		System.out.println(elems);
 		
 		try {
-			for(int i=0;i<elems.size();i++) {
+			for(int i=0;i<elems.size();i++)
 				elems.get(i).renderImage(savePath.resolve("svg"), ARC, client, reference);
-				System.out.println(elems);
-			}
 		} catch (IOException e) {}
 
 		ArrayList<String> elemsPaths = new ArrayList<String>();

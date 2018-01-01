@@ -28,7 +28,7 @@ public class Premium extends ModeleGenerique {
 
 	@Override
 	protected String[] getElementsClasses() {
-		return new String[] {"MontantCorniere", "MontantIntermediaire", "TraverseCorniere"};
+		return new String[] {/*"MontantCorniere",*/ "MontantIntermediaire"/*, "TraverseCorniere"*/};
 	}
 
 	@Override

@@ -2,14 +2,13 @@ package myCustomSvgLibrary;
 
 public class StrSVG extends SvgComponent {
 	private String str;
-	private double x, y, width;
+	private double x, y;
 	
-	public StrSVG(String str, double x, double y, double width, StyleContext sc) {
+	public StrSVG(String str, double x, double y, StyleContext sc) {
 		super(sc);
 		this.str = str;
 		this.x = x;
 		this.y = y;
-		this.width = width;
 	}
 	
 	public String renderTag() {
