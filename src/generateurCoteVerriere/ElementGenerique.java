@@ -5,31 +5,26 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 
+import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
+import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
 public abstract class ElementGenerique {
-	//protected ConfGenerique conf;
 	protected HashMap<String, Double> conf;
+	protected HashMap<String, Object> data;
 	
-	public ElementGenerique(HashMap<String, Double> conf){
+	public ElementGenerique(HashMap<String, Double> conf, HashMap<String, Object> data){
 		this.conf = conf;
+		this.data = data;
 	}
 	
-	public void renderImage(Path savePath, String ARC, String client, String reference) throws IOException{
+	public void renderImage(Path savePath) throws IOException{
 		// Création d'une l'image vierge
-		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced(getLargeurImage(), getHauteurImage());
-		
-		// Initialisation des paramètres de rendu
-		
-		// Remplie l'image avec un fond blanc
-		/*
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, g.getWidth(), g.getHeight());
-		*/
-		g.setColor(Color.BLACK);
-		//g.drawRect(0, 0, g.getWidth(), g.getHeight());
-		
-		drawImage(g);
+		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
+
+		g.drawSvg(this.getEntete(), 0, 0, ShiftMode.CENTER);
+		g.drawSvg(this.getDessin(), 0, 150, ShiftMode.CENTER);
+		g.drawSvg(this.getPiedDePage(), 0, 800, ShiftMode.CENTER);
 		
 		/*
 		double margeEntreDonnees = 2;
@@ -41,16 +36,13 @@ public abstract class ElementGenerique {
 		g.drawString("Dimensions vitrage : " + conf.largeurVitrage + " x " + conf.hauteurVitrage, new Point(0, (double) g.getHeight() - margeInferieureDonnees), 10, ShiftMode.LEFT);
 		*/
 		
-		PiedDePage pdp = new PiedDePage();
-		pdp.drawImage(g, ARC, client, reference);
-		
 		Path outputFilePath = savePath.resolve(getNomFichierDeRendu() + ".svg");
 		g.writeToSVG(outputFilePath);
 	}
 
-	protected abstract void drawImage(MyCustomSvgEnhanced g);
-	protected abstract int getLargeurImage();
-	protected abstract int getHauteurImage();
 	protected abstract int getNbElements();
+	protected abstract MyCustomSvg getEntete();
+	protected abstract MyCustomSvg getDessin();
+	protected abstract MyCustomSvg getPiedDePage();
 	public abstract String getNomFichierDeRendu();
 }

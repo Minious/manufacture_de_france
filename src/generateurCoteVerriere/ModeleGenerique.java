@@ -16,18 +16,14 @@ import org.apache.pdfbox.util.PDFMergerUtility;
 
 public abstract class ModeleGenerique {
 	protected HashMap<String, Double> conf;
-	protected String ARC;
-	protected String client;
-	protected String reference;
+	protected HashMap<String, Object> data;
 	
-	public ModeleGenerique(String ARC, String client, String reference) {
-		this.ARC = ARC;
-		this.client = client;
-		this.reference = reference;
+	public ModeleGenerique(HashMap<String, Object> data) {
+		this.data = data;
 	}
 	
 	public void generate(Path savePathTemp) {
-		Path savePath = savePathTemp.resolve(this.client+"_"+this.reference);
+		Path savePath = savePathTemp.resolve(this.data.get("client")+"_"+this.data.get("reference"));
 		
 		System.out.println("\n\tChargement...\n");
 		
@@ -42,8 +38,8 @@ public abstract class ModeleGenerique {
 		ArrayList<ElementGenerique> elems = new ArrayList<ElementGenerique>();
 		for(Class curClass : classes)
 			try {
-				Constructor constructor = curClass.getDeclaredConstructor(HashMap.class);
-				ElementGenerique curElem = (ElementGenerique) constructor.newInstance(this.conf);
+				Constructor constructor = curClass.getDeclaredConstructor(HashMap.class, HashMap.class);
+				ElementGenerique curElem = (ElementGenerique) constructor.newInstance(this.conf, this.data);
 				if(curElem.getNbElements() > 0)
 					elems.add(curElem);
 			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -52,7 +48,7 @@ public abstract class ModeleGenerique {
 		
 		try {
 			for(int i=0;i<elems.size();i++)
-				elems.get(i).renderImage(savePath.resolve("svg"), ARC, client, reference);
+				elems.get(i).renderImage(savePath.resolve("svg"));
 		} catch (IOException e) {}
 
 		ArrayList<String> elemsPaths = new ArrayList<String>();
@@ -85,5 +81,4 @@ public abstract class ModeleGenerique {
 
 	protected abstract String[] getElementsClasses();
 	protected abstract String getPackage();
-	//protected abstract ConfGenerique getConf();
 }

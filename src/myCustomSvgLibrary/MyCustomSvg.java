@@ -21,21 +21,23 @@ import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import utils.MyPath2D;
 
 public class MyCustomSvg extends SvgComponent{
-	private int width, height;
+	//private int width, height;
 	private double x, y;
 	private Rectangle2D bounds;
 	private ArrayList<SvgComponent> svgTree = new ArrayList<SvgComponent>();
 	//private Padding padding;
 	
-	public MyCustomSvg(int width, int height) {
+	public MyCustomSvg(/*int width, int height*/) {
 		super(new StyleContext(
 				new AffineTransform(),
 				Color.BLACK,
 				new Font("Arial", Font.PLAIN, 12),
 				new BasicStroke(1)
 		));
+		/*
 		this.width = width;
 		this.height = height;
+		*/
 		this.bounds = null;
 		//this.padding = new Padding(100);
 		this.x = 0;
@@ -43,14 +45,14 @@ public class MyCustomSvg extends SvgComponent{
 	}
 
 	public double getWidth() {
-		//return this.bounds.getWidth();
-		return this.width;
+		return this.bounds.getWidth();
+		//return this.width;
 		// this.bounds.getWidth() + this.padding.getHorizontalPadding();
 	}
 
 	public double getHeight() {
-		//return this.bounds.getHeight();
-		return this.height;
+		return this.bounds.getHeight();
+		//return this.height;
 		// this.bounds.getHeight() + this.padding.getVerticalPadding();
 	}
 	

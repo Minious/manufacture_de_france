@@ -8,16 +8,16 @@ import conf.UnprocessableConfFileException;
 import generateurCoteVerriere.ModeleGenerique;
 
 public class Premium extends ModeleGenerique {
-	public Premium(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
-		super(ARC, client, reference);
+	public Premium(HashMap<String,Object> data) {
+		super(data);
 
 		String fileName = "conf_premium.txt";
 
 		HashMap<String, Double> initialMap = new HashMap<String, Double>();
 		
-		initialMap.put("hauteurVerriere", hauteurVerriere);
-		initialMap.put("largeurVerriere", largeurVerriere);
-		initialMap.put("nbPartitions", (double) nbPartitions);
+		initialMap.put("hauteurVerriere", (Double) data.get("hauteurVerriere"));
+		initialMap.put("largeurVerriere", (Double) data.get("largeurVerriere"));
+		initialMap.put("nbPartitions", ((Integer) data.get("nbPartitions")).doubleValue());
 
 		try {
 			this.conf = TextFileConf.loadConf(fileName, initialMap);

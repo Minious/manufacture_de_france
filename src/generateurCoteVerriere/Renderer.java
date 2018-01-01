@@ -7,27 +7,14 @@ import generateurCoteVerriere.modeles.mecanique.Mecanique;
 import generateurCoteVerriere.modeles.premium.Premium;
 
 public class Renderer {
-	public static void render(String modele, Path savePath, HashMap<String, Object> args) {
-		switch(modele) {
+	public static void render(String modele, Path savePath, HashMap<String, Object> data) {
+		switch(modele) {/*
 			case "Mécanique":
-				new Mecanique(
-					(String) args.get("ARC"),
-					(String) args.get("client"),
-					(String) args.get("reference"),
-					(Double) args.get("hauteurVerriere"),
-					(Double) args.get("largeurVerriere"),
-					(Integer) args.get("nbPartitions")
-				).generate(savePath);
+				new Mecanique(data).generate(savePath);
 				break;
+				*/
 			case "Premium":
-				new Premium(
-					(String) args.get("ARC"),
-					(String) args.get("client"),
-					(String) args.get("reference"),
-					(Double) args.get("hauteurVerriere"),
-					(Double) args.get("largeurVerriere"),
-					(Integer) args.get("nbPartitions")
-				).generate(savePath);
+				new Premium(data).generate(savePath);
 				break;
 		}
 	}

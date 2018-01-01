@@ -248,16 +248,6 @@ public class TraverseCorniere extends ElementGenerique {
 	}
 
 	@Override
-	protected int getLargeurImage() {
-		return (int) this.largeurImage;
-	}
-
-	@Override
-	protected int getHauteurImage() {
-		return (int) this.hauteurImage;
-	}
-
-	@Override
 	public String getNomFichierDeRendu() {
 		return this.nomFichierDeRendu;
 	}

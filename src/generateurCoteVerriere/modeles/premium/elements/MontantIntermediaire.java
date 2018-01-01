@@ -3,9 +3,12 @@ package generateurCoteVerriere.modeles.premium.elements;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Path2D;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
+import generateurCoteVerriere.LignesTexte;
+import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibrary.PathSVG;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
@@ -13,6 +16,7 @@ import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import utils.MyPath2D;
 
 public class MontantIntermediaire extends ElementGenerique {
+
 	// Initialisation des paramètres
 	private String nomFichierDeRendu = "montant_intermediaire";
 
@@ -51,21 +55,15 @@ public class MontantIntermediaire extends ElementGenerique {
 	
 	private final double largeurImage = this.abscisseAxeMontant + this.distanceEntreCentreMontantEtExtremiteDroiteDessin + this.margeLateraleDessin;
 	private final double hauteurImage = this.ordonneeBasMontant + this.margeBasDessin;
-	
-	public MontantIntermediaire(HashMap<String, Double> conf){
-		super(conf);
+
+	public MontantIntermediaire(HashMap<String, Double> conf, HashMap<String, Object> data) {
+		super(conf, data);
 	}
 
-	// protected void drawImage(SVGGraphics2D g){
-	protected void drawImage(MyCustomSvgEnhanced g){
-		g.setUnderLineGap(this.curUnderLineGap);
+	protected MyCustomSvg getDessin() {
+		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 		
-		// Affiche les titres du dessin
-		g.setColor(Color.BLACK);
-		g.setFontSize(this.taillePoliceTitre);
-		String titre = "MONTANT INTERMEDIAIRE T DE 30x30x4";
-		g.drawString(titre, new Point((double) g.getWidth() / 2, this.ordonneePremiereLigneTitre), 0, ShiftMode.CENTER);
-		g.drawString("QTE = " + this.nbMontants, new Point((double) g.getWidth() / 2, this.ordonneeDeuxiemeLigneTitre), 0, ShiftMode.CENTER);
+		g.setUnderLineGap(this.curUnderLineGap);
 		
 		// Trace le montant 
 		g.setFontSize(this.taillePoliceCote);
@@ -132,20 +130,12 @@ public class MontantIntermediaire extends ElementGenerique {
 		
 		// Cote longueur totale du montant
 		g.drawDistanceCote(p3_1, p2_2, curDistanceCotesLaterales);
+		
+		return g;
 	}
 	
 	private double decalerCote(double curDistance){
 		return curDistance + this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote;
-	}
-
-	@Override
-	protected int getLargeurImage() {
-		return (int) this.largeurImage;
-	}
-
-	@Override
-	protected int getHauteurImage() {
-		return (int) this.hauteurImage;
 	}
 
 	@Override
@@ -156,5 +146,23 @@ public class MontantIntermediaire extends ElementGenerique {
 	@Override
 	protected int getNbElements() {
 		return this.nbMontants;
+	}
+
+	@Override
+	protected MyCustomSvg getEntete() {
+		ArrayList<String> lignes = new ArrayList<String>();
+		lignes.add("MONTANT INTERMEDIAIRE T DE 30x30x4");
+		lignes.add("QTE = " + this.nbMontants);
+		return new LignesTexte(lignes, 15, ShiftMode.CENTER);
+	}
+
+	@Override
+	protected MyCustomSvg getPiedDePage() {
+		ArrayList<String> lignes = new ArrayList<String>();
+		lignes.add("ARC : " + this.data.get("ARC"));
+		lignes.add("Client : " + this.data.get("client"));
+		lignes.add("Ref : " + this.data.get("reference"));
+		lignes.add("Dimensions vitrage : " + conf.get("largeurVitrage") + " x " + conf.get("hauteurVitrage"));
+		return new LignesTexte(lignes);
 	}
 }
