@@ -41,9 +41,9 @@ public class MontantIntermediaire extends ElementGenerique {
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 		
 		g.setUnderLineGap(this.curUnderLineGap);
+		g.setFontSize(this.taillePoliceCote);
 		
 		// Trace le montant 
-		g.setFontSize(this.taillePoliceCote);
 	    g.setStrokeWidth(1);
 	    MyPath2D path = new MyPath2D();
 	    path.moveTo(conf.get("demiLargeurDroitChampMontantIntermediaire"), 0);

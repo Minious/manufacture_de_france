@@ -1,10 +1,12 @@
 package generateurCoteVerriere.modeles.premium.elements;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
+import generateurCoteVerriere.LignesTexte;
+import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -14,92 +16,59 @@ public class TraverseCorniere extends ElementGenerique {
 	private String nomFichierDeRendu = "traverse_corniere";
 
 	// Parametres de la police
-	private final int taillePoliceTitre = 12;
 	private final int taillePoliceCote = 10;
 	private final int curUnderLineGap = 2;
 
 	// Titre traverse Corniere
-	private final double margeEntreLignesTitre = 10;
-	private final double ordonneePremiereLigneTitre = this.margeEntreLignesTitre + this.taillePoliceCote;
-	private final double ordonneeDeuxiemeLigneTitre = this.ordonneePremiereLigneTitre + this.margeEntreLignesTitre + this.taillePoliceCote;
-	private final double margeEntreTitreEtDessin = 10;
 	private final int nbTraverses = 2;
 
 	// General
-	private final double ordonneeHautDessinTraverse = this.ordonneeDeuxiemeLigneTitre + this.margeEntreTitreEtDessin;
-
-	private final double margeInterCote = 0; // 10;
 	private final double margeEntreTraverseEtPremiereCote = 10; // <--- Empirique
-	
-	private final double ordonneeHautTraverse = this.ordonneeHautDessinTraverse + 2 * (this.taillePoliceCote + this.curUnderLineGap + this.margeEntreTraverseEtPremiereCote);
-	private final double ordonneeBasTraverse = this.ordonneeHautTraverse + conf.get("longueurTraverseCorniere");
 
 	private final double diametrePercages = conf.get("largeurChampTraverseCorniere") / 8; // INCORRECT
 	private final String valeurDiametrePercagesMontant = "Ø7";
 	private final String valeurDiametrePercagesParclose = "ØM5";
 	private final String valeurDiametrePercagesFixation = "Ø5.5 + fraisage";
-
-	private final double nbCotesAGauche = conf.get("nbPartitions") > 1 ? conf.get("nbPartitions") * 4 : 5;
-	private final double distanceEntreCentreTraverseEtExtremiteGaucheDessin = conf.get("demiLargeurGaucheChampTraverseCorniere") + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesAGauche;
-	private final double nbCotesADroite = 3;
-	private final double distanceEntreCentreTraverseEtExtremiteDroiteDessin = conf.get("demiLargeurDroitChampTraverseCorniere") + this.margeEntreTraverseEtPremiereCote + (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote) * this.nbCotesADroite;
 	
-	private final double margeLateraleDessin = 50;
-	private final double margeBasDessin = 100;
-	
-	private final double abscisseAxeTraverse = this.margeLateraleDessin + this.distanceEntreCentreTraverseEtExtremiteGaucheDessin;
-	
-	private final double largeurImage = this.abscisseAxeTraverse + this.distanceEntreCentreTraverseEtExtremiteDroiteDessin + this.margeLateraleDessin;
-	private final double hauteurImage = this.ordonneeBasTraverse + this.margeBasDessin;
-	
-	public TraverseCorniere(HashMap<String, Double> conf){
-		super(conf);
+	public TraverseCorniere(HashMap<String, Double> conf, HashMap<String, Object> data) {
+		super(conf, data);
 	}
-	
-	protected void drawImage(MyCustomSvgEnhanced g){
-		// Défini la police de caractères par défaut
-		g.setFont(this.taillePoliceCote, "Arial");
+
+	@Override
+	protected MyCustomSvg getDessin() {
+		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
+
 		g.setUnderLineGap(this.curUnderLineGap);
-
-		this.draw(g);
-	}
-	
-	private void draw(MyCustomSvgEnhanced g){		
-		// Affiche les titres du dessin
-		g.setColor(Color.BLACK);
-		g.setFontSize(this.taillePoliceTitre);
-		String titre = "TRAVERSE CORNIERE 30x30x3";
-		g.drawString(titre, new Point((double) g.getWidth() / 2, this.ordonneePremiereLigneTitre), 0, ShiftMode.CENTER);
-		g.drawString("QTE = " + this.nbTraverses, new Point((double) g.getWidth() / 2, this.ordonneeDeuxiemeLigneTitre), 0, ShiftMode.CENTER);
+		g.setFontSize(this.taillePoliceCote);
 		
 		// Trace le traverse 
 		g.setStrokeWidth(1);
-		g.drawRect(this.abscisseAxeTraverse - conf.get("demiLargeurGaucheChampTraverseCorniere"), this.ordonneeHautTraverse, conf.get("largeurChampTraverseCorniere"), conf.get("longueurTraverseCorniere"));
+		g.drawRect(- conf.get("demiLargeurGaucheChampTraverseCorniere"), 0, conf.get("largeurChampTraverseCorniere"), conf.get("longueurTraverseCorniere"));
 
 		// Trace l'onglet
 		g.setStrokeWidth(1);
-		g.drawLine(this.abscisseAxeTraverse + conf.get("demiLargeurDroitChampTraverseCorniere") - conf.get("epaisseurTraverseCorniere"), this.ordonneeHautTraverse, this.abscisseAxeTraverse + conf.get("demiLargeurDroitChampTraverseCorniere") - conf.get("epaisseurTraverseCorniere"), this.ordonneeBasTraverse);
+		g.drawLine(conf.get("demiLargeurDroitChampTraverseCorniere") - conf.get("epaisseurTraverseCorniere"), 0, conf.get("demiLargeurDroitChampTraverseCorniere") - conf.get("epaisseurTraverseCorniere"), conf.get("longueurTraverseCorniere"));
 
 		// Trace l'axe du milieu du traverse 
 		g.setStroke(new BasicStroke(0.5f));
 		g.setDashArray(new float[] {10, 2, 2, 2});
-		g.drawLine(this.abscisseAxeTraverse, this.ordonneeHautTraverse, this.abscisseAxeTraverse, this.ordonneeBasTraverse);
+		g.drawLine(0, 0, 0, conf.get("longueurTraverseCorniere"));
 		g.removeDashArray();
 		
 		// Cote de largeur puis demi largeur de la Corniere avant
  		g.setFontSize(this.taillePoliceCote);
- 		Point p1_1 = new Point(this.abscisseAxeTraverse - conf.get("demiLargeurGaucheChampTraverseCorniere"), this.ordonneeHautTraverse);
- 		Point p1_2 = new Point(this.abscisseAxeTraverse + conf.get("demiLargeurDroitChampTraverseCorniere"), this.ordonneeHautTraverse);
+ 		Point p1_1 = new Point(- conf.get("demiLargeurGaucheChampTraverseCorniere"), 0);
+ 		Point p1_2 = new Point(conf.get("demiLargeurDroitChampTraverseCorniere"), 0);
  		g.drawDistanceCote(p1_1, p1_2, margeEntreTraverseEtPremiereCote + curUnderLineGap + taillePoliceCote, 0, ShiftMode.CENTER);
  		
  		Point p2_1 = p1_1;
- 		Point p2_2 = new Point(this.abscisseAxeTraverse, this.ordonneeHautTraverse);
+ 		Point p2_2 = new Point(0, 0);
  		g.drawDistanceCote(p2_1, p2_2, margeEntreTraverseEtPremiereCote, - conf.get("demiLargeurGaucheChampTraverseCorniere") / 2 - 4, ShiftMode.RIGHT);
 	 	
  		// Cotes latérales
  		int numCurCoteGauche = 0;
- 		Point pBasTraverseCornier = new Point(this.abscisseAxeTraverse, this.ordonneeBasTraverse);
- 		Point pHautTraverseCornier = new Point(this.abscisseAxeTraverse, this.ordonneeHautTraverse);
+ 		Point pBasTraverseCornier = new Point(0, conf.get("longueurTraverseCorniere"));
+ 		Point pHautTraverseCornier = new Point(0, 0);
  		if(conf.get("nbPartitions") <= 2) {
  			Point pParclose1 = new Point(pBasTraverseCornier);
  			pParclose1.move(0, - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
@@ -161,7 +130,7 @@ public class TraverseCorniere extends ElementGenerique {
  		}
  		else {
  			// Cotes gauches (nbPart > 2)
-	 		Point pCurPercageMontant = new Point(this.abscisseAxeTraverse, this.ordonneeBasTraverse - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere"));
+	 		Point pCurPercageMontant = new Point(0, conf.get("longueurTraverseCorniere") - conf.get("ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere"));
 	 		for(int i=0;i<conf.get("nbPartitions")-1;i++) {
 	 			Point pParclose1 = new Point(pCurPercageMontant);
 	 			pParclose1.move(0, conf.get("entreAxePercageMontantTraverseCorniere") - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
@@ -245,6 +214,8 @@ public class TraverseCorniere extends ElementGenerique {
  		}
  		
  		g.drawDistanceCote(pBasTraverseCornier, pHautTraverseCornier, conf.get("demiLargeurGaucheChampTraverseCorniere") + margeEntreTraverseEtPremiereCote + numCurCoteGauche * (curUnderLineGap + taillePoliceCote));
+	
+ 		return g;
 	}
 
 	@Override
@@ -255,5 +226,27 @@ public class TraverseCorniere extends ElementGenerique {
 	@Override
 	protected int getNbElements() {
 		return this.nbTraverses;
+	}
+
+	@Override
+	protected MyCustomSvg getEntete() {
+		ArrayList<String> lignes = new ArrayList<String>();
+		lignes.add("TRAVERSE CORNIERE 30x30x3");
+		lignes.add("QTE = " + this.nbTraverses);
+		return new LignesTexte(lignes, 15, ShiftMode.CENTER);
+	}
+
+	@Override
+	protected MyCustomSvg getPiedDePage() {
+		ArrayList<String> lignes = new ArrayList<String>();
+		lignes.add("ARC : " + this.data.get("ARC"));
+		lignes.add("Client : " + this.data.get("client"));
+		lignes.add("Ref : " + this.data.get("reference"));
+		lignes.add("Dimensions vitrage : " + conf.get("largeurVitrage") + " x " + conf.get("hauteurVitrage"));
+		lignes.add("Parcloses Traverse laterale : " + conf.get("nbParcloseTraverseLaterale").intValue() + " x " + conf.get("longueurParcloseTraverseLaterale"));
+		if(conf.get("nbParcloseTraverseCentrale") > 0)
+			lignes.add("Parcloses Traverse centrale : " + conf.get("nbParcloseTraverseCentrale").intValue() + " x " + conf.get("longueurParcloseTraverseCentrale"));
+		lignes.add("Parcloses Montant : " + conf.get("nbParcloseMontant").intValue() + " x " + conf.get("longueurParcloseMontant"));
+		return new LignesTexte(lignes);
 	}
 }

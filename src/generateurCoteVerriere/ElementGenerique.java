@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibrary.MyHandyLayout;
-import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
 public abstract class ElementGenerique {
@@ -21,7 +20,6 @@ public abstract class ElementGenerique {
 	public void renderImage(Path savePath) throws IOException{
 		//MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 
-		double marge = 20;
 		MyCustomSvg entete = this.getEntete();
 		MyCustomSvg dessin = this.getDessin();
 		MyCustomSvg piedDePage = this.getPiedDePage();
@@ -33,7 +31,8 @@ public abstract class ElementGenerique {
 		MyHandyLayout l = new MyHandyLayout();
 		l.addRow(entete, ShiftMode.CENTER);
 		System.out.println("nbTags = "+entete.getNbTag());
-		l.addRow(new MyCustomSvg[] {dessin, dessin}, ShiftMode.CENTER);
+		l.addRow(dessin, ShiftMode.CENTER);
+		//l.addRow(new MyCustomSvg[] {dessin, dessin}, ShiftMode.CENTER);
 		System.out.println("dessin width = "+dessin.getWidth());
 		l.addRow(piedDePage, ShiftMode.LEFT);
 		MyCustomSvg g = l.getSvg();
