@@ -10,18 +10,19 @@ import generateurCoteVerriere.ModeleGenerique;
 import net.objecthunter.exp4j.function.Function;
 
 public class Mecanique extends ModeleGenerique {
-	public Mecanique(String ARC, String client, String reference, double hauteurVerriere, double largeurVerriere, int nbPartitions) {
-		super(ARC, client, reference);
+	public Mecanique(HashMap<String,Object> data) {
+		super(data);
 
 		String fileName = "conf_mecanique.txt";
 
 		HashMap<String, Double> initialMap = new HashMap<String, Double>();
-		
-		initialMap.put("hauteurVerriere", hauteurVerriere);
-		initialMap.put("largeurVerriere", largeurVerriere);
-		initialMap.put("nbPartitions", (double) nbPartitions);
+
+		initialMap.put("hauteurVerriere", (Double) data.get("hauteurVerriere"));
+		initialMap.put("largeurVerriere", (Double) data.get("largeurVerriere"));
+		initialMap.put("nbPartitions", ((Integer) data.get("nbPartitions")).doubleValue());
 
 		ArrayList<Function> functions = new ArrayList<Function>();
+		/*
 		functions.add(new Function("getNbTrousVerticaux", 1) {
 			@Override
 			public double apply(double... args) {
@@ -33,6 +34,7 @@ public class Mecanique extends ModeleGenerique {
 					return (int) Math.floor(hauteurVerriere / 500);
 			}
 		});
+		*/
 		functions.add(new Function("getNbAttachesIntermediairesTraverseCorniere", 2) {
 			@Override
 			public double apply(double... args) {

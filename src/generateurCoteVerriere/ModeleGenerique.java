@@ -20,6 +20,7 @@ public abstract class ModeleGenerique {
 	
 	public ModeleGenerique(HashMap<String, Object> data) {
 		this.data = data;
+		this.conf = new HashMap<String, Double>();
 	}
 	
 	public void generate(Path savePathTemp) {
