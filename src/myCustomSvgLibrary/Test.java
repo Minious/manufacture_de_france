@@ -86,7 +86,7 @@ public class Test {
 	}
 
 	private static void test5() {
-		DessinProfil profil = new DessinProfil(400, 30);
+		DessinProfil profil = new DessinProfil(30, 400);
 		try {
 			profil.setEpaulement(20, 3);
 			//profil.isCorniere();

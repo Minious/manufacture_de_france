@@ -47,7 +47,7 @@ public class Mecanique extends ModeleGenerique {
 
 	@Override
 	protected String[] getElementsClasses() {
-		return new String[] {"MontantPartition2", "MontantCorniere2", "TraverseCorniere2"/*, "MontantPartition", "ContreCadreMontantPartition", "MontantCorniere", "ContreCadreMontantCorniere", "TraverseCorniere", "ContreCadreTraverseCorniere", "AttachesTraverseCorniere"*/};
+		return new String[] {/*"MontantPartition2", "MontantCorniere2", "TraverseCorniere2", */"MontantPartition"/*, "ContreCadreMontantPartition", "MontantCorniere", "ContreCadreMontantCorniere", "TraverseCorniere", "ContreCadreTraverseCorniere", "AttachesTraverseCorniere"*/};
 	}
 
 	@Override

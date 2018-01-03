@@ -6,7 +6,11 @@ import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
 import generateurCoteVerriere.LignesTexte;
+import generateurCoteVerriere.dessinProfil.DessinProfil;
+import generateurCoteVerriere.dessinProfil.DessinProfilException;
 import myCustomSvgLibrary.MyCustomSvg;
+import myCustomSvgLibrary.MyHandyLayout;
+import myCustomSvgLibrary.Padding;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -34,6 +38,28 @@ public class MontantPartition extends ElementGenerique {
 
 	@Override
 	protected MyCustomSvg getDessin() {
+		MyHandyLayout l = new MyHandyLayout();
+		l.addRow(new MyCustomSvg[] {getDessinOriginal(), getDessinNew()}, ShiftMode.CENTER);
+		return l.getSvg();
+	}
+	
+	private MyCustomSvg getDessinNew() {
+		DessinProfil profil = new DessinProfil(conf.get("largeurMontantPartition"), conf.get("hauteurMontantPartition"));
+		profil.setLargeurPercage(this.diametreTrous);
+		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
+			double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantPartition") + i * conf.get("entreAxeMontant");
+			if(i != conf.get("nbTrousIntermediairesVerticaux") + 1)
+				profil.addPercage(ordonnee);
+			else
+				profil.addPercage(ordonnee, this.valeurDiametreTrous);
+		}
+		profil.addCoteDroite(0, 1, 0);
+		MyCustomSvg g = profil.render();
+		
+		return g;
+	}
+
+	private MyCustomSvg getDessinOriginal() {
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 
 		g.setUnderLineGap(this.curUnderLineGap);

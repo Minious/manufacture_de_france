@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
+import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.StyleTrait;
 import myCustomSvgLibraryEnhanced.Point;
 import utils.MyPath2D;
@@ -30,11 +31,11 @@ public class DessinProfil {
 	private float margeEntreMontantEtPremiereCote;
 	private double margeInterCote;
 	
-	public DessinProfil(double longueur, double largeur) {
-		this(longueur, largeur, largeur / 2);
+	public DessinProfil(double largeur, double longueur) {
+		this(largeur, longueur, largeur / 2);
 	}
 	
-	public DessinProfil(double longueur, double largeur, double axePercage) {
+	public DessinProfil(double largeur, double longueur, double axePercage) {
 		this.longueur = longueur;
 		this.largeur = largeur;
 		this.axePercage = axePercage;
@@ -51,7 +52,7 @@ public class DessinProfil {
 
 		this.curUnderLineGap = 2;
 		this.taillePoliceCote = 10;
-		this.margeEntreMontantEtPremiereCote = 6;
+		this.margeEntreMontantEtPremiereCote = 15;
 		this.margeInterCote = 0;
 	}
 	
@@ -97,6 +98,17 @@ public class DessinProfil {
 	    g.setDashArray(StyleTrait.MIXTE);
 	    g.drawLine(0, 0, 0, this.longueur);
 	    g.removeDashArray();
+		
+	    // Cote de largeur puis demi largeur de la Partition avant
+	    double curDistanceCotesSuperieures = this.margeEntreMontantEtPremiereCote;
+		Point origine = new Point(0, 0);
+		Point coinSuperieurGaucheProfil = new Point(- demiLargeurGauche, 0);
+		Point coinSuperieurDroiteProfil = new Point(demiLargeurDroite, 0);
+		
+		g.drawDistanceCote(coinSuperieurGaucheProfil, origine, curDistanceCotesSuperieures, - demiLargeurGauche / 2 - 10, ShiftMode.RIGHT);
+		curDistanceCotesSuperieures = decalerCote(curDistanceCotesSuperieures);
+		g.drawDistanceCote(coinSuperieurGaucheProfil, coinSuperieurDroiteProfil, curDistanceCotesSuperieures, 0, ShiftMode.CENTER);
+		
 	    
 	    // Percages ordonnes de bas en haut
 	    ArrayList<Percage> sortedPercages = (ArrayList<Percage>) this.percages.clone();
@@ -131,7 +143,6 @@ public class DessinProfil {
 	    }
 	    
 	    // Trace la cote de longueur totale
-	    Point coinSuperieurGaucheProfil = new Point(- demiLargeurGauche, 0);
     	g.drawDistanceCote(origineCotesGauches, coinSuperieurGaucheProfil, curDistanceCotesGauches);
 
     	// Cotes droites ordonnees de le moins a la plus eloignee
