@@ -10,9 +10,10 @@ import myCustomSvgLibrary.MyCustomSvg;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
 	public double underLineGap = 0;
+	public double distanceCoteGap = 2;
 	
-	public void setUnderLineGap(double u) {
-		this.underLineGap = u;
+	public void setUnderLineGap(double underLineGap) {
+		this.underLineGap = underLineGap;
 	}
 
 	public void setFont(int size, String font){
@@ -20,18 +21,26 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.setFont(f);
 	}
 	
-	public void drawDiameterCote(String displayedCote, Point p1, Point p2, int shift, ShiftMode shiftMode, int underLineGap){
+	public void drawDiameterCote(String displayedCote, Point p1, Point p2, int shift, ShiftMode shiftMode, double customUnderLineGap){
 		if(p1.x != p2.x || p1.y != p2.y)
-			drawDiameterCote(displayedCote, p1, - Utils.getAngle(p1, p2), shift, shiftMode, underLineGap);
+			drawDiameterCote(displayedCote, p1, - Utils.getAngle(p1, p2), shift, shiftMode, customUnderLineGap);
 	}
 	
-	public void drawDiameterCote(String displayedCote, Point p1, double angle, int shift, ShiftMode shiftMode, int customUnderLineGap){
+	public void drawDiameterCote(String displayedCote, Point p, double angle, int shift){
+		drawDiameterCote(displayedCote, p, angle, shift, ShiftMode.LEFT);
+	}
+	
+	public void drawDiameterCote(String displayedCote, Point p, double angle, int shift, ShiftMode shiftMode){
+		drawDiameterCote(displayedCote, p, angle, shift, shiftMode, this.underLineGap);
+	}
+		
+	public void drawDiameterCote(String displayedCote, Point p, double angle, int shift, ShiftMode shiftMode, double customUnderLineGap){
 		AffineTransform orig = this.getTransform();
 		
 		FontMetrics metrics = this.getFontMetrics();
 		int coteStringWidth = metrics.stringWidth(displayedCote);
 
-		this.translate(p1.x, p1.y);
+		this.translate(p.x, p.y);
 		this.rotate(angle);
 		
 		if(angle <= 0){
@@ -108,11 +117,11 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			FontMetrics metrics = this.getFontMetrics();
 			int coteStringWidth = metrics.stringWidth(formatedCote);
 
-			this.drawLine(0, 0, offset, 0);
+			this.drawLine(this.distanceCoteGap, 0, offset, 0);
 			
 			this.translate(0, distance);
 
-			this.drawLine(0, 0, offset, 0);
+			this.drawLine(this.distanceCoteGap, 0, offset, 0);
 			
 			this.translate(offset, - distance / 2);
 			
@@ -166,6 +175,10 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.drawDistanceCote(p1, p2, 10);
 	}
 	
+	public void drawLine(Point p1, Point p2){
+		this.drawLine(p1.x, p1.y, p2.x, p2.y);
+	}
+	
 	public void drawOval(Point center, Point dimensions){
 		this.drawEllipse(center.x - dimensions.x / 2, center.y - dimensions.y / 2, dimensions.x, dimensions.y);
 	}
@@ -174,11 +187,27 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.drawOval(center, new Point(diameter, diameter));
 	}
 	
+	public void setDashArray(StyleTrait styleTrait) {
+		switch(styleTrait) {
+			case MIXTE:
+				this.setDashArray(new float[]{10, 2, 2, 2});
+				break;
+			case INTERROMPU:
+				this.setDashArray(new float[]{4, 1});
+				break;
+		}
+	}
+	
 	public enum ShiftMode{
 		CENTER,
 		LEFT,
 		RIGHT,
 		TOP,
 		BOTTOM;
+	}
+	
+	public enum StyleTrait {
+		MIXTE,
+		INTERROMPU;
 	}
 }

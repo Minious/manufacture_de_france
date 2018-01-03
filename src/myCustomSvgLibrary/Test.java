@@ -2,6 +2,8 @@ package myCustomSvgLibrary;
 
 import java.nio.file.Paths;
 
+import generateurCoteVerriere.dessinProfil.DessinProfil;
+import generateurCoteVerriere.dessinProfil.DessinProfilException;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import myCustomSvgLibraryEnhanced.Point;
@@ -12,7 +14,8 @@ public class Test {
 		//test1();
 		//test2();
 		//test3();
-		test4();
+		//test4();
+		test5();
 	}
 	
 	private static void test1() {
@@ -78,6 +81,30 @@ public class Test {
 		gbis.drawSvg(gter, 10, 10);
 		
 		g.drawSvg(gbis, 10, 10);
+		
+		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+	}
+
+	private static void test5() {
+		DessinProfil profil = new DessinProfil(400, 30);
+		try {
+			profil.setEpaulement(20, 3);
+			//profil.isCorniere();
+			profil.setLargeurPercage(4);
+			profil.addPercage(25);
+			profil.addPercage(120);
+			profil.addPercage(200);
+			profil.addPercage(230);
+			profil.addPercage(270);
+			profil.addPercage(370, "CACA");
+			profil.addCoteDroite(0, 1, 0);
+			profil.addCoteDroite(3, 2, 0);
+			profil.addCoteDroite(3, 0, 1);
+		} catch (DessinProfilException e) {
+			e.printStackTrace();
+		}
+		MyCustomSvg g = profil.render();
+		g.setPadding(new Padding(10));
 		
 		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}
