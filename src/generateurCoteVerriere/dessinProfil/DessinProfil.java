@@ -177,21 +177,28 @@ public class DessinProfil {
 		this.largeurPercageEnregistree = largeurPercage;
 	}
 	
-	public void isCorniere() throws DessinProfilException {
+	public void isCorniere() {
 		if(!this.hasEpaulement)
 			this.isCorniere = true;
 		else
-			throw new DessinProfilException("Can't set isCorniere, already has epaulement");
+			try {
+				throw new DessinProfilException("Can't set isCorniere, already has epaulement");
+			} catch (DessinProfilException e) {
+				e.printStackTrace();
+			}
 	}
 	
-	public void setEpaulement(double longueurEpaulement, double epaisseurEpaulement) throws DessinProfilException {
+	public void setEpaulement(double longueurEpaulement, double epaisseurEpaulement) {
 		if(!this.isCorniere) {
 			this.hasEpaulement = true;
 			this.longueurEpaulement = longueurEpaulement;
 			this.epaisseurEpaulement = epaisseurEpaulement;
-		}
-		else
-			throw new DessinProfilException("Can't set epaulement, already isCorniere");
+		} else
+			try {
+				throw new DessinProfilException("Can't set epaulement, already isCorniere");
+			} catch (DessinProfilException e) {
+				e.printStackTrace();
+			}
 	}
 	
 	public void addPercage(double hauteurPercage) {

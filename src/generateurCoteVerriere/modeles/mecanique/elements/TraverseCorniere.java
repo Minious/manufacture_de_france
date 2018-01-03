@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
 import generateurCoteVerriere.LignesTexte;
+import generateurCoteVerriere.dessinProfil.DessinProfil;
 import myCustomSvgLibrary.MyCustomSvg;
+import myCustomSvgLibrary.MyHandyLayout;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -35,6 +37,52 @@ public class TraverseCorniere extends ElementGenerique {
 
 	@Override
 	protected MyCustomSvg getDessin() {	
+		MyHandyLayout l = new MyHandyLayout();
+		l.addRow(new MyCustomSvg[] {getDessinOriginal(), getDessinNew()}, ShiftMode.CENTER);
+		return l.getSvg();
+	}
+	
+	private MyCustomSvg getDessinNew() {
+		DessinProfil profil = new DessinProfil(conf.get("largeurTraverseCorniere"), conf.get("hauteurTraverseCorniere"));
+		profil.isCorniere();
+		profil.setLargeurPercage(this.diametreTrous);
+		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouTraverseCorniere");
+		profil.addPercage(ordonnee);
+		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere");
+		profil.addPercage(ordonnee);
+		ordonnee += conf.get("entreAxeLateralTraverseCorniere");
+		profil.addPercage(ordonnee);
+		
+		for(int i=0;i<conf.get("nbPartitions") - 2;i++) {
+			ordonnee += conf.get("entreAxeT");
+			profil.addPercage(ordonnee);
+			ordonnee += conf.get("entreAxeCentralTraverseCorniere");
+			profil.addPercage(ordonnee);
+		}
+		
+		if(conf.get("nbPartitions") >= 2) {
+			ordonnee += conf.get("entreAxeT");
+			profil.addPercage(ordonnee);
+			ordonnee += conf.get("entreAxeLateralTraverseCorniere");
+			profil.addPercage(ordonnee);
+			profil.addCoteDroite(2, 3, 0);
+		}
+
+		if(conf.get("nbPartitions") >= 3)
+			profil.addCoteDroite(3, 4, 0);
+		
+		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere");
+		profil.addPercage(ordonnee, this.valeurDiametreTrous);
+		
+		profil.addCoteDroite(0, 1, 0);
+		profil.addCoteDroite(1, 2, 0);
+
+		MyCustomSvg g = profil.render();
+		
+		return g;
+	}
+
+	private MyCustomSvg getDessinOriginal() {
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 
 		g.setUnderLineGap(this.curUnderLineGap);
