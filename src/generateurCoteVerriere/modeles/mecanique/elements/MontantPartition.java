@@ -25,7 +25,7 @@ public class MontantPartition extends ElementGenerique {
 	private final double margeInterCote = 0; // 10;
 	private final double margeEntreMontantEtPremiereCote = conf.get("largeurMontantPartition") / 2; // <--- Empirique
 
-	private final double diametreTrous = conf.get("largeurMontantPartition") / 4; // INCORRECT
+	private final double diametreTrous = conf.get("largeurMontantPartition") / 8; // INCORRECT
 	private final String valeurDiametreTrous = "ØM5";
 	
 	public MontantPartition(HashMap<String, Double> conf, HashMap<String, Object> data) {

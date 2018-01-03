@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibrary.MyHandyLayout;
+import myCustomSvgLibrary.Padding;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
 public abstract class ElementGenerique {
@@ -21,13 +22,14 @@ public abstract class ElementGenerique {
 		MyCustomSvg entete = this.getEntete();
 		MyCustomSvg dessin = this.getDessin();
 		MyCustomSvg piedDePage = this.getPiedDePage();
-		
+
 		MyHandyLayout l = new MyHandyLayout();
 		l.addRow(entete, ShiftMode.CENTER);
 		l.addRow(dessin, ShiftMode.CENTER);
 		//l.addRow(new MyCustomSvg[] {dessin, dessin}, ShiftMode.CENTER);
 		l.addRow(piedDePage, ShiftMode.LEFT);
 		MyCustomSvg g = l.getSvg();
+		g.setPadding(new Padding(10));
 		
 		Path outputFilePath = savePath.resolve(getNomFichierDeRendu() + ".svg");
 		g.writeToSVG(outputFilePath);
