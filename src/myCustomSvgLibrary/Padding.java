@@ -18,11 +18,31 @@ public class Padding {
 		this.bottomPadding = bottomPadding;
 	}
 	
+	public double getLeftPadding() {
+		return this.leftPadding;
+	}
+	
+	public double getRightPadding() {
+		return this.rightPadding;
+	}
+	
+	public double getTopPadding() {
+		return this.leftPadding;
+	}
+	
+	public double getBottomPadding() {
+		return this.bottomPadding;
+	}
+	
 	public double getHorizontalPadding() {
 		return this.leftPadding + this.rightPadding;
 	}
 	
 	public double getVerticalPadding() {
 		return this.topPadding + this.bottomPadding;
+	}
+	
+	public Padding clone() {
+		return new Padding(this.leftPadding, this.rightPadding, this.topPadding, this.bottomPadding);
 	}
 }

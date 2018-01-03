@@ -48,8 +48,6 @@ public class MyHandyLayout {
 				maxWidth = curWidth;
 		}
 		
-		System.out.println("maxWidth = "+maxWidth);
-		
 		MyCustomSvg gFinal = new MyCustomSvg();
 		double curY = 0;
 		for(int i=0;i<this.gs.size();i++) {
@@ -57,8 +55,6 @@ public class MyHandyLayout {
 			double curWidth = widths.get(i);
 			double curHeight = heights.get(i);
 			ShiftMode curShiftMode = this.shiftModes.get(i);
-			
-			System.out.println("width row n°"+ i +" = "+curWidth);
 			
 			double startX;
 			switch(curShiftMode) {
@@ -73,10 +69,8 @@ public class MyHandyLayout {
 					break;
 			}
 			
-			System.out.println("startX = "+startX);
 			double curX = startX;
 			for(MyCustomSvg g : gs) {
-				//System.out.println("test "+curX+" "+curY);
 				gFinal.drawSvg(g, curX, curY);
 				curX += g.getWidth() + marge;
 			}

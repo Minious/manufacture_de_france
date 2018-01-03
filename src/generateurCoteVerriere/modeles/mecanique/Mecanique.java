@@ -22,19 +22,6 @@ public class Mecanique extends ModeleGenerique {
 		initialMap.put("nbPartitions", ((Integer) data.get("nbPartitions")).doubleValue());
 
 		ArrayList<Function> functions = new ArrayList<Function>();
-		/*
-		functions.add(new Function("getNbTrousVerticaux", 1) {
-			@Override
-			public double apply(double... args) {
-				// TODO
-				Double hauteurVerriere = args[0];
-				if (hauteurVerriere < 500)
-					return 1;
-				else
-					return (int) Math.floor(hauteurVerriere / 500);
-			}
-		});
-		*/
 		functions.add(new Function("getNbAttachesIntermediairesTraverseCorniere", 2) {
 			@Override
 			public double apply(double... args) {
@@ -60,7 +47,7 @@ public class Mecanique extends ModeleGenerique {
 
 	@Override
 	protected String[] getElementsClasses() {
-		return new String[] {"MontantPartition", "ContreCadreMontantPartition", "MontantCorniere", "ContreCadreMontantCorniere", "TraverseCorniere", "ContreCadreTraverseCorniere", "AttachesTraverseCorniere"};
+		return new String[] {"MontantPartition2", "TraverseCorniere2"/*, "MontantPartition", "ContreCadreMontantPartition", "MontantCorniere", "ContreCadreMontantCorniere", "TraverseCorniere", "ContreCadreTraverseCorniere", "AttachesTraverseCorniere"*/};
 	}
 
 	@Override

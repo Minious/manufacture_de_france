@@ -18,22 +18,14 @@ public abstract class ElementGenerique {
 	}
 	
 	public void renderImage(Path savePath) throws IOException{
-		//MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
-
 		MyCustomSvg entete = this.getEntete();
 		MyCustomSvg dessin = this.getDessin();
 		MyCustomSvg piedDePage = this.getPiedDePage();
-		/*
-		g.drawSvg(entete, 0, 0, ShiftMode.CENTER);
-		g.drawSvg(dessin, 0, entete.getHeight() + marge, ShiftMode.CENTER);
-		g.drawSvg(piedDePage, - entete.getWidth() / 2, entete.getHeight() + marge + dessin.getHeight() + marge, ShiftMode.LEFT);
-		*/
+		
 		MyHandyLayout l = new MyHandyLayout();
 		l.addRow(entete, ShiftMode.CENTER);
-		System.out.println("nbTags = "+entete.getNbTag());
 		l.addRow(dessin, ShiftMode.CENTER);
 		//l.addRow(new MyCustomSvg[] {dessin, dessin}, ShiftMode.CENTER);
-		System.out.println("dessin width = "+dessin.getWidth());
 		l.addRow(piedDePage, ShiftMode.LEFT);
 		MyCustomSvg g = l.getSvg();
 		

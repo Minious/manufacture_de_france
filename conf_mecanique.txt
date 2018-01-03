@@ -4,7 +4,6 @@
 // nbPartitions
 		
 // Nb trous
-//nbTrousIntermediairesVerticaux = getNbTrousVerticaux(hauteurVerriere)
 nbTrousIntermediairesVerticaux = if(hauteurVerriere < 500, 1, floor(hauteurVerriere / 500))
 nbPairesTrousIntermediairesHorizontaux = nbPartitions - 1
 

@@ -21,11 +21,11 @@ import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import utils.MyPath2D;
 
 public class MyCustomSvg extends SvgComponent{
-	//private int width, height;
 	private double x, y;
 	private Rectangle2D bounds;
 	private ArrayList<SvgComponent> svgTree;
-	//private Padding padding;
+	private Padding padding;
+	private boolean hasBorders;
 	
 	public MyCustomSvg() {
 		super(new StyleContext(
@@ -34,37 +34,42 @@ public class MyCustomSvg extends SvgComponent{
 				new Font("Arial", Font.PLAIN, 12),
 				new BasicStroke(1)
 		));
-		/*
-		this.width = width;
-		this.height = height;
-		*/
 		this.bounds = null;
-		//this.padding = new Padding(100);
+		this.padding = new Padding(0);
 		this.x = 0;
 		this.y = 0;
 		this.svgTree = new ArrayList<SvgComponent>();
+		this.hasBorders = false;
 	}
 	
 	public MyCustomSvg(MyCustomSvg g) {
 		super(g.sc);
 		this.bounds = (Rectangle2D) g.bounds.clone();
+		this.padding = g.padding.clone();
 		this.x = g.x;
 		this.y = g.y;
 		this.svgTree = new ArrayList<SvgComponent>();
 		for(SvgComponent c : g.svgTree)
 			this.svgTree.add(c.clone());
+		this.hasBorders = g.hasBorders;
+	}
+	
+	public void setPadding(Padding padding) {
+		this.padding = padding;
 	}
 
+	public void setBorders(boolean hasBorders) {
+		this.hasBorders = hasBorders;
+	}
+	
 	public double getWidth() {
-		return this.bounds.getWidth();
-		//return this.width;
-		// this.bounds.getWidth() + this.padding.getHorizontalPadding();
+		//return this.bounds.getWidth();
+		return this.bounds.getWidth() + this.padding.getHorizontalPadding();
 	}
 
 	public double getHeight() {
-		return this.bounds.getHeight();
-		//return this.height;
-		// this.bounds.getHeight() + this.padding.getVerticalPadding();
+		//return this.bounds.getHeight();
+		return this.bounds.getHeight() + this.padding.getVerticalPadding();
 	}
 	
 	public void setPosition(double x, double y) {
@@ -207,67 +212,51 @@ public class MyCustomSvg extends SvgComponent{
 		this.enlargeBounds(bounds);
 	}
 	
-	// A SUPPRIMER
-	public int getNbTag() {
-		return this.svgTree.size();
-	}
-	
 	public String renderTag() {
-		//System.out.println("fixed dimensions : "+this.width+"x"+this.height);
-		System.out.println("dynamic dimensions : "+this.bounds.getWidth()+"x"+this.bounds.getHeight());
+		//System.out.println("dynamic dimensions : "+this.bounds.getWidth()+"x"+this.bounds.getHeight());
 		
 		double curX, curY;
 		curX = - this.bounds.getX() + this.x;
 		curY = - this.bounds.getY() + this.y;
 		
+		double curW, curH;
+		curW = this.bounds.getWidth() + this.padding.getHorizontalPadding();
+		curH = this.bounds.getHeight() + this.padding.getVerticalPadding();
+		
 		String output = "";
-		output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" style=\"overflow:visible;\" >\n";
-		//output += "<svg x=\""+this.x+"\" y=\""+this.y+"\" style=\"overflow:visible;\" >\n";
-		System.out.println("nb tag = "+this.svgTree.size());
+		output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" >\n";
+		///// DEBUG /////
+		/*
+		if(this.hasBorders)
+			output += "<rect x=\"0\" y=\"0\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"stroke-width: 1.0; stroke: rgb(255,0,0); stroke-opacity: 1.0; stroke-linecap: butt; fill: none;\"/>\n";
+		*/
+		output += "<svg x=\"" + this.padding.getLeftPadding() + "\" y=\"" + this.padding.getTopPadding() + "\" style=\"overflow:visible;\" >\n";
 		for(SvgComponent svgComponent : this.svgTree) {
 			output += svgComponent.renderTag() + "\n";
 		}
+		output += "</svg>\n";
 		output += "</svg>\n";
 		
 		return output;
 	}
 	
 	public void writeToSVG(Path outputFilePath) {
-		double w, h;
-		/*
-		w = this.width;
-		h = this.height;
-		*/
-		w = this.bounds.getWidth();
-		h = this.bounds.getHeight();
-		
-		double curX, curY;
-		curX = - this.bounds.getX();
-		curY = - this.bounds.getY();
-		
-		// TEMP //
-		/*
-		w = Math.max(this.width, this.bounds.getWidth());
-		h = Math.max(this.getHeight(),  this.bounds.getHeight());
-		*/
-		//////////
-		
 		///// DEBUG
+		/*
 		this.setColor(Color.RED);
 		this.drawRect(this.bounds.getX(), this.bounds.getY(), this.bounds.getWidth(), this.bounds.getHeight());
+		*/
 		/////
 		
-		System.out.println(outputFilePath);
+		//System.out.println(outputFilePath);
+		
+		double w, h;
+		w = this.bounds.getWidth() + this.padding.getHorizontalPadding();
+		h = this.bounds.getHeight() + this.padding.getVerticalPadding();
 		
 		String output = "";
-		//output += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + w + "\" height=\"" + h + "\">\n";
 		output += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + w + "\" height=\"" + h + "\" style=\"overflow:visible;\" >\n";
-		//output += "<g transform=\"translate(" + curX + " " + curY + ")\" >\n";
-		//output += "<g x=\"" + curX + "\" y=\"" + curY + "\" >\n";
-		//output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" style=\"overflow:visible;\" >\n";
 		output += this.renderTag();
-		//output += "</g>\n";
-		//output += "</svg>\n";
 		output += "</svg>\n";
 		
 		try {
@@ -276,9 +265,6 @@ public class MyCustomSvg extends SvgComponent{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		System.out.println(this.bounds.getX()+" "+this.bounds.getMinX()+" "+this.bounds.getWidth()+" "+(this.bounds.getX()+this.bounds.getWidth()));
-		System.out.println(this.bounds.getY()+" "+this.bounds.getMinY()+" "+this.bounds.getHeight()+" "+(this.bounds.getY()+this.bounds.getHeight()));
 	}
 	
 	private void enlargeBounds(Shape shape) {

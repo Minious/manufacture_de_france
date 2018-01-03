@@ -9,6 +9,13 @@ import myCustomSvgLibraryEnhanced.Point;
 public class Test {
 
 	public static void main(String[] args) {
+		//test1();
+		//test2();
+		//test3();
+		test4();
+	}
+	
+	private static void test1() {
 		MyCustomSvgEnhanced g1 = new MyCustomSvgEnhanced();
 		g1.drawCircle(new Point(50, 50), 80);
 		
@@ -26,4 +33,52 @@ public class Test {
 		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}
 
+	private static void test2() {
+		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
+		g.drawRect(0, 0, 180, 80);
+		
+		MyCustomSvgEnhanced gbis = new MyCustomSvgEnhanced();
+		gbis.drawRect(0, 0, 160, 60);
+		
+		MyCustomSvgEnhanced gter = new MyCustomSvgEnhanced();
+		gter.drawRect(0, 0, 140, 40);
+		
+		gbis.drawSvg(gter, 10, 10);
+		
+		g.drawSvg(gbis, 10, 10);
+		
+		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+	}
+
+	private static void test3() {
+		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
+		g.setPadding(new Padding(10));
+		g.setBorders(true);
+		g.drawRect(0, 0, 100, 100);
+		
+		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+	}
+
+	private static void test4() {
+		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
+		g.drawRect(0, 0, 180, 80);
+		g.setPadding(new Padding(50));
+		g.setBorders(true);
+		
+		MyCustomSvgEnhanced gbis = new MyCustomSvgEnhanced();
+		gbis.drawRect(0, 0, 160, 60);
+		gbis.setPadding(new Padding(20));
+		gbis.setBorders(true);
+		
+		MyCustomSvgEnhanced gter = new MyCustomSvgEnhanced();
+		gter.drawRect(0, 0, 140, 40);
+		gter.setPadding(new Padding(10));
+		gter.setBorders(true);
+		
+		gbis.drawSvg(gter, 10, 10);
+		
+		g.drawSvg(gbis, 10, 10);
+		
+		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+	}
 }

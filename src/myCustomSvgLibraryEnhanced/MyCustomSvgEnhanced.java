@@ -9,12 +9,6 @@ import generateurCoteVerriere.Utils;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
-	/*
-	public MyCustomSvgEnhanced(int width, int height) {
-		super(width, height);
-	}
- 	*/
-	
 	public double underLineGap = 0;
 	
 	public void setUnderLineGap(double u) {

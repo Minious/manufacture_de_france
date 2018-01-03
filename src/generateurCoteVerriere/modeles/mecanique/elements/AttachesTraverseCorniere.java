@@ -40,14 +40,14 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 		g.setFontSize(this.taillePoliceCote);
 		
 		// Trace la traverse corniere
-	    g.setStroke(new BasicStroke(2));
+	    g.setStroke(new BasicStroke(1));
 	    g.drawLine(- conf.get("largeurTraverseCorniere") / 2, 0, - conf.get("largeurTraverseCorniere") / 2, conf.get("hauteurTraverseCorniere"));
 	    g.drawLine(conf.get("largeurTraverseCorniere") / 2, 0, conf.get("largeurTraverseCorniere") / 2, conf.get("hauteurTraverseCorniere"));
 	    g.drawLine(- conf.get("largeurTraverseCorniere") / 2, 0, conf.get("largeurTraverseCorniere") / 2, 0);
 	    g.drawLine(- conf.get("largeurTraverseCorniere") / 2, conf.get("hauteurTraverseCorniere"), conf.get("largeurTraverseCorniere") / 2, conf.get("hauteurTraverseCorniere"));
 	    
 	    // Trace l'axe du milieu du traverse 
-	    g.setStroke(new BasicStroke(1));
+	    g.setStroke(new BasicStroke(0.5f));
 	    g.drawLine(0, 0, 0, conf.get("hauteurTraverseCorniere"));
 	    
 	    // Cote de largeur puis demi largeur de la traverse corniere
