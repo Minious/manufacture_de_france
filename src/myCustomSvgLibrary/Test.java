@@ -3,6 +3,7 @@ package myCustomSvgLibrary;
 import java.nio.file.Paths;
 
 import generateurCoteVerriere.dessinProfil.DessinProfil;
+import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
 import generateurCoteVerriere.dessinProfil.DessinProfilException;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -87,22 +88,19 @@ public class Test {
 
 	private static void test5() {
 		DessinProfil profil = new DessinProfil(30, 400);
-		try {
-			profil.setEpaulement(20, 3);
-			//profil.isCorniere();
-			profil.setLargeurPercage(4);
-			profil.addPercage(25);
-			profil.addPercage(120);
-			profil.addPercage(200);
-			profil.addPercage(230);
-			profil.addPercage(270);
-			profil.addPercage(370, "CACA");
-			profil.addCoteDroite(0, 1, 0);
-			profil.addCoteDroite(3, 2, 0);
-			profil.addCoteDroite(3, 0, 1);
-		} catch (DessinProfilException e) {
-			e.printStackTrace();
-		}
+		profil.setEpaulement(20, 10, Side.LEFT);
+		profil.setChamp(5, Side.LEFT);
+		//profil.setCorniere(Side.LEFT);
+		profil.setLargeurPercage(4);
+		profil.addPercage(25);
+		profil.addPercage(120);
+		profil.addPercage(200);
+		profil.addPercage(230);
+		profil.addPercage(270);
+		profil.addPercage(370, "CACA");
+		profil.addCoteDroite(0, 1, 0);
+		profil.addCoteDroite(3, 2, 0);
+		profil.addCoteDroite(3, 0, 1);
 		MyCustomSvg g = profil.render();
 		g.setPadding(new Padding(10));
 		
