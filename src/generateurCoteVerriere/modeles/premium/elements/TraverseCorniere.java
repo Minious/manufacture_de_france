@@ -6,7 +6,10 @@ import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
 import generateurCoteVerriere.LignesTexte;
+import generateurCoteVerriere.dessinProfil.DessinProfil;
+import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
 import myCustomSvgLibrary.MyCustomSvg;
+import myCustomSvgLibrary.MyHandyLayout;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -36,6 +39,57 @@ public class TraverseCorniere extends ElementGenerique {
 
 	@Override
 	protected MyCustomSvg getDessin() {
+		MyHandyLayout l = new MyHandyLayout();
+		l.addRow(new MyCustomSvg[] {getDessinOriginal(), getDessinNew()}, ShiftMode.CENTER);
+		return l.getSvg();
+	}
+	
+	private MyCustomSvg getDessinNew() {
+		System.out.println(conf.get("largeurClairVitrage"));
+		System.out.println(conf.get("entreAxePercageMontantTraverseCorniere"));
+		System.out.println(conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+		
+		
+		DessinProfil profil = new DessinProfil(conf.get("largeurChampTraverseCorniere"), conf.get("longueurTraverseCorniere"), 10);
+		profil.setChamp(conf.get("epaisseurTraverseCorniere"), Side.RIGHT);
+		
+		double ordonnee = 0;
+		ordonnee += conf.get("ecartEntreExtremiteEtPremierPercageParcloseTraverseCorniere");
+		profil.addPercage(ordonnee);
+		ordonnee += conf.get("entreAxePercageMontantTraverseCorniere") - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere");
+		for(int i=0;i<conf.get("nbPartitions") - 1;i++) {
+			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantTraverseCorniere") / 2);
+			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+			if(i < conf.get("nbPartitions") - 2) {
+				profil.addPercage(ordonnee);
+				profil.addPercage(ordonnee + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"));
+			} else {
+				profil.addPercage(ordonnee, this.valeurDiametrePercagesMontant);
+				profil.addPercage(ordonnee + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"), this.valeurDiametrePercagesParclose);				
+			}
+			ordonnee += conf.get("entreAxePercageMontantTraverseCorniere");
+		}
+		
+		if(conf.get("nbPartitions") == 1) {
+			profil.addPercage(conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"));
+			profil.addPercage(conf.get("longueurTraverseCorniere") - conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"), this.valeurDiametrePercagesFixation);
+		} else {
+			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantTraverseCorniere") / 2, this.valeurDiametrePercagesFixation);
+		}
+		profil.addPercage(ordonnee - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"), this.valeurDiametrePercagesParclose);
+
+		if(conf.get("nbPartitions") >= 3) {
+			profil.addCoteDroite(0, 4, 0);
+			profil.addCoteDroite(1, 5, 1);
+			profil.addCoteDroite(2, 6, 2);
+		}
+		
+		MyCustomSvg g = profil.render();
+		
+		return g;
+	}
+
+	private MyCustomSvg getDessinOriginal() {
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 
 		g.setUnderLineGap(this.curUnderLineGap);
