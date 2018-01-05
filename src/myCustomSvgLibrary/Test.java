@@ -4,7 +4,6 @@ import java.nio.file.Paths;
 
 import generateurCoteVerriere.dessinProfil.DessinProfil;
 import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
-import generateurCoteVerriere.dessinProfil.DessinProfilException;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import myCustomSvgLibraryEnhanced.Point;
@@ -88,9 +87,9 @@ public class Test {
 
 	private static void test5() {
 		DessinProfil profil = new DessinProfil(30, 400);
-		//profil.setEpaulement(20, 10, Side.LEFT);
+		profil.setEpaulement(20, 10, Side.RIGHT);
 		profil.setChamp(5, Side.LEFT);
-		profil.setCorniere(Side.RIGHT);
+		//profil.setCorniere(Side.RIGHT);
 		profil.setLargeurPercage(4);
 		profil.addPercage(25);
 		profil.addPercage(120);

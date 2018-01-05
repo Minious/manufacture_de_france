@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
 import generateurCoteVerriere.LignesTexte;
+import generateurCoteVerriere.dessinProfil.DessinProfil;
 import myCustomSvgLibrary.MyCustomSvg;
+import myCustomSvgLibrary.MyHandyLayout;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.Point;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
@@ -34,6 +36,32 @@ public class MontantCorniere extends ElementGenerique {
 
 	@Override
 	protected MyCustomSvg getDessin() {
+		MyHandyLayout l = new MyHandyLayout();
+		l.addRow(new MyCustomSvg[] {getDessinOriginal(), getDessinNew()}, ShiftMode.CENTER);
+		return l.getSvg();
+	}
+	
+	private MyCustomSvg getDessinNew() {
+		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantCorniere"), conf.get("longueurMontantCorniere"), 20);
+		profil.setEpaulement(conf.get("longueurEpaulementMontantIntermediaire"), conf.get("epaisseurEpaulementMontantIntermediaire"));
+		profil.setChamp(conf.get("epaisseurMontantIntermedaire"));
+		
+		double ordonnee = conf.get("ecartEntreExtremiteEtPremierPercageMontantIntermediaire");
+		for(int i=0;i<conf.get("nbPercageMontant");i++) {
+			if(i != conf.get("nbPercageMontant") - 1) {
+				profil.addPercage(ordonnee);
+				ordonnee += conf.get("entreAxePercagesMontant");
+			}
+			else
+				profil.addPercage(ordonnee, this.valeurDiametrePercages);
+		}
+		profil.addCoteDroite(0, 1, 0);
+		MyCustomSvg g = profil.render();
+		
+		return g;
+	}
+
+	private MyCustomSvg getDessinOriginal() {
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 
 		g.setUnderLineGap(this.curUnderLineGap);

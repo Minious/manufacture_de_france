@@ -80,20 +80,18 @@ public class DessinProfil {
 
 		MyPath2D path = new MyPath2D();
 
-		path.moveTo(demiLargeurDroite, 0);
+		if(this.corniereSide == Side.RIGHT || this.epaulementSide == Side.RIGHT) {
+			g.translate(0, this.longueur);
+			g.rotate(Math.PI);
+			path.moveTo(demiLargeurGauche, 0);
+		}
+		else
+			path.moveTo(demiLargeurDroite, 0);
 		if (this.isCorniere) {
-			if(this.corniereSide == Side.RIGHT) {
-				g.translate(0, this.longueur);
-				g.rotate(Math.PI);
-			}
 			path.lineToR(0, this.longueur);
 			path.lineToR(-this.largeur, -this.largeur);
 			path.lineToR(0, -this.longueur + 2 * this.largeur);
 		} else if (this.hasEpaulement) {
-			if(this.epaulementSide == Side.RIGHT) {
-				g.translate(0, this.longueur);
-				g.rotate(Math.PI);
-			}
 			path.lineToR(0, this.longueur);
 			path.lineToR(-this.largeur + this.epaisseurEpaulement, 0);
 			path.lineToR(0, -this.longueurEpaulement);
@@ -102,6 +100,7 @@ public class DessinProfil {
 			path.lineToR(this.epaisseurEpaulement, 0);
 			path.lineToR(0, -this.longueurEpaulement);
 		} else {
+			path.moveTo(demiLargeurDroite, 0);
 			path.lineToR(0, this.longueur);
 			path.lineToR(-this.largeur, 0);
 			path.lineToR(0, -this.longueur);
