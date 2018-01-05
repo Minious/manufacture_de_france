@@ -44,7 +44,7 @@ public class TraverseCorniere extends ElementGenerique {
 	
 	private MyCustomSvg getDessinNew() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurTraverseCorniere"), conf.get("hauteurTraverseCorniere"));
-		profil.isCorniere();
+		profil.setCorniere();
 		profil.setLargeurPercage(this.diametreTrous);
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouTraverseCorniere");
 		profil.addPercage(ordonnee);

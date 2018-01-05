@@ -43,7 +43,7 @@ public class MontantCorniere extends ElementGenerique {
 	
 	private MyCustomSvg getDessinNew() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurMontantCorniere"), conf.get("hauteurMontantCorniere"));
-		profil.isCorniere();
+		profil.setCorniere();
 		profil.setLargeurPercage(this.diametreTrous);
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantCorniere");
 		profil.addPercage(ordonnee);
