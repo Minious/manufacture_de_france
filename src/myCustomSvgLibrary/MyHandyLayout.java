@@ -2,6 +2,7 @@ package myCustomSvgLibrary;
 
 import java.util.ArrayList;
 
+import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
 public class MyHandyLayout {
@@ -48,7 +49,7 @@ public class MyHandyLayout {
 				maxWidth = curWidth;
 		}
 		
-		MyCustomSvg gFinal = new MyCustomSvg();
+		MyCustomSvg gFinal = new MyCustomSvgEnhanced();
 		double curY = 0;
 		for(int i=0;i<this.gs.size();i++) {
 			MyCustomSvg[] gs = this.gs.get(i);

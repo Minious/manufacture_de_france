@@ -178,7 +178,7 @@ public class DessinProfil {
 			Point coordPercage = new Point(0, this.longueur - percage.getHauteurPercage());
 			g.drawCircle(coordPercage, percage.getLargeurPercage());
 			if (percage.hasValeurPercage())
-				g.drawDiameterCote(percage.getValeurPercage(), coordPercage, -Math.PI / 4, 40);
+				g.drawDiameterCote(percage.getValeurPercage(), coordPercage, - 3 * Math.PI / 4, 50);
 
 			// Traits d'axe
 			Point extremiteTraitDAxe = new Point(demiLargeurDroite, this.longueur - percage.getHauteurPercage());

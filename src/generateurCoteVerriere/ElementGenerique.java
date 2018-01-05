@@ -7,7 +7,9 @@ import java.util.HashMap;
 import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibrary.MyHandyLayout;
 import myCustomSvgLibrary.Padding;
+import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
+import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.StyleTrait;
 
 public abstract class ElementGenerique {
 	protected HashMap<String, Double> conf;
@@ -22,11 +24,10 @@ public abstract class ElementGenerique {
 		MyCustomSvg entete = this.getEntete();
 		MyCustomSvg dessin = this.getDessin();
 		MyCustomSvg piedDePage = this.getPiedDePage();
-
+		
 		MyHandyLayout l = new MyHandyLayout();
 		l.addRow(entete, ShiftMode.CENTER);
 		l.addRow(dessin, ShiftMode.CENTER);
-		//l.addRow(new MyCustomSvg[] {dessin, dessin}, ShiftMode.CENTER);
 		l.addRow(piedDePage, ShiftMode.LEFT);
 		MyCustomSvg g = l.getSvg();
 		g.setPadding(new Padding(10));

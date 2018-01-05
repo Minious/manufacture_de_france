@@ -26,6 +26,7 @@ public class MyCustomSvg extends SvgComponent{
 	private ArrayList<SvgComponent> svgTree;
 	private Padding padding;
 	private boolean hasBorders;
+	private StyleContext borderSc;
 	
 	public MyCustomSvg() {
 		super(new StyleContext(
@@ -40,6 +41,7 @@ public class MyCustomSvg extends SvgComponent{
 		this.y = 0;
 		this.svgTree = new ArrayList<SvgComponent>();
 		this.hasBorders = false;
+		this.borderSc = null;
 	}
 	
 	public MyCustomSvg(MyCustomSvg g) {
@@ -52,6 +54,7 @@ public class MyCustomSvg extends SvgComponent{
 		for(SvgComponent c : g.svgTree)
 			this.svgTree.add(c.clone());
 		this.hasBorders = g.hasBorders;
+		this.borderSc = g.borderSc;
 	}
 	
 	public void setPadding(Padding padding) {
@@ -60,6 +63,7 @@ public class MyCustomSvg extends SvgComponent{
 
 	public void setBorders(boolean hasBorders) {
 		this.hasBorders = hasBorders;
+		this.borderSc = this.sc.clone();
 	}
 	
 	public double getWidth() {
@@ -230,10 +234,15 @@ public class MyCustomSvg extends SvgComponent{
 		String output = "";
 		output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" >\n";
 		///// DEBUG /////
-		/*
-		if(this.hasBorders)
-			output += "<rect x=\"0\" y=\"0\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"stroke-width: 1.0; stroke: rgb(255,0,0); stroke-opacity: 1.0; stroke-linecap: butt; fill: none;\"/>\n";
-		*/
+		if(this.hasBorders) {
+			output += "<rect ";
+			output += "x=\"" + this.bounds.getX() + "\" ";
+			output += "y=\"" + this.bounds.getY() + "\" ";
+			output += "width=\"" + curW + "\" ";
+			output += "height=\"" + curH + "\" ";
+			output += "style=\"" + this.borderSc.getStrokeStyle() + "fill: none;\" ";
+			output += "/>";
+		}
 		output += "<svg x=\"" + this.padding.getLeftPadding() + "\" y=\"" + this.padding.getTopPadding() + "\" style=\"overflow:visible;\" >\n";
 		for(SvgComponent svgComponent : this.svgTree) {
 			output += svgComponent.renderTag() + "\n";
