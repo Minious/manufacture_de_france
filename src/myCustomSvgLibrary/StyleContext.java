@@ -49,6 +49,10 @@ public class StyleContext {
 		this.curTransform.rotate(theta);
 	}
 	
+	public void resetTransform() {
+		this.curTransform = new AffineTransform();
+	}
+	
 	public void setColor(Color c) {
 		this.curColor = c;
 	}

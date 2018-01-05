@@ -94,6 +94,10 @@ public class MyCustomSvg extends SvgComponent{
 		this.sc.rotate(theta);
 	}
 	
+	public void resetTransform() {
+		this.sc.resetTransform();
+	}
+	
 	public void setColor(Color c) {
 		this.sc.setColor(c);
 	}

@@ -82,37 +82,25 @@ public class DessinProfil {
 
 		path.moveTo(demiLargeurDroite, 0);
 		if (this.isCorniere) {
-			if(this.corniereSide == Side.LEFT) {
-				path.lineToR(0, this.longueur);
-				path.lineToR(-this.largeur, -this.largeur);
-				path.lineToR(0, -this.longueur + 2 * this.largeur);
-			} else {
-				path.moveToR(0, this.largeur);
-				path.lineToR(0, this.longueur - 2 * this.largeur);
-				path.lineToR(- this.largeur, this.largeur);
-				path.lineToR(0, - this.longueur);
+			if(this.corniereSide == Side.RIGHT) {
+				g.translate(0, this.longueur);
+				g.rotate(Math.PI);
 			}
+			path.lineToR(0, this.longueur);
+			path.lineToR(-this.largeur, -this.largeur);
+			path.lineToR(0, -this.longueur + 2 * this.largeur);
 		} else if (this.hasEpaulement) {
-			if(this.epaulementSide == Side.LEFT) {
-				System.out.println("gauche");
-				path.lineToR(0, this.longueur);
-				path.lineToR(-this.largeur + this.epaisseurEpaulement, 0);
-				path.lineToR(0, -this.longueurEpaulement);
-				path.lineToR(-this.epaisseurEpaulement, 0);
-				path.lineToR(0, -this.longueur + 2 * this.longueurEpaulement);
-				path.lineToR(this.epaisseurEpaulement, 0);
-				path.lineToR(0, -this.longueurEpaulement);
-			} else {
-				System.out.println("droite");
-				path.moveToR(0, this.longueurEpaulement);
-				path.lineToR(0, this.longueur - this.longueurEpaulement * 2);
-				path.lineToR(-this.epaisseurEpaulement, 0);
-				path.lineToR(0, this.longueurEpaulement);
-				path.lineToR(-this.largeur + this.epaisseurEpaulement, 0);
-				path.lineToR(0, -this.longueur);
-				path.lineToR(this.largeur - this.epaisseurEpaulement, 0);
-				path.lineToR(0, this.longueurEpaulement);
+			if(this.epaulementSide == Side.RIGHT) {
+				g.translate(0, this.longueur);
+				g.rotate(Math.PI);
 			}
+			path.lineToR(0, this.longueur);
+			path.lineToR(-this.largeur + this.epaisseurEpaulement, 0);
+			path.lineToR(0, -this.longueurEpaulement);
+			path.lineToR(-this.epaisseurEpaulement, 0);
+			path.lineToR(0, -this.longueur + 2 * this.longueurEpaulement);
+			path.lineToR(this.epaisseurEpaulement, 0);
+			path.lineToR(0, -this.longueurEpaulement);
 		} else {
 			path.lineToR(0, this.longueur);
 			path.lineToR(-this.largeur, 0);
@@ -121,6 +109,7 @@ public class DessinProfil {
 		
 		path.closePath();
 		g.drawPath(path);
+		g.resetTransform();
 		
 		// Trace le champ
 		double abscisseChamp;
