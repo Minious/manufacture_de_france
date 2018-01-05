@@ -207,8 +207,7 @@ public class DessinProfil {
 			double ordonneeHaute = ordonnee1 > ordonnee2 ? ordonnee1 : ordonnee2;
 			Point extremiteCote1 = new Point(demiLargeurDroite, this.longueur - ordonneeHaute);
 			Point extremiteCote2 = new Point(demiLargeurDroite, this.longueur - ordonneeBasse);
-			g.drawDistanceCote(extremiteCote1, extremiteCote2, this.margeEntreMontantEtPremiereCote
-					+ coteDroite.getEtage() * (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote));
+			g.drawReversedDistanceCote(extremiteCote1, extremiteCote2, this.margeEntreMontantEtPremiereCote	+ coteDroite.getEtage() * (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote));
 		}
 
 		return g;

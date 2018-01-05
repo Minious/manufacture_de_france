@@ -102,7 +102,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.drawString(displayedStr, abscisse, p.y);
 	}
 
-	public void drawDistanceCote(Point p1, Point p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
+	public void drawDistanceCote(Point p1, Point p2, double offset, double shift, ShiftMode shiftMode, double underLineGap, boolean reversed){
 		if(p1.x != p2.x || p1.y != p2.y){
 			AffineTransform orig = this.getTransform();
 
@@ -142,7 +142,9 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 				upperBound += 0;
 			
 			this.drawLine(0, lowerBound < - distance / 2 ? lowerBound : - distance / 2, 0, upperBound > distance / 2 ? upperBound : distance / 2);
-	
+
+			if(reversed)
+				this.rotate(Math.PI);
 			this.translate(underLineGap, 0);
 			
 			if(shiftMode == ShiftMode.LEFT)
@@ -159,6 +161,10 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		}
 	}
 	
+	public void drawDistanceCote(Point p1, Point p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
+		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, underLineGap, false);
+	}
+	
 	public void drawDistanceCote(Point p1, Point p2, double offset, double shift, ShiftMode shiftMode){
 		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, underLineGap);
 	}
@@ -173,6 +179,26 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	
 	public void drawDistanceCote(Point p1, Point p2){
 		this.drawDistanceCote(p1, p2, 10);
+	}
+	
+	public void drawReversedDistanceCote(Point p1, Point p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
+		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, underLineGap, true);
+	}
+	
+	public void drawReversedDistanceCote(Point p1, Point p2, double offset, double shift, ShiftMode shiftMode){
+		this.drawReversedDistanceCote(p1, p2, offset, shift, shiftMode, underLineGap);
+	}
+	
+	public void drawReversedDistanceCote(Point p1, Point p2, double offset, double shift){
+		this.drawReversedDistanceCote(p1, p2, offset, shift, ShiftMode.CENTER);
+	}
+	
+	public void drawReversedDistanceCote(Point p1, Point p2, double offset){
+		this.drawReversedDistanceCote(p1, p2, offset, 0);
+	}
+	
+	public void drawReversedDistanceCote(Point p1, Point p2){
+		this.drawReversedDistanceCote(p1, p2, 10);
 	}
 	
 	public void drawLine(Point p1, Point p2){
