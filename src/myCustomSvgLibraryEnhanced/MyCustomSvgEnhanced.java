@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 
 import generateurCoteVerriere.Utils;
 import myCustomSvgLibrary.MyCustomSvg;
+import utils.MyPath2D;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
 	public double underLineGap = 0;
@@ -141,19 +142,48 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			if(shiftMode == ShiftMode.RIGHT)
 				upperBound += 0;
 			
-			this.drawLine(0, lowerBound < - distance / 2 ? lowerBound : - distance / 2, 0, upperBound > distance / 2 ? upperBound : distance / 2);
+			double actualLowerBound = lowerBound < - distance / 2 ? lowerBound : - distance / 2;
+			double actualUpperBound = upperBound > distance / 2 ? upperBound : distance / 2;
+			double actualDistance = actualUpperBound - actualLowerBound;
+			
+			this.drawLine(0, actualLowerBound, 0, actualUpperBound);
+			
+			double arrowWidth = 10, arrowHeight = 4;
+			MyPath2D arrowPath = new MyPath2D();
+			arrowPath.moveTo(0, 0);
+			arrowPath.lineTo(- arrowWidth, arrowHeight / 2);
+			arrowPath.lineTo(- arrowWidth, - arrowHeight / 2);
+			arrowPath.closePath();
 
+			this.rotate(Math.PI / 2);
 			if(reversed)
 				this.rotate(Math.PI);
-			this.translate(underLineGap, 0);
+
+			this.translate(- distance / 2, 0);
+			if(distance > 2 * arrowWidth) {
+				this.rotate(Math.PI);
+				this.drawPath(arrowPath);
+				this.rotate(Math.PI);
+			} else {
+				this.drawPath(arrowPath);
+			}
+			this.translate(distance, 0);
+			if(distance > 2 * arrowWidth) {
+				this.drawPath(arrowPath);
+			} else {
+				this.rotate(Math.PI);
+				this.drawPath(arrowPath);
+				this.rotate(Math.PI);
+			}
+			this.translate(- distance / 2, 0);
 			
+			this.translate(0, - underLineGap);
 			if(shiftMode == ShiftMode.LEFT)
-				this.translate(0, shift);
+				this.translate(shift, 0);
 			if(shiftMode == ShiftMode.CENTER)
-				this.translate(0, - coteStringWidth / 2 + shift);
+				this.translate(- coteStringWidth / 2 + shift, 0);
 			if(shiftMode == ShiftMode.RIGHT)
-				this.translate(0, - coteStringWidth + shift);
-			this.rotate(Math.PI / 2);
+				this.translate(- coteStringWidth + shift, 0);
 			
 			this.drawString(formatedCote, 0, 0);
 			

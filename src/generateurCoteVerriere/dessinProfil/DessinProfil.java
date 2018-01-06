@@ -60,10 +60,10 @@ public class DessinProfil {
 		this.longueurEpaulement = 0;
 		this.epaisseurEpaulement = 0;
 
-		this.curUnderLineGap = 2;
+		this.curUnderLineGap = 5;
 		this.taillePoliceCote = 10;
 		this.margeEntreMontantEtPremiereCote = 15;
-		this.margeInterCote = 0;
+		this.margeInterCote = 2;
 	}
 
 	public MyCustomSvg render() {
