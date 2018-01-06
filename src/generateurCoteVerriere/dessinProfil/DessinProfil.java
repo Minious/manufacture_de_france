@@ -114,10 +114,8 @@ public class DessinProfil {
 		double abscisseChamp;
 		Point p1Champ, p2Champ;
 		if(this.hasChamp) {
-			System.out.println("lol");
 			abscisseChamp = (this.champSide == Side.LEFT ? - demiLargeurGauche + this.epaisseurChamp : demiLargeurDroite - this.epaisseurChamp);
 			if(this.hasEpaulement && isChampDansEpaulement()) {
-				System.out.println("lol");
 				p1Champ = new Point(abscisseChamp, this.longueurEpaulement);
 				p2Champ = new Point(abscisseChamp, this.longueur - this.longueurEpaulement);
 			} else if(this.isCorniere) {

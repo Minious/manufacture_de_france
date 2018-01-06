@@ -36,7 +36,7 @@ public abstract class ElementGenerique {
 		g.writeToSVG(outputFilePath);
 	}
 
-	protected abstract int getNbElements();
+	public abstract int getNbElements();
 	protected abstract MyCustomSvg getEntete();
 	protected abstract MyCustomSvg getDessin();
 	protected abstract MyCustomSvg getPiedDePage();

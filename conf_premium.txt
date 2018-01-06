@@ -45,6 +45,7 @@ ecartEntreExtremiteEtPremierPercageMontantIntermediaire = ecartEntreExtremiteEtP
 
 // Vitrage
 penetrationVitrage = 4
+nbVitrage = nbPartitions
 largeurVitrage = largeurClairVitrage + 2 * penetrationVitrage
 hauteurVitrage = hauteurClairVitrage + 2 * penetrationVitrage
 
@@ -60,5 +61,6 @@ nbParcloseTraverseLaterale = if(nbPartitions > 1, 4, 2)
 longueurParcloseTraverseLaterale = ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere - epaisseurMontantCorniere - epaisseurMontantIntermedaire / 2 - jeuParclose
 nbParcloseTraverseCentrale = min(0, (nbPartitions - 2) * 2)
 longueurParcloseTraverseCentrale = entreAxePercageMontantTraverseCorniere - epaisseurMontantIntermedaire - jeuParclose
-nbParcloseMontant = nbPartitions + 1
+nbParcloseMontantCorniere = 2
+nbParcloseMontantIntermediaire = (nbPartitions - 1) * 2
 longueurParcloseMontant = hauteurVerriere - 2 * (epaisseurTraverseCorniere + hauteurParcloseCorniere) - jeuParclose

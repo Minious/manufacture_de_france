@@ -27,6 +27,7 @@ public class MyCustomSvg extends SvgComponent{
 	private Padding padding;
 	private boolean hasBorders;
 	private StyleContext borderSc;
+	private StyleContext svgTagSc;
 	
 	public MyCustomSvg() {
 		super(new StyleContext(
@@ -42,6 +43,7 @@ public class MyCustomSvg extends SvgComponent{
 		this.svgTree = new ArrayList<SvgComponent>();
 		this.hasBorders = false;
 		this.borderSc = null;
+		this.svgTagSc = this.sc;
 	}
 	
 	public MyCustomSvg(MyCustomSvg g) {
@@ -55,7 +57,8 @@ public class MyCustomSvg extends SvgComponent{
 			this.svgTree.add(c.clone());
 		this.hasBorders = g.hasBorders;
 		this.borderSc = g.borderSc;
-	}
+		this.svgTagSc = g.svgTagSc;
+	}	
 	
 	public void setPadding(Padding padding) {
 		this.padding = padding;
@@ -212,8 +215,9 @@ public class MyCustomSvg extends SvgComponent{
 				actualY = y;
 				break;
 		}
-		
+
 		MyCustomSvg svgClone = (MyCustomSvg) svg.clone();
+		svgClone.svgTagSc = this.sc.clone();
 		svgTree.add(svgClone);
 		svgClone.setPosition(actualX, actualY);
 		Rectangle2D bounds = new Rectangle2D.Double(actualX, actualY, svgClone.getWidth(), svgClone.getHeight());
@@ -232,7 +236,10 @@ public class MyCustomSvg extends SvgComponent{
 		curH = this.bounds.getHeight() + this.padding.getVerticalPadding();
 		
 		String output = "";
-		output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" >\n";
+		//output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" ";
+		output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" ";
+		output += "transform=\"" + this.svgTagSc.getTransformMatrix() + "\" ";
+		output +=  ">\n";
 		///// DEBUG /////
 		if(this.hasBorders) {
 			output += "<rect ";
@@ -260,8 +267,6 @@ public class MyCustomSvg extends SvgComponent{
 		this.drawRect(this.bounds.getX(), this.bounds.getY(), this.bounds.getWidth(), this.bounds.getHeight());
 		*/
 		/////
-		
-		//System.out.println(outputFilePath);
 		
 		double w, h;
 		w = this.bounds.getWidth() + this.padding.getHorizontalPadding();

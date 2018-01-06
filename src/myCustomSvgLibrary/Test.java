@@ -15,7 +15,8 @@ public class Test {
 		//test2();
 		//test3();
 		//test4();
-		test5();
+		//test5();
+		test6();
 	}
 	
 	private static void test1() {
@@ -104,5 +105,17 @@ public class Test {
 		g.setPadding(new Padding(10));
 		
 		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+	}
+	
+	private static void test6() {
+		MyCustomSvg g1 = new MyCustomSvg();
+		g1.drawEllipse(-100, -50, 200, 100);
+		g1.drawLine(-100, -50, 100, 50);
+		MyCustomSvg g2 = new MyCustomSvg();
+		g2.translate(550, 550);
+		g2.rotate(Math.PI / 2);
+		g2.drawSvg(g1, 100, 100);
+		g2.resetTransform();
+		g2.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}
 }

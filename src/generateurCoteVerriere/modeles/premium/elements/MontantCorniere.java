@@ -42,7 +42,7 @@ public class MontantCorniere extends ElementGenerique {
 		return l.getSvg();
 	}
 	
-	private MyCustomSvg getDessinNew() {
+	public MyCustomSvg getDessinNew() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantCorniere"), conf.get("longueurMontantCorniere"), 10);
 		profil.setChamp(conf.get("epaisseurMontantCorniere"), Side.RIGHT);
 		
@@ -126,7 +126,7 @@ public class MontantCorniere extends ElementGenerique {
 	}
 
 	@Override
-	protected int getNbElements() {
+	public int getNbElements() {
 		return this.nbMontants;
 	}
 
@@ -145,10 +145,6 @@ public class MontantCorniere extends ElementGenerique {
 		lignes.add("Client : " + this.data.get("client"));
 		lignes.add("Ref : " + this.data.get("reference"));
 		lignes.add("Dimensions vitrage : " + conf.get("largeurVitrage") + " x " + conf.get("hauteurVitrage"));
-		lignes.add("Parcloses Traverse laterale : " + conf.get("nbParcloseTraverseLaterale").intValue() + " x " + conf.get("longueurParcloseTraverseLaterale"));
-		if(conf.get("nbParcloseTraverseCentrale") > 0)
-			lignes.add("Parcloses Traverse centrale : " + conf.get("nbParcloseTraverseCentrale").intValue() + " x " + conf.get("longueurParcloseTraverseCentrale"));
-		lignes.add("Parcloses Montant : " + conf.get("nbParcloseMontant").intValue() + " x " + conf.get("longueurParcloseMontant"));
 		return new LignesTexte(lignes);
 	}
 }
