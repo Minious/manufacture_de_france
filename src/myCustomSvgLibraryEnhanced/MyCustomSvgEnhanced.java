@@ -149,7 +149,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			
 			this.drawLine(0, actualLowerBound, 0, actualUpperBound);
 			
-			double arrowWidth = 10, arrowHeight = 4;
+			double arrowWidth = 10, arrowHeight = 3;
 			MyPath2D arrowPath = new MyPath2D();
 			arrowPath.moveTo(0, 0);
 			arrowPath.lineTo(- arrowWidth, arrowHeight / 2);

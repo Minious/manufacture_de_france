@@ -100,6 +100,10 @@ public class MyCustomSvg extends SvgComponent{
 		this.sc.resetTransform();
 	}
 	
+	public void setFontColor(Color c) {
+		this.sc.setFontColor(c);
+	}
+	
 	public void setStrokeColor(Color c) {
 		this.sc.setStrokeColor(c);
 	}

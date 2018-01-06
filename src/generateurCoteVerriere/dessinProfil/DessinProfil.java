@@ -63,7 +63,7 @@ public class DessinProfil {
 		this.curUnderLineGap = 5;
 		this.taillePoliceCote = 10;
 		this.margeEntreMontantEtPremiereCote = 15;
-		this.margeInterCote = 2;
+		this.margeInterCote = 3;
 	}
 
 	public MyCustomSvg render() {

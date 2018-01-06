@@ -9,29 +9,32 @@ public class StyleContext {
 	private AffineTransform curTransform;
 	private Color curStrokeColor;
 	private Color curFillColor;
+	private Color curFontColor;
 	private Font curFont;
 	private BasicStroke curStroke;
 
 	public StyleContext() {
-		this(new AffineTransform(), Color.BLACK, null, new Font("Arial", Font.PLAIN, 12), new BasicStroke(1));
+		this(new AffineTransform(), Color.BLACK, null, Color.BLACK, new Font("Arial", Font.PLAIN, 12), new BasicStroke(1));
 	}
 
-	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Font f, BasicStroke s) {
+	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, BasicStroke s) {
 		this.curTransform = t;
 		this.curStrokeColor = strokeC;
 		this.curFillColor = fillC;
+		this.curFontColor = fontC;
 		this.curFont = f;
 		this.curStroke = s;
 	}
 	
 	public StyleContext clone() {
-		AffineTransform t = (AffineTransform) this.curTransform.clone(); // new AffineTransform(t);
-		Color strokeC = this.curStrokeColor; // new Color(c.getRGB());
-		Color fillC = this.curFillColor; // new Color(c.getRGB());
+		AffineTransform t = (AffineTransform) this.curTransform.clone();
+		Color strokeC = this.curStrokeColor;
+		Color fillC = this.curFillColor;
+		Color fontC = this.curFontColor;
 		Font f = this.curFont;
 		BasicStroke s = this.curStroke;
 		
-		return new StyleContext(t, strokeC, fillC, f, s);
+		return new StyleContext(t, strokeC, fillC, fontC, f, s);
 	}
 	
 	public Font getFont() {
@@ -44,6 +47,10 @@ public class StyleContext {
 	
 	public Color getFillColor() {
 		return this.curFillColor;
+	}
+	
+	public Color getFontColor() {
+		return this.curFontColor;
 	}
 	
 	public AffineTransform getTransform() {
@@ -70,6 +77,10 @@ public class StyleContext {
 	
 	public void setFillColor(Color c) {
 		this.curFillColor = c;
+	}
+	
+	public void setFontColor(Color c) {
+		this.curFontColor = c;
 	}
 	
 	public void setFont(Font f) {
@@ -143,7 +154,7 @@ public class StyleContext {
 	
 	public String getFontStyle() {
 		String outputStr = "";
-		outputStr += "fill: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ";
+		outputStr += "fill: rgb(" + this.curFontColor.getRed() + "," + this.curFontColor.getGreen() + "," + this.curFontColor.getBlue() + "); ";
 		outputStr += "fill-opacity: 1.0; ";
 		outputStr += "font-family: " + this.curFont.getFontName() + "; ";
 		outputStr += "font-size: " + this.curFont.getSize() + "px; ";
