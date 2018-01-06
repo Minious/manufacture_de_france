@@ -52,12 +52,12 @@ public class Premium extends ModeleGenerique {
 		montantIntermediaireSvg.drawSvg(montantIntermediaire.getDessinNew(), 0, 0);
 		traverseCorniereSvg.drawSvg(traverseCorniere.getDessinNew(), 0, 0);
 		
-		MyCustomSvg traverseCorniereTitre = new LignesTexte(Arrays.asList(new String[] {"TRAVERSES HAUTE ET BASSE"}));
-		MyCustomSvg traverseCorniereQte = new LignesTexte(Arrays.asList(new String[] {"QTE : "+traverseCorniere.getNbElements()}));
-		MyCustomSvg montantCorniereTitre = new LignesTexte(Arrays.asList(new String[] {"MT CORNIERE LATERAL"}));
-		MyCustomSvg montantCorniereQte = new LignesTexte(Arrays.asList(new String[] {"QTE : "+montantCorniere.getNbElements()}));
-		MyCustomSvg montantIntermediaireTitre = new LignesTexte(Arrays.asList(new String[] {"MT T INTERMEDIAIRE"}));
-		MyCustomSvg montantIntermediaireQte = new LignesTexte(Arrays.asList(new String[] {"QTE : "+montantIntermediaire.getNbElements()}));
+		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
+		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements());
+		MyCustomSvg montantCorniereTitre = new LignesTexte("MT CORNIERE LATERAL");
+		MyCustomSvg montantCorniereQte = new LignesTexte("QTE : "+montantCorniere.getNbElements());
+		MyCustomSvg montantIntermediaireTitre = new LignesTexte("MT T INTERMEDIAIRE");
+		MyCustomSvg montantIntermediaireQte = new LignesTexte("QTE : "+montantIntermediaire.getNbElements());
 
 		MyHandyLayout layoutDessins = new MyHandyLayout();
 		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);

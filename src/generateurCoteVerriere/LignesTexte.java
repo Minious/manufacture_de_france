@@ -1,5 +1,6 @@
 package generateurCoteVerriere;
 
+import java.util.Arrays;
 import java.util.List;
 
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
@@ -8,6 +9,18 @@ import myCustomSvgLibraryEnhanced.Point;
 public class LignesTexte extends MyCustomSvgEnhanced {
 	private final static int TAILLE_POLICE_PAR_DEFAUT = 15;
 	private final static double MARGE_ENTRE_LIGNES_PAR_DEFAUT = 2;
+	
+	public LignesTexte(String ligne) {
+		this(Arrays.asList(new String[] {ligne}));
+	}
+	
+	public LignesTexte(String ligne, int taillePoliceDonnees) {
+		this(Arrays.asList(new String[] {ligne}), taillePoliceDonnees);
+	}
+	
+	public LignesTexte(String ligne, int taillePoliceDonnees, ShiftMode shiftMode) {
+		this(Arrays.asList(new String[] {ligne}), taillePoliceDonnees, shiftMode);
+	}
 	
 	public LignesTexte(List<String> lignes) {
 		this(lignes, TAILLE_POLICE_PAR_DEFAUT);
