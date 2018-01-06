@@ -1,5 +1,6 @@
 package myCustomSvgLibraryEnhanced;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.geom.AffineTransform;
@@ -159,6 +160,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			if(reversed)
 				this.rotate(Math.PI);
 
+			this.setFillColor(Color.black);
 			this.translate(- distance / 2, 0);
 			if(distance > 2 * arrowWidth) {
 				this.rotate(Math.PI);
@@ -176,6 +178,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 				this.rotate(Math.PI);
 			}
 			this.translate(- distance / 2, 0);
+			this.removeFillColor();
 			
 			this.translate(0, - underLineGap);
 			if(shiftMode == ShiftMode.LEFT)

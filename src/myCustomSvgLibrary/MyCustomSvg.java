@@ -30,12 +30,7 @@ public class MyCustomSvg extends SvgComponent{
 	private StyleContext svgTagSc;
 	
 	public MyCustomSvg() {
-		super(new StyleContext(
-				new AffineTransform(),
-				Color.BLACK,
-				new Font("Arial", Font.PLAIN, 12),
-				new BasicStroke(1)
-		));
+		super(new StyleContext());
 		this.bounds = null;
 		this.padding = new Padding(0);
 		this.x = 0;
@@ -105,8 +100,16 @@ public class MyCustomSvg extends SvgComponent{
 		this.sc.resetTransform();
 	}
 	
-	public void setColor(Color c) {
-		this.sc.setColor(c);
+	public void setStrokeColor(Color c) {
+		this.sc.setStrokeColor(c);
+	}
+	
+	public void setFillColor(Color c) {
+		this.sc.setFillColor(c);
+	}
+	
+	public void removeFillColor() {
+		this.sc.setFillColor(null);
 	}
 	
 	public void setFont(Font f) {
@@ -247,7 +250,7 @@ public class MyCustomSvg extends SvgComponent{
 			output += "y=\"" + this.bounds.getY() + "\" ";
 			output += "width=\"" + curW + "\" ";
 			output += "height=\"" + curH + "\" ";
-			output += "style=\"" + this.borderSc.getStrokeStyle() + "fill: none;\" ";
+			output += "style=\"" + this.borderSc.getShapeStyle() + "\" ";
 			output += "/>";
 		}
 		output += "<svg x=\"" + this.padding.getLeftPadding() + "\" y=\"" + this.padding.getTopPadding() + "\" style=\"overflow:visible;\" >\n";

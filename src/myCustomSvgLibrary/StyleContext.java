@@ -6,33 +6,44 @@ import java.awt.Font;
 import java.awt.geom.AffineTransform;
 
 public class StyleContext {
-	private AffineTransform curTransform = new AffineTransform();
-	private Color curColor = Color.BLACK;
-	private Font curFont = new Font("Arial", Font.PLAIN, 12);
-	private BasicStroke curStroke = new BasicStroke(1);
+	private AffineTransform curTransform;
+	private Color curStrokeColor;
+	private Color curFillColor;
+	private Font curFont;
+	private BasicStroke curStroke;
 
-	public StyleContext(AffineTransform t, Color c, Font f, BasicStroke s) {
+	public StyleContext() {
+		this(new AffineTransform(), Color.BLACK, null, new Font("Arial", Font.PLAIN, 12), new BasicStroke(1));
+	}
+
+	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Font f, BasicStroke s) {
 		this.curTransform = t;
-		this.curColor = c;
+		this.curStrokeColor = strokeC;
+		this.curFillColor = fillC;
 		this.curFont = f;
 		this.curStroke = s;
 	}
 	
 	public StyleContext clone() {
 		AffineTransform t = (AffineTransform) this.curTransform.clone(); // new AffineTransform(t);
-		Color c = this.curColor; // new Color(c.getRGB());
+		Color strokeC = this.curStrokeColor; // new Color(c.getRGB());
+		Color fillC = this.curFillColor; // new Color(c.getRGB());
 		Font f = this.curFont;
 		BasicStroke s = this.curStroke;
 		
-		return new StyleContext(t, c, f, s);
+		return new StyleContext(t, strokeC, fillC, f, s);
 	}
 	
 	public Font getFont() {
 		return this.curFont;
 	}
 	
-	public Color getColor() {
-		return this.curColor;
+	public Color getStrokeColor() {
+		return this.curStrokeColor;
+	}
+	
+	public Color getFillColor() {
+		return this.curFillColor;
 	}
 	
 	public AffineTransform getTransform() {
@@ -53,8 +64,12 @@ public class StyleContext {
 		this.curTransform = new AffineTransform();
 	}
 	
-	public void setColor(Color c) {
-		this.curColor = c;
+	public void setStrokeColor(Color c) {
+		this.curStrokeColor = c;
+	}
+	
+	public void setFillColor(Color c) {
+		this.curFillColor = c;
 	}
 	
 	public void setFont(Font f) {
@@ -104,12 +119,12 @@ public class StyleContext {
 		);
 	}
 	
-	public String getStrokeStyle() {
+	public String getShapeStyle() {
 		float[] dashArray = this.curStroke.getDashArray();
 		
 		String outputStr = "";
 		outputStr += "stroke-width: " + this.curStroke.getLineWidth() + "; ";
-		outputStr += "stroke: rgb(" + this.curColor.getRed() + "," + this.curColor.getGreen() + "," + this.curColor.getBlue() + "); ";
+		outputStr += "stroke: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ";
 		outputStr += "stroke-opacity: 1.0; ";
 		outputStr += "stroke-linecap: butt; ";
 		if(dashArray != null) {
@@ -119,12 +134,16 @@ public class StyleContext {
 				dashArrayStr += ","+dashArray[i];
 			outputStr += "stroke-dasharray: "+dashArrayStr+"; ";
 		}
+		if(this.curFillColor == null)
+			outputStr += "fill: none; ";
+		else
+			outputStr += "fill: rgb(" + this.curFillColor.getRed() + "," + this.curFillColor.getGreen() + "," + this.curFillColor.getBlue() + "); ";
 		return outputStr;
 	}
 	
 	public String getFontStyle() {
 		String outputStr = "";
-		outputStr += "fill: rgb(" + this.curColor.getRed() + "," + this.curColor.getGreen() + "," + this.curColor.getBlue() + "); ";
+		outputStr += "fill: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ";
 		outputStr += "fill-opacity: 1.0; ";
 		outputStr += "font-family: " + this.curFont.getFontName() + "; ";
 		outputStr += "font-size: " + this.curFont.getSize() + "px; ";

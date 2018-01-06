@@ -18,7 +18,7 @@ public class LineSVG extends SvgComponent {
 		outputStr += "y1=\"" + this.y1 + "\" ";
 		outputStr += "x2=\"" + this.x2 + "\" ";
 		outputStr += "y2=\"" + this.y2 + "\" ";
-		outputStr += "style=\"" + this.sc.getStrokeStyle() + "\" ";
+		outputStr += "style=\"" + this.sc.getShapeStyle() + "\" ";
 		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
 		outputStr += "/>";
 		

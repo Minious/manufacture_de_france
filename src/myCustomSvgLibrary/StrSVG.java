@@ -12,7 +12,7 @@ public class StrSVG extends SvgComponent {
 	}
 	
 	public String renderTag() {
-		String rgbColorStyle = "rgb(" + this.sc.getColor().getRed() + "," + this.sc.getColor().getGreen() + "," + this.sc.getColor().getBlue() + ")";
+		//String rgbColorStyle = "rgb(" + this.sc.getColor().getRed() + "," + this.sc.getColor().getGreen() + "," + this.sc.getColor().getBlue() + ")";
 		
 		String outputStr = "";
 		outputStr += "<text ";
