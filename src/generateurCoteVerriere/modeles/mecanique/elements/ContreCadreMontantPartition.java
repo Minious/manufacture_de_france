@@ -116,7 +116,7 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 	}
 
 	@Override
-	protected int getNbElements() {
+	public int getNbElements() {
 		return this.nbMontants;
 	}
 

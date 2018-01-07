@@ -124,7 +124,7 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 	}
 
 	@Override
-	protected int getNbElements() {
+	public int getNbElements() {
 		return this.nbTraverses;
 	}
 

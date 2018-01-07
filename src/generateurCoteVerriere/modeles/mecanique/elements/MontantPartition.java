@@ -7,7 +7,6 @@ import java.util.HashMap;
 import generateurCoteVerriere.ElementGenerique;
 import generateurCoteVerriere.LignesTexte;
 import generateurCoteVerriere.dessinProfil.DessinProfil;
-import generateurCoteVerriere.dessinProfil.DessinProfilException;
 import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibrary.MyHandyLayout;
 import myCustomSvgLibrary.Padding;
@@ -120,7 +119,7 @@ public class MontantPartition extends ElementGenerique {
 	}
 
 	@Override
-	protected int getNbElements() {
+	public int getNbElements() {
 		return this.nbMontants;
 	}
 

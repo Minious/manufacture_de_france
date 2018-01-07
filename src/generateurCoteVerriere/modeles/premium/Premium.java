@@ -57,9 +57,7 @@ public class Premium extends ModeleGenerique {
 		MyCustomSvg traverseCorniereSvg = traverseCorniereLayout.getSvg();
 		montantCorniereSvg.rotate(Math.PI / 2);
 		montantIntermediaireSvg.rotate(Math.PI / 2);
-		System.out.println(montantCorniere.getDessinNew().getBounds());
 		montantCorniereSvg.drawSvg(montantCorniere.getDessinNew(), 0, 0);
-		System.out.println(montantCorniereSvg.getBounds());
 		montantIntermediaireSvg.drawSvg(montantIntermediaire.getDessinNew(), 0, 0);
 		
 		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
@@ -123,7 +121,7 @@ public class Premium extends ModeleGenerique {
 
 	@Override
 	protected String[] getElementsClasses() {
-		return new String[] {"MontantCorniere", "MontantIntermediaire", "TraverseCorniere"};
+		return new String[] {/*"MontantCorniere", "MontantIntermediaire", "TraverseCorniere"*/};
 	}
 
 	@Override
