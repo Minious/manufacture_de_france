@@ -25,7 +25,7 @@ public class MainDebug {
 		
 		hauteurVerriere = 490d;
 		largeurVerriere = 1150d;
-		nbPartitions = 3;
+		nbPartitions = 1;
 		
 		HashMap<String, Object> myArgs = new HashMap<String, Object>();
 		myArgs.put("ARC", "190000310");
@@ -35,6 +35,6 @@ public class MainDebug {
 		myArgs.put("largeurVerriere", largeurVerriere);
 		myArgs.put("nbPartitions", nbPartitions);
 		
-		Renderer.render("Mécanique", Paths.get("").toAbsolutePath(), myArgs);
+		Renderer.render("Premium", Paths.get("").toAbsolutePath(), myArgs);
 	}
 }

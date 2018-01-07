@@ -71,9 +71,11 @@ public class Premium extends ModeleGenerique {
 		layoutDessins.addRow(traverseCorniereSvg, ShiftMode.CENTER);
 		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
 		layoutDessins.addRow(montantCorniereSvg, ShiftMode.CENTER);
-		layoutDessins.addRow(new MyCustomSvg[] {montantIntermediaireTitre, montantIntermediaireQte}, ShiftMode.LEFT);
-		layoutDessins.addRow(montantIntermediaireSvg, ShiftMode.CENTER);
-
+		if(montantIntermediaire.getNbElements() > 0) {
+			layoutDessins.addRow(new MyCustomSvg[] {montantIntermediaireTitre, montantIntermediaireQte}, ShiftMode.LEFT);
+			layoutDessins.addRow(montantIntermediaireSvg, ShiftMode.CENTER);
+		}
+		
 		MyCustomSvg dessins = layoutDessins.getSvg();
 
 		MyCustomSvg parcloses = new LignesTexte(Arrays.asList(new String[] {

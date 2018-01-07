@@ -125,8 +125,10 @@ public class Mecanique extends ModeleGenerique {
 		MyHandyLayout layoutDessins = new MyHandyLayout();
 		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);
 		layoutDessins.addRow(traverseCorniereLayout.getSvg(), ShiftMode.CENTER);
-		layoutDessins.addRow(new MyCustomSvg[] {montantPartitionTitre, montantPartitionQte}, ShiftMode.LEFT);
-		layoutDessins.addRow(montantPartitionLayout.getSvg(), ShiftMode.CENTER);
+		if(montantPartition.getNbElements() > 0) {
+			layoutDessins.addRow(new MyCustomSvg[] {montantPartitionTitre, montantPartitionQte}, ShiftMode.LEFT);
+			layoutDessins.addRow(montantPartitionLayout.getSvg(), ShiftMode.CENTER);
+		}
 		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
 		layoutDessins.addRow(montantCorniereLayout.getSvg(), ShiftMode.CENTER);
 
