@@ -132,6 +132,9 @@ public class DessinProfil {
 					p1Champ = new Point(abscisseChamp, this.epaisseurChamp);
 					p2Champ = new Point(abscisseChamp, this.longueur - this.epaisseurChamp);
 				}
+			} else if(this.isChampCorniere) {
+				p1Champ = new Point(abscisseChamp, this.epaisseurChamp);
+				p2Champ = new Point(abscisseChamp, this.longueur - this.epaisseurChamp);
 			} else {
 				p1Champ = new Point(abscisseChamp, 0);
 				p2Champ = new Point(abscisseChamp, this.longueur);
@@ -141,12 +144,19 @@ public class DessinProfil {
 				g.setDashArray(StyleTrait.INTERROMPU);
 			g.drawLine(p1Champ, p2Champ);
 			if(this.isChampCorniere) {
-				Point p1ChampCorniere1 = new Point(abscisseChamp, this.largeurChamp);
-				Point p2ChampCorniere1 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.largeurChamp);
-				Point p1ChampCorniere2 = new Point(abscisseChamp, this.longueur - this.largeurChamp);
-				Point p2ChampCorniere2 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.longueur - this.largeurChamp);
-				g.drawLine(p1ChampCorniere1, p2ChampCorniere1);
-				g.drawLine(p1ChampCorniere2, p2ChampCorniere2);
+				Point p1ChampCorniere11 = new Point(abscisseChamp, this.largeurChamp);
+				Point p2ChampCorniere11 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.largeurChamp);
+				Point p1ChampCorniere12 = new Point(abscisseChamp, this.longueur - this.largeurChamp);
+				Point p2ChampCorniere12 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.longueur - this.largeurChamp);
+				g.drawLine(p1ChampCorniere11, p2ChampCorniere11);
+				g.drawLine(p1ChampCorniere12, p2ChampCorniere12);
+				
+				Point p1ChampCorniere21 = new Point(abscisseChamp, this.epaisseurChamp);
+				Point p2ChampCorniere21 = new Point(this.champSide == Side.LEFT ? demiLargeurDroite : - demiLargeurGauche, this.epaisseurChamp);
+				Point p1ChampCorniere22 = new Point(abscisseChamp, this.longueur - this.epaisseurChamp);
+				Point p2ChampCorniere22 = new Point(this.champSide == Side.LEFT ? demiLargeurDroite : - demiLargeurGauche, this.longueur - this.epaisseurChamp);
+				g.drawLine(p1ChampCorniere21, p2ChampCorniere21);
+				g.drawLine(p1ChampCorniere22, p2ChampCorniere22);
 			}
 			g.removeDashArray();
 		}
