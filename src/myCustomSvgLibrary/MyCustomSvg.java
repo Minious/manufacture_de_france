@@ -272,6 +272,10 @@ public class MyCustomSvg extends SvgComponent{
 		return this.bounds;
 	}
 	
+	public void clear() {
+		this.svgTree.clear();
+	}
+	
 	public void writeToSVG(Path outputFilePath) {
 		///// DEBUG
 		/*

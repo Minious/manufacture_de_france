@@ -78,14 +78,19 @@ public class Premium extends ModeleGenerique {
 		
 		MyCustomSvg dessins = layoutDessins.getSvg();
 
-		MyCustomSvg parcloses = new LignesTexte(Arrays.asList(new String[] {
+		LignesTexte parcloses = new LignesTexte();
+		parcloses.addLignes(Arrays.asList(new String[] {
 			"PARCLOSES : " + conf.get("hauteurParcloseCorniere").intValue(),
 			"- " + conf.get("longueurParcloseTraverseLaterale") + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
-			"- " + conf.get("longueurParcloseTraverseCentrale") + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue(),
-			"- " + conf.get("longueurParcloseMontant") + " QTE " + conf.get("nbParcloseMontantCorniere").intValue(),
-			"PARCLOSES : " + conf.get("hauteurParcloseT").intValue(),
-			"- " + conf.get("longueurParcloseMontant") + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue(),
+			"- " + conf.get("longueurParcloseMontant") + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
 		}));
+		if(conf.get("nbParcloseTraverseCentrale") > 0)
+			parcloses.addLigne("- " + conf.get("longueurParcloseTraverseCentrale") + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
+		if(conf.get("nbParcloseMontantIntermediaire") > 0)
+			parcloses.addLignes(Arrays.asList(new String[] {
+				"PARCLOSES : " + conf.get("hauteurParcloseT").intValue(),
+				"- " + conf.get("longueurParcloseMontant") + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue(),
+			}));
 
 		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(new String[] {
 			"VITRAGE :",

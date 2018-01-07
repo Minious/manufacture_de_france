@@ -1,5 +1,6 @@
 package generateurCoteVerriere;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,6 +10,15 @@ import myCustomSvgLibraryEnhanced.Point;
 public class LignesTexte extends MyCustomSvgEnhanced {
 	private final static int TAILLE_POLICE_PAR_DEFAUT = 15;
 	private final static double MARGE_ENTRE_LIGNES_PAR_DEFAUT = 2;
+	
+	private ArrayList<String> lignes;
+	private int taillePoliceDonnees;
+	private ShiftMode shiftMode;
+	private double margeEntreLignes;
+	
+	public LignesTexte() {
+		this(Arrays.asList(new String[] {}));
+	}
 	
 	public LignesTexte(String ligne) {
 		this(Arrays.asList(new String[] {ligne}));
@@ -35,8 +45,28 @@ public class LignesTexte extends MyCustomSvgEnhanced {
 	}
 	
 	public LignesTexte(List<String> lignes, int taillePoliceDonnees, ShiftMode shiftMode, double margeEntreLignes) {
+		this.lignes = new ArrayList<String>();
+		this.lignes.addAll(lignes);
+		this.taillePoliceDonnees = taillePoliceDonnees;
+		this.shiftMode = shiftMode;
+		this.margeEntreLignes = margeEntreLignes;
 		this.setFontSize(taillePoliceDonnees);
-		for(int i=0;i<lignes.size();i++)
-			this.drawString(lignes.get(i), new Point(0, i * (taillePoliceDonnees + margeEntreLignes)), 0, shiftMode);
+		
+		render();
+	}
+	
+	public void addLigne(String ligne) {
+		addLignes(Arrays.asList(new String[] {ligne}));
+	}
+	
+	public void addLignes(List<String> lignes) {
+		this.lignes.addAll(lignes);
+		render();
+	}
+	
+	private void render() {
+		this.clear();
+		for(int i=0;i<this.lignes.size();i++)
+			this.drawString(this.lignes.get(i), new Point(0, i * (taillePoliceDonnees + margeEntreLignes)), 0, shiftMode);
 	}
 }
