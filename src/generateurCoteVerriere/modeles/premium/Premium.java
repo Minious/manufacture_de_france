@@ -111,10 +111,6 @@ public class Premium extends ModeleGenerique {
 		MyCustomSvg finalSvg = finalLayout.getSvg();
 		finalSvg.setPadding(new Padding(10));
 		this.svgToRender.put("complete", finalSvg);
-		finalSvg.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
-		
-		//montantCorniereSvg.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
-		//montantCorniere.getDessinNew().writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}
 
 	@Override

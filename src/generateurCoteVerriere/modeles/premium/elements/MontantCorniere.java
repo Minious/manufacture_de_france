@@ -45,6 +45,8 @@ public class MontantCorniere extends ElementGenerique {
 	public MyCustomSvg getDessinNew() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantCorniere"), conf.get("longueurMontantCorniere"), 10);
 		profil.setChamp(conf.get("epaisseurMontantCorniere"), Side.RIGHT);
+		profil.setIsChampCorniere(true);
+		profil.setLargeurChamp(conf.get("largeurFaceMontantCorniere"));
 		
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierPercageMontantCorniere");
 		for(int i=0;i<conf.get("nbPercageMontant");i++) {

@@ -25,7 +25,10 @@ public class DessinProfil {
 	private Side corniereSide;
 	private boolean hasChamp;
 	private Side champSide;
+	private Face champFace;
+	private boolean isChampCorniere;
 	private double epaisseurChamp;
+	private double largeurChamp;
 	private boolean hasEpaulement;
 	private Side epaulementSide;
 	private double longueurEpaulement;
@@ -54,7 +57,10 @@ public class DessinProfil {
 		this.corniereSide = Side.LEFT;
 		this.hasChamp = false;
 		this.champSide = Side.LEFT;
+		this.champFace = Face.FRONT;
+		this.isChampCorniere = false;
 		this.epaisseurChamp = 0;
+		this.largeurChamp = this.largeur;
 		this.hasEpaulement = false;
 		this.epaulementSide = Side.LEFT;
 		this.longueurEpaulement = 0;
@@ -131,8 +137,17 @@ public class DessinProfil {
 				p2Champ = new Point(abscisseChamp, this.longueur);
 			}
 			
-			g.setDashArray(StyleTrait.INTERROMPU);
+			if(this.champFace == Face.BACK)
+				g.setDashArray(StyleTrait.INTERROMPU);
 			g.drawLine(p1Champ, p2Champ);
+			if(this.isChampCorniere) {
+				Point p1ChampCorniere1 = new Point(abscisseChamp, this.largeurChamp);
+				Point p2ChampCorniere1 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.largeurChamp);
+				Point p1ChampCorniere2 = new Point(abscisseChamp, this.longueur - this.largeurChamp);
+				Point p2ChampCorniere2 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.longueur - this.largeurChamp);
+				g.drawLine(p1ChampCorniere1, p2ChampCorniere1);
+				g.drawLine(p1ChampCorniere2, p2ChampCorniere2);
+			}
 			g.removeDashArray();
 		}
 
@@ -228,10 +243,20 @@ public class DessinProfil {
 		this.corniereSide = side;
 	}
 	
-	public void setChamp(double epaisseur, Side side) {
+	public void setChamp(double epaisseur, Side side, Face face, boolean isChampCorniere) {
 		this.hasChamp = true;
 		this.epaisseurChamp = epaisseur;
 		this.champSide = side;
+		this.champFace = face;
+		this.isChampCorniere = isChampCorniere;
+	}
+	
+	public void setChamp(double epaisseur, Side side, Face face) {
+		setChamp(epaisseur, side, Face.FRONT, false);
+	}
+	
+	public void setChamp(double epaisseur, Side side) {
+		setChamp(epaisseur, side, Face.FRONT);
 	}
 	
 	public void setChamp(double epaisseur) {
@@ -240,6 +265,18 @@ public class DessinProfil {
 	
 	public void setSideChamp(Side side) {
 		this.champSide = side;
+	}
+	
+	public void setFaceChamp(Face face) {
+		this.champFace = face;
+	}
+	
+	public void setIsChampCorniere(boolean isChampCorniere) {
+		this.isChampCorniere = isChampCorniere;
+	}
+	
+	public void setLargeurChamp(double largeur) {
+		this.largeurChamp = largeur;
 	}
 
 	public void setEpaulement(double longueurEpaulement, double epaisseurEpaulement, Side side) {
@@ -344,5 +381,9 @@ public class DessinProfil {
 
 	public enum Side {
 		LEFT, RIGHT;
+	}
+
+	public enum Face {
+		FRONT, BACK;
 	}
 }
