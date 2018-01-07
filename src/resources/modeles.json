@@ -52,5 +52,31 @@
 				"type": "Integer"
 			}
 		],
+		"Mecanica": [ {
+				"name": "ARC",
+				"displayName": "ARC",
+				"type": "String"
+			}, {
+				"name": "client",
+				"displayName": "Client",
+				"type": "String"
+			}, {
+				"name": "reference",
+				"displayName": "Référence",
+				"type": "String"
+			}, {
+				"name": "hauteurVerriere",
+				"displayName": "Hauteur verrière (en mm)",
+				"type": "Double"
+			}, {
+				"name": "largeurVerriere",
+				"displayName": "Largeur verrière (en mm)",
+				"type": "Double"
+			}, {
+				"name": "nbPartitions",
+				"displayName": "Nombre de partitions",
+				"type": "Integer"
+			}
+		]
 	}
 }
