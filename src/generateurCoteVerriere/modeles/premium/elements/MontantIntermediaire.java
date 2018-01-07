@@ -30,7 +30,8 @@ public class MontantIntermediaire extends ElementGenerique {
 			else
 				profil.addPercage(ordonnee, this.valeurDiametrePercages);
 		}
-		profil.addCoteDroite(0, 1, 0);
+		profil.addCoteDroiteEntrePercages(0, 1, 0);
+		profil.addCoteDroiteOrigine(conf.get("longueurEpaulementMontantIntermediaire"), 0);
 		MyCustomSvg g = profil.render();
 		
 		return g;

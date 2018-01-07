@@ -41,17 +41,17 @@ public class TraverseCorniere extends ElementGenerique {
 			profil.addPercage(ordonnee);
 			ordonnee += conf.get("entreAxeLateralTraverseCorniere");
 			profil.addPercage(ordonnee);
-			profil.addCoteDroite(2, 3, 0);
+			profil.addCoteDroiteEntrePercages(2, 3, 0);
 		}
 
 		if(conf.get("nbPartitions") >= 3)
-			profil.addCoteDroite(3, 4, 0);
+			profil.addCoteDroiteEntrePercages(3, 4, 0);
 		
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere");
 		profil.addPercage(ordonnee, this.valeurDiametreTrous);
 		
-		profil.addCoteDroite(0, 1, 0);
-		profil.addCoteDroite(1, 2, 0);
+		profil.addCoteDroiteEntrePercages(0, 1, 0);
+		profil.addCoteDroiteEntrePercages(1, 2, 0);
 
 		MyCustomSvg g = profil.render();
 		

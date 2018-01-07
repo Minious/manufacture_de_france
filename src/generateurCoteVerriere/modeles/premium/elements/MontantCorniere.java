@@ -32,7 +32,7 @@ public class MontantCorniere extends ElementGenerique {
 			else
 				profil.addPercage(ordonnee, this.valeurDiametrePercages);
 		}
-		profil.addCoteDroite(0, 1, 0);
+		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		MyCustomSvg g = profil.render();
 		
 		return g;

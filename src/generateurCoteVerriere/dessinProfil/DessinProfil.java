@@ -36,7 +36,7 @@ public class DessinProfil {
 
 	private double curUnderLineGap;
 	private float taillePoliceCote;
-	private float margeEntreMontantEtPremiereCote;
+	private float margeEntreProfilEtPremiereCote;
 	private double margeInterCote;
 
 	public DessinProfil(double largeur, double longueur) {
@@ -68,8 +68,8 @@ public class DessinProfil {
 
 		this.curUnderLineGap = 5;
 		this.taillePoliceCote = 10;
-		this.margeEntreMontantEtPremiereCote = 15;
-		this.margeInterCote = 3;
+		this.margeEntreProfilEtPremiereCote = 20;
+		this.margeInterCote = 2;
 	}
 
 	public MyCustomSvg render() {
@@ -160,7 +160,7 @@ public class DessinProfil {
 		}
 
 		// Cote de largeur puis demi largeur de la Partition avant
-		double curDistanceCotesSuperieures = this.margeEntreMontantEtPremiereCote;
+		double curDistanceCotesSuperieures = this.margeEntreProfilEtPremiereCote;
 		Point origine = new Point(0, 0);
 		Point coinSuperieurGaucheProfil = new Point(-demiLargeurGauche, 0);
 		Point coinSuperieurDroiteProfil = new Point(demiLargeurDroite, 0);
@@ -184,7 +184,7 @@ public class DessinProfil {
 
 		// Trace les cotes gauches + percages + traits d'axe horizontaux
 		Point origineCotesGauches = new Point(-demiLargeurGauche, this.longueur);
-		double curDistanceCotesGauches = this.margeEntreMontantEtPremiereCote;
+		double curDistanceCotesGauches = this.margeEntreProfilEtPremiereCote;
 		for (Percage percage : sortedPercages) {
 			// Cotes gauches
 			Point extremiteCote = new Point(-demiLargeurGauche, this.longueur - percage.getHauteurPercage());
@@ -218,13 +218,13 @@ public class DessinProfil {
 
 		// Trace les cotes droites
 		for (CoteDroite coteDroite : sortedCotesDroites) {
-			double ordonnee1 = coteDroite.getPercage1().getHauteurPercage();
-			double ordonnee2 = coteDroite.getPercage2().getHauteurPercage();
+			double ordonnee1 = coteDroite.getHauteur1();
+			double ordonnee2 = coteDroite.getHauteur2();
 			double ordonneeBasse = ordonnee1 < ordonnee2 ? ordonnee1 : ordonnee2;
 			double ordonneeHaute = ordonnee1 > ordonnee2 ? ordonnee1 : ordonnee2;
 			Point extremiteCote1 = new Point(demiLargeurDroite, this.longueur - ordonneeHaute);
 			Point extremiteCote2 = new Point(demiLargeurDroite, this.longueur - ordonneeBasse);
-			g.drawReversedDistanceCote(extremiteCote1, extremiteCote2, this.margeEntreMontantEtPremiereCote	+ coteDroite.getEtage() * (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote));
+			g.drawReversedDistanceCote(extremiteCote1, extremiteCote2, this.margeEntreProfilEtPremiereCote	+ coteDroite.getEtage() * (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote));
 		}
 
 		return g;
@@ -323,27 +323,43 @@ public class DessinProfil {
 		this.percages.add(new Percage(hauteurPercage, largeurPercage, valeurPercage));
 	}
 
-	public void addCoteDroite(int percage1, int percage2, int etage) {
-		this.coteDroites.add(new CoteDroite(this.percages.get(percage1), this.percages.get(percage2), etage));
+	public void addCoteDroiteEntrePercages(int percage1, int percage2, int etage) {
+		addCoteDroite(this.percages.get(percage1).getHauteurPercage(), this.percages.get(percage2).getHauteurPercage(), etage);
+	}
+
+	public void addCoteDroiteEntreHauteurEtPercage(double hauteur, int percage, int etage) {
+		addCoteDroite(hauteur, this.percages.get(percage).getHauteurPercage(), etage);
+	}
+
+	public void addCoteDroiteEntrePercageEtOrigine(int percage, int etage) {
+		addCoteDroiteOrigine(this.percages.get(percage).getHauteurPercage(), etage);
+	}
+
+	public void addCoteDroiteOrigine(double hauteur, int etage) {
+		addCoteDroite(0, hauteur, etage);
+	}
+
+	public void addCoteDroite(double hauteur1, double hauteur2, int etage) {
+		this.coteDroites.add(new CoteDroite(hauteur1, hauteur2, etage));
 	}
 
 	class CoteDroite {
-		private Percage percage1;
-		private Percage percage2;
+		private double hauteur1;
+		private double hauteur2;
 		private int etage;
 
-		public CoteDroite(Percage percage1, Percage percage2, int etage) {
-			this.percage1 = percage1;
-			this.percage2 = percage2;
+		public CoteDroite(double hauteur1, double hauteur2, int etage) {
+			this.hauteur1 = hauteur1;
+			this.hauteur2 = hauteur2;
 			this.etage = etage;
 		}
 
-		public Percage getPercage1() {
-			return this.percage1;
+		public double getHauteur1() {
+			return this.hauteur1;
 		}
 
-		public Percage getPercage2() {
-			return this.percage2;
+		public double getHauteur2() {
+			return this.hauteur2;
 		}
 
 		public int getEtage() {

@@ -32,7 +32,7 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 				profil.addPercage(ordonnee);
 		}
 		
-		profil.addCoteDroite(0, 1, 0);
+		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		MyCustomSvg g = profil.render();
 		
 		return g;
