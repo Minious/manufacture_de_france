@@ -153,9 +153,11 @@ public class DessinProfil {
 
 		// Trace l'axe des percages
 		g.setStrokeWidth(0.5f);
-		g.setDashArray(StyleTrait.MIXTE);
-		g.drawLine(0, 0, 0, this.longueur);
-		g.removeDashArray();
+		if(this.percages.size() > 0) {
+			g.setDashArray(StyleTrait.MIXTE);
+			g.drawLine(0, 0, 0, this.longueur);
+			g.removeDashArray();
+		}
 
 		// Cote de largeur puis demi largeur de la Partition avant
 		double curDistanceCotesSuperieures = this.margeEntreMontantEtPremiereCote;
@@ -163,9 +165,11 @@ public class DessinProfil {
 		Point coinSuperieurGaucheProfil = new Point(-demiLargeurGauche, 0);
 		Point coinSuperieurDroiteProfil = new Point(demiLargeurDroite, 0);
 
-		g.drawDistanceCote(coinSuperieurGaucheProfil, origine, curDistanceCotesSuperieures, -demiLargeurGauche / 2 - 10,
-				ShiftMode.RIGHT);
-		curDistanceCotesSuperieures = decalerCote(curDistanceCotesSuperieures);
+		if(this.percages.size() > 0) {
+			g.drawDistanceCote(coinSuperieurGaucheProfil, origine, curDistanceCotesSuperieures, -demiLargeurGauche / 2 - 10,
+					ShiftMode.RIGHT);
+			curDistanceCotesSuperieures = decalerCote(curDistanceCotesSuperieures);
+		}
 		g.drawDistanceCote(coinSuperieurGaucheProfil, coinSuperieurDroiteProfil, curDistanceCotesSuperieures, 0,
 				ShiftMode.CENTER);
 

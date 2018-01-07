@@ -41,18 +41,26 @@ public class Premium extends ModeleGenerique {
 		MontantCorniere montantCorniere = new MontantCorniere(this.conf, this.data);
 		MontantIntermediaire montantIntermediaire = new MontantIntermediaire(this.conf, this.data);
 		TraverseCorniere traverseCorniere = new TraverseCorniere(this.conf, this.data);
+		
+		MyHandyLayout traverseCorniereLayout = new MyHandyLayout();
+		MyCustomSvg traverseCorniereChampSvg = new MyCustomSvg();
+		MyCustomSvg traverseCorniereFaceSvg = new MyCustomSvg();
+		traverseCorniereChampSvg.rotate(Math.PI / 2);
+		traverseCorniereFaceSvg.rotate(Math.PI / 2);
+		traverseCorniereChampSvg.drawSvg(traverseCorniere.getDessinNew(), 0, 0);
+		traverseCorniereFaceSvg.drawSvg(traverseCorniere.getDessinFace(), 0, 0);
+		traverseCorniereLayout.addRow(traverseCorniereChampSvg, ShiftMode.CENTER);
+		traverseCorniereLayout.addRow(traverseCorniereFaceSvg, ShiftMode.CENTER);
 
 		MyCustomSvg montantCorniereSvg = new MyCustomSvg();
 		MyCustomSvg montantIntermediaireSvg = new MyCustomSvg();
-		MyCustomSvg traverseCorniereSvg = new MyCustomSvg();
+		MyCustomSvg traverseCorniereSvg = traverseCorniereLayout.getSvg();
 		montantCorniereSvg.rotate(Math.PI / 2);
 		montantIntermediaireSvg.rotate(Math.PI / 2);
-		traverseCorniereSvg.rotate(Math.PI / 2);
 		System.out.println(montantCorniere.getDessinNew().getBounds());
 		montantCorniereSvg.drawSvg(montantCorniere.getDessinNew(), 0, 0);
 		System.out.println(montantCorniereSvg.getBounds());
 		montantIntermediaireSvg.drawSvg(montantIntermediaire.getDessinNew(), 0, 0);
-		traverseCorniereSvg.drawSvg(traverseCorniere.getDessinNew(), 0, 0);
 		
 		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
 		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements());
