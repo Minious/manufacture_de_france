@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
 import generateurCoteVerriere.dessinProfil.DessinProfil;
+import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class AttachesTraverseCorniere extends ElementGenerique {
@@ -20,6 +21,8 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 	public MyCustomSvg getDessin() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurTraverseCorniere"), conf.get("hauteurTraverseCorniere"));
 		profil.setLargeurPercage(this.diametreTrous);
+		profil.setChamp(conf.get("epaisseurProfil"), Side.LEFT);
+		profil.setIsChampCorniere(true);
 		
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere");
 		profil.addPercage(ordonnee);

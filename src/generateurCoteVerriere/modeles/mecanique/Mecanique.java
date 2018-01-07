@@ -111,8 +111,8 @@ public class Mecanique extends ModeleGenerique {
 		attachesTraverseCorniereSvg.drawSvg(attachesTraverseCorniere.getDessin(), 0, 0);
 		
 		traverseCorniereLayout.addRow(traverseCorniereSvg, ShiftMode.CENTER);
-		traverseCorniereLayout.addRow(contreCadreTraverseCorniereSvg, ShiftMode.CENTER);
 		traverseCorniereLayout.addRow(attachesTraverseCorniereSvg, ShiftMode.CENTER);
+		traverseCorniereLayout.addRow(contreCadreTraverseCorniereSvg, ShiftMode.CENTER);
 
 		// Final		
 		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
@@ -125,9 +125,9 @@ public class Mecanique extends ModeleGenerique {
 		MyHandyLayout layoutDessins = new MyHandyLayout();
 		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);
 		layoutDessins.addRow(traverseCorniereLayout.getSvg(), ShiftMode.CENTER);
-		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
-		layoutDessins.addRow(montantPartitionLayout.getSvg(), ShiftMode.CENTER);
 		layoutDessins.addRow(new MyCustomSvg[] {montantPartitionTitre, montantPartitionQte}, ShiftMode.LEFT);
+		layoutDessins.addRow(montantPartitionLayout.getSvg(), ShiftMode.CENTER);
+		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
 		layoutDessins.addRow(montantCorniereLayout.getSvg(), ShiftMode.CENTER);
 
 		MyCustomSvg dessins = layoutDessins.getSvg();

@@ -13,6 +13,9 @@ jeuEntreTraverseCorniereEtMontantPartition = 0.5
 // T
 entreAxeT = 44
 
+// Generique
+epaisseurProfil = 3
+
 // Traverse corniere
 hauteurTraverseCorniere = largeurVerriere
 largeurTraverseCorniere = 30
