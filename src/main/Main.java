@@ -84,7 +84,7 @@ public class Main {
 		String jsonFileName = "modeles.json";
 		String encodage = "UTF-8";
 
-		InputStream stream = TextFileConf.class.getClassLoader().getResourceAsStream("resources/"+jsonFileName);
+		InputStream stream = Main.class.getClassLoader().getResourceAsStream("resources/"+jsonFileName);
 		String json = IOUtils.toString(stream, encodage);
 
 		JSONObject modeles = new JSONObject(json).getJSONObject("modeles");

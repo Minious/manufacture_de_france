@@ -2,6 +2,7 @@ package conf;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -38,12 +39,14 @@ public class TextFileConf {
 	}
 
 	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap, ArrayList<Function> customFunctions) throws UnprocessableConfFileException, IOException {
-		File file = new File(TextFileConf.class.getClassLoader().getResource(fileName).getFile());
+		//File file = new File(TextFileConf.class.getClassLoader().getResource("/resources/" + fileName).getFile());
+		String path = "resources/" + fileName;
+		InputStream stream = TextFileConf.class.getClassLoader().getResourceAsStream(path);
 				
 		ArrayList<String> exps = new ArrayList<String>();
 		Pattern pExp = Pattern.compile(".*(?<![=!])=(?!=).*"); // compliqué du cul
 
-		Scanner scanner = new Scanner(file);
+		Scanner scanner = new Scanner(stream);
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			
