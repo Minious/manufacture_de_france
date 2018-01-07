@@ -12,7 +12,7 @@ import utils.MyPath2D;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
 	public double underLineGap = 0;
-	public double distanceCoteGap = 2;
+	public double distanceCoteGap = 4;
 	
 	public void setUnderLineGap(double underLineGap) {
 		this.underLineGap = underLineGap;
@@ -119,11 +119,11 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			FontMetrics metrics = this.getFontMetrics();
 			int coteStringWidth = metrics.stringWidth(formatedCote);
 
-			this.drawLine(this.distanceCoteGap, 0, offset, 0);
+			this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
 			
 			this.translate(0, distance);
 
-			this.drawLine(this.distanceCoteGap, 0, offset, 0);
+			this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
 			
 			this.translate(offset, - distance / 2);
 			

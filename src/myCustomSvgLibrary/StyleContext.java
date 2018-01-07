@@ -14,7 +14,7 @@ public class StyleContext {
 	private BasicStroke curStroke;
 
 	public StyleContext() {
-		this(new AffineTransform(), Color.BLACK, null, Color.BLACK, new Font("Arial", Font.PLAIN, 12), new BasicStroke(1));
+		this(new AffineTransform(), Color.BLACK, null, Color.BLACK, new Font("Century Gothic", Font.PLAIN, 12), new BasicStroke(1));
 	}
 
 	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, BasicStroke s) {
