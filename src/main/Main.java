@@ -17,10 +17,12 @@ import java.awt.ComponentOrientation;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import conf.TextFileConf;
 import generateurCoteVerriere.Renderer;
 
 import javax.swing.JPanel;
@@ -34,14 +36,18 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -74,10 +80,11 @@ public class Main {
 	}
 
 	private JSONObject getJSONModeles() throws IOException, JSONException {
-		String jsonFilePath = "modeles.json";
-		Charset JSONCharset = Charset.forName("UTF-8");
-		List<String> lines = Files.readAllLines(Paths.get(jsonFilePath), JSONCharset);
-		String json = String.join("\n", lines);
+		String jsonFileName = "modeles.json";
+		String encodage = "UTF-8";
+
+		String json = IOUtils.toString(TextFileConf.class.getClassLoader().getResourceAsStream(jsonFileName), encodage);
+
 		JSONObject modeles = new JSONObject(json).getJSONObject("modeles");
 		return modeles;
 	}

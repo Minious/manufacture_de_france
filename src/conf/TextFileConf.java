@@ -1,6 +1,9 @@
 package conf;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,9 +13,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
+
+import main.MainDebug;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
@@ -26,18 +33,20 @@ public class TextFileConf {
 		return loadConf(fileName, new HashMap<String, Double>());
 	}
 
-	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap)
-			throws UnprocessableConfFileException, IOException {
+	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap) throws UnprocessableConfFileException, IOException {
 		return loadConf(fileName, initialMap, new ArrayList<Function>());
 	}
 
 	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap, ArrayList<Function> customFunctions) throws UnprocessableConfFileException, IOException {
-		Path path = Paths.get(fileName);
-		List<String> file = Files.readAllLines(path, ENCODING);
-
+		File file = new File(TextFileConf.class.getClassLoader().getResource(fileName).getFile());
+				
 		ArrayList<String> exps = new ArrayList<String>();
 		Pattern pExp = Pattern.compile(".*(?<![=!])=(?!=).*"); // compliqué du cul
-		for (String line : file) {
+
+		Scanner scanner = new Scanner(file);
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			
 			String exp = line.split("//", -1)[0].replaceAll("\\s", "");
 			if (!exp.isEmpty()) {
 				Matcher mExp = pExp.matcher(exp);
@@ -49,6 +58,7 @@ public class TextFileConf {
 				}
 			}
 		}
+		scanner.close();
 
 		HashMap<String, Double> map = new HashMap<String, Double>();
 		map.putAll(initialMap);

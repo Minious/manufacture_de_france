@@ -3,6 +3,7 @@ package conf;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
