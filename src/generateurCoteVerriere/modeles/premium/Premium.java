@@ -1,7 +1,6 @@
 package generateurCoteVerriere.modeles.premium;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -47,7 +46,7 @@ public class Premium extends ModeleGenerique {
 		MyCustomSvg traverseCorniereFaceSvg = new MyCustomSvg();
 		traverseCorniereChampSvg.rotate(Math.PI / 2);
 		traverseCorniereFaceSvg.rotate(Math.PI / 2);
-		traverseCorniereChampSvg.drawSvg(traverseCorniere.getDessinNew(), 0, 0);
+		traverseCorniereChampSvg.drawSvg(traverseCorniere.getDessin(), 0, 0);
 		traverseCorniereFaceSvg.drawSvg(traverseCorniere.getDessinFace(), 0, 0);
 		traverseCorniereLayout.addRow(traverseCorniereChampSvg, ShiftMode.CENTER);
 		traverseCorniereLayout.addRow(traverseCorniereFaceSvg, ShiftMode.CENTER);
@@ -57,8 +56,8 @@ public class Premium extends ModeleGenerique {
 		MyCustomSvg traverseCorniereSvg = traverseCorniereLayout.getSvg();
 		montantCorniereSvg.rotate(Math.PI / 2);
 		montantIntermediaireSvg.rotate(Math.PI / 2);
-		montantCorniereSvg.drawSvg(montantCorniere.getDessinNew(), 0, 0);
-		montantIntermediaireSvg.drawSvg(montantIntermediaire.getDessinNew(), 0, 0);
+		montantCorniereSvg.drawSvg(montantCorniere.getDessin(), 0, 0);
+		montantIntermediaireSvg.drawSvg(montantIntermediaire.getDessin(), 0, 0);
 		
 		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
 		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements());

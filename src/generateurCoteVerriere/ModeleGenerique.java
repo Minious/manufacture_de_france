@@ -33,8 +33,12 @@ public abstract class ModeleGenerique {
 		Path savePath = savePathTemp.resolve(this.data.get("client")+"_"+this.data.get("reference"));
 		
 		System.out.println("\n\tChargement...\n");
+
+		ArrayList<String> svgPaths = new ArrayList<String>();
+		ArrayList<String> pdfPaths = new ArrayList<String>();
 		
 		// Independant elements
+		/*
 		String[] classesStr = this.getElementsClasses();
 		
 		ArrayList<Class> classes = new ArrayList<Class>();
@@ -42,9 +46,6 @@ public abstract class ModeleGenerique {
 			try {
 				classes.add(Class.forName(getPackage() + "." + classStr));
 			} catch (ClassNotFoundException e1) {}
-
-		ArrayList<String> svgPaths = new ArrayList<String>();
-		ArrayList<String> pdfPaths = new ArrayList<String>();
 		ArrayList<ElementGenerique> elems = new ArrayList<ElementGenerique>();
 		for(Class curClass : classes)
 			try {
@@ -65,6 +66,7 @@ public abstract class ModeleGenerique {
 				pdfPaths.add(completePdfSavePath.toString());
 			}
 		} catch (IOException e) {}
+		*/
 		
 		// HashMap svgToRender
 		for(String fileName : this.svgToRender.keySet()) {

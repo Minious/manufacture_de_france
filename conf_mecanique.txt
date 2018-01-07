@@ -63,6 +63,7 @@ penetrationVitrageGaucheDroite = 8
 penetrationVitrageHautBas = 9
 largeurVitrage = largeurClairDeVitrage + 2 * penetrationVitrageGaucheDroite
 hauteurVitrage = hauteurClairDeVitrage + 2 * penetrationVitrageHautBas
+nbVitrage = nbPartitions
 
 // ClairDeVitrage
 largeurClairDeVitrage = (hauteurTraverseCorniere - 2 * largeurMontantCorniere - nbPairesTrousIntermediairesHorizontaux * largeurMontantPartition) / nbPartitions

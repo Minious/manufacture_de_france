@@ -35,6 +35,6 @@ public class MainDebug {
 		myArgs.put("largeurVerriere", largeurVerriere);
 		myArgs.put("nbPartitions", nbPartitions);
 		
-		Renderer.render("Premium", Paths.get("").toAbsolutePath(), myArgs);
+		Renderer.render("Mécanique", Paths.get("").toAbsolutePath(), myArgs);
 	}
 }
