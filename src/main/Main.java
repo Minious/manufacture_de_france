@@ -38,6 +38,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -83,7 +84,8 @@ public class Main {
 		String jsonFileName = "modeles.json";
 		String encodage = "UTF-8";
 
-		String json = IOUtils.toString(TextFileConf.class.getClassLoader().getResourceAsStream(jsonFileName), encodage);
+		InputStream stream = TextFileConf.class.getClassLoader().getResourceAsStream("resources/"+jsonFileName);
+		String json = IOUtils.toString(stream, encodage);
 
 		JSONObject modeles = new JSONObject(json).getJSONObject("modeles");
 		return modeles;
@@ -93,7 +95,7 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Manufacture de France - Générateur de verrière");
 		frame.getContentPane().setBackground(Color.WHITE);
 		
 		try {
