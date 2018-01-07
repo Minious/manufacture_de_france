@@ -27,7 +27,7 @@ public class MyCustomSvg extends SvgComponent{
 	private Padding padding;
 	private boolean hasBorders;
 	private StyleContext borderSc;
-	private StyleContext svgTagSc;
+	public StyleContext svgTagSc;
 	
 	public MyCustomSvg() {
 		super(new StyleContext());
@@ -38,7 +38,7 @@ public class MyCustomSvg extends SvgComponent{
 		this.svgTree = new ArrayList<SvgComponent>();
 		this.hasBorders = false;
 		this.borderSc = null;
-		this.svgTagSc = this.sc;
+		this.svgTagSc = this.sc.clone();
 	}
 	
 	public MyCustomSvg(MyCustomSvg g) {
@@ -51,8 +51,8 @@ public class MyCustomSvg extends SvgComponent{
 		for(SvgComponent c : g.svgTree)
 			this.svgTree.add(c.clone());
 		this.hasBorders = g.hasBorders;
-		this.borderSc = g.borderSc;
-		this.svgTagSc = g.svgTagSc;
+		this.borderSc = g.borderSc != null ? g.borderSc.clone() : null;
+		this.svgTagSc = g.svgTagSc.clone();
 	}	
 	
 	public void setPadding(Padding padding) {
@@ -244,8 +244,9 @@ public class MyCustomSvg extends SvgComponent{
 		
 		String output = "";
 		//output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" ";
-		output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" ";
-		output += "transform=\"" + this.svgTagSc.getTransformMatrix() + "\" ";
+		output += "<g style=\"overflow:visible;\" ";
+		//output += "transform=\"translate("+curX+" "+curY+") "+ this.svgTagSc.getTransformMatrix() + "\" ";
+		output += "transform=\""+ this.svgTagSc.getTransformMatrix() + " translate("+curX+" "+curY+") \" ";
 		output +=  ">\n";
 		///// DEBUG /////
 		if(this.hasBorders) {
@@ -257,14 +258,18 @@ public class MyCustomSvg extends SvgComponent{
 			output += "style=\"" + this.borderSc.getShapeStyle() + "\" ";
 			output += "/>";
 		}
-		output += "<svg x=\"" + this.padding.getLeftPadding() + "\" y=\"" + this.padding.getTopPadding() + "\" style=\"overflow:visible;\" >\n";
+		output += "<g transform=\"translate(" + this.padding.getLeftPadding() + " " + this.padding.getTopPadding() + ")\" >\n";
 		for(SvgComponent svgComponent : this.svgTree) {
 			output += svgComponent.renderTag() + "\n";
 		}
-		output += "</svg>\n";
-		output += "</svg>\n";
+		output += "</g>\n";
+		output += "</g>\n";
 		
 		return output;
+	}
+	
+	public Rectangle2D getBounds() {
+		return this.bounds;
 	}
 	
 	public void writeToSVG(Path outputFilePath) {

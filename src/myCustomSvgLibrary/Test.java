@@ -14,9 +14,9 @@ public class Test {
 		//test1();
 		//test2();
 		//test3();
-		//test4();
+		test4();
 		//test5();
-		test6();
+		//test6();
 	}
 	
 	private static void test1() {
@@ -67,21 +67,26 @@ public class Test {
 		MyCustomSvgEnhanced g = new MyCustomSvgEnhanced();
 		g.drawRect(0, 0, 180, 80);
 		g.setPadding(new Padding(50));
-		g.setBorders(true);
+		//g.setBorders(true);
 		
 		MyCustomSvgEnhanced gbis = new MyCustomSvgEnhanced();
 		gbis.drawRect(0, 0, 160, 60);
-		gbis.setPadding(new Padding(20));
-		gbis.setBorders(true);
+		//gbis.setPadding(new Padding(20));
+		//gbis.setBorders(true);
 		
 		MyCustomSvgEnhanced gter = new MyCustomSvgEnhanced();
 		gter.drawRect(0, 0, 140, 40);
-		gter.setPadding(new Padding(10));
-		gter.setBorders(true);
+		//gter.setPadding(new Padding(10));
+		//gter.setBorders(true);
 		
 		gbis.drawSvg(gter, 10, 10);
 		
+		System.out.println(g.svgTagSc.getTransformMatrix());
+		g.rotate(Math.PI / 2);
+		System.out.println(g.svgTagSc.getTransformMatrix());
 		g.drawSvg(gbis, 10, 10);
+		System.out.println(g.svgTagSc.getTransformMatrix());
+		//g.resetTransform();
 		
 		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}

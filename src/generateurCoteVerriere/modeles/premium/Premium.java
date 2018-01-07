@@ -48,7 +48,9 @@ public class Premium extends ModeleGenerique {
 		montantCorniereSvg.rotate(Math.PI / 2);
 		montantIntermediaireSvg.rotate(Math.PI / 2);
 		traverseCorniereSvg.rotate(Math.PI / 2);
+		System.out.println(montantCorniere.getDessinNew().getBounds());
 		montantCorniereSvg.drawSvg(montantCorniere.getDessinNew(), 0, 0);
+		System.out.println(montantCorniereSvg.getBounds());
 		montantIntermediaireSvg.drawSvg(montantIntermediaire.getDessinNew(), 0, 0);
 		traverseCorniereSvg.drawSvg(traverseCorniere.getDessinNew(), 0, 0);
 		
@@ -110,6 +112,9 @@ public class Premium extends ModeleGenerique {
 		finalSvg.setPadding(new Padding(10));
 		this.svgToRender.put("complete", finalSvg);
 		finalSvg.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+		
+		//montantCorniereSvg.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+		//montantCorniere.getDessinNew().writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}
 
 	@Override
