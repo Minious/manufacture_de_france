@@ -35,7 +35,7 @@ public class Premium extends ModeleGenerique {
 
 		try {
 			this.conf = TextFileConf.loadConf(fileName, initialMap);
-		} catch (IOException | UnprocessableConfFileException e) {
+		} catch (UnprocessableConfFileException e) {
 			e.printStackTrace();
 		}
 

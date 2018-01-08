@@ -1,48 +1,29 @@
 package conf;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.io.IOUtils;
-
-import main.MainDebug;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import net.objecthunter.exp4j.function.Function;
 import net.objecthunter.exp4j.operator.Operator;
 
+import java.io.InputStream;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TextFileConf {
 
-	final static Charset ENCODING = Charset.forName("UTF-8");
-
-	public static HashMap<String, Double> loadConf(String fileName) throws UnprocessableConfFileException, IOException {
-		return loadConf(fileName, new HashMap<String, Double>());
+	public static HashMap<String, Double> loadConf(String fileName) throws UnprocessableConfFileException {
+		return loadConf(fileName, new HashMap<>());
 	}
 
-	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap) throws UnprocessableConfFileException, IOException {
-		return loadConf(fileName, initialMap, new ArrayList<Function>());
+	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap) throws UnprocessableConfFileException {
+		return loadConf(fileName, initialMap, new ArrayList<>());
 	}
 
-	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap, ArrayList<Function> customFunctions) throws UnprocessableConfFileException, IOException {
-		//File file = new File(TextFileConf.class.getClassLoader().getResource("/resources/" + fileName).getFile());
+	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap, ArrayList<Function> customFunctions) throws UnprocessableConfFileException {
 		InputStream stream = TextFileConf.class.getResourceAsStream("/" + fileName);
 				
-		ArrayList<String> exps = new ArrayList<String>();
+		ArrayList<String> exps = new ArrayList<>();
 		Pattern pExp = Pattern.compile(".*(?<![=!])=(?!=).*"); // compliqué du cul
 
 		Scanner scanner = new Scanner(stream);
@@ -62,15 +43,14 @@ public class TextFileConf {
 		}
 		scanner.close();
 
-		HashMap<String, Double> map = new HashMap<String, Double>();
-		map.putAll(initialMap);
+		HashMap<String, Double> map = new HashMap<>(initialMap);
 
 		String[] builtinFunctions = { "abs", "acos", "asin", "atan", "cbrt", "ceil", "cos", "cosh", "exp", "floor", "log", "log10", "log2", "sin", "sinh", "sqrt", "tan", "tanh", "signum" };
 
 		while (!exps.isEmpty()) {
 			int i = 0;
 			boolean almostOneExpProcessed = false;
-			ArrayList<String> unprocessedExp = new ArrayList<String>();
+			ArrayList<String> unprocessedExp = new ArrayList<>();
 			while (i < exps.size()) {
 				String curExp = exps.get(i);
 				String curAff = curExp.split("=", 2)[0];
@@ -85,14 +65,13 @@ public class TextFileConf {
 				
 				ArrayList<Function> includedFunctions = getIncludedFunctions();
 				
-				ArrayList<String> functionsNames = new ArrayList<String>();
-				functionsNames.addAll(Arrays.asList(builtinFunctions));
+				ArrayList<String> functionsNames = new ArrayList<>(Arrays.asList(builtinFunctions));
 				for(Function curFunc : includedFunctions)
 					functionsNames.add(curFunc.getName());
 				for(Function curFunc : customFunctions)
 					functionsNames.add(curFunc.getName());
 
-				ArrayList<String> vars = new ArrayList<String>();
+				ArrayList<String> vars = new ArrayList<>();
 				Pattern p = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_]*$");
 				for (String token : curOpArr) {
 					Matcher m = p.matcher(token);
@@ -101,7 +80,7 @@ public class TextFileConf {
 						vars.add(token);
 				}
 				
-				eb.variables(new HashSet<String>(vars));
+				eb.variables(new HashSet<>(vars));
 				eb.functions(includedFunctions);
 				eb.functions(customFunctions);
 				eb.operator(getIncludedOperators());
@@ -144,12 +123,11 @@ public class TextFileConf {
 	}
 	
 	private static ArrayList<Function> getIncludedFunctions() {
-		ArrayList<Function> functions = new ArrayList<Function>();
+		ArrayList<Function> functions = new ArrayList<>();
 		
 		functions.add(new Function("if", 3) {
 			@Override
 			public double apply(double... args) {
-				// TODO
 				Double condition = args[0];
 				Double instructionsIf = args[1];
 				Double instructionsElse = args[2];
@@ -163,7 +141,6 @@ public class TextFileConf {
 		functions.add(new Function("min", 2) {
 			@Override
 			public double apply(double... args) {
-				// TODO
 				Double a = args[0];
 				Double b = args[1];
 				if (a < b)
@@ -176,7 +153,6 @@ public class TextFileConf {
 		functions.add(new Function("max", 2) {
 			@Override
 			public double apply(double... args) {
-				// TODO
 				Double a = args[0];
 				Double b = args[1];
 				if (a > b)
@@ -190,7 +166,7 @@ public class TextFileConf {
 	}
 
 	private static ArrayList<Operator> getIncludedOperators() {
-		ArrayList<Operator> operators = new ArrayList<Operator>();
+		ArrayList<Operator> operators = new ArrayList<>();
 
 		operators.add(new Operator(">=", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 			@Override

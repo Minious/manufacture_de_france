@@ -40,7 +40,7 @@ public class ConfTests {
 			assertEquals(conf.get("c"), Double.valueOf(-50.5d));
 			assertEquals(conf.get("d"), Double.valueOf(0d));
 			assertEquals(conf.get("e"), Double.valueOf(40d));
-		} catch (IOException | UnprocessableConfFileException e) {
+		} catch (UnprocessableConfFileException e) {
 			e.printStackTrace();
 		}
 	}

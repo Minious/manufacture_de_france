@@ -56,7 +56,7 @@ public class Mecanique extends ModeleGenerique {
 
 		try {
 			this.conf = TextFileConf.loadConf(fileName, initialMap, functions);
-		} catch (IOException | UnprocessableConfFileException e) {
+		} catch (UnprocessableConfFileException e) {
 			e.printStackTrace();
 		}
 
