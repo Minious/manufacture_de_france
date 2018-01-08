@@ -1,54 +1,22 @@
 package main;
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
-
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.ComponentOrientation;
-
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
-
+import generateurCoteVerriere.Renderer;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import conf.TextFileConf;
-import generateurCoteVerriere.Renderer;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import utils.SpringUtilities;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
 
@@ -84,11 +52,7 @@ public class Main {
 		String jsonFileName = "modeles.json";
 		String encodage = "UTF-8";
 
-		InputStream stream = Main.class.getClassLoader().getResourceAsStream("resources/"+jsonFileName);
-		Scanner s = new Scanner(stream);
-		while(s.hasNext())
-			System.out.println(s.nextLine());
-		System.out.println("ZBOUB");
+		InputStream stream = Main.class.getResourceAsStream("/" + jsonFileName);
 		String json = IOUtils.toString(stream, encodage);
 		System.out.println(json);
 
@@ -100,7 +64,7 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Manufacture de France - G�n�rateur de verri�re");
+		frame = new JFrame("Manufacture de France - Générateur de verrière");
 		frame.getContentPane().setBackground(Color.WHITE);
 		
 		try {

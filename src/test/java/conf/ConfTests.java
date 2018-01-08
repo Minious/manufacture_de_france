@@ -1,15 +1,13 @@
 package conf;
 
-import static org.junit.Assert.*;
+import net.objecthunter.exp4j.function.Function;
+import org.junit.Test;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.junit.Test;
-
-import net.objecthunter.exp4j.function.Function;
+import static org.junit.Assert.assertEquals;
 
 public class ConfTests {
 

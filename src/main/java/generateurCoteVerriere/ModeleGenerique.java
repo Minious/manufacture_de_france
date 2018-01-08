@@ -1,20 +1,17 @@
 package generateurCoteVerriere;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import myCustomSvgLibrary.MyCustomSvg;
 import org.apache.batik.apps.rasterizer.DestinationType;
 import org.apache.batik.apps.rasterizer.SVGConverter;
 import org.apache.batik.apps.rasterizer.SVGConverterException;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.util.PDFMergerUtility;
 
-import myCustomSvgLibrary.MyCustomSvg;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class ModeleGenerique {
 	protected HashMap<String, Double> conf;
@@ -99,7 +96,7 @@ public abstract class ModeleGenerique {
 		} catch (COSVisitorException e) {} 
 		catch (IOException e) {}
 		
-		System.out.println("\nTerminé !");
+		System.out.println("\nTerminï¿½ !");
 	}
 
 	protected abstract String[] getElementsClasses();
