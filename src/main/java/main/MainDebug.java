@@ -27,7 +27,7 @@ public class MainDebug {
 		*/
 		
 		hauteurVerriere = 490d;
-		largeurVerriere = 1150d;
+		largeurVerriere = 1147d;
 		nbPartitions = 3;
 		
 		HashMap<String, Object> myArgs = new HashMap<String, Object>();

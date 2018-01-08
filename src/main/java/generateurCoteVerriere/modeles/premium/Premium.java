@@ -2,6 +2,7 @@ package generateurCoteVerriere.modeles.premium;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -18,6 +19,7 @@ import myCustomSvgLibrary.MyCustomSvg;
 import myCustomSvgLibrary.MyHandyLayout;
 import myCustomSvgLibrary.Padding;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
+import myCustomSvgLibraryEnhanced.Point;
 
 public class Premium extends ModeleGenerique {	
 	public Premium(HashMap<String,Object> data) {
@@ -78,23 +80,24 @@ public class Premium extends ModeleGenerique {
 		
 		MyCustomSvg dessins = layoutDessins.getSvg();
 
+		DecimalFormat myFormatter = new DecimalFormat("#.##");
 		LignesTexte parcloses = new LignesTexte();
 		parcloses.addLignes(Arrays.asList(new String[] {
 			"PARCLOSES : " + conf.get("hauteurParcloseCorniere").intValue(),
-			"- " + conf.get("longueurParcloseTraverseLaterale") + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
-			"- " + conf.get("longueurParcloseMontant") + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
+			"- " + myFormatter.format(conf.get("longueurParcloseTraverseLaterale")) + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
+			"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
 		}));
 		if(conf.get("nbParcloseTraverseCentrale") > 0)
-			parcloses.addLigne("- " + conf.get("longueurParcloseTraverseCentrale") + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
+			parcloses.addLigne("- " + myFormatter.format(conf.get("longueurParcloseTraverseCentrale")) + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
 		if(conf.get("nbParcloseMontantIntermediaire") > 0)
 			parcloses.addLignes(Arrays.asList(new String[] {
 				"PARCLOSES : " + conf.get("hauteurParcloseT").intValue(),
-				"- " + conf.get("longueurParcloseMontant") + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue(),
+				"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue(),
 			}));
 
 		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(new String[] {
 			"VITRAGE :",
-			conf.get("largeurVitrage") + " x " + conf.get("hauteurVitrage") + " QTE " + conf.get("nbVitrage").intValue()
+				myFormatter.format(conf.get("largeurVitrage")) + " x " + myFormatter.format(conf.get("hauteurVitrage")) + " QTE " + conf.get("nbVitrage").intValue()
 		}));
 		
 		MyHandyLayout layoutCartoucheGauche = new MyHandyLayout();
