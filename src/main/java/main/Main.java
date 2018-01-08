@@ -54,7 +54,6 @@ public class Main {
 
 		InputStream stream = Main.class.getResourceAsStream("/" + jsonFileName);
 		String json = IOUtils.toString(stream, encodage);
-		System.out.println(json);
 
 		JSONObject modeles = new JSONObject(json).getJSONObject("modeles");
 		return modeles;

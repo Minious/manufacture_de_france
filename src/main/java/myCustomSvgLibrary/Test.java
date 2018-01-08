@@ -81,13 +81,9 @@ public class Test {
 		//gter.setBorders(true);
 		
 		gbis.drawSvg(gter, 10, 10);
-		
-		System.out.println(g.svgTagSc.getTransformMatrix());
+
 		g.rotate(Math.PI / 2);
-		System.out.println(g.svgTagSc.getTransformMatrix());
 		g.drawSvg(gbis, 10, 10);
-		System.out.println(g.svgTagSc.getTransformMatrix());
-		//g.resetTransform();
 		
 		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}

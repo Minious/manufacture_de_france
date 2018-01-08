@@ -26,8 +26,8 @@ public class MainDebug {
 		sc.close();
 		*/
 		
-		hauteurVerriere = 490d;
-		largeurVerriere = 1147d;
+		hauteurVerriere = 600d;
+		largeurVerriere = 1150d;
 		nbPartitions = 3;
 		
 		HashMap<String, Object> myArgs = new HashMap<String, Object>();

@@ -238,8 +238,6 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public String renderTag() {
-		//System.out.println("dynamic dimensions : "+this.bounds.getWidth()+"x"+this.bounds.getHeight());
-		
 		double curX, curY;
 		curX = - this.bounds.getX() + this.x;
 		curY = - this.bounds.getY() + this.y;
@@ -249,9 +247,7 @@ public class MyCustomSvg extends SvgComponent{
 		curH = this.bounds.getHeight() + this.padding.getVerticalPadding();
 		
 		String output = "";
-		//output += "<svg x=\"" + curX + "\" y=\"" + curY + "\" width=\"" + curW + "\" height=\"" + curH + "\" style=\"overflow:visible;\" ";
 		output += "<g style=\"overflow:visible;\" ";
-		//output += "transform=\"translate("+curX+" "+curY+") "+ this.svgTagSc.getTransformMatrix() + "\" ";
 		output += "transform=\""+ this.svgTagSc.getTransformMatrix() + " translate("+curX+" "+curY+") \" ";
 		output +=  ">\n";
 		///// DEBUG /////

@@ -23,15 +23,12 @@ public class EllipticalArcSVG extends SvgComponent {
 		double xEnd = this.x + Math.cos(end) * height / 2;
 		double yEnd = this.y - Math.sin(end) * height / 2;
 		
-		System.out.println(yStart);
-		
 		DecimalFormat df = new DecimalFormat("#.#");
         df.setMaximumFractionDigits(8);
 
         double simplifiedStart = Utils.positiveModulo(this.start, 2 * Math.PI);
         double simplifiedEnd = Utils.positiveModulo(this.end, 2 * Math.PI);
 		int largeArcFlag = (simplifiedEnd - simplifiedStart + (Math.PI * 2)) % (Math.PI * 2) > Math.PI ? 1 : 0;
-		System.out.println(simplifiedStart+" "+simplifiedEnd+" "+largeArcFlag);
 		int sweepFlag = 0;
 		
 		String outputStr = "";

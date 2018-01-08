@@ -33,38 +33,7 @@ public abstract class ModeleGenerique {
 
 		ArrayList<String> svgPaths = new ArrayList<String>();
 		ArrayList<String> pdfPaths = new ArrayList<String>();
-		
-		// Independant elements
-		/*
-		String[] classesStr = this.getElementsClasses();
-		
-		ArrayList<Class> classes = new ArrayList<Class>();
-		for(String classStr : classesStr)
-			try {
-				classes.add(Class.forName(getPackage() + "." + classStr));
-			} catch (ClassNotFoundException e1) {}
-		ArrayList<ElementGenerique> elems = new ArrayList<ElementGenerique>();
-		for(Class curClass : classes)
-			try {
-				Constructor constructor = curClass.getDeclaredConstructor(HashMap.class, HashMap.class);
-				ElementGenerique curElem = (ElementGenerique) constructor.newInstance(this.conf, this.data);
-				if(curElem.getNbElements() > 0)
-					elems.add(curElem);
-			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		
-		try {
-			for(int i=0;i<elems.size();i++) {
-				elems.get(i).renderImage(savePath.resolve("svg"));
-				Path completeSvgSavePath = savePath.resolve("svg").resolve(elems.get(i).getNomFichierDeRendu()+".svg");
-				Path completePdfSavePath = savePath.resolve("pdf").resolve(elems.get(i).getNomFichierDeRendu()+".pdf");
-				svgPaths.add(completeSvgSavePath.toString());
-				pdfPaths.add(completePdfSavePath.toString());
-			}
-		} catch (IOException e) {}
-		*/
-		
+
 		// HashMap svgToRender
 		for(String fileName : this.svgToRender.keySet()) {
 			MyCustomSvg curSvg = this.svgToRender.get(fileName);
