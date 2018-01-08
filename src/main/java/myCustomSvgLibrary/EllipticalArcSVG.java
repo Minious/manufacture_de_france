@@ -7,7 +7,7 @@ import generateurCoteVerriere.Utils;
 public class EllipticalArcSVG extends SvgComponent {
 	private double x, y, width, height, start, end;
 	
-	public EllipticalArcSVG(double x, double y, double width, double height, double start, double end, StyleContext sc) {
+	EllipticalArcSVG(double x, double y, double width, double height, double start, double end, StyleContext sc) {
 		super(sc);
 		this.x = x;
 		this.y = y;

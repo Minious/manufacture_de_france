@@ -16,7 +16,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Main {
 
@@ -29,14 +28,12 @@ public class Main {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				Main window = new Main();
+				window.frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -44,7 +41,7 @@ public class Main {
 	/**
 	 * Create the application.
 	 */
-	public Main() {
+	private Main() {
 		initialize();
 	}
 
@@ -55,8 +52,7 @@ public class Main {
 		InputStream stream = Main.class.getResourceAsStream("/" + jsonFileName);
 		String json = IOUtils.toString(stream, encodage);
 
-		JSONObject modeles = new JSONObject(json).getJSONObject("modeles");
-		return modeles;
+		return new JSONObject(json).getJSONObject("modeles");
 	}
 
 	/**
@@ -70,14 +66,14 @@ public class Main {
 			JSONObject modelesJSON = getJSONModeles();
 			final String[] modeles = JSONObject.getNames(modelesJSON);
 			
-			this.fields = new HashMap<String, HashMap<String, MyField>>();
+			this.fields = new HashMap<>();
 
 			// MIDDLE
 			JPanel cards = new JPanel(new CardLayout());
 			
 			for (String modele : modeles) {
 				JPanel curCard = new JPanel(new SpringLayout());
-				HashMap<String, MyField> curFields = new HashMap<String, MyField>();
+				HashMap<String, MyField> curFields = new HashMap<>();
 
 				JSONArray curModeleJSON = modelesJSON.getJSONArray(modele);
 				int fieldNumber = curModeleJSON.length();
@@ -127,14 +123,11 @@ public class Main {
 			
 			// TOP
 			JPanel comboBoxPane = new JPanel();
-			JComboBox<String> cb = new JComboBox<String>(modeles);
+			JComboBox<String> cb = new JComboBox<>(modeles);
 			cb.setEditable(false);
-			cb.addItemListener(new ItemListener() {
-				@Override
-				public void itemStateChanged(ItemEvent evt) {
-					CardLayout cl = (CardLayout) (cards.getLayout());
-					cl.show(cards, (String) evt.getItem());
-				}
+			cb.addItemListener((ItemEvent evt) -> {
+				CardLayout cl = (CardLayout) (cards.getLayout());
+				cl.show(cards, (String) evt.getItem());
 			});
 			comboBoxPane.add(cb);
 			
@@ -167,7 +160,7 @@ public class Main {
 					String curModele = (String) cb.getSelectedItem();
 					
 					HashMap<String, MyField> selectedModelFields = fields.get(curModele);
-					HashMap<String, Object> renderValues = new HashMap<String, Object>();
+					HashMap<String, Object> renderValues = new HashMap<>();
 					
 					for(String key : selectedModelFields.keySet()) {
 						String type = selectedModelFields.get(key).getType();
@@ -208,9 +201,8 @@ public class Main {
 			frame.setResizable(false);
 			frame.setLocation(300, 200);
 			frame.pack();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		} catch (IOException | JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -219,7 +211,7 @@ public class Main {
 		private String type;
 		private JTextField field;
 		
-		public MyField(String type, JTextField field) {
+		MyField(String type, JTextField field) {
 			this.type = type;
 			this.field = field;
 		}

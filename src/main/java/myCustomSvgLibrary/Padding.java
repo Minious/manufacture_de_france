@@ -27,7 +27,7 @@ public class Padding {
 	}
 	
 	public double getTopPadding() {
-		return this.leftPadding;
+		return this.topPadding;
 	}
 	
 	public double getBottomPadding() {

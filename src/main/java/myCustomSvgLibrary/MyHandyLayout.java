@@ -12,8 +12,8 @@ public class MyHandyLayout {
 	private ArrayList<ShiftMode> shiftModes;
 	
 	public MyHandyLayout() {
-		this.gs = new ArrayList<MyCustomSvg[]>();
-		this.shiftModes = new ArrayList<ShiftMode>();
+		this.gs = new ArrayList<>();
+		this.shiftModes = new ArrayList<>();
 	}
 	
 	public void addRow(MyCustomSvg g, ShiftMode shiftMode) {
@@ -26,8 +26,8 @@ public class MyHandyLayout {
 	}
 	
 	public MyCustomSvg getSvg() {
-		ArrayList<Double> widths = new ArrayList<Double>();
-		ArrayList<Double> heights = new ArrayList<Double>();
+		ArrayList<Double> widths = new ArrayList<>();
+		ArrayList<Double> heights = new ArrayList<>();
 
 		double maxWidth = 0;
 		for(MyCustomSvg[] gs : this.gs) {

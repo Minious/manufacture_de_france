@@ -4,7 +4,7 @@ public class StrSVG extends SvgComponent {
 	private String str;
 	private double x, y;
 	
-	public StrSVG(String str, double x, double y, StyleContext sc) {
+	StrSVG(String str, double x, double y, StyleContext sc) {
 		super(sc);
 		this.str = str;
 		this.x = x;

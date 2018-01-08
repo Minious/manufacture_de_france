@@ -3,7 +3,7 @@ package myCustomSvgLibrary;
 public abstract class SvgComponent {
 	protected StyleContext sc;
 	
-	protected SvgComponent(StyleContext sc) {
+	SvgComponent(StyleContext sc) {
 		this.sc = sc.clone();
 	}
 

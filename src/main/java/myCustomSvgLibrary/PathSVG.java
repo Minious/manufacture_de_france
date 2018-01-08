@@ -7,7 +7,7 @@ import utils.MyPath2D;
 public class PathSVG extends SvgComponent {
 	private MyPath2D path;
 	
-	public PathSVG(MyPath2D path2, StyleContext sc) {
+	PathSVG(MyPath2D path2, StyleContext sc) {
 		super(sc);
 		this.path = path2;
 	}

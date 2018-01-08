@@ -3,7 +3,7 @@ package myCustomSvgLibrary;
 public class EllipseSVG extends SvgComponent {
 	private double x, y, width, height;
 	
-	public EllipseSVG(double x, double y, double width, double height, StyleContext sc) {
+	EllipseSVG(double x, double y, double width, double height, StyleContext sc) {
 		super(sc);
 		this.x = x;
 		this.y = y;

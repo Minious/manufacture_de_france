@@ -3,7 +3,7 @@ package myCustomSvgLibrary;
 public class LineSVG extends SvgComponent {
 	private double x1, y1, x2, y2;
 	
-	public LineSVG(double x1, double y1, double x2, double y2, StyleContext sc) {
+	LineSVG(double x1, double y1, double x2, double y2, StyleContext sc) {
 		super(sc);
 		this.x1 = x1;
 		this.y1 = y1;

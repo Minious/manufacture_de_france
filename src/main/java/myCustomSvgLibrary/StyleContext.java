@@ -13,11 +13,11 @@ public class StyleContext {
 	private Font curFont;
 	private BasicStroke curStroke;
 
-	public StyleContext() {
+	StyleContext() {
 		this(new AffineTransform(), Color.BLACK, null, Color.BLACK, new Font("Century Gothic", Font.PLAIN, 12), new BasicStroke(1));
 	}
 
-	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, BasicStroke s) {
+	StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, BasicStroke s) {
 		this.curTransform = t;
 		this.curStrokeColor = strokeC;
 		this.curFillColor = fillC;

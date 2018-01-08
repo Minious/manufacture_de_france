@@ -11,8 +11,8 @@ import myCustomSvgLibrary.MyCustomSvg;
 import utils.MyPath2D;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
-	public double underLineGap = 0;
-	public double distanceCoteGap = 4;
+	private double underLineGap = 0;
+	private double distanceCoteGap = 4;
 	
 	public void setUnderLineGap(double underLineGap) {
 		this.underLineGap = underLineGap;
@@ -194,7 +194,6 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			
 			double actualLowerBound = lowerBound < - distance / 2 ? lowerBound : - distance / 2;
 			double actualUpperBound = upperBound > distance / 2 ? upperBound : distance / 2;
-			double actualDistance = actualUpperBound - actualLowerBound;
 			
 			this.drawLine(0, actualLowerBound, 0, actualUpperBound);
 			
@@ -311,11 +310,11 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		LEFT,
 		RIGHT,
 		TOP,
-		BOTTOM;
+		BOTTOM
 	}
 	
 	public enum StyleTrait {
 		MIXTE,
-		INTERROMPU;
+		INTERROMPU
 	}
 }

@@ -3,7 +3,7 @@ package myCustomSvgLibrary;
 public class RectSVG extends SvgComponent {
 	private double x, y, width, height;
 	
-	public RectSVG(double x, double y, double width, double height, StyleContext sc) {
+	RectSVG(double x, double y, double width, double height, StyleContext sc) {
 		super(sc);
 		this.x = x;
 		this.y = y;
