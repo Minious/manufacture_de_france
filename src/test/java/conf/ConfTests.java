@@ -3,7 +3,6 @@ package conf;
 import net.objecthunter.exp4j.function.Function;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,14 +14,13 @@ public class ConfTests {
 	public void test() {
 		String fileName = "confTest.txt";
 		
-		HashMap<String, Double> initialMap = new HashMap<String, Double>();
+		HashMap<String, Double> initialMap = new HashMap<>();
 		initialMap.put("e", 40d);
 		
-		ArrayList<Function> functions = new ArrayList<Function>();
+		ArrayList<Function> functions = new ArrayList<>();
 		functions.add(new Function("funcTest", 2) {
 		    @Override
 		    public double apply(double... args) {
-		    	// TODO
 		    	Double a = args[0];
 		    	Double b = args[1];
 				if(a + b < 60)
