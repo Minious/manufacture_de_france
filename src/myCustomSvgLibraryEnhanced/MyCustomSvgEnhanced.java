@@ -85,6 +85,55 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.setTransform(orig);
 	}
 	
+	public void drawPercage(String valeurPercage, Point p){
+		if(valeurPercage.charAt(0) == 'Ø') {
+			String actualValeurPercage = valeurPercage.substring(1);
+			double diametrePercage;
+			if(actualValeurPercage.charAt(0) == 'M') {
+				int percageNumericValue =  Integer.parseInt(actualValeurPercage.substring(1));
+				double diametrePercageTaraudage = getDiametrePercageTaraudage(percageNumericValue);
+				double pas = getPasPercageTaraudage(percageNumericValue);
+				diametrePercage = diametrePercageTaraudage + pas;
+				this.drawEllipticalArc(p.x, p.y, diametrePercage - pas, diametrePercage - pas, Math.PI * 3 / 2, Math.PI);
+			} else
+				diametrePercage = Double.parseDouble(actualValeurPercage);
+			this.drawCircle(p, diametrePercage);
+		}
+	}
+	
+	public void drawPercage(String valeurPercage, Point p, double angle, int shift, ShiftMode shiftMode, double customUnderLineGap){
+		this.drawPercage(valeurPercage, p);
+		this.drawDiameterCote(valeurPercage, p, angle, shift, shiftMode, customUnderLineGap);
+	}
+	
+	private double getDiametrePercageTaraudage(int valeur) {
+		switch(valeur) {
+			case 2: return 1.60;
+			case 3: return 2.50;
+			case 4: return 3.30;
+			case 5: return 4.20;
+			case 6: return 5.00;
+			case 8: return 6.80;
+			case 10: return 8.50;
+			case 12: return 10.20;
+		}
+		return Double.NaN;
+	}
+	
+	private double getPasPercageTaraudage(int valeur) {
+		switch(valeur) {
+			case 2: return 0.40;
+			case 3: return 0.50;
+			case 4: return 0.70;
+			case 5: return 0.80;
+			case 6: return 1.00;
+			case 8: return 1.25;
+			case 10: return 1.50;
+			case 12: return 1.75;
+		}
+		return Double.NaN;
+	}
+		
 	public void drawString(String displayedStr, Point p){
 		this.drawString(displayedStr, p, 0, ShiftMode.LEFT);
 	}

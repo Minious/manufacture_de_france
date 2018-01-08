@@ -165,6 +165,12 @@ public class MyCustomSvg extends SvgComponent{
 		this.enlargeBounds(new Ellipse2D.Double(x, y, width, height));
 	}
 	
+	public void drawEllipticalArc(double x, double y, double width, double height, double start, double end) {
+		EllipticalArcSVG elArc = new EllipticalArcSVG(x, y, width, height, start, end, this.sc);
+		svgTree.add(elArc);
+		this.enlargeBounds(new Ellipse2D.Double(x - width / 2, y - height / 2, width, height));
+	}
+	
 	public void drawLine(double x1, double y1, double x2, double y2) {
 		LineSVG line = new LineSVG(x1, y1, x2, y2, this.sc);
 		svgTree.add(line);

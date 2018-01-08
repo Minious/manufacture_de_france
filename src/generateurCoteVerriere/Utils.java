@@ -22,4 +22,8 @@ public class Utils{
 		}
 		return angle;
 	}
+	
+	public static double positiveModulo(double value, double modulo) {
+		return ((value % modulo) + modulo) % modulo;
+	}
 }

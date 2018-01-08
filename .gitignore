@@ -58,3 +58,5 @@ pom.xml.tag
 
 *.svg
 *.pdf
+
+.idea/

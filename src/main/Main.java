@@ -85,7 +85,12 @@ public class Main {
 		String encodage = "UTF-8";
 
 		InputStream stream = Main.class.getClassLoader().getResourceAsStream("resources/"+jsonFileName);
+		Scanner s = new Scanner(stream);
+		while(s.hasNext())
+			System.out.println(s.nextLine());
+		System.out.println("ZBOUB");
 		String json = IOUtils.toString(stream, encodage);
+		System.out.println(json);
 
 		JSONObject modeles = new JSONObject(json).getJSONObject("modeles");
 		return modeles;
@@ -95,7 +100,7 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Manufacture de France - Générateur de verrière");
+		frame = new JFrame("Manufacture de France - Gï¿½nï¿½rateur de verriï¿½re");
 		frame.getContentPane().setBackground(Color.WHITE);
 		
 		try {
@@ -182,7 +187,7 @@ public class Main {
 				@Override public void mouseClicked(MouseEvent arg0) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setCurrentDirectory(new java.io.File("."));
-					chooser.setDialogTitle("Dossier de réception des images");
+					chooser.setDialogTitle("Dossier de rï¿½ception des images");
 					chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 					chooser.setAcceptAllFileFilterUsed(false);
 			
@@ -193,7 +198,7 @@ public class Main {
 				}
 			});
 			
-			JButton btnGenerer = new JButton("Générer");
+			JButton btnGenerer = new JButton("Gï¿½nï¿½rer");
 			btnGenerer.addMouseListener(new MouseAdapter() {
 				@Override public void mouseClicked(MouseEvent arg0) {
 					String curModele = (String) cb.getSelectedItem();
@@ -221,7 +226,7 @@ public class Main {
 					
 					Renderer.render(curModele, savePath, renderValues);
 					
-					JOptionPane.showMessageDialog(frame, "Opération terminée avec succès !");
+					JOptionPane.showMessageDialog(frame, "Opï¿½ration terminï¿½e avec succï¿½s !");
 				}
 			});
 			btnGenerer.setMnemonic(KeyEvent.VK_G);

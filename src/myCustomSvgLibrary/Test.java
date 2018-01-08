@@ -14,9 +14,10 @@ public class Test {
 		//test1();
 		//test2();
 		//test3();
-		test4();
+		//test4();
 		//test5();
 		//test6();
+		test7();
 	}
 	
 	private static void test1() {
@@ -96,7 +97,7 @@ public class Test {
 		profil.setEpaulement(20, 10, Side.RIGHT);
 		profil.setChamp(5, Side.LEFT);
 		//profil.setCorniere(Side.RIGHT);
-		profil.setLargeurPercage(4);
+		profil.setValeurPercage("Ø5");
 		profil.addPercage(25);
 		profil.addPercage(120);
 		profil.addPercage(200);
@@ -122,5 +123,16 @@ public class Test {
 		g2.drawSvg(g1, 100, 100);
 		g2.resetTransform();
 		g2.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
+	}
+	
+	private static void test7() {
+		MyCustomSvg g = new MyCustomSvg();
+		g.drawEllipticalArc(0, 0, 200, 200, Math.PI * 5/3, Math.PI * 3 / 2);
+		g.drawEllipticalArc(0, 0, 180, 180, Math.PI, Math.PI * 3 / 2);
+		g.drawEllipticalArc(0, 0, 160, 160, Math.PI * 5/3, Math.PI / 2);
+		g.drawEllipticalArc(0, 0, 140, 140, Math.PI * 5/3, Math.PI);
+		g.drawEllipticalArc(0, 0, 120, 120, 0, Math.PI);
+		g.drawEllipticalArc(0, 0, 100, 100, Math.PI / 4, Math.PI * 3 / 2);
+		g.writeToSVG(Paths.get("").toAbsolutePath().resolve("test.svg"));
 	}
 }
