@@ -1,6 +1,5 @@
 package generateurCoteVerriere.modeles.mecanique;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,17 +30,16 @@ public class Mecanique extends ModeleGenerique {
 
 		String fileName = "conf_mecanique.txt";
 
-		HashMap<String, Double> initialMap = new HashMap<String, Double>();
+		HashMap<String, Double> initialMap = new HashMap<>();
 
 		initialMap.put("hauteurVerriere", (Double) data.get("hauteurVerriere"));
 		initialMap.put("largeurVerriere", (Double) data.get("largeurVerriere"));
 		initialMap.put("nbPartitions", ((Integer) data.get("nbPartitions")).doubleValue());
 
-		ArrayList<Function> functions = new ArrayList<Function>();
+		ArrayList<Function> functions = new ArrayList<>();
 		functions.add(new Function("getNbAttachesIntermediairesTraverseCorniere", 2) {
 			@Override
 			public double apply(double... args) {
-				// TODO
 				double entreAxeAttachesSouhaite = args[0];
 				double longueurADiviser = args[1];
 				int nbAttaches = (int) Math.floor(longueurADiviser / entreAxeAttachesSouhaite);
@@ -162,15 +160,5 @@ public class Mecanique extends ModeleGenerique {
 		MyCustomSvg finalSvg = finalLayout.getSvg();
 		finalSvg.setPadding(new Padding(10));
 		this.svgToRender.put("complete", finalSvg);
-	}
-
-	@Override
-	protected String[] getElementsClasses() {
-		return new String[] {/*"MontantPartition2", "MontantCorniere2", "TraverseCorniere2", */"MontantPartition", "ContreCadreMontantPartition", "MontantCorniere", "ContreCadreMontantCorniere", "TraverseCorniere", "ContreCadreTraverseCorniere", "AttachesTraverseCorniere"};
-	}
-
-	@Override
-	protected String getPackage() {
-		return "generateurCoteVerriere.modeles.mecanique.elements";
 	}
 }

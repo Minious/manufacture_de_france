@@ -26,9 +26,8 @@ public class MontantPartition extends ElementGenerique {
 				profil.addPercage(ordonnee, true);
 		}
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
-		MyCustomSvg g = profil.render();
 		
-		return g;
+		return profil.render();
 	}
 
 	@Override

@@ -53,9 +53,7 @@ public class TraverseCorniere extends ElementGenerique {
 			profil.addCoteDroiteEntrePercages(2, 6, 2);
 		}
 		
-		MyCustomSvg g = profil.render();
-		
-		return g;
+		return profil.render();
 	}
 	
 	public MyCustomSvg getDessinFace() {
@@ -63,9 +61,7 @@ public class TraverseCorniere extends ElementGenerique {
 		profil.setCorniere(Side.RIGHT);
 		profil.setChamp(conf.get("epaisseurTraverseCorniere"), Side.LEFT);
 		
-		MyCustomSvg g = profil.render();
-		
-		return g;
+		return profil.render();
 	}
 
 	@Override

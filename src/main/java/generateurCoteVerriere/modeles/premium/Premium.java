@@ -1,6 +1,5 @@
 package generateurCoteVerriere.modeles.premium;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -27,7 +26,7 @@ public class Premium extends ModeleGenerique {
 
 		String fileName = "conf_premium.txt";
 
-		HashMap<String, Double> initialMap = new HashMap<String, Double>();
+		HashMap<String, Double> initialMap = new HashMap<>();
 		
 		initialMap.put("hauteurVerriere", (Double) data.get("hauteurVerriere"));
 		initialMap.put("largeurVerriere", (Double) data.get("largeurVerriere"));
@@ -126,15 +125,5 @@ public class Premium extends ModeleGenerique {
 		MyCustomSvg finalSvg = finalLayout.getSvg();
 		finalSvg.setPadding(new Padding(10));
 		this.svgToRender.put("complete", finalSvg);
-	}
-
-	@Override
-	protected String[] getElementsClasses() {
-		return new String[] {/*"MontantCorniere", "MontantIntermediaire", "TraverseCorniere"*/};
-	}
-
-	@Override
-	protected String getPackage() {
-		return "generateurCoteVerriere.modeles.premium.elements";
 	}
 }

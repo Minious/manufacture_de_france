@@ -20,15 +20,12 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 		profil.setValeurPercage(this.valeurDiametreTrous);
 		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
 			double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantPartition") + i * conf.get("entreAxeMontant");
-			if(i != conf.get("nbTrousIntermediairesVerticaux") + 1)
-				profil.addPercage(ordonnee, false);
-			else
-				profil.addPercage(ordonnee, true);
+			boolean showCote = i == conf.get("nbTrousIntermediairesVerticaux") + 1;
+			profil.addPercage(ordonnee, showCote);
 		}
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
-		MyCustomSvg g = profil.render();
 		
-		return g;
+		return profil.render();
 	}
 
 	@Override

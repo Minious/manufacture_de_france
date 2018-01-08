@@ -20,21 +20,19 @@ public class MontantIntermediaire extends ElementGenerique {
 		profil.setEpaulement(conf.get("longueurEpaulementMontantIntermediaire"), conf.get("epaisseurEpaulementMontantIntermediaire"), Side.RIGHT);
 		profil.setChamp(conf.get("epaisseurMontantIntermedaire"), Side.RIGHT);
 		profil.setValeurPercage(this.valeurDiametrePercages);
-		
+
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierPercageMontantIntermediaire");
-		for(int i=0;i<conf.get("nbPercageMontant");i++) {
-			if(i != conf.get("nbPercageMontant") - 1) {
+		for (int i = 0; i < conf.get("nbPercageMontant"); i++) {
+			if (i != conf.get("nbPercageMontant") - 1) {
 				profil.addPercage(ordonnee, false);
 				ordonnee += conf.get("entreAxePercagesMontant");
-			}
-			else
+			} else
 				profil.addPercage(ordonnee, true);
 		}
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		profil.addCoteDroiteOrigine(conf.get("longueurEpaulementMontantIntermediaire"), 0);
-		MyCustomSvg g = profil.render();
-		
-		return g;
+
+		return profil.render();
 	}
 
 	@Override

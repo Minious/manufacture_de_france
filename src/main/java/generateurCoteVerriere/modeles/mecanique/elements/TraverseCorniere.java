@@ -53,10 +53,8 @@ public class TraverseCorniere extends ElementGenerique {
 		
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		profil.addCoteDroiteEntrePercages(1, 2, 0);
-
-		MyCustomSvg g = profil.render();
 		
-		return g;
+		return profil.render();
 	}
 
 	@Override

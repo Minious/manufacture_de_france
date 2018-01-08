@@ -21,9 +21,9 @@ public abstract class ModeleGenerique {
 	
 	public ModeleGenerique(HashMap<String, Object> data) {
 		this.data = data;
-		this.conf = new HashMap<String, Double>();
+		this.conf = new HashMap<>();
 		
-		this.svgToRender = new HashMap<String, MyCustomSvg>();
+		this.svgToRender = new HashMap<>();
 	}
 	
 	public void generate(Path savePathTemp) {
@@ -31,8 +31,8 @@ public abstract class ModeleGenerique {
 		
 		System.out.println("\n\tChargement...\n");
 
-		ArrayList<String> svgPaths = new ArrayList<String>();
-		ArrayList<String> pdfPaths = new ArrayList<String>();
+		ArrayList<String> svgPaths = new ArrayList<>();
+		ArrayList<String> pdfPaths = new ArrayList<>();
 
 		// HashMap svgToRender
 		for(String fileName : this.svgToRender.keySet()) {
@@ -59,17 +59,15 @@ public abstract class ModeleGenerique {
 		// Merge pdf files
 		PDFMergerUtility pdf = new PDFMergerUtility();
 		pdf.setDestinationFileName(savePath.resolve("result.pdf").toString());
-		for(int i=0;i<pdfPaths.size();i++)
-			pdf.addSource(pdfPaths.get(i).toString());
+		for(String pdfPath : pdfPaths)
+			pdf.addSource(pdfPath);
 		try {
 			pdf.mergeDocuments();
 			System.out.println("Merge pdf files");
-		} catch (COSVisitorException e) {} 
-		catch (IOException e) {}
+		} catch (COSVisitorException | IOException e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println("\nTerminé !");
 	}
-
-	protected abstract String[] getElementsClasses();
-	protected abstract String getPackage();
 }

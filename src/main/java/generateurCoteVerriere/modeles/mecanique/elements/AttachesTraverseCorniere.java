@@ -8,9 +8,7 @@ import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class AttachesTraverseCorniere extends ElementGenerique {
-	private String nomFichierDeRendu = "attaches_traverse_corniere";
 	private final int nbTraverses = 2;
-	private final double diametreTrous = conf.get("largeurTraverseCorniere") / 8; // INCORRECT
 	private final String valeurDiametreTrous = "ØM5";
 
 	public AttachesTraverseCorniere(HashMap<String, Double> conf, HashMap<String, Object> data) {
@@ -36,9 +34,8 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 		}
 		
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
-		MyCustomSvg g = profil.render();
 		
-		return g;
+		return profil.render();
 	}
 
 	@Override

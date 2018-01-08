@@ -24,20 +24,21 @@ public class ContreCadreMontantCorniere extends ElementGenerique {
 		profil.addPercage(ordonnee, false);
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere");
 		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
+			boolean showCote;
 			if(i != conf.get("nbTrousIntermediairesVerticaux") + 1) {
-				profil.addPercage(ordonnee, false);
+				showCote = false;
 				ordonnee += conf.get("entreAxeMontant");
 			}
 			else
-				profil.addPercage(ordonnee, true);
+				showCote = true;
+			profil.addPercage(ordonnee, showCote);
 		}
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere");
 		profil.addPercage(ordonnee, false);
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		profil.addCoteDroiteEntrePercages(1, 2, 0);
-		MyCustomSvg g = profil.render();
 		
-		return g;
+		return profil.render();
 	}
 	
 	@Override
