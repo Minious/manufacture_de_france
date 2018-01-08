@@ -48,10 +48,10 @@ public class DessinProfil {
 		this.largeur = largeur;
 		this.axePercage = axePercage;
 
-		this.percages = new ArrayList<Percage>();
+		this.percages = new ArrayList<>();
 		this.valeurPercageEnregistree = "4";
 
-		this.coteDroites = new ArrayList<CoteDroite>();
+		this.coteDroites = new ArrayList<>();
 
 		this.isCorniere = false;
 		this.corniereSide = Side.LEFT;
@@ -184,13 +184,8 @@ public class DessinProfil {
 				ShiftMode.CENTER);
 
 		// Percages ordonnes de bas en haut
-		ArrayList<Percage> sortedPercages = (ArrayList<Percage>) this.percages.clone();
-		Collections.sort(sortedPercages, new Comparator<Percage>() {
-			@Override
-			public int compare(Percage percage1, Percage percage2) {
-				return Double.valueOf(percage1.getHauteurPercage()).compareTo(percage2.getHauteurPercage());
-			}
-		});
+		ArrayList<Percage> sortedPercages = new ArrayList<>(this.percages);
+		sortedPercages.sort(Comparator.comparing(Percage::getHauteurPercage));
 
 		// Trace les cotes gauches + percages + traits d'axe horizontaux
 		Point origineCotesGauches = new Point(-demiLargeurGauche, this.longueur);
@@ -218,13 +213,8 @@ public class DessinProfil {
 		g.drawDistanceCote(origineCotesGauches, coinSuperieurGaucheProfil, curDistanceCotesGauches);
 
 		// Cotes droites ordonnees de le moins a la plus eloignee
-		ArrayList<CoteDroite> sortedCotesDroites = (ArrayList<CoteDroite>) this.coteDroites.clone();
-		Collections.sort(sortedCotesDroites, new Comparator<CoteDroite>() {
-			@Override
-			public int compare(CoteDroite cote1, CoteDroite cote2) {
-				return Integer.valueOf(cote1.getEtage()).compareTo(cote2.getEtage());
-			}
-		});
+		ArrayList<CoteDroite> sortedCotesDroites = new ArrayList<>(this.coteDroites);
+		sortedCotesDroites.sort(Comparator.comparing(CoteDroite::getEtage));
 
 		// Trace les cotes droites
 		for (CoteDroite coteDroite : sortedCotesDroites) {
@@ -358,21 +348,21 @@ public class DessinProfil {
 		private double hauteur2;
 		private int etage;
 
-		public CoteDroite(double hauteur1, double hauteur2, int etage) {
+		CoteDroite(double hauteur1, double hauteur2, int etage) {
 			this.hauteur1 = hauteur1;
 			this.hauteur2 = hauteur2;
 			this.etage = etage;
 		}
 
-		public double getHauteur1() {
+		double getHauteur1() {
 			return this.hauteur1;
 		}
 
-		public double getHauteur2() {
+		double getHauteur2() {
 			return this.hauteur2;
 		}
 
-		public int getEtage() {
+		int getEtage() {
 			return this.etage;
 		}
 	}
@@ -382,34 +372,34 @@ public class DessinProfil {
 		private String valeurPercage;
 		private boolean showCote;
 
-		public Percage(double hauteurPercage, String valeurPercage, boolean showCote) {
+		Percage(double hauteurPercage, String valeurPercage, boolean showCote) {
 			this.hauteurPercage = hauteurPercage;
 			this.valeurPercage = valeurPercage;
 			this.showCote = showCote;
 		}
 
-		public Percage(double hauteurPercage, String valeurPercage) {
+		Percage(double hauteurPercage, String valeurPercage) {
 			this(hauteurPercage, valeurPercage, false);
 		}
 
-		public double getHauteurPercage() {
+		double getHauteurPercage() {
 			return this.hauteurPercage;
 		}
 
-		public String getValeurPercage() {
+		String getValeurPercage() {
 			return this.valeurPercage;
 		}
 		
-		public boolean getShowCote() {
+		boolean getShowCote() {
 			return this.showCote;
 		}
 	}
 
 	public enum Side {
-		LEFT, RIGHT;
+		LEFT, RIGHT
 	}
 
 	public enum Face {
-		FRONT, BACK;
+		FRONT, BACK
 	}
 }
