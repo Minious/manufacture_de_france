@@ -151,7 +151,7 @@ public class Main {
 				@Override public void mouseClicked(MouseEvent arg0) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setCurrentDirectory(new java.io.File("."));
-					chooser.setDialogTitle("Dossier de r�ception des images");
+					chooser.setDialogTitle("Dossier de réception des images");
 					chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 					chooser.setAcceptAllFileFilterUsed(false);
 			
@@ -162,7 +162,7 @@ public class Main {
 				}
 			});
 			
-			JButton btnGenerer = new JButton("G�n�rer");
+			JButton btnGenerer = new JButton("Générer");
 			btnGenerer.addMouseListener(new MouseAdapter() {
 				@Override public void mouseClicked(MouseEvent arg0) {
 					String curModele = (String) cb.getSelectedItem();
@@ -190,7 +190,7 @@ public class Main {
 					
 					Renderer.render(curModele, savePath, renderValues);
 					
-					JOptionPane.showMessageDialog(frame, "Op�ration termin�e avec succ�s !");
+					JOptionPane.showMessageDialog(frame, "Opération terminée avec succès !");
 				}
 			});
 			btnGenerer.setMnemonic(KeyEvent.VK_G);

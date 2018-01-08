@@ -10,7 +10,7 @@ public class Renderer {
 	public static void render(String modele, Path savePath, HashMap<String, Object> data) {
 		data.put("modele", modele);
 		switch(modele) {
-			case "Mécanique":
+			case "MÃ©canique":
 			case "Mecanica":
 				new Mecanique(data).generate(savePath);
 				break;

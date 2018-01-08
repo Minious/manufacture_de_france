@@ -11,7 +11,7 @@ public class TraverseCorniere extends ElementGenerique {
 	private final int nbTraverses = 2;
 	private final String valeurDiametrePercagesMontant = "Ø7";
 	private final String valeurDiametrePercagesParclose = "ØM5";
-	private final String valeurDiametrePercagesFixation = "Ø5.5"; // "�5.5 + fraisage";
+	private final String valeurDiametrePercagesFixation = "Ø5.5"; // "Ø5.5 + fraisage";
 	
 	public TraverseCorniere(HashMap<String, Double> conf, HashMap<String, Object> data) {
 		super(conf, data);

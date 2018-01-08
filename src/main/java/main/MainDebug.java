@@ -17,9 +17,9 @@ public class MainDebug {
 		
 		/*
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Entrez la hauteur de la verrière : ");
+		System.out.print("Entrez la hauteur de la verriÃ¨re : ");
 		hauteurVerriere = sc.nextDouble();
-		System.out.print("Entrez la largeur de la verrière : ");
+		System.out.print("Entrez la largeur de la verriÃ¨re : ");
 		largeurVerriere = sc.nextDouble();
 		System.out.print("Entrez le nombre de partitions : ");
 		nbPartitions = sc.nextInt();

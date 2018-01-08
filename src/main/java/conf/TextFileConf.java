@@ -40,11 +40,10 @@ public class TextFileConf {
 
 	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap, ArrayList<Function> customFunctions) throws UnprocessableConfFileException, IOException {
 		//File file = new File(TextFileConf.class.getClassLoader().getResource("/resources/" + fileName).getFile());
-		String path = "resources/" + fileName;
-		InputStream stream = TextFileConf.class.getClassLoader().getResourceAsStream(path);
+		InputStream stream = TextFileConf.class.getResourceAsStream("/" + fileName);
 				
 		ArrayList<String> exps = new ArrayList<String>();
-		Pattern pExp = Pattern.compile(".*(?<![=!])=(?!=).*"); // compliqué du cul
+		Pattern pExp = Pattern.compile(".*(?<![=!])=(?!=).*"); // compliquÃ© du cul
 
 		Scanner scanner = new Scanner(stream);
 		while (scanner.hasNextLine()) {

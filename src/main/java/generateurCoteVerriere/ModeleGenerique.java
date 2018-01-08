@@ -83,7 +83,9 @@ public abstract class ModeleGenerique {
 		converter.setDst(outputFile);
 		try {
 			converter.execute();
-		} catch (SVGConverterException e) {}
+		} catch (SVGConverterException e) {
+			e.printStackTrace();
+		}
 		
 		// Merge pdf files
 		PDFMergerUtility pdf = new PDFMergerUtility();
@@ -96,7 +98,7 @@ public abstract class ModeleGenerique {
 		} catch (COSVisitorException e) {} 
 		catch (IOException e) {}
 		
-		System.out.println("\nTermin� !");
+		System.out.println("\nTerminé !");
 	}
 
 	protected abstract String[] getElementsClasses();

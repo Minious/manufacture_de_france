@@ -86,7 +86,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	}
 	
 	public void drawPercage(String valeurPercage, Point p){
-		if(valeurPercage.charAt(0) == 'Ø') {
+		if(valeurPercage.charAt(0) == 'Ã˜') {
 			String actualValeurPercage = valeurPercage.substring(1);
 			double diametrePercage;
 			if(actualValeurPercage.charAt(0) == 'M') {

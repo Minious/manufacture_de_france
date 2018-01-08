@@ -110,7 +110,7 @@ public class Premium extends ModeleGenerique {
 			"Client : " + data.get("client"),
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
-			"Modèle : Premium",
+			"ModÃ¨le : Premium",
 			"Dimensions : " + conf.get("largeurVerriere") + " x " + conf.get("hauteurVerriere")
 		}));
 		cartoucheDroite.setPadding(new Padding(10));
