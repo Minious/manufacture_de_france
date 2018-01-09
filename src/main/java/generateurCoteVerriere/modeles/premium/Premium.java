@@ -68,7 +68,7 @@ public class Premium extends ModeleGenerique {
 		MyCustomSvg montantCorniereDesc = new LignesTexte("CORNIERE 30x20x3");
 		MyCustomSvg montantIntermediaireTitre = new LignesTexte("MT INTERMEDIAIRE");
 		MyCustomSvg montantIntermediaireQte = new LignesTexte("QTE : "+montantIntermediaire.getNbElements());
-		MyCustomSvg montantIntermediaireDesc = new LignesTexte("T de 30x20x3");
+		MyCustomSvg montantIntermediaireDesc = new LignesTexte("T de 30x30x3");
 
 		MyHandyLayout layoutDessins = new MyHandyLayout();
 		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte, traverseCorniereDesc}, ShiftMode.LEFT);
@@ -116,7 +116,7 @@ public class Premium extends ModeleGenerique {
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
 			"Modèle : Premium",
-			"Dimensions : " + conf.get("largeurVerriere") + " x " + conf.get("hauteurVerriere")
+			"Dimensions : " + conf.get("largeurVerriere") + " LARG x " + conf.get("hauteurVerriere") + " HT"
 		}));
 		cartoucheDroite.setPadding(new Padding(10));
 		cartoucheDroite.setBorders(true);

@@ -210,7 +210,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 
 			this.setFillColor(Color.black);
 			this.translate(- distance / 2, 0);
-			if(distance > 2 * arrowWidth) {
+			if(distance > 2.5 * arrowWidth) {
 				this.rotate(Math.PI);
 				this.drawPath(arrowPath);
 				this.rotate(Math.PI);
@@ -218,7 +218,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 				this.drawPath(arrowPath);
 			}
 			this.translate(distance, 0);
-			if(distance > 2 * arrowWidth) {
+			if(distance > 2.5 * arrowWidth) {
 				this.drawPath(arrowPath);
 			} else {
 				this.rotate(Math.PI);

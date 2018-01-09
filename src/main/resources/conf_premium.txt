@@ -44,10 +44,10 @@ demiLargeurGaucheChampMontantIntermediaire = largeurChampMontantIntermediaire - 
 ecartEntreExtremiteEtPremierPercageMontantIntermediaire = ecartEntreExtremiteEtPremierPercageMontantCorniere - epaisseurTraverseCorniere
 
 // Vitrage
-penetrationVitrage = 4
+jeuVitrage = 4
 nbVitrage = nbPartitions
-largeurVitrage = largeurClairVitrage + 2 * penetrationVitrage
-hauteurVitrage = hauteurClairVitrage + 2 * penetrationVitrage
+largeurVitrage = entreAxePercageMontantTraverseCorniere - epaisseurMontantIntermedaire - 2 * jeuVitrage
+hauteurVitrage = hauteurVerriere - 2 * epaisseurTraverseCorniere - 2 * jeuVitrage
 
 // ClairDeVitrage
 largeurClairVitrage = (largeurVerriere - 2 * largeurFaceMontantCorniere - (nbPartitions - 1) * largeurFaceMontantIntermediaire) / nbPartitions

@@ -17,6 +17,7 @@ public class MontantIntermediaire extends ElementGenerique {
 
 	public MyCustomSvg getDessin() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantIntermediaire"), conf.get("longueurMontantIntermediaire"), conf.get("demiLargeurGaucheChampMontantIntermediaire"));
+		profil.setSideCoteDemiLargeur(Side.RIGHT);
 		profil.setEpaulement(conf.get("longueurEpaulementMontantIntermediaire"), conf.get("epaisseurEpaulementMontantIntermediaire"), Side.RIGHT);
 		profil.setChamp(conf.get("epaisseurMontantIntermedaire"), Side.RIGHT);
 		profil.setValeurPercage(this.valeurDiametrePercages);
