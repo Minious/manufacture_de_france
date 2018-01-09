@@ -18,10 +18,9 @@ public class StrSVG extends SvgComponent {
 		outputStr += "<text ";
 		outputStr += "x=\"" + this.x + "\" ";
 		outputStr += "y=\"" + this.y + "\" ";
-		//outputStr += "textLength=\"" + this.width + "\" ";
-		//outputStr += "lengthAdjust=\"spacingAndGlyphs\" ";
 		outputStr += "style=\"" + this.sc.getFontStyle() + "\" ";
-		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
+		if(!this.sc.isTranformIdentity())
+			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
 		outputStr += ">";
 		outputStr += this.str;
 		outputStr += "</text>";

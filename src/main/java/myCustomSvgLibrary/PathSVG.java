@@ -31,8 +31,9 @@ public class PathSVG extends SvgComponent {
 		if(state == PathIterator.SEG_CLOSE)
 			outputStr += "Z ";
 		outputStr += "\" ";
-		outputStr += "style=\"" + this.sc.getShapeStyle() + "\" ";
-		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
+		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
+		if(!this.sc.isTranformIdentity())
+			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
 		outputStr += "/>";
 		
 		return outputStr;

@@ -35,8 +35,9 @@ public class EllipticalArcSVG extends SvgComponent {
 		outputStr += "<path d=\"";
 		outputStr += "M " +  xStart + " " + yStart + " ";
 		outputStr += "A " + this.width / 2 + " " + this.height / 2 + " 0 " + largeArcFlag + " " + sweepFlag + " " + String.valueOf(xEnd) + " " + yEnd + "\" ";
-		outputStr += "style=\"" + this.sc.getShapeStyle() + "\" ";
-		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
+		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
+		if(!this.sc.isTranformIdentity())
+			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
 		outputStr += "/>";
 		
 		return outputStr;

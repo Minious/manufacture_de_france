@@ -130,40 +130,45 @@ public class StyleContext {
 			this.curStroke.getMiterLimit()
 		);
 	}
-	
-	public String getShapeStyle() {
+
+	public String getStrokeStyle() {
 		float[] dashArray = this.curStroke.getDashArray();
-		
+
 		String outputStr = "";
 		outputStr += "stroke-width: " + this.curStroke.getLineWidth() + "; ";
 		outputStr += "stroke: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ";
-		outputStr += "stroke-opacity: 1.0; ";
+		//outputStr += "stroke-opacity: 1.0; ";
 		outputStr += "stroke-linecap: butt; ";
 		if(dashArray != null) {
 			String dashArrayStr = "";
 			dashArrayStr += dashArray[0];
 			for(int i=1;i<dashArray.length;i++)
 				dashArrayStr += ","+dashArray[i];
-			outputStr += "stroke-dasharray: "+dashArrayStr+"; ";
+			outputStr += "stroke-dasharray: "+dashArrayStr+";";
 		}
+		return outputStr;
+	}
+
+	public String getShapeStyle() {
+		String outputStr = "";
 		if(this.curFillColor == null)
-			outputStr += "fill: none; ";
+			outputStr += "fill: none;";
 		else
-			outputStr += "fill: rgb(" + this.curFillColor.getRed() + "," + this.curFillColor.getGreen() + "," + this.curFillColor.getBlue() + "); ";
+			outputStr += "fill: rgb(" + this.curFillColor.getRed() + "," + this.curFillColor.getGreen() + "," + this.curFillColor.getBlue() + ");";
 		return outputStr;
 	}
 	
 	public String getFontStyle() {
 		String outputStr = "";
 		outputStr += "fill: rgb(" + this.curFontColor.getRed() + "," + this.curFontColor.getGreen() + "," + this.curFontColor.getBlue() + "); ";
-		outputStr += "fill-opacity: 1.0; ";
+		//outputStr += "fill-opacity: 1.0; ";
 		outputStr += "font-family: " + this.curFont.getFontName() + "; ";
 		outputStr += "font-size: " + this.curFont.getSize() + "px; ";
 		
 		return outputStr;
 	}
 	
-	public String getTransformMatrix() {
+	public String getTransformSvgNotation() {
 		String outputStr = "";
 
 		int type = this.curTransform.getType();

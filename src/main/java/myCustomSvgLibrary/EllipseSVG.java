@@ -23,8 +23,9 @@ public class EllipseSVG extends SvgComponent {
 		outputStr += "cy=\"" + cy + "\" ";
 		outputStr += "rx=\"" + rx + "\" ";
 		outputStr += "ry=\"" + ry + "\" ";
-		outputStr += "style=\"" + this.sc.getShapeStyle() + "\" ";
-		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
+		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
+		if(!this.sc.isTranformIdentity())
+			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
 		outputStr += "/>";
 		
 		return outputStr;

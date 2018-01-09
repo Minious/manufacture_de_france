@@ -18,8 +18,9 @@ public class RectSVG extends SvgComponent {
 		outputStr += "y=\"" + this.y + "\" ";
 		outputStr += "width=\"" + this.width + "\" ";
 		outputStr += "height=\"" + this.height + "\" ";
-		outputStr += "style=\"" + this.sc.getShapeStyle() + "\" ";
-		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
+		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
+		if(!this.sc.isTranformIdentity())
+			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
 		outputStr += "/>";
 		
 		return outputStr;

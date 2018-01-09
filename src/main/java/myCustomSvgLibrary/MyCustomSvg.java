@@ -254,8 +254,8 @@ public class MyCustomSvg extends SvgComponent{
 		String gPadding = "";
 		if(this.padding.getLeftPadding() != 0 || this.padding.getTopPadding() != 0) {
 			gPadding += "<g transform=\"translate(" + this.padding.getLeftPadding() + " " + this.padding.getTopPadding() + ")\" >\n";
-			gPadding += balisesIntermediaires;
-			gPadding += "</g>";
+			gPadding += tabuler(balisesIntermediaires);
+			gPadding += "</g>\n";
 		} else
 			gPadding += balisesIntermediaires;
 
@@ -267,7 +267,7 @@ public class MyCustomSvg extends SvgComponent{
 			gBorder += "width=\"" + curW + "\" ";
 			gBorder += "height=\"" + curH + "\" ";
 			gBorder += "style=\"" + this.borderSc.getShapeStyle() + "\" ";
-			gBorder += "/>";
+			gBorder += "/>\n";
 
 			gPadding = gBorder += gPadding;
 		}
@@ -276,20 +276,27 @@ public class MyCustomSvg extends SvgComponent{
 		if(!this.svgTagSc.isTranformIdentity() || curX != 0 || curY != 0) {
 			gTransform += "<g transform=\"";
 			if(!this.svgTagSc.isTranformIdentity())
-				gTransform += this.svgTagSc.getTransformMatrix() + " ";
+				gTransform += this.svgTagSc.getTransformSvgNotation() + " ";
 			if(curX != 0 || curY != 0)
 				gTransform += "translate(" + curX + " " + curY + ")";
 			gTransform += "\" >\n";
 
-			gTransform += gPadding;
+			gTransform += tabuler(gPadding);
 
 			gTransform += "</g>\n";
 		} else
 			gTransform += gPadding;
 
-		return gTransform;
+		return gTransform.substring(0, gTransform.length() - 1);
 	}
-	
+
+	private String tabuler(String input){
+		String output = "";
+		for(String line : input.split("\n"))
+			output += "\t" + line + "\n";
+		return output;
+	}
+
 	public Rectangle2D getBounds() {
 		return this.bounds;
 	}
@@ -311,8 +318,8 @@ public class MyCustomSvg extends SvgComponent{
 		h = this.bounds.getHeight() + this.padding.getVerticalPadding();
 		
 		String output = "";
-		output += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + w + "\" height=\"" + h + "\" style=\"overflow:visible;\" >\n";
-		output += this.renderTag();
+		output += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + w + "\" height=\"" + h + "\" >\n";
+		output += tabuler(this.renderTag());
 		output += "</svg>\n";
 		
 		try {

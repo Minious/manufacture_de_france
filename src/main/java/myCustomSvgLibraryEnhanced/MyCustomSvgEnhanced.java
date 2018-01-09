@@ -202,7 +202,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			arrowPath.moveTo(0, 0);
 			arrowPath.lineTo(- arrowWidth, arrowHeight / 2);
 			arrowPath.lineTo(- arrowWidth, - arrowHeight / 2);
-			arrowPath.closePath();
+			//arrowPath.closePath();
 
 			this.rotate(Math.PI / 2);
 			if(reversed)
