@@ -2,8 +2,8 @@ package myCustomSvgLibrary;
 
 import java.nio.file.Paths;
 
-import generateurCoteVerriere.dessinProfil.DessinProfil;
-import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
+import generateurCoteVerriere.DessinProfil;
+import generateurCoteVerriere.DessinProfil.Side;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import myCustomSvgLibraryEnhanced.Point;

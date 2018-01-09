@@ -1,4 +1,4 @@
-package generateurCoteVerriere.dessinProfil;
+package generateurCoteVerriere;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,6 +36,7 @@ public class DessinProfil {
 
 	private double curUnderLineGap;
 	private float taillePoliceCote;
+	private Side sideCoteDemiLargeur;
 	private float margeEntreProfilEtPremiereCote;
 	private double margeInterCote;
 
@@ -68,6 +69,7 @@ public class DessinProfil {
 
 		this.curUnderLineGap = 5;
 		this.taillePoliceCote = 10;
+		this.sideCoteDemiLargeur = Side.LEFT;
 		this.margeEntreProfilEtPremiereCote = 20;
 		this.margeInterCote = 2;
 	}
@@ -173,14 +175,16 @@ public class DessinProfil {
 		double curDistanceCotesSuperieures = this.margeEntreProfilEtPremiereCote;
 		Point origine = new Point(0, 0);
 		Point coinSuperieurGaucheProfil = new Point(-demiLargeurGauche, 0);
-		Point coinSuperieurDroiteProfil = new Point(demiLargeurDroite, 0);
+		Point coinSuperieurDroitProfil = new Point(demiLargeurDroite, 0);
 
 		if(this.percages.size() > 0) {
-			g.drawDistanceCote(coinSuperieurGaucheProfil, origine, curDistanceCotesSuperieures, -demiLargeurGauche / 2 - 10,
-					ShiftMode.RIGHT);
+			if(this.sideCoteDemiLargeur == Side.LEFT)
+				g.drawDistanceCote(coinSuperieurGaucheProfil, origine, curDistanceCotesSuperieures, -demiLargeurGauche / 2 - 10, ShiftMode.RIGHT);
+			else
+				g.drawDistanceCote(origine, coinSuperieurDroitProfil, curDistanceCotesSuperieures, -demiLargeurDroite / 2 + 10, ShiftMode.LEFT);
 			curDistanceCotesSuperieures = decalerCote(curDistanceCotesSuperieures);
 		}
-		g.drawDistanceCote(coinSuperieurGaucheProfil, coinSuperieurDroiteProfil, curDistanceCotesSuperieures, 0,
+		g.drawDistanceCote(coinSuperieurGaucheProfil, coinSuperieurDroitProfil, curDistanceCotesSuperieures, 0,
 				ShiftMode.CENTER);
 
 		// Percages ordonnes de bas en haut

@@ -3,7 +3,7 @@ package generateurCoteVerriere.modeles.mecanique.elements;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.dessinProfil.DessinProfil;
+import generateurCoteVerriere.DessinProfil;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class MontantPartition extends ElementGenerique {

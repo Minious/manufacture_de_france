@@ -26,9 +26,9 @@ public class MainDebug {
 		sc.close();
 		*/
 		
-		hauteurVerriere = 600d;
+		hauteurVerriere = 700d;
 		largeurVerriere = 1150d;
-		nbPartitions = 3;
+		nbPartitions = 2;
 		
 		HashMap<String, Object> myArgs = new HashMap<String, Object>();
 		myArgs.put("ARC", "190000310");

@@ -62,18 +62,21 @@ public class Premium extends ModeleGenerique {
 		
 		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
 		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements());
-		MyCustomSvg montantCorniereTitre = new LignesTexte("MT CORNIERE LATERAL");
+		MyCustomSvg traverseCorniereDesc = new LignesTexte("CORNIERE 30x20x3");
+		MyCustomSvg montantCorniereTitre = new LignesTexte("MT LATERAL");
 		MyCustomSvg montantCorniereQte = new LignesTexte("QTE : "+montantCorniere.getNbElements());
-		MyCustomSvg montantIntermediaireTitre = new LignesTexte("MT T INTERMEDIAIRE");
+		MyCustomSvg montantCorniereDesc = new LignesTexte("CORNIERE 30x20x3");
+		MyCustomSvg montantIntermediaireTitre = new LignesTexte("MT INTERMEDIAIRE");
 		MyCustomSvg montantIntermediaireQte = new LignesTexte("QTE : "+montantIntermediaire.getNbElements());
+		MyCustomSvg montantIntermediaireDesc = new LignesTexte("T de 30x20x3");
 
 		MyHandyLayout layoutDessins = new MyHandyLayout();
-		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);
+		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte, traverseCorniereDesc}, ShiftMode.LEFT);
 		layoutDessins.addRow(traverseCorniereSvg, ShiftMode.CENTER);
-		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
+		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte, montantCorniereDesc}, ShiftMode.LEFT);
 		layoutDessins.addRow(montantCorniereSvg, ShiftMode.CENTER);
 		if(montantIntermediaire.getNbElements() > 0) {
-			layoutDessins.addRow(new MyCustomSvg[] {montantIntermediaireTitre, montantIntermediaireQte}, ShiftMode.LEFT);
+			layoutDessins.addRow(new MyCustomSvg[] {montantIntermediaireTitre, montantIntermediaireQte, montantIntermediaireDesc}, ShiftMode.LEFT);
 			layoutDessins.addRow(montantIntermediaireSvg, ShiftMode.CENTER);
 		}
 		

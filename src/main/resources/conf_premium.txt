@@ -8,7 +8,7 @@ epaisseurTraverseCorniere = 3
 longueurTraverseCorniere = largeurVerriere
 largeurChampTraverseCorniere = 30
 largeurFaceTraverseCorniere = 20
-demiLargeurDroitChampTraverseCorniere = 20
+demiLargeurDroitChampTraverseCorniere = 21
 demiLargeurGaucheChampTraverseCorniere = largeurChampTraverseCorniere - demiLargeurDroitChampTraverseCorniere
 ecartEntreExtremiteEtPremierPercageMontantTraverseCorniere = largeurClairVitrage + largeurFaceMontantCorniere + largeurFaceMontantIntermediaire / 2
 ecartEntreExtremiteEtPremierPercageParcloseTraverseCorniere = largeurFaceMontantCorniere + largeurClairVitrage + largeurFaceMontantIntermediaire / 2 + entreAxePercageMontantEtParcloseTraverseCorniere - entreAxePercageMontantTraverseCorniere
@@ -18,7 +18,7 @@ entreAxePercageMontantEtParcloseTraverseCorniere = 50
 
 // Montant generique
 longueurADiviserMontant = longueurMontantCorniere - 2 * ecartEntreExtremiteEtPremierPercageMontantCorniere
-entreAxePercagesMax = 500
+entreAxePercagesMax = 600
 nbPercageMontant = ceil(longueurADiviserMontant / entreAxePercagesMax) + 1
 entreAxePercagesMontant = longueurADiviserMontant / (nbPercageMontant - 1)
 
@@ -27,7 +27,7 @@ longueurMontantCorniere = hauteurVerriere
 epaisseurMontantCorniere = 3
 largeurChampMontantCorniere = 30
 largeurFaceMontantCorniere = 20
-demiLargeurDroitChampMontantCorniere = 20
+demiLargeurDroitChampMontantCorniere = 21
 demiLargeurGaucheChampMontantCorniere = largeurChampMontantCorniere - demiLargeurDroitChampMontantCorniere
 ecartEntreExtremiteEtPremierPercageMontantCorniere = 70
 
@@ -39,7 +39,7 @@ epaisseurEpaulementMontantIntermediaire = epaisseurMontantIntermedaire
 longueurMontantIntermediaire = hauteurVerriere - 2 * epaisseurTraverseCorniere
 largeurFaceMontantIntermediaire = 30
 largeurChampMontantIntermediaire = 30
-demiLargeurDroitChampMontantIntermediaire = 10
+demiLargeurDroitChampMontantIntermediaire = 21
 demiLargeurGaucheChampMontantIntermediaire = largeurChampMontantIntermediaire - demiLargeurDroitChampMontantIntermediaire
 ecartEntreExtremiteEtPremierPercageMontantIntermediaire = ecartEntreExtremiteEtPremierPercageMontantCorniere - epaisseurTraverseCorniere
 

@@ -3,8 +3,8 @@ package generateurCoteVerriere.modeles.mecanique.elements;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.dessinProfil.DessinProfil;
-import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
+import generateurCoteVerriere.DessinProfil;
+import generateurCoteVerriere.DessinProfil.Side;
 import myCustomSvgLibrary.MyCustomSvg;
 
 

@@ -22,6 +22,7 @@ public class StrSVG extends SvgComponent {
 		//outputStr += "lengthAdjust=\"spacingAndGlyphs\" ";
 		outputStr += "style=\"" + this.sc.getFontStyle() + "\" ";
 		outputStr += "transform=\"" + this.sc.getTransformMatrix() + "\" ";
+		outputStr += "xml:space=\"preserve\"" ;
 		outputStr += ">";
 		outputStr += this.str;
 		outputStr += "</text>";

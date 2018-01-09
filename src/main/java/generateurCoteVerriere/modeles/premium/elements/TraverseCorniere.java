@@ -3,8 +3,8 @@ package generateurCoteVerriere.modeles.premium.elements;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.dessinProfil.DessinProfil;
-import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
+import generateurCoteVerriere.DessinProfil;
+import generateurCoteVerriere.DessinProfil.Side;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class TraverseCorniere extends ElementGenerique {
@@ -19,28 +19,28 @@ public class TraverseCorniere extends ElementGenerique {
 
 	@Override
 	public MyCustomSvg getDessin() {
-		DessinProfil profil = new DessinProfil(conf.get("largeurChampTraverseCorniere"), conf.get("longueurTraverseCorniere"), 10);
+		DessinProfil profil = new DessinProfil(conf.get("largeurChampTraverseCorniere"), conf.get("longueurTraverseCorniere"), conf.get("demiLargeurGaucheChampTraverseCorniere"));
 		profil.setChamp(conf.get("epaisseurTraverseCorniere"), Side.RIGHT);
 		profil.setIsChampCorniere(true);
 		profil.setLargeurChamp(conf.get("largeurFaceTraverseCorniere"));
 		
 		double ordonnee = 0;
 		ordonnee += conf.get("ecartEntreExtremiteEtPremierPercageParcloseTraverseCorniere");
-		profil.addPercage(ordonnee, this.valeurDiametrePercagesParclose, false);
+		profil.addPercage(ordonnee, this.valeurDiametrePercagesParclose, true);
 		ordonnee += conf.get("entreAxePercageMontantTraverseCorniere") - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere");
 		for(int i=0;i<conf.get("nbPartitions") - 1;i++) {
-			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantTraverseCorniere") / 2, this.valeurDiametrePercagesFixation, false);
-			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"), this.valeurDiametrePercagesParclose, false);
+			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantTraverseCorniere") / 2, this.valeurDiametrePercagesFixation, true);
+			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"), this.valeurDiametrePercagesParclose, true);
 
-			boolean showCote = i == conf.get("nbPartitions") - 2;
-			profil.addPercage(ordonnee, this.valeurDiametrePercagesMontant, showCote);
-			profil.addPercage(ordonnee + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"), this.valeurDiametrePercagesParclose, showCote);			
+			//boolean showCote = i == conf.get("nbPartitions") - 2;
+			profil.addPercage(ordonnee, this.valeurDiametrePercagesMontant, true);
+			profil.addPercage(ordonnee + conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"), this.valeurDiametrePercagesParclose, true);
 			
 			ordonnee += conf.get("entreAxePercageMontantTraverseCorniere");
 		}
 		
 		if(conf.get("nbPartitions") == 1) {
-			profil.addPercage(conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"), this.valeurDiametrePercagesFixation, false);
+			profil.addPercage(conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"), this.valeurDiametrePercagesFixation, true);
 			profil.addPercage(conf.get("longueurTraverseCorniere") - conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"), this.valeurDiametrePercagesFixation, true);
 		} else {
 			profil.addPercage(ordonnee - conf.get("entreAxePercageMontantTraverseCorniere") / 2, this.valeurDiametrePercagesFixation, true);
@@ -48,9 +48,9 @@ public class TraverseCorniere extends ElementGenerique {
 		profil.addPercage(ordonnee - conf.get("entreAxePercageMontantEtParcloseTraverseCorniere"), this.valeurDiametrePercagesParclose, true);
 
 		if(conf.get("nbPartitions") >= 3) {
-			profil.addCoteDroiteEntrePercages(0, 4, 0);
-			profil.addCoteDroiteEntrePercages(1, 5, 1);
-			profil.addCoteDroiteEntrePercages(2, 6, 2);
+			profil.addCoteDroiteEntrePercages(0, 4, 2);
+			profil.addCoteDroiteEntrePercages(1, 5, 3);
+			profil.addCoteDroiteEntrePercages(2, 6, 4);
 		}
 		
 		return profil.render();

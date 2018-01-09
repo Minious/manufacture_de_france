@@ -3,8 +3,8 @@ package generateurCoteVerriere.modeles.premium.elements;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.dessinProfil.DessinProfil;
-import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
+import generateurCoteVerriere.DessinProfil;
+import generateurCoteVerriere.DessinProfil.Side;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class MontantIntermediaire extends ElementGenerique {
@@ -16,7 +16,7 @@ public class MontantIntermediaire extends ElementGenerique {
 	}
 
 	public MyCustomSvg getDessin() {
-		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantIntermediaire"), conf.get("longueurMontantIntermediaire"), 10);
+		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantIntermediaire"), conf.get("longueurMontantIntermediaire"), conf.get("demiLargeurGaucheChampMontantIntermediaire"));
 		profil.setEpaulement(conf.get("longueurEpaulementMontantIntermediaire"), conf.get("epaisseurEpaulementMontantIntermediaire"), Side.RIGHT);
 		profil.setChamp(conf.get("epaisseurMontantIntermedaire"), Side.RIGHT);
 		profil.setValeurPercage(this.valeurDiametrePercages);

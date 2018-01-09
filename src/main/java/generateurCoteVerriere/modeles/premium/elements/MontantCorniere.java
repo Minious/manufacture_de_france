@@ -3,8 +3,8 @@ package generateurCoteVerriere.modeles.premium.elements;
 import java.util.HashMap;
 
 import generateurCoteVerriere.ElementGenerique;
-import generateurCoteVerriere.dessinProfil.DessinProfil;
-import generateurCoteVerriere.dessinProfil.DessinProfil.Side;
+import generateurCoteVerriere.DessinProfil;
+import generateurCoteVerriere.DessinProfil.Side;
 import myCustomSvgLibrary.MyCustomSvg;
 
 public class MontantCorniere extends ElementGenerique {
@@ -17,7 +17,7 @@ public class MontantCorniere extends ElementGenerique {
 
 	@Override
 	public MyCustomSvg getDessin() {
-		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantCorniere"), conf.get("longueurMontantCorniere"), 10);
+		DessinProfil profil = new DessinProfil(conf.get("largeurChampMontantCorniere"), conf.get("longueurMontantCorniere"), conf.get("demiLargeurGaucheChampMontantCorniere"));
 		profil.setChamp(conf.get("epaisseurMontantCorniere"), Side.RIGHT);
 		profil.setIsChampCorniere(true);
 		profil.setLargeurChamp(conf.get("largeurFaceMontantCorniere"));
