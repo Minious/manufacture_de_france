@@ -27,7 +27,7 @@ public class MyCustomSvg extends SvgComponent{
 	private Padding padding;
 	private boolean hasBorders;
 	private StyleContext borderSc;
-	public StyleContext svgTagSc;
+	public StyleContext rememberedSc;
 	
 	public MyCustomSvg() {
 		super(new StyleContext());
@@ -38,7 +38,7 @@ public class MyCustomSvg extends SvgComponent{
 		this.svgTree = new ArrayList<SvgComponent>();
 		this.hasBorders = false;
 		this.borderSc = null;
-		this.svgTagSc = this.sc.clone();
+		this.rememberedSc = this.sc.clone();
 	}
 	
 	public MyCustomSvg(MyCustomSvg g) {
@@ -52,7 +52,7 @@ public class MyCustomSvg extends SvgComponent{
 			this.svgTree.add(c.clone());
 		this.hasBorders = g.hasBorders;
 		this.borderSc = g.borderSc != null ? g.borderSc.clone() : null;
-		this.svgTagSc = g.svgTagSc.clone();
+		this.rememberedSc = g.rememberedSc.clone();
 	}	
 	
 	public void setPadding(Padding padding) {
@@ -61,7 +61,7 @@ public class MyCustomSvg extends SvgComponent{
 
 	public void setBorders(boolean hasBorders) {
 		this.hasBorders = hasBorders;
-		this.borderSc = this.sc.clone();
+		this.borderSc = this.rememberedSc.clone();
 	}
 	
 	public double getWidth() {
@@ -81,76 +81,76 @@ public class MyCustomSvg extends SvgComponent{
 	
 	public FontMetrics getFontMetrics() {
 		Canvas c = new Canvas();
-		return c.getFontMetrics(this.sc.getFont());
+		return c.getFontMetrics(this.rememberedSc.getFont());
 	}
 	
 	public AffineTransform getTransform() {
-		return this.sc.getTransform();
+		return this.rememberedSc.getTransform();
 	}
 	
 	public void translate(double tx, double ty) {
-		this.sc.translate(tx, ty);
+		this.rememberedSc.translate(tx, ty);
 	}
 	
 	public void rotate(double theta) {
-		this.sc.rotate(theta);
+		this.rememberedSc.rotate(theta);
 	}
 	
 	public void resetTransform() {
-		this.sc.resetTransform();
+		this.rememberedSc.resetTransform();
 	}
 	
 	public void setFontColor(Color c) {
-		this.sc.setFontColor(c);
+		this.rememberedSc.setFontColor(c);
 	}
 	
 	public void setStrokeColor(Color c) {
-		this.sc.setStrokeColor(c);
+		this.rememberedSc.setStrokeColor(c);
 	}
 	
 	public void setFillColor(Color c) {
-		this.sc.setFillColor(c);
+		this.rememberedSc.setFillColor(c);
 	}
 	
 	public void removeFillColor() {
-		this.sc.setFillColor(null);
+		this.rememberedSc.setFillColor(null);
 	}
 	
 	public void setFont(Font f) {
-		this.sc.setFont(f);
+		this.rememberedSc.setFont(f);
 	}
 	
 	public void setFontSize(float size) {
-		this.sc.setFontSize(size);
+		this.rememberedSc.setFontSize(size);
 	}
 	
 	public void setStroke(BasicStroke s) {
-		this.sc.setStroke(s);
+		this.rememberedSc.setStroke(s);
 	}
 	
 	public void setStrokeWidth(float w) {
-		this.sc.setStrokeWidth(w);
+		this.rememberedSc.setStrokeWidth(w);
 	}
 	
 	public void setDashArray(float[] dashArray) {
-		this.sc.setDashArray(dashArray);
+		this.rememberedSc.setDashArray(dashArray);
 	}
 	
 	public void removeDashArray() {
-		this.sc.removeDashArray();
+		this.rememberedSc.removeDashArray();
 	}
 	
 	public void setTransform(AffineTransform t) {
-		this.sc.setTransform(t);
+		this.rememberedSc.setTransform(t);
 	}
 	
 	public void drawPath(MyPath2D path) {
-		svgTree.add(new PathSVG(path, sc));
+		svgTree.add(new PathSVG(path, this.rememberedSc));
 		this.enlargeBounds(path.getPath2D());
 	}
 	
 	public void drawRect(double x, double y, double width, double height) {
-		RectSVG rect = new RectSVG(x, y, width, height, sc);
+		RectSVG rect = new RectSVG(x, y, width, height, this.rememberedSc);
 		svgTree.add(rect);
 		this.enlargeBounds(new Rectangle2D.Double(x, y, width, height));
 	}
@@ -160,29 +160,29 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public void drawEllipse(double x, double y, double width, double height) {
-		EllipseSVG el = new EllipseSVG(x, y, width, height, this.sc);
+		EllipseSVG el = new EllipseSVG(x, y, width, height, this.rememberedSc);
 		svgTree.add(el);
 		this.enlargeBounds(new Ellipse2D.Double(x, y, width, height));
 	}
 	
 	public void drawEllipticalArc(double x, double y, double width, double height, double start, double end) {
-		EllipticalArcSVG elArc = new EllipticalArcSVG(x, y, width, height, start, end, this.sc);
+		EllipticalArcSVG elArc = new EllipticalArcSVG(x, y, width, height, start, end, this.rememberedSc);
 		svgTree.add(elArc);
 		this.enlargeBounds(new Ellipse2D.Double(x - width / 2, y - height / 2, width, height));
 	}
 	
 	public void drawLine(double x1, double y1, double x2, double y2) {
-		LineSVG line = new LineSVG(x1, y1, x2, y2, this.sc);
+		LineSVG line = new LineSVG(x1, y1, x2, y2, this.rememberedSc);
 		svgTree.add(line);
 		this.enlargeBounds(new Line2D.Double(x1, y1, x2, y2));
 	}
 	
 	public void drawString(String text, double x, double y) {
-		Rectangle2D boundsH = this.sc.getFont().getStringBounds(text, new FontRenderContext(null, true, true));
-		Rectangle2D boundsV = this.sc.getFont().createGlyphVector(this.getFontMetrics().getFontRenderContext(), text).getVisualBounds();
+		Rectangle2D boundsH = this.rememberedSc.getFont().getStringBounds(text, new FontRenderContext(null, true, true));
+		Rectangle2D boundsV = this.rememberedSc.getFont().createGlyphVector(this.getFontMetrics().getFontRenderContext(), text).getVisualBounds();
 		Rectangle2D bounds = new Rectangle2D.Double(boundsH.getX() + x, boundsV.getY() + y, boundsH.getWidth(), boundsV.getHeight());
 		
-		StrSVG str = new StrSVG(text, x, y, this.sc);
+		StrSVG str = new StrSVG(text, x, y, this.rememberedSc);
 		svgTree.add(str);
 		
 		this.enlargeBounds(bounds);
@@ -230,7 +230,7 @@ public class MyCustomSvg extends SvgComponent{
 		}
 
 		MyCustomSvg svgClone = (MyCustomSvg) svg.clone();
-		svgClone.svgTagSc = this.sc.clone();
+		svgClone.sc = this.rememberedSc.clone();
 		svgTree.add(svgClone);
 		svgClone.setPosition(actualX, actualY);
 		Rectangle2D bounds = new Rectangle2D.Double(actualX, actualY, svgClone.getWidth(), svgClone.getHeight());
@@ -241,15 +241,10 @@ public class MyCustomSvg extends SvgComponent{
 		double curX, curY;
 		curX = - this.bounds.getX() + this.x;
 		curY = - this.bounds.getY() + this.y;
-		
-		double curW, curH;
-		curW = this.bounds.getWidth() + this.padding.getHorizontalPadding();
-		curH = this.bounds.getHeight() + this.padding.getVerticalPadding();
 
 		String balisesIntermediaires = "";
-		for(SvgComponent svgComponent : this.svgTree) {
+		for(SvgComponent svgComponent : this.svgTree)
 			balisesIntermediaires += svgComponent.renderTag() + "\n";
-		}
 
 		String gPadding = "";
 		if(this.padding.getLeftPadding() != 0 || this.padding.getTopPadding() != 0) {
@@ -260,23 +255,27 @@ public class MyCustomSvg extends SvgComponent{
 			gPadding += balisesIntermediaires;
 
 		if(this.hasBorders) {
+			double curW, curH;
+			curW = this.bounds.getWidth() + this.padding.getHorizontalPadding();
+			curH = this.bounds.getHeight() + this.padding.getVerticalPadding();
+
 			String gBorder = "";
 			gBorder += "<rect ";
 			gBorder += "x=\"" + this.bounds.getX() + "\" ";
 			gBorder += "y=\"" + this.bounds.getY() + "\" ";
 			gBorder += "width=\"" + curW + "\" ";
 			gBorder += "height=\"" + curH + "\" ";
-			gBorder += "style=\"" + this.borderSc.getShapeStyle() + "\" ";
+			gBorder += "style=\"" + this.borderSc.getStrokeStyle() + " " + this.borderSc.getShapeStyle() + "\" ";
 			gBorder += "/>\n";
 
 			gPadding = gBorder += gPadding;
 		}
 
 		String gTransform = "";
-		if(!this.svgTagSc.isTranformIdentity() || curX != 0 || curY != 0) {
+		if(!this.sc.isTranformIdentity() || curX != 0 || curY != 0) {
 			gTransform += "<g transform=\"";
-			if(!this.svgTagSc.isTranformIdentity())
-				gTransform += this.svgTagSc.getTransformSvgNotation() + " ";
+			if(!this.sc.isTranformIdentity())
+				gTransform += this.sc.getTransformSvgNotation() + " ";
 			if(curX != 0 || curY != 0)
 				gTransform += "translate(" + curX + " " + curY + ")";
 			gTransform += "\" >\n";
@@ -296,23 +295,12 @@ public class MyCustomSvg extends SvgComponent{
 			output += "\t" + line + "\n";
 		return output;
 	}
-
-	public Rectangle2D getBounds() {
-		return this.bounds;
-	}
 	
 	public void clear() {
 		this.svgTree.clear();
 	}
 	
 	public void writeToSVG(Path outputFilePath) {
-		///// DEBUG
-		/*
-		this.setColor(Color.RED);
-		this.drawRect(this.bounds.getX(), this.bounds.getY(), this.bounds.getWidth(), this.bounds.getHeight());
-		*/
-		/////
-		
 		double w, h;
 		w = this.bounds.getWidth() + this.padding.getHorizontalPadding();
 		h = this.bounds.getHeight() + this.padding.getVerticalPadding();
@@ -331,7 +319,7 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	private void enlargeBounds(Shape shape) {
-		Shape transformedShape = this.sc.getTransform().createTransformedShape(shape);
+		Shape transformedShape = this.rememberedSc.getTransform().createTransformedShape(shape);
 		Rectangle2D bounds = transformedShape.getBounds2D();
 		if(this.bounds == null)
 			this.bounds = bounds;

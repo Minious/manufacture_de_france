@@ -137,7 +137,6 @@ public class StyleContext {
 		String outputStr = "";
 		outputStr += "stroke-width: " + this.curStroke.getLineWidth() + "; ";
 		outputStr += "stroke: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ";
-		//outputStr += "stroke-opacity: 1.0; ";
 		outputStr += "stroke-linecap: butt; ";
 		if(dashArray != null) {
 			String dashArrayStr = "";
@@ -161,7 +160,6 @@ public class StyleContext {
 	public String getFontStyle() {
 		String outputStr = "";
 		outputStr += "fill: rgb(" + this.curFontColor.getRed() + "," + this.curFontColor.getGreen() + "," + this.curFontColor.getBlue() + "); ";
-		//outputStr += "fill-opacity: 1.0; ";
 		outputStr += "font-family: " + this.curFont.getFontName() + "; ";
 		outputStr += "font-size: " + this.curFont.getSize() + "px; ";
 		
