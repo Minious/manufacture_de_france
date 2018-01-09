@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.AffineTransform;
+import java.util.Arrays;
 
 public class StyleContext {
 	private AffineTransform curTransform;
@@ -163,16 +164,30 @@ public class StyleContext {
 	}
 	
 	public String getTransformMatrix() {
-		double[] matrix = new double[6];
-		this.curTransform.getMatrix(matrix);
 		String outputStr = "";
-		outputStr += "matrix(";
-		outputStr += matrix[0] + ",";
-		outputStr += matrix[1] + ",";
-		outputStr += matrix[2] + ",";
-		outputStr += matrix[3] + ",";
-		outputStr += matrix[4] + ",";
-		outputStr += matrix[5] + ")";
+
+		int type = this.curTransform.getType();
+		boolean isIdentity = type == AffineTransform.TYPE_IDENTITY;
+		boolean isQuadrantRotation = (type & AffineTransform.TYPE_QUADRANT_ROTATION) == AffineTransform.TYPE_QUADRANT_ROTATION;
+		boolean isRotation = (type & AffineTransform.TYPE_GENERAL_ROTATION) == AffineTransform.TYPE_GENERAL_ROTATION;
+		boolean isTranslation = (type & AffineTransform.TYPE_TRANSLATION) == AffineTransform.TYPE_TRANSLATION;
+
+		if (!isIdentity) {
+			if(isTranslation) {
+				double translateX = this.curTransform.getTranslateX();
+				double translateY = this.curTransform.getTranslateY();
+				outputStr += "translate(" + translateX + " " + translateY + ") ";
+			}
+			if(isQuadrantRotation || isRotation) {
+				double rotation = Math.toDegrees(Math.atan2(this.curTransform.getShearY(), this.curTransform.getScaleY()));
+				outputStr += "rotate(" + rotation + ") ";
+			}
+		}
+
 		return outputStr;
+	}
+
+	public boolean isTranformIdentity(){
+		return this.curTransform.isIdentity();
 	}
 }

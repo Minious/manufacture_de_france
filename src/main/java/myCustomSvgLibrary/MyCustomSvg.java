@@ -245,29 +245,49 @@ public class MyCustomSvg extends SvgComponent{
 		double curW, curH;
 		curW = this.bounds.getWidth() + this.padding.getHorizontalPadding();
 		curH = this.bounds.getHeight() + this.padding.getVerticalPadding();
-		
-		String output = "";
-		output += "<g style=\"overflow:visible;\" ";
-		output += "transform=\""+ this.svgTagSc.getTransformMatrix() + " translate("+curX+" "+curY+") \" ";
-		output +=  ">\n";
-		///// DEBUG /////
-		if(this.hasBorders) {
-			output += "<rect ";
-			output += "x=\"" + this.bounds.getX() + "\" ";
-			output += "y=\"" + this.bounds.getY() + "\" ";
-			output += "width=\"" + curW + "\" ";
-			output += "height=\"" + curH + "\" ";
-			output += "style=\"" + this.borderSc.getShapeStyle() + "\" ";
-			output += "/>";
-		}
-		output += "<g transform=\"translate(" + this.padding.getLeftPadding() + " " + this.padding.getTopPadding() + ")\" >\n";
+
+		String balisesIntermediaires = "";
 		for(SvgComponent svgComponent : this.svgTree) {
-			output += svgComponent.renderTag() + "\n";
+			balisesIntermediaires += svgComponent.renderTag() + "\n";
 		}
-		output += "</g>\n";
-		output += "</g>\n";
-		
-		return output;
+
+		String gPadding = "";
+		if(this.padding.getLeftPadding() != 0 || this.padding.getTopPadding() != 0) {
+			gPadding += "<g transform=\"translate(" + this.padding.getLeftPadding() + " " + this.padding.getTopPadding() + ")\" >\n";
+			gPadding += balisesIntermediaires;
+			gPadding += "</g>";
+		} else
+			gPadding += balisesIntermediaires;
+
+		if(this.hasBorders) {
+			String gBorder = "";
+			gBorder += "<rect ";
+			gBorder += "x=\"" + this.bounds.getX() + "\" ";
+			gBorder += "y=\"" + this.bounds.getY() + "\" ";
+			gBorder += "width=\"" + curW + "\" ";
+			gBorder += "height=\"" + curH + "\" ";
+			gBorder += "style=\"" + this.borderSc.getShapeStyle() + "\" ";
+			gBorder += "/>";
+
+			gPadding = gBorder += gPadding;
+		}
+
+		String gTransform = "";
+		if(!this.svgTagSc.isTranformIdentity() || curX != 0 || curY != 0) {
+			gTransform += "<g transform=\"";
+			if(!this.svgTagSc.isTranformIdentity())
+				gTransform += this.svgTagSc.getTransformMatrix() + " ";
+			if(curX != 0 || curY != 0)
+				gTransform += "translate(" + curX + " " + curY + ")";
+			gTransform += "\" >\n";
+
+			gTransform += gPadding;
+
+			gTransform += "</g>\n";
+		} else
+			gTransform += gPadding;
+
+		return gTransform;
 	}
 	
 	public Rectangle2D getBounds() {
