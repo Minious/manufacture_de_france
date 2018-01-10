@@ -1,5 +1,7 @@
 package myCustomSvgLibrary;
 
+import myCustomSvgLibrary.tags.RectTag;
+
 public class RectSVG extends SvgComponent {
 	private double x, y, width, height;
 	
@@ -12,18 +14,16 @@ public class RectSVG extends SvgComponent {
 	}
 	
 	public String renderTag() {
-		String outputStr = "";
-		outputStr += "<rect ";
-		outputStr += "x=\"" + this.x + "\" ";
-		outputStr += "y=\"" + this.y + "\" ";
-		outputStr += "width=\"" + this.width + "\" ";
-		outputStr += "height=\"" + this.height + "\" ";
-		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
-		if(!this.sc.isTranformIdentity())
-			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
-		outputStr += "/>";
-		
-		return outputStr;
+		RectTag tag = new RectTag();
+		tag.x(this.x);
+		tag.y(this.y);
+		tag.width(this.width);
+		tag.height(this.height);
+		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
+		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
+		tag.rotate(this.sc.getRotation());
+
+		return tag.render();
 	}
 
 	@Override

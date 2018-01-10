@@ -1,5 +1,7 @@
 package myCustomSvgLibrary;
 
+import myCustomSvgLibrary.tags.TextTag;
+
 public class StrSVG extends SvgComponent {
 	private String str;
 	private double x, y;
@@ -12,20 +14,14 @@ public class StrSVG extends SvgComponent {
 	}
 	
 	public String renderTag() {
-		//String rgbColorStyle = "rgb(" + this.sc.getColor().getRed() + "," + this.sc.getColor().getGreen() + "," + this.sc.getColor().getBlue() + ")";
-		
-		String outputStr = "";
-		outputStr += "<text ";
-		outputStr += "x=\"" + this.x + "\" ";
-		outputStr += "y=\"" + this.y + "\" ";
-		outputStr += "style=\"" + this.sc.getFontStyle() + "\" ";
-		if(!this.sc.isTranformIdentity())
-			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
-		outputStr += ">";
-		outputStr += this.str;
-		outputStr += "</text>";
-		
-		return outputStr;
+		TextTag tag = new TextTag();
+		tag.x(this.x);
+		tag.y(this.y);
+		tag.style(this.sc.getFontStyle());
+		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
+		tag.rotate(this.sc.getRotation());
+
+		return tag.render(this.str);
 	}
 
 	@Override

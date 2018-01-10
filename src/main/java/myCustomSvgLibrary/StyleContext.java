@@ -190,6 +190,18 @@ public class StyleContext {
 		return outputStr;
 	}
 
+	public double getTranslateX(){
+		return this.curTransform.getTranslateX();
+	}
+
+	public double getTranslateY(){
+		return this.curTransform.getTranslateY();
+	}
+
+	public double getRotation(){
+		return Math.toDegrees(Math.atan2(this.curTransform.getShearY(), this.curTransform.getScaleY()));
+	}
+
 	public boolean isTranformIdentity(){
 		return this.curTransform.isIdentity();
 	}

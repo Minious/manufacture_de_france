@@ -1,5 +1,7 @@
 package myCustomSvgLibrary;
 
+import myCustomSvgLibrary.tags.EllipseTag;
+
 public class EllipseSVG extends SvgComponent {
 	private double x, y, width, height;
 	
@@ -17,18 +19,16 @@ public class EllipseSVG extends SvgComponent {
 		double cx = this.x + rx;
 		double cy = this.y + ry;
 
-		String outputStr = "";
-		outputStr += "<ellipse ";
-		outputStr += "cx=\"" + cx + "\" ";
-		outputStr += "cy=\"" + cy + "\" ";
-		outputStr += "rx=\"" + rx + "\" ";
-		outputStr += "ry=\"" + ry + "\" ";
-		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
-		if(!this.sc.isTranformIdentity())
-			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
-		outputStr += "/>";
-		
-		return outputStr;
+		EllipseTag tag = new EllipseTag();
+		tag.cx(cx);
+		tag.cy(cy);
+		tag.rx(rx);
+		tag.ry(ry);
+		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
+		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
+		tag.rotate(this.sc.getRotation());
+
+		return tag.render();
 	}
 
 	@Override

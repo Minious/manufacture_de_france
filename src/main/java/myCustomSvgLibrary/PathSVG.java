@@ -2,6 +2,7 @@ package myCustomSvgLibrary;
 
 import java.awt.geom.PathIterator;
 
+import myCustomSvgLibrary.tags.PathTag;
 import utils.MyPath2D;
 
 public class PathSVG extends SvgComponent {
@@ -16,27 +17,25 @@ public class PathSVG extends SvgComponent {
 		PathIterator pathIterator = path.getPathIterator();
 		double[] coords = new double[6];
 		int state;
-		
-		String outputStr = "";
-		outputStr += "<path ";
-		outputStr += "d=\"";
+
 		state = pathIterator.currentSegment(coords);
-		outputStr += "M"+coords[0]+" "+coords[1]+" ";
+		String path = "M"+coords[0]+" "+coords[1]+" ";
 		pathIterator.next();
 		while(!pathIterator.isDone()) {
 			state = pathIterator.currentSegment(coords);
-			outputStr += "L"+coords[0]+" "+coords[1]+" ";
+			path += "L"+coords[0]+" "+coords[1]+" ";
 			pathIterator.next();
 		}
 		if(state == PathIterator.SEG_CLOSE)
-			outputStr += "Z ";
-		outputStr += "\" ";
-		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
-		if(!this.sc.isTranformIdentity())
-			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
-		outputStr += "/>";
-		
-		return outputStr;
+			path += "Z ";
+
+		PathTag tag = new PathTag();
+		tag.d(path);
+		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
+		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
+		tag.rotate(this.sc.getRotation());
+
+		return tag.render();
 	}
 
 	@Override

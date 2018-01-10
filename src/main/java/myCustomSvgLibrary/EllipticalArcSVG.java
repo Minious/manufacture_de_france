@@ -3,6 +3,7 @@ package myCustomSvgLibrary;
 import java.text.DecimalFormat;
 
 import generateurCoteVerriere.Utils;
+import myCustomSvgLibrary.tags.PathTag;
 
 public class EllipticalArcSVG extends SvgComponent {
 	private double x, y, width, height, start, end;
@@ -30,17 +31,17 @@ public class EllipticalArcSVG extends SvgComponent {
         double simplifiedEnd = Utils.positiveModulo(this.end, 2 * Math.PI);
 		int largeArcFlag = (simplifiedEnd - simplifiedStart + (Math.PI * 2)) % (Math.PI * 2) > Math.PI ? 1 : 0;
 		int sweepFlag = 0;
-		
-		String outputStr = "";
-		outputStr += "<path d=\"";
-		outputStr += "M " +  xStart + " " + yStart + " ";
-		outputStr += "A " + this.width / 2 + " " + this.height / 2 + " 0 " + largeArcFlag + " " + sweepFlag + " " + String.valueOf(xEnd) + " " + yEnd + "\" ";
-		outputStr += "style=\"" + this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle() + "\" ";
-		if(!this.sc.isTranformIdentity())
-			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
-		outputStr += "/>";
-		
-		return outputStr;
+
+		String path = "M " +  xStart + " " + yStart + " ";
+		path += "A " + this.width / 2 + " " + this.height / 2 + " 0 " + largeArcFlag + " " + sweepFlag + " " + String.valueOf(xEnd) + " " + yEnd;
+
+		PathTag tag = new PathTag();
+		tag.d(path);
+		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
+		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
+		tag.rotate(this.sc.getRotation());
+
+		return tag.render();
 	}
 
 	@Override

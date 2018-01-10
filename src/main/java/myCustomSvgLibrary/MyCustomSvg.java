@@ -17,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import myCustomSvgLibrary.tags.GTag;
+import myCustomSvgLibrary.tags.SvgTag;
 import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 import utils.MyPath2D;
 
@@ -246,13 +248,9 @@ public class MyCustomSvg extends SvgComponent{
 		for(SvgComponent svgComponent : this.svgTree)
 			balisesIntermediaires += svgComponent.renderTag() + "\n";
 
-		String gPadding = "";
-		if(this.padding.getLeftPadding() != 0 || this.padding.getTopPadding() != 0) {
-			gPadding += "<g transform=\"translate(" + this.padding.getLeftPadding() + " " + this.padding.getTopPadding() + ")\" >\n";
-			gPadding += tabuler(balisesIntermediaires);
-			gPadding += "</g>\n";
-		} else
-			gPadding += balisesIntermediaires;
+		GTag gTagPadding = new GTag();
+		gTagPadding.translate(this.padding.getLeftPadding(), this.padding.getTopPadding());
+		String gPadding = gTagPadding.render(balisesIntermediaires);
 
 		if(this.hasBorders) {
 			double curW, curH;
@@ -271,22 +269,12 @@ public class MyCustomSvg extends SvgComponent{
 			gPadding = gBorder += gPadding;
 		}
 
-		String gTransform = "";
-		if(!this.sc.isTranformIdentity() || curX != 0 || curY != 0) {
-			gTransform += "<g transform=\"";
-			if(!this.sc.isTranformIdentity())
-				gTransform += this.sc.getTransformSvgNotation() + " ";
-			if(curX != 0 || curY != 0)
-				gTransform += "translate(" + curX + " " + curY + ")";
-			gTransform += "\" >\n";
+		GTag gTagTransform = new GTag();
+		gTagTransform.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
+		gTagTransform.rotate(this.sc.getRotation());
+		gTagTransform.translate(curX, curY);
 
-			gTransform += tabuler(gPadding);
-
-			gTransform += "</g>\n";
-		} else
-			gTransform += gPadding;
-
-		return gTransform.substring(0, gTransform.length() - 1);
+		return gTagTransform.render(gPadding);
 	}
 
 	private String tabuler(String input){
@@ -301,15 +289,21 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public void writeToSVG(Path outputFilePath) {
-		double w, h;
-		w = this.bounds.getWidth() + this.padding.getHorizontalPadding();
-		h = this.bounds.getHeight() + this.padding.getVerticalPadding();
-		
+		double w = this.bounds.getWidth() + this.padding.getHorizontalPadding();
+		double h = this.bounds.getHeight() + this.padding.getVerticalPadding();
+
+		/*
 		String output = "";
 		output += "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + w + "\" height=\"" + h + "\" >\n";
 		output += tabuler(this.renderTag());
-		output += "</svg>\n";
-		
+		output += "</svg>";
+		*/
+
+		SvgTag svgTag = new SvgTag();
+		svgTag.width(w);
+		svgTag.height(h);
+		String output = svgTag.render(this.renderTag());
+
 		try {
 			Files.createDirectories(outputFilePath.getParent());
 			Files.write(outputFilePath, output.getBytes(Charset.forName("UTF-8")));

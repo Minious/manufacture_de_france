@@ -1,5 +1,7 @@
 package myCustomSvgLibrary;
 
+import myCustomSvgLibrary.tags.LineTag;
+
 public class LineSVG extends SvgComponent {
 	private double x1, y1, x2, y2;
 	
@@ -12,18 +14,16 @@ public class LineSVG extends SvgComponent {
 	}
 	
 	public String renderTag() {
-		String outputStr = "";
-		outputStr += "<line ";
-		outputStr += "x1=\"" + this.x1 + "\" ";
-		outputStr += "y1=\"" + this.y1 + "\" ";
-		outputStr += "x2=\"" + this.x2 + "\" ";
-		outputStr += "y2=\"" + this.y2 + "\" ";
-		outputStr += "style=\"" + this.sc.getStrokeStyle() + "\" ";
-		if(!this.sc.isTranformIdentity())
-			outputStr += "transform=\"" + this.sc.getTransformSvgNotation() + "\" ";
-		outputStr += "/>";
-		
-		return outputStr;
+		LineTag tag = new LineTag();
+		tag.x1(x1);
+		tag.y1(y1);
+		tag.x2(x2);
+		tag.y2(y2);
+		tag.style(this.sc.getStrokeStyle());
+		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
+		tag.rotate(this.sc.getRotation());
+
+		return tag.render();
 	}
 
 	@Override
