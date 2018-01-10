@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class AbstractTag {
-    private HashMap<String, AbstractAtt> hashAttrs;
+    protected HashMap<String, AbstractAtt> hashAttrs;
     protected ArrayList<AbstractAtt> attrs;
     private boolean isAutoClosing;
     private boolean forceRendering = false;
@@ -76,7 +76,7 @@ public abstract class AbstractTag {
             else {
                 strBld.append(">\n");
                 if(content != null)
-                    strBld.append(AbstractTag.tabuler(content) + "\n");
+                    strBld.append(AbstractTag.tabuler(content));
                 strBld.append("</" + this.getTagName() + ">");
             }
         } else

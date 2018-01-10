@@ -29,14 +29,12 @@ public class EllipticalArcSVG extends SvgComponent {
 
         double simplifiedStart = Utils.positiveModulo(this.start, 2 * Math.PI);
         double simplifiedEnd = Utils.positiveModulo(this.end, 2 * Math.PI);
-		int largeArcFlag = (simplifiedEnd - simplifiedStart + (Math.PI * 2)) % (Math.PI * 2) > Math.PI ? 1 : 0;
-		int sweepFlag = 0;
-
-		String path = "M " +  xStart + " " + yStart + " ";
-		path += "A " + this.width / 2 + " " + this.height / 2 + " 0 " + largeArcFlag + " " + sweepFlag + " " + String.valueOf(xEnd) + " " + yEnd;
+		boolean largeArcFlag = (simplifiedEnd - simplifiedStart + (Math.PI * 2)) % (Math.PI * 2) > Math.PI;
+		boolean sweepFlag = false;
 
 		PathTag tag = new PathTag();
-		tag.d(path);
+		tag.moveto(xStart, yStart);
+		tag.arcto(this.width / 2, this.height / 2, largeArcFlag, sweepFlag, xEnd, yEnd);
 		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
 		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
 		tag.rotate(this.sc.getRotation());

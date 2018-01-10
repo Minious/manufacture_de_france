@@ -18,19 +18,17 @@ public class PathSVG extends SvgComponent {
 		double[] coords = new double[6];
 		int state;
 
+		PathTag tag = new PathTag();
 		state = pathIterator.currentSegment(coords);
-		String path = "M"+coords[0]+" "+coords[1]+" ";
+		tag.moveto(coords[0], coords[1]);
 		pathIterator.next();
 		while(!pathIterator.isDone()) {
 			state = pathIterator.currentSegment(coords);
-			path += "L"+coords[0]+" "+coords[1]+" ";
+			tag.lineto(coords[0], coords[1]);
 			pathIterator.next();
 		}
 		if(state == PathIterator.SEG_CLOSE)
-			path += "Z ";
-
-		PathTag tag = new PathTag();
-		tag.d(path);
+			tag.closePath();
 		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
 		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
 		tag.rotate(this.sc.getRotation());
