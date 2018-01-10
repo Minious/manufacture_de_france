@@ -37,7 +37,7 @@ public abstract class AbstractTag {
             hashAttrs.put(transformAtt.getName(), transformAtt);
             attrs.add(transformAtt);
         }
-        ((TransformAtt) getAtt("transform")).addTransform(type, values);
+        ((TransformAtt) getAtt("transform")).addValue(type, values);
     }
 
     public void style(String value){
@@ -92,6 +92,27 @@ public abstract class AbstractTag {
         TRANSLATION, ROTATION, MATRIX;
     }
 
+    class TransformAtt extends MultipleValuesAtt<TransformType> {
+
+        public TransformAtt() {
+            super("transform");
+            this.isInPrentheses();
+        }
+
+        @Override
+        protected String getTypeStr(TransformType type) {
+            switch(type){
+                case TRANSLATION:
+                    return "translate";
+                case ROTATION:
+                    return "rotate";
+                case MATRIX:
+                    return "matrix";
+            }
+            return null;
+        }
+    }
+    /*
     class TransformAtt extends AbstractAtt {
         private ArrayList<Transform> transforms;
 
@@ -146,7 +167,7 @@ public abstract class AbstractTag {
             }
         }
     }
-
+*/
     class Att extends AbstractAtt {
         String value;
 
@@ -159,23 +180,5 @@ public abstract class AbstractTag {
         public String getValue() {
             return this.value;
         }
-    }
-
-    abstract class AbstractAtt {
-        String name;
-
-        public AbstractAtt(String name){
-            this.name = name;
-        }
-
-        public String getName(){
-            return this.name;
-        }
-
-        public String render(){
-            return this.getName()+"=\""+this.getValue()+"\"";
-        }
-
-        abstract public String getValue();
     }
 }
