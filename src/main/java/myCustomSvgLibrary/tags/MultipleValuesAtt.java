@@ -36,7 +36,7 @@ public abstract class MultipleValuesAtt<Type> extends AbstractAtt {
         return strBld.toString();
     }
 
-    class Value {
+    private class Value {
         String type;
         double[] values;
 

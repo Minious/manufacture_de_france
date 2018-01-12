@@ -71,7 +71,7 @@ public abstract class AbstractTag {
             for (AbstractAtt att : this.attrs)
                 strBld.append(att.getName() + "=\"" + att.getValue() + "\" ");
             strBld.deleteCharAt(strBld.length() - 1);
-            if (isAutoClosing)
+            if (this.isAutoClosing)
                 strBld.append("/>");
             else {
                 strBld.append(">\n");
@@ -112,63 +112,8 @@ public abstract class AbstractTag {
             return null;
         }
     }
-    /*
-    class TransformAtt extends AbstractAtt {
-        private ArrayList<Transform> transforms;
 
-        public TransformAtt() {
-            super("transform");
-            this.transforms = new ArrayList<>();
-        }
-
-        public void addTransform(TransformType type, double... values){
-            String typeStr = null;
-            switch(type){
-                case TRANSLATION:
-                    typeStr = "translate";
-                    break;
-                case ROTATION:
-                    typeStr = "rotate";
-                    break;
-                case MATRIX:
-                    typeStr = "matrix";
-                    break;
-            }
-            if(typeStr != null)
-                this.transforms.add(new Transform(typeStr, values));
-        }
-
-        @Override
-        public String getValue() {
-            StringBuilder strBld = new StringBuilder();
-            for(Transform transform : this.transforms)
-                strBld.append(transform.render()+" ");
-            strBld.deleteCharAt(strBld.length() - 1);
-            return strBld.toString();
-        }
-
-        class Transform {
-            String type;
-            double[] values;
-
-            public Transform(String type, double[] values){
-                this.type = type;
-                this.values = values;
-            }
-
-            public String render(){
-                StringBuilder strBld = new StringBuilder();
-                strBld.append(this.type+"(");
-                for(double value : this.values)
-                    strBld.append(value+" ");
-                strBld.deleteCharAt(strBld.length() - 1);
-                strBld.append(")");
-                return strBld.toString();
-            }
-        }
-    }
-*/
-    class Att extends AbstractAtt {
+    private class Att extends AbstractAtt {
         String value;
 
         public Att(String name, String value){

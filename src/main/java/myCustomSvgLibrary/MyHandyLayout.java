@@ -7,11 +7,18 @@ import myCustomSvgLibraryEnhanced.MyCustomSvgEnhanced.ShiftMode;
 
 public class MyHandyLayout {
 
-	private double marge = 20;
+	private final static double DEFAULT_MARGE = 20;
+
+	private double marge;
 	private ArrayList<MyCustomSvg[]> gs;
 	private ArrayList<ShiftMode> shiftModes;
-	
+
 	public MyHandyLayout() {
+		this(MyHandyLayout.DEFAULT_MARGE);
+	}
+
+	public MyHandyLayout(double marge) {
+		this.marge = marge;
 		this.gs = new ArrayList<>();
 		this.shiftModes = new ArrayList<>();
 	}

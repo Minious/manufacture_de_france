@@ -6,9 +6,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-public class ConfTests {
+public class ConfTest {
+
+	@Test
+	public void testTest(){
+		assertEquals(10, 5 + 5);
+	}
 
 	@Test
 	public void test() {
@@ -33,13 +38,25 @@ public class ConfTests {
 		try {
 			HashMap<String, Double> conf = TextFileConf.loadConf(fileName, initialMap, functions);
 
-			assertEquals(conf.get("a"), Double.valueOf(5d));
-			assertEquals(conf.get("b"), Double.valueOf(12d));
-			assertEquals(conf.get("c"), Double.valueOf(-50.5d));
-			assertEquals(conf.get("d"), Double.valueOf(0d));
-			assertEquals(conf.get("e"), Double.valueOf(40d));
+			Double[] actuals = new Double[]{
+				conf.get("a"),
+				conf.get("b"),
+				conf.get("c"),
+				conf.get("d"),
+				conf.get("e")
+			};
+
+			Double[] expecteds = new Double[]{
+				5d,
+				12d,
+				-50.5d,
+				0d,
+				40d
+			};
+
+			assertArrayEquals("Test conf file gives expected values.", expecteds, actuals);
 		} catch (UnprocessableConfFileException e) {
-			e.printStackTrace();
+			fail("Unprocessable test conf file.");
 		}
 	}
 }
