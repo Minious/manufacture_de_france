@@ -30,7 +30,7 @@ public class RectSVG extends SvgComponent {
 	}
 
 	@Override
-	public SvgComponent clone() {
+	public SvgComponent duplicate() {
 		return new RectSVG(this.x, this.y, this.width, this.height, this.sc);
 	}
 }

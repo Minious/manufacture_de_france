@@ -26,7 +26,7 @@ public class StrSVG extends SvgComponent {
 	}
 
 	@Override
-	public SvgComponent clone() {
+	public SvgComponent duplicate() {
 		return new StrSVG(this.str, this.x, this.y, this.sc);
 	}
 }

@@ -54,7 +54,7 @@ public class MyCustomSvg extends SvgComponent{
 		this.y = g.y;
 		this.svgTree = new ArrayList<>();
 		for(SvgComponent c : g.svgTree)
-			this.svgTree.add(c.clone());
+			this.svgTree.add(c.duplicate());
 		this.hasBorders = g.hasBorders;
 		this.borderSc = g.borderSc != null ? g.borderSc.clone() : null;
 		this.rememberedSc = g.rememberedSc.clone();
@@ -225,7 +225,7 @@ public class MyCustomSvg extends SvgComponent{
 				break;
 		}
 
-		MyCustomSvg svgClone = svg.clone();
+		MyCustomSvg svgClone = svg.duplicate();
 		svgClone.sc = this.rememberedSc.clone();
 		svgTree.add(svgClone);
 		svgClone.setPosition(actualX, actualY);
@@ -299,7 +299,7 @@ public class MyCustomSvg extends SvgComponent{
 			this.bounds.add(curBounds);
 	}
 	
-	public MyCustomSvg clone() {
+	public MyCustomSvg duplicate() {
 		return new MyCustomSvg(this);
 	}
 }

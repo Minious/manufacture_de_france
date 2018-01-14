@@ -14,5 +14,5 @@ public abstract class SvgComponent {
 	}
 
 	public abstract String renderTag();
-	public abstract SvgComponent clone();
+	public abstract SvgComponent duplicate();
 }
