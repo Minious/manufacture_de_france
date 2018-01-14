@@ -3,6 +3,11 @@ package com.manufacturedefrance.techdrawgen;
 import com.manufacturedefrance.utils.Point;
 
 public class Utils{
+
+	private Utils() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	/**
 	 * Retourne l'angle orienté entre le vecteur vertical orienté vers le bas et le vecteur (p2.x - p1.x, p2.y - p1.y) (compris entre -PI et PI)
 	 * Exemple : 
