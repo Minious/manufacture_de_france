@@ -43,21 +43,21 @@ public class MyCustomSvg extends SvgComponent{
 		this.svgTree = new ArrayList<>();
 		this.hasBorders = false;
 		this.borderSc = null;
-		this.rememberedSc = this.sc.clone();
+		this.rememberedSc = new StyleContext(this.sc);
 	}
 	
 	public MyCustomSvg(MyCustomSvg g) {
 		super(g.sc);
 		this.bounds = (Rectangle2D) g.bounds.clone();
-		this.padding = g.padding.clone();
+		this.padding = new Padding(g.padding);
 		this.x = g.x;
 		this.y = g.y;
 		this.svgTree = new ArrayList<>();
 		for(SvgComponent c : g.svgTree)
 			this.svgTree.add(c.duplicate());
 		this.hasBorders = g.hasBorders;
-		this.borderSc = g.borderSc != null ? g.borderSc.clone() : null;
-		this.rememberedSc = g.rememberedSc.clone();
+		this.borderSc = g.borderSc != null ? new StyleContext(g.borderSc) : null;
+		this.rememberedSc = new StyleContext(g.rememberedSc);
 	}	
 	
 	public void setPadding(Padding padding) {
@@ -66,7 +66,7 @@ public class MyCustomSvg extends SvgComponent{
 
 	public void setBorders(boolean hasBorders) {
 		this.hasBorders = hasBorders;
-		this.borderSc = this.rememberedSc.clone();
+		this.borderSc = new StyleContext(this.rememberedSc);
 	}
 	
 	public double getWidth() {
@@ -226,7 +226,7 @@ public class MyCustomSvg extends SvgComponent{
 		}
 
 		MyCustomSvg svgClone = svg.duplicate();
-		svgClone.sc = this.rememberedSc.clone();
+		svgClone.sc = new StyleContext(this.rememberedSc);
 		svgTree.add(svgClone);
 		svgClone.setPosition(actualX, actualY);
 		Rectangle2D svgBounds = new Rectangle2D.Double(actualX, actualY, svgClone.getWidth(), svgClone.getHeight());

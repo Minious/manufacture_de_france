@@ -25,16 +25,9 @@ public class StyleContext {
 		this.curFont = f;
 		this.curStroke = s;
 	}
-	
-	public StyleContext clone() {
-		AffineTransform t = (AffineTransform) this.curTransform.clone();
-		Color strokeC = this.curStrokeColor;
-		Color fillC = this.curFillColor;
-		Color fontC = this.curFontColor;
-		Font f = this.curFont;
-		BasicStroke s = this.curStroke;
-		
-		return new StyleContext(t, strokeC, fillC, fontC, f, s);
+
+	StyleContext(StyleContext styleContext) {
+		this((AffineTransform) styleContext.curTransform.clone(), styleContext.curStrokeColor, styleContext.curFillColor, styleContext.curFontColor, styleContext.curFont, styleContext.curStroke);
 	}
 	
 	public Font getFont() {

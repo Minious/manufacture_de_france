@@ -10,7 +10,7 @@ public abstract class SvgComponent {
 	public static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("###.##", new DecimalFormatSymbols(Locale.ENGLISH));
 	
 	SvgComponent(StyleContext sc) {
-		this.sc = sc.clone();
+		this.sc = new StyleContext(sc);
 	}
 
 	public abstract String renderTag();

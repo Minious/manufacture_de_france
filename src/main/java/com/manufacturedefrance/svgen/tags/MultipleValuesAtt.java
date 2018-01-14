@@ -4,7 +4,7 @@ import com.manufacturedefrance.svgen.SvgComponent;
 
 import java.util.ArrayList;
 
-public abstract class MultipleValuesAtt<TYPE> extends AbstractAtt {
+public abstract class MultipleValuesAtt<T> extends AbstractAtt {
 
     private ArrayList<Value> values;
     private boolean isInParentheses;
@@ -19,13 +19,13 @@ public abstract class MultipleValuesAtt<TYPE> extends AbstractAtt {
         this.isInParentheses = true;
     }
 
-    public void addValue(TYPE type, double... values){
+    public void addValue(T type, double... values){
         String typeStr = getTypeStr(type);
         if(typeStr != null)
             this.values.add(new Value(typeStr, values));
     }
 
-    protected abstract String getTypeStr(TYPE type);
+    protected abstract String getTypeStr(T type);
 
     @Override
     public String getValue() {

@@ -32,12 +32,13 @@ public abstract class AbstractTag {
     }
 
     private void transform(TransformType type, double... values) {
-        if (!this.hashAttrs.containsKey("transform")) {
+        String transformTagName = "transform";
+        if (!this.hashAttrs.containsKey(transformTagName)) {
             TransformAtt transformAtt = new TransformAtt();
             hashAttrs.put(transformAtt.getName(), transformAtt);
             attrs.add(transformAtt);
         }
-        ((TransformAtt) getAtt("transform")).addValue(type, values);
+        ((TransformAtt) getAtt(transformTagName)).addValue(type, values);
     }
 
     public void style(String value){

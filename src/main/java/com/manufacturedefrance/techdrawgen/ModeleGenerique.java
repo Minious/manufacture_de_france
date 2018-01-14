@@ -31,8 +31,8 @@ public abstract class ModeleGenerique {
 	
 	public void generate(Path savePathTemp) {
 		Path savePath = savePathTemp.resolve(this.data.get("client")+"_"+this.data.get("reference"));
-		
-		System.out.println("\n\tChargement...\n");
+
+		Logger.getAnonymousLogger().log(Level.INFO, "Loading...");
 
 		ArrayList<String> svgPaths = new ArrayList<>();
 		ArrayList<String> pdfPaths = new ArrayList<>();
@@ -65,11 +65,11 @@ public abstract class ModeleGenerique {
 			pdf.addSource(pdfPath);
 		try {
 			pdf.mergeDocuments();
-			System.out.println("Merge pdf files");
+			Logger.getAnonymousLogger().log(Level.INFO, "Merge pdf files");
 		} catch (COSVisitorException | IOException e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 		}
-		
-		System.out.println("\nTerminé !");
+
+		Logger.getAnonymousLogger().log(Level.INFO, "Finished");
 	}
 }
