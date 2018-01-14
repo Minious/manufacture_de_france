@@ -177,66 +177,42 @@ public class TextFileConf {
 		operators.add(new Operator(">=", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 			@Override
 			public double apply(double[] values) {
-				if (values[0] >= values[1]) {
-					return 1d;
-				} else {
-					return 0d;
-				}
+				return values[0] >= values[1] ? 1d : 0d;
 			}
 		});
 
 		operators.add(new Operator(">", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 			@Override
 			public double apply(double[] values) {
-				if (values[0] > values[1]) {
-					return 1d;
-				} else {
-					return 0d;
-				}
+				return values[0] > values[1] ? 1d : 0d;
 			}
 		});
 
 		operators.add(new Operator(">=", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 			@Override
 			public double apply(double[] values) {
-				if (values[0] <= values[1]) {
-					return 1d;
-				} else {
-					return 0d;
-				}
+				return values[0] <= values[1] ? 1d : 0d;
 			}
 		});
 
 		operators.add(new Operator("<", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 			@Override
 			public double apply(double[] values) {
-				if (values[0] < values[1]) {
-					return 1d;
-				} else {
-					return 0d;
-				}
+				return values[0] < values[1] ? 1d : 0d;
 			}
 		});
 
 		operators.add(new Operator("==", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 			@Override
 			public double apply(double[] values) {
-				if (values[0] == values[1]) {
-					return 1d;
-				} else {
-					return 0d;
-				}
+				return values[0] == values[1] ? 1d : 0d;
 			}
 		});
 
 		operators.add(new Operator("!=", 2, true, Operator.PRECEDENCE_ADDITION - 1) {
 			@Override
 			public double apply(double[] values) {
-				if (values[0] != values[1]) {
-					return 1d;
-				} else {
-					return 0d;
-				}
+				return values[0] != values[1] ? 1d : 0d;
 			}
 		});
 
