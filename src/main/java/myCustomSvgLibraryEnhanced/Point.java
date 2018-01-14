@@ -1,8 +1,25 @@
 package myCustomSvgLibraryEnhanced;
 
 public class Point{
-	public double x;
-	public double y;
+	private double x;
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	private double y;
 	
 	public Point(double x, double y){
 		this.x = x;
@@ -14,9 +31,10 @@ public class Point{
 		this.y = p.y;
 	}
 	
-	public void move(double x, double y){
+	public Point move(double x, double y){
 		this.x += x;
 		this.y += y;
+		return this;
 	}
 	
 	public static double distance(Point p1, Point p2){

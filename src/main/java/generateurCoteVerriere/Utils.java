@@ -11,11 +11,11 @@ public class Utils{
 	 * @return Double représentant l'angle orienté compris entre -PI et PI
 	 */
 	public static double getAngle(Point p1, Point p2){
-		double angle = Math.asin((p1.x - p2.x) / Point.distance(p1, p2));
-		if(p1.y < p2.y)
+		double angle = Math.asin((p1.getX() - p2.getX()) / Point.distance(p1, p2));
+		if(p1.getY() < p2.getY())
 			angle = - angle;
 		else{
-			if(p1.x < p2.x)
+			if(p1.getX() < p2.getX())
 				angle += Math.PI;
 			else
 				angle -= Math.PI;

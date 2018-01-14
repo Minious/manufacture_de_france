@@ -24,7 +24,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	}
 	
 	public void drawDiameterCote(String displayedCote, Point p1, Point p2, int shift, ShiftMode shiftMode, double customUnderLineGap){
-		if(p1.x != p2.x || p1.y != p2.y)
+		if(p1.getX() != p2.getX() || p1.getY() != p2.getY())
 			drawDiameterCote(displayedCote, p1, - Utils.getAngle(p1, p2), shift, shiftMode, customUnderLineGap);
 	}
 	
@@ -42,7 +42,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		FontMetrics metrics = this.getFontMetrics();
 		double coteStringWidth = metrics.stringWidth(displayedCote);
 
-		this.translate(p.x, p.y);
+		this.translate(p.getX(), p.getY());
 		this.rotate(angle);
 		
 		if(angle <= 0){
@@ -94,7 +94,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 				double diametrePercageTaraudage = getDiametrePercageTaraudage(percageNumericValue);
 				double pas = getPasPercageTaraudage(percageNumericValue);
 				diametrePercage = diametrePercageTaraudage + pas;
-				this.drawEllipticalArc(p.x, p.y, diametrePercage - pas, diametrePercage - pas, Math.PI * 3 / 2, Math.PI);
+				this.drawEllipticalArc(p.getX(), p.getY(), diametrePercage - pas, diametrePercage - pas, Math.PI * 3 / 2, Math.PI);
 			} else
 				diametrePercage = Double.parseDouble(actualValeurPercage);
 			this.drawCircle(p, diametrePercage);
@@ -142,7 +142,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		FontMetrics metrics = this.getFontMetrics();
 		double stringWidth = metrics.stringWidth(displayedStr);
 		
-		double abscisse = p.x + shift;
+		double abscisse = p.getX() + shift;
 		if(shiftMode == ShiftMode.LEFT)
 			abscisse += 0;
 		if(shiftMode == ShiftMode.CENTER)
@@ -150,23 +150,23 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		if(shiftMode == ShiftMode.RIGHT)
 			abscisse += - stringWidth;
 
-		this.drawString(displayedStr, abscisse, p.y);
+		this.drawString(displayedStr, abscisse, p.getY());
 	}
 
 	public void drawDistanceCote(Point p1, Point p2, double offset, double shift, ShiftMode shiftMode, double underLineGap, boolean reversed){
-		if(p1.x != p2.x || p1.y != p2.y){
+		if(p1.getX() != p2.getX() || p1.getY() != p2.getY()){
 			AffineTransform orig = this.getTransform();
 
 			DecimalFormat myFormatter = new DecimalFormat("#.##");
 			String formatedCote = myFormatter.format(Point.distance(p1, p2));
 			
-			this.translate(p1.x, p1.y);
+			this.translate(p1.getX(), p1.getY());
 			this.rotate(- Utils.getAngle(p1, p2));
 			
 			double distance = Point.distance(p1, p2);
 
 			FontMetrics metrics = this.getFontMetrics();
-			int coteStringWidth = metrics.stringWidth(formatedCote);
+			double	 coteStringWidth = metrics.stringWidth(formatedCote);
 
 			this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
 			
@@ -283,11 +283,11 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	}
 	
 	public void drawLine(Point p1, Point p2){
-		this.drawLine(p1.x, p1.y, p2.x, p2.y);
+		this.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
 	}
 	
 	public void drawOval(Point center, Point dimensions){
-		this.drawEllipse(center.x - dimensions.x / 2, center.y - dimensions.y / 2, dimensions.x, dimensions.y);
+		this.drawEllipse(center.getX() - dimensions.getX() / 2, center.getY() - dimensions.getY() / 2, dimensions.getX(), dimensions.getY());
 	}
 	
 	public void drawCircle(Point center, double diameter){
