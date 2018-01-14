@@ -86,23 +86,23 @@ public class Premium extends ModeleGenerique {
 
 		DecimalFormat myFormatter = new DecimalFormat("#.##");
 		LignesTexte parcloses = new LignesTexte();
-		parcloses.addLignes(Arrays.asList(new String[] {
+		parcloses.addLignes(Arrays.asList(
 			"PARCLOSES : " + conf.get("hauteurParcloseCorniere").intValue(),
 			"- " + myFormatter.format(conf.get("longueurParcloseTraverseLaterale")) + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
 			"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
-		}));
+		));
 		if(conf.get("nbParcloseTraverseCentrale") > 0)
 			parcloses.addLigne("- " + myFormatter.format(conf.get("longueurParcloseTraverseCentrale")) + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
 		if(conf.get("nbParcloseMontantIntermediaire") > 0)
-			parcloses.addLignes(Arrays.asList(new String[] {
+			parcloses.addLignes(Arrays.asList(
 				"PARCLOSES : " + conf.get("hauteurParcloseT").intValue(),
-				"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue(),
-			}));
+				"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue()
+			));
 
-		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(new String[] {
+		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(
 			"VITRAGE :",
 				myFormatter.format(conf.get("largeurVitrage")) + " x " + myFormatter.format(conf.get("hauteurVitrage")) + " QTE " + conf.get("nbVitrage").intValue()
-		}));
+		));
 		
 		MyHandyLayout layoutCartoucheGauche = new MyHandyLayout();
 		layoutCartoucheGauche.addRow(new MyCustomSvg[] {parcloses, vitrages}, ShiftMode.CENTER);
@@ -112,14 +112,14 @@ public class Premium extends ModeleGenerique {
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 		Date date = new Date();
-		MyCustomSvg cartoucheDroite = new LignesTexte(Arrays.asList(new String[] {
+		MyCustomSvg cartoucheDroite = new LignesTexte(Arrays.asList(
 			"ARC : " + data.get("ARC"),
 			"Client : " + data.get("client"),
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
 			"Modèle : Premium",
 			"Dimensions : " + conf.get("largeurVerriere") + " LARG x " + conf.get("hauteurVerriere") + " HT"
-		}));
+		));
 		cartoucheDroite.setPadding(new Padding(10));
 		cartoucheDroite.setBorders(true);
 		

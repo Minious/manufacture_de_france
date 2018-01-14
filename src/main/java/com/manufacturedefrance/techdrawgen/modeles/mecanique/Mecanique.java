@@ -131,24 +131,24 @@ public class Mecanique extends ModeleGenerique {
 
 		MyCustomSvg dessins = layoutDessins.getSvg();
 
-		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(new String[] {
+		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(
 			"VITRAGE :",
 			conf.get("largeurVitrage") + " x " + conf.get("hauteurVitrage") + " QTE " + conf.get("nbVitrage").intValue()
-		}));
+		));
 
 		vitrages.setPadding(new Padding(10));
 		vitrages.setBorders(true);
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 		Date date = new Date();
-		MyCustomSvg cartoucheDroite = new LignesTexte(Arrays.asList(new String[] {
+		MyCustomSvg cartoucheDroite = new LignesTexte(Arrays.asList(
 			"ARC : " + data.get("ARC"),
 			"Client : " + data.get("client"),
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
 			"Modèle : " + data.get("modele"),
 			"Dimensions : " + conf.get("largeurVerriere") + " x " + conf.get("hauteurVerriere")
-		}));
+		));
 		cartoucheDroite.setPadding(new Padding(10));
 		cartoucheDroite.setBorders(true);
 		
