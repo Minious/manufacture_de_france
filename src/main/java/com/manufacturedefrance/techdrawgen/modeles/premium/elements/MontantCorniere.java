@@ -1,6 +1,5 @@
 package com.manufacturedefrance.techdrawgen.modeles.premium.elements;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
@@ -9,8 +8,8 @@ import com.manufacturedefrance.techdrawgen.DessinProfil.Side;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class MontantCorniere extends ElementGenerique {
-	private final int nbMontants = 2;
-	private final String valeurDiametrePercages = "ØM5";
+	private static final int nbMontants = 2;
+	private static final String valeurDiametrePercages = "ØM5";
 	
 	public MontantCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -23,7 +22,7 @@ public class MontantCorniere extends ElementGenerique {
 		profil.setChamp(conf.get("epaisseurMontantCorniere"), Side.RIGHT);
 		profil.setIsChampCorniere(true);
 		profil.setLargeurChamp(conf.get("largeurFaceMontantCorniere"));
-		profil.setValeurPercage(this.valeurDiametrePercages);
+		profil.setValeurPercage(valeurDiametrePercages);
 		
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierPercageMontantCorniere");
 		for(int i=0;i<conf.get("nbPercageMontant");i++) {
@@ -41,6 +40,6 @@ public class MontantCorniere extends ElementGenerique {
 
 	@Override
 	public int getNbElements() {
-		return this.nbMontants;
+		return nbMontants;
 	}
 }

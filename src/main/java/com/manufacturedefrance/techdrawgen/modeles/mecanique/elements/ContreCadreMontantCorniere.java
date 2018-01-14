@@ -1,6 +1,5 @@
 package com.manufacturedefrance.techdrawgen.modeles.mecanique.elements;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
@@ -8,8 +7,8 @@ import com.manufacturedefrance.techdrawgen.DessinProfil;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class ContreCadreMontantCorniere extends ElementGenerique {
-	private final int nbMontants = 2;
-	private final String valeurDiametreTrous = "Ø9";
+	private static final int nbMontants = 2;
+	private static final String valeurDiametreTrous = "Ø9";
 	
 	public ContreCadreMontantCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -19,7 +18,7 @@ public class ContreCadreMontantCorniere extends ElementGenerique {
 	public MyCustomSvg getDessin() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurContreCadreMontantCorniere"), conf.get("hauteurContreCadreMontantCorniere"), 13.5);
 		profil.setCorniere();
-		profil.setValeurPercage(this.valeurDiametreTrous);
+		profil.setValeurPercage(valeurDiametreTrous);
 		
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouContreCadreMontantCorniere");
 		profil.addPercage(ordonnee, false);
@@ -44,6 +43,6 @@ public class ContreCadreMontantCorniere extends ElementGenerique {
 	
 	@Override
 	public int getNbElements() {
-		return this.nbMontants;
+		return nbMontants;
 	}
 }

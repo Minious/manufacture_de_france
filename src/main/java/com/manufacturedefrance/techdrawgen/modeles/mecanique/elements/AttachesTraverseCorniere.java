@@ -1,6 +1,5 @@
 package com.manufacturedefrance.techdrawgen.modeles.mecanique.elements;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
@@ -9,8 +8,8 @@ import com.manufacturedefrance.techdrawgen.DessinProfil.Side;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class AttachesTraverseCorniere extends ElementGenerique {
-	private final int nbTraverses = 2;
-	private final String valeurDiametreTrous = "ØM5";
+	private static final int nbTraverses = 2;
+	private static final String valeurDiametreTrous = "ØM5";
 
 	public AttachesTraverseCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -19,7 +18,7 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 	@Override
 	public MyCustomSvg getDessin() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurTraverseCorniere"), conf.get("hauteurTraverseCorniere"));
-		profil.setValeurPercage(this.valeurDiametreTrous);
+		profil.setValeurPercage(valeurDiametreTrous);
 		profil.setChamp(conf.get("epaisseurProfil"), Side.LEFT);
 		profil.setIsChampCorniere(true);
 		
@@ -41,6 +40,6 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 
 	@Override
 	public int getNbElements() {
-		return this.nbTraverses;
+		return nbTraverses;
 	}
 }

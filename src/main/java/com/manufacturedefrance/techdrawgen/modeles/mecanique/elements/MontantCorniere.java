@@ -1,6 +1,5 @@
 package com.manufacturedefrance.techdrawgen.modeles.mecanique.elements;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
@@ -9,8 +8,8 @@ import com.manufacturedefrance.techdrawgen.DessinProfil.Side;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class MontantCorniere extends ElementGenerique {
-	private final int nbMontants = 2;
-	private final String valeurDiametreTrous = "ØM5";
+	private static final int nbMontants = 2;
+	private static final String valeurDiametreTrous = "ØM5";
 	
 	public MontantCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
