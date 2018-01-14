@@ -108,30 +108,48 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	
 	private double getDiametrePercageTaraudage(int valeur) {
 		switch(valeur) {
-			case 2: return 1.60;
-			case 3: return 2.50;
-			case 4: return 3.30;
-			case 5: return 4.20;
-			case 6: return 5.00;
-			case 8: return 6.80;
-			case 10: return 8.50;
-			case 12: return 10.20;
+			case 2:
+				return 1.60;
+			case 3:
+				return 2.50;
+			case 4:
+				return 3.30;
+			case 5:
+				return 4.20;
+			case 6:
+				return 5.00;
+			case 8:
+				return 6.80;
+			case 10:
+				return 8.50;
+			case 12:
+				return 10.20;
+			default:
+				return Double.NaN;
 		}
-		return Double.NaN;
 	}
 	
 	private double getPasPercageTaraudage(int valeur) {
 		switch(valeur) {
-			case 2: return 0.40;
-			case 3: return 0.50;
-			case 4: return 0.70;
-			case 5: return 0.80;
-			case 6: return 1.00;
-			case 8: return 1.25;
-			case 10: return 1.50;
-			case 12: return 1.75;
+			case 2:
+				return 0.40;
+			case 3:
+				return 0.50;
+			case 4:
+				return 0.70;
+			case 5:
+				return 0.80;
+			case 6:
+				return 1.00;
+			case 8:
+				return 1.25;
+			case 10:
+				return 1.50;
+			case 12:
+				return 1.75;
+			default:
+				return Double.NaN;
 		}
-		return Double.NaN;
 	}
 		
 	public void drawString(String displayedStr, Point p){
@@ -176,7 +194,8 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			
 			this.translate(offset, - distance / 2);
 			
-			double lowerBound = shift, upperBound = shift;
+			double lowerBound = shift;
+			double upperBound = shift;
 			
 			if(shiftMode == ShiftMode.LEFT)
 				lowerBound += 0;
@@ -197,12 +216,13 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			
 			this.drawLine(0, actualLowerBound, 0, actualUpperBound);
 			
-			double arrowWidth = 10, arrowHeight = 3;
+			double arrowWidth = 10;
+			double arrowHeight = 3;
 			MyPath2D arrowPath = new MyPath2D();
 			arrowPath.moveTo(0, 0);
 			arrowPath.lineTo(- arrowWidth, arrowHeight / 2);
 			arrowPath.lineTo(- arrowWidth, - arrowHeight / 2);
-			//arrowPath.closePath();
+			arrowPath.closePath();
 
 			this.rotate(Math.PI / 2);
 			if(reversed)
@@ -302,6 +322,9 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 			case INTERROMPU:
 				this.setDashArray(new float[]{4, 1});
 				break;
+			default:
+				this.removeDashArray();
+				break;
 		}
 	}
 	
@@ -315,6 +338,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	
 	public enum StyleTrait {
 		MIXTE,
-		INTERROMPU
+		INTERROMPU,
+		CONTINU
 	}
 }
