@@ -5,7 +5,8 @@ import java.awt.geom.PathIterator;
 
 public class MyPath2D {
 	private Path2D path;
-	private double x, y;
+	private double x;
+	private double y;
 	
 	public MyPath2D() {
 		this.path = new Path2D.Double();
