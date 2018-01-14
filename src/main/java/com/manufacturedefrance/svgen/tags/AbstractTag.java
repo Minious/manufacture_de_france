@@ -48,11 +48,11 @@ public abstract class AbstractTag {
         return hashAttrs.get(name);
     }
 
-    static private String tabuler(String input){
-        String output = "";
+    private static String tabuler(String input){
+        StringBuilder output = new StringBuilder();
         for(String line : input.split("\n"))
-            output += "\t" + line + "\n";
-        return output;
+            output.append("\t" + line + "\n");
+        return output.toString();
     }
 
     protected void forceRender(){
@@ -66,7 +66,7 @@ public abstract class AbstractTag {
     public String render(String content) {
         StringBuilder strBld = new StringBuilder();
 
-        if(this.forceRendering || this.attrs.size() > 0) {
+        if(this.forceRendering || !this.attrs.isEmpty()) {
             strBld.append("<" + this.getTagName() + " ");
             for (AbstractAtt att : this.attrs)
                 strBld.append(att.getName() + "=\"" + att.getValue() + "\" ");

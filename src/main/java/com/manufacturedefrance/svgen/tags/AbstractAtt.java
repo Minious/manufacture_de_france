@@ -15,5 +15,5 @@ abstract class AbstractAtt {
         return this.getName()+"=\""+this.getValue()+"\"";
     }
 
-    abstract public String getValue();
+    public abstract String getValue();
 }

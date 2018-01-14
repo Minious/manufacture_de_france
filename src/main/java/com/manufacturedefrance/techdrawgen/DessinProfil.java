@@ -118,7 +118,8 @@ public class DessinProfil {
 		
 		// Trace le champ
 		double abscisseChamp;
-		Point p1Champ, p2Champ;
+		Point p1Champ;
+		Point p2Champ;
 		if(this.hasChamp) {
 			abscisseChamp = (this.champSide == Side.LEFT ? - demiLargeurGauche + this.epaisseurChamp : demiLargeurDroite - this.epaisseurChamp);
 			if(this.hasEpaulement && isChampDansEpaulement()) {
@@ -163,7 +164,7 @@ public class DessinProfil {
 
 		// Trace l'axe des percages
 		g.setStrokeWidth(0.5f);
-		if(this.percages.size() > 0) {
+		if(!this.percages.isEmpty()) {
 			g.setDashArray(StyleTrait.MIXTE);
 			g.drawLine(0, 0, 0, this.longueur);
 			g.removeDashArray();
@@ -175,7 +176,7 @@ public class DessinProfil {
 		Point coinSuperieurGaucheProfil = new Point(-demiLargeurGauche, 0);
 		Point coinSuperieurDroitProfil = new Point(demiLargeurDroite, 0);
 
-		if(this.percages.size() > 0) {
+		if(!this.percages.isEmpty()) {
 			if(this.sideCoteDemiLargeur == Side.LEFT)
 				g.drawDistanceCote(coinSuperieurGaucheProfil, origine, curDistanceCotesSuperieures, -demiLargeurGauche / 2 - 10, ShiftMode.RIGHT);
 			else
@@ -262,7 +263,7 @@ public class DessinProfil {
 	}
 	
 	public void setChamp(double epaisseur, Side side, Face face) {
-		setChamp(epaisseur, side, Face.FRONT, false);
+		setChamp(epaisseur, side, face, false);
 	}
 	
 	public void setChamp(double epaisseur, Side side) {

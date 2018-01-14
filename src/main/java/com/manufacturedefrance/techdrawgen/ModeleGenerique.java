@@ -20,7 +20,7 @@ public abstract class ModeleGenerique {
 	protected Map<String, Double> conf;
 	protected Map<String, Object> data;
 	
-	protected HashMap<String, MyCustomSvg> svgToRender;
+	protected Map<String, MyCustomSvg> svgToRender;
 	
 	public ModeleGenerique(Map<String, Object> data) {
 		this.data = data;
@@ -38,11 +38,10 @@ public abstract class ModeleGenerique {
 		ArrayList<String> pdfPaths = new ArrayList<>();
 
 		// HashMap svgToRender
-		for(String fileName : this.svgToRender.keySet()) {
-			MyCustomSvg curSvg = this.svgToRender.get(fileName);
-			Path completeSvgSavePath = savePath.resolve("svg").resolve(fileName + ".svg");
-			Path completePdfSavePath = savePath.resolve("pdf").resolve(fileName + ".pdf");
-			curSvg.writeToSVG(completeSvgSavePath);
+		for(Map.Entry<String, MyCustomSvg> entry : this.svgToRender.entrySet()) {
+			Path completeSvgSavePath = savePath.resolve("svg").resolve(entry.getKey() + ".svg");
+			Path completePdfSavePath = savePath.resolve("pdf").resolve(entry.getKey() + ".pdf");
+			entry.getValue().writeToSVG(completeSvgSavePath);
 			svgPaths.add(completeSvgSavePath.toString());
 			pdfPaths.add(completePdfSavePath.toString());
 		}

@@ -7,10 +7,10 @@ import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 
 public class MyHandyLayout {
 
-	private final static double DEFAULT_MARGE = 20;
+	private static final double DEFAULT_MARGE = 20;
 
 	private double marge;
-	private ArrayList<MyCustomSvg[]> gs;
+	private ArrayList<MyCustomSvg[]> gRows;
 	private ArrayList<ShiftMode> shiftModes;
 
 	public MyHandyLayout() {
@@ -19,7 +19,7 @@ public class MyHandyLayout {
 
 	public MyHandyLayout(double marge) {
 		this.marge = marge;
-		this.gs = new ArrayList<>();
+		this.gRows = new ArrayList<>();
 		this.shiftModes = new ArrayList<>();
 	}
 	
@@ -27,8 +27,8 @@ public class MyHandyLayout {
 		this.addRow(new MyCustomSvg[] {g}, shiftMode);
 	}
 	
-	public void addRow(MyCustomSvg[] gs, ShiftMode shiftMode) {
-		this.gs.add(gs);
+	public void addRow(MyCustomSvg[] gRow, ShiftMode shiftMode) {
+		this.gRows.add(gRow);
 		this.shiftModes.add(shiftMode);
 	}
 	
@@ -37,10 +37,10 @@ public class MyHandyLayout {
 		ArrayList<Double> heights = new ArrayList<>();
 
 		double maxWidth = 0;
-		for(MyCustomSvg[] gs : this.gs) {
+		for(MyCustomSvg[] gRow : this.gRows) {
 			double curWidth = 0;
 			double maxHeight = 0;
-			for(MyCustomSvg g : gs) {
+			for(MyCustomSvg g : gRow) {
 				curWidth += g.getWidth();
 				curWidth += marge;
 				
@@ -58,8 +58,8 @@ public class MyHandyLayout {
 		
 		MyCustomSvg gFinal = new MyCustomSvgEnhanced();
 		double curY = 0;
-		for(int i=0;i<this.gs.size();i++) {
-			MyCustomSvg[] gs = this.gs.get(i);
+		for(int i=0;i<this.gRows.size();i++) {
+			MyCustomSvg[] gRow = this.gRows.get(i);
 			double curWidth = widths.get(i);
 			double curHeight = heights.get(i);
 			ShiftMode curShiftMode = this.shiftModes.get(i);
@@ -78,7 +78,7 @@ public class MyHandyLayout {
 			}
 			
 			double curX = startX;
-			for(MyCustomSvg g : gs) {
+			for(MyCustomSvg g : gRow) {
 				gFinal.drawSvg(g, curX, curY);
 				curX += g.getWidth() + marge;
 			}

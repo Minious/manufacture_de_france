@@ -1,6 +1,5 @@
 package com.manufacturedefrance.techdrawgen;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.manufacturedefrance.svgen.MyCustomSvg;

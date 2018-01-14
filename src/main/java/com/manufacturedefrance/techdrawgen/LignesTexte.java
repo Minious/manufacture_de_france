@@ -7,28 +7,28 @@ import java.util.List;
 import com.manufacturedefrance.utils.Point;
 
 public class LignesTexte extends MyCustomSvgEnhanced {
-	private final static int TAILLE_POLICE_PAR_DEFAUT = 15;
-	private final static double MARGE_ENTRE_LIGNES_PAR_DEFAUT = 2;
-	
+	private static final int TAILLE_POLICE_PAR_DEFAUT = 15;
+	private static final double MARGE_ENTRE_LIGNES_PAR_DEFAUT = 2;
+
 	private ArrayList<String> lignes;
 	private int taillePoliceDonnees;
 	private ShiftMode shiftMode;
 	private double margeEntreLignes;
-	
+
 	public LignesTexte() {
-		this(Arrays.asList(new String[] {}));
+		this(Arrays.asList());
 	}
-	
+
 	public LignesTexte(String ligne) {
-		this(Arrays.asList(new String[] {ligne}));
+		this(Arrays.asList(ligne));
 	}
 	
 	public LignesTexte(String ligne, int taillePoliceDonnees) {
-		this(Arrays.asList(new String[] {ligne}), taillePoliceDonnees);
+		this(Arrays.asList(ligne), taillePoliceDonnees);
 	}
 	
 	public LignesTexte(String ligne, int taillePoliceDonnees, ShiftMode shiftMode) {
-		this(Arrays.asList(new String[] {ligne}), taillePoliceDonnees, shiftMode);
+		this(Arrays.asList(ligne), taillePoliceDonnees, shiftMode);
 	}
 	
 	public LignesTexte(List<String> lignes) {
@@ -44,7 +44,7 @@ public class LignesTexte extends MyCustomSvgEnhanced {
 	}
 	
 	public LignesTexte(List<String> lignes, int taillePoliceDonnees, ShiftMode shiftMode, double margeEntreLignes) {
-		this.lignes = new ArrayList<String>();
+		this.lignes = new ArrayList<>();
 		this.lignes.addAll(lignes);
 		this.taillePoliceDonnees = taillePoliceDonnees;
 		this.shiftMode = shiftMode;
@@ -55,7 +55,7 @@ public class LignesTexte extends MyCustomSvgEnhanced {
 	}
 	
 	public void addLigne(String ligne) {
-		addLignes(Arrays.asList(new String[] {ligne}));
+		addLignes(Arrays.asList(ligne));
 	}
 	
 	public void addLignes(List<String> lignes) {
