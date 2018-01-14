@@ -138,11 +138,13 @@ public class StyleContext {
 		outputStr += "stroke: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ";
 		outputStr += "stroke-linecap: butt; ";
 		if(dashArray != null) {
-			String dashArrayStr = "";
-			dashArrayStr += dashArray[0];
-			for(int i=1;i<dashArray.length;i++)
-				dashArrayStr += ","+dashArray[i];
-			outputStr += "stroke-dasharray: "+dashArrayStr+";";
+			StringBuilder dashArraySb = new StringBuilder();
+			for(int i=0;i<dashArray.length;i++) {
+				dashArraySb.append(dashArray[i]);
+				if(i<dashArray.length-1)
+				dashArraySb.append(",");
+			}
+			outputStr += "stroke-dasharray: "+dashArraySb.toString()+";";
 		}
 		return outputStr;
 	}

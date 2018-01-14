@@ -1,7 +1,10 @@
 package com.manufacturedefrance.svgen;
 
 public class Padding {
-	private double leftPadding, rightPadding, topPadding, bottomPadding;
+	private double leftPadding;
+	private double rightPadding;
+	private double topPadding;
+	private double bottomPadding;
 	
 	public Padding(double padding) {
 		this(padding, padding);

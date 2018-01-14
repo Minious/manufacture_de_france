@@ -6,14 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.manufacturedefrance.utils.SpringUtilities;
-import sun.util.resources.cldr.lag.LocaleNames_lag;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
@@ -232,7 +230,7 @@ public class Main {
 		
 	}
 
-	private static enum FieldType {
+	private enum FieldType {
 		STRING, DOUBLE, INTEGER
 	}
 }

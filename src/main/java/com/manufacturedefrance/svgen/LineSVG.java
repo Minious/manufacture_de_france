@@ -3,7 +3,10 @@ package com.manufacturedefrance.svgen;
 import com.manufacturedefrance.svgen.tags.LineTag;
 
 public class LineSVG extends SvgComponent {
-	private double x1, y1, x2, y2;
+	private double x1;
+	private double y1;
+	private double x2;
+	private double y2;
 	
 	LineSVG(double x1, double y1, double x2, double y2, StyleContext sc) {
 		super(sc);

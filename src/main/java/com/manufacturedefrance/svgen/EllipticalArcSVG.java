@@ -6,7 +6,12 @@ import com.manufacturedefrance.techdrawgen.Utils;
 import com.manufacturedefrance.svgen.tags.PathTag;
 
 public class EllipticalArcSVG extends SvgComponent {
-	private double x, y, width, height, start, end;
+	private double x;
+	private double y;
+	private double width;
+	private double height;
+	private double start;
+	private double end;
 	
 	EllipticalArcSVG(double x, double y, double width, double height, double start, double end, StyleContext sc) {
 		super(sc);

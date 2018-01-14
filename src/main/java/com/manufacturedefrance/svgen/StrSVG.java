@@ -4,7 +4,8 @@ import com.manufacturedefrance.svgen.tags.TextTag;
 
 public class StrSVG extends SvgComponent {
 	private String str;
-	private double x, y;
+	private double x;
+	private double y;
 	
 	StrSVG(String str, double x, double y, StyleContext sc) {
 		super(sc);

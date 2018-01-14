@@ -3,7 +3,10 @@ package com.manufacturedefrance.svgen;
 import com.manufacturedefrance.svgen.tags.EllipseTag;
 
 public class EllipseSVG extends SvgComponent {
-	private double x, y, width, height;
+	private double x;
+	private double y;
+	private double width;
+	private double height;
 	
 	EllipseSVG(double x, double y, double width, double height, StyleContext sc) {
 		super(sc);

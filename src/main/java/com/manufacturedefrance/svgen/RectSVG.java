@@ -3,7 +3,10 @@ package com.manufacturedefrance.svgen;
 import com.manufacturedefrance.svgen.tags.RectTag;
 
 public class RectSVG extends SvgComponent {
-	private double x, y, width, height;
+	private double x;
+	private double y;
+	private double width;
+	private double height;
 	
 	RectSVG(double x, double y, double width, double height, StyleContext sc) {
 		super(sc);
