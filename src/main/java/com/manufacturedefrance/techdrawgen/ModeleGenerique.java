@@ -12,16 +12,17 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class ModeleGenerique {
-	protected HashMap<String, Double> conf;
-	protected HashMap<String, Object> data;
+	protected Map<String, Double> conf;
+	protected Map<String, Object> data;
 	
 	protected HashMap<String, MyCustomSvg> svgToRender;
 	
-	public ModeleGenerique(HashMap<String, Object> data) {
+	public ModeleGenerique(Map<String, Object> data) {
 		this.data = data;
 		this.conf = new HashMap<>();
 		

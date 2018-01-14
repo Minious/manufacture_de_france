@@ -1,6 +1,7 @@
 package com.manufacturedefrance.techdrawgen.modeles.premium.elements;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
 import com.manufacturedefrance.techdrawgen.DessinProfil;
@@ -14,7 +15,7 @@ public class TraverseCorniere extends ElementGenerique {
     private final String valeurDiametrePercagesFixation = "Ø5.5";
     private final String valeurAfficheeDiametrePercagesFixation = "Ø5.5 + fr";
 	
-	public TraverseCorniere(HashMap<String, Double> conf, HashMap<String, Object> data) {
+	public TraverseCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
 	}
 

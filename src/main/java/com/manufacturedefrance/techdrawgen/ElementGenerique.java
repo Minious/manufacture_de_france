@@ -1,14 +1,15 @@
 package com.manufacturedefrance.techdrawgen;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public abstract class ElementGenerique {
-	protected HashMap<String, Double> conf;
-	protected HashMap<String, Object> data;
+	protected Map<String, Double> conf;
+	protected Map<String, Object> data;
 	
-	public ElementGenerique(HashMap<String, Double> conf, HashMap<String, Object> data){
+	public ElementGenerique(Map<String, Double> conf, Map<String, Object> data){
 		this.conf = conf;
 		this.data = data;
 	}

@@ -1,10 +1,10 @@
 package com.manufacturedefrance.conf;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UnprocessableConfFileException extends Exception {
 
-	UnprocessableConfFileException(ArrayList<String> unprocessedExp) {
+	UnprocessableConfFileException(List<String> unprocessedExp) {
 		super(unprocessedExp.toString());
 	}
 }

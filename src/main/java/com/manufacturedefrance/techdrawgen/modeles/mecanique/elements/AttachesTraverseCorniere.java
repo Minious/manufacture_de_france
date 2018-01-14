@@ -1,6 +1,7 @@
 package com.manufacturedefrance.techdrawgen.modeles.mecanique.elements;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
 import com.manufacturedefrance.techdrawgen.DessinProfil;
@@ -11,7 +12,7 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 	private final int nbTraverses = 2;
 	private final String valeurDiametreTrous = "ØM5";
 
-	public AttachesTraverseCorniere(HashMap<String, Double> conf, HashMap<String, Object> data) {
+	public AttachesTraverseCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
 	}
 

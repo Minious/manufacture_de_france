@@ -1,6 +1,7 @@
 package com.manufacturedefrance.techdrawgen.modeles.mecanique.elements;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
 import com.manufacturedefrance.techdrawgen.DessinProfil;
@@ -10,7 +11,7 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 	private final int nbMontants = (int) (conf.get("nbPartitions") - 1);
 	private final String valeurDiametreTrous = "Ø7";
 	
-	public ContreCadreMontantPartition(HashMap<String, Double> conf, HashMap<String, Object> data) {
+	public ContreCadreMontantPartition(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
 	}
 

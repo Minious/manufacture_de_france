@@ -14,15 +14,19 @@ import java.util.regex.Pattern;
 
 public class TextFileConf {
 
-	public static HashMap<String, Double> loadConf(String fileName) throws UnprocessableConfFileException {
+	private TextFileConf() {
+		throw new IllegalStateException("Utility class");
+	}
+
+	public static Map<String, Double> loadConf(String fileName) throws UnprocessableConfFileException {
 		return loadConf(fileName, new HashMap<>());
 	}
 
-	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap) throws UnprocessableConfFileException {
+	public static Map<String, Double> loadConf(String fileName, Map<String, Double> initialMap) throws UnprocessableConfFileException {
 		return loadConf(fileName, initialMap, new ArrayList<>());
 	}
 
-	public static HashMap<String, Double> loadConf(String fileName, HashMap<String, Double> initialMap, ArrayList<Function> customFunctions) throws UnprocessableConfFileException {
+	public static Map<String, Double> loadConf(String fileName, Map<String, Double> initialMap, List<Function> customFunctions) throws UnprocessableConfFileException {
 		InputStream stream = TextFileConf.class.getResourceAsStream("/" + fileName);
 				
 		ArrayList<String> exps = new ArrayList<>();
@@ -52,7 +56,7 @@ public class TextFileConf {
 		while (!exps.isEmpty()) {
 			int i = 0;
 			boolean almostOneExpProcessed = false;
-			ArrayList<String> unprocessedExp = new ArrayList<>();
+			List<String> unprocessedExp = new ArrayList<>();
 			while (i < exps.size()) {
 				String curExp = exps.get(i);
 				String curAff = curExp.split("=", 2)[0];
@@ -116,7 +120,7 @@ public class TextFileConf {
 
 			if (!almostOneExpProcessed) {
 				for(String exp : unprocessedExp)
-					System.out.println(exp);
+					Logger.getAnonymousLogger().log(Level.SEVERE, exp);
 				throw new UnprocessableConfFileException(unprocessedExp);
 			}
 		}

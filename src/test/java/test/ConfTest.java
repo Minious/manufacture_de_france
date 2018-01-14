@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -38,7 +39,7 @@ public class ConfTest {
 		});
 		
 		try {
-			HashMap<String, Double> conf = TextFileConf.loadConf(fileName, initialMap, functions);
+			Map<String, Double> conf = TextFileConf.loadConf(fileName, initialMap, functions);
 
 			Double[] actuals = new Double[]{
 				conf.get("a"),

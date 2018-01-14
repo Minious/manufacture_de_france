@@ -2,10 +2,7 @@ package com.manufacturedefrance.techdrawgen.modeles.mecanique;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +24,7 @@ import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 import net.objecthunter.exp4j.function.Function;
 
 public class Mecanique extends ModeleGenerique {
-	public Mecanique(HashMap<String,Object> data) {
+	public Mecanique(Map<String,Object> data) {
 		super(data);
 
 		String fileName = "conf_mecanique.txt";

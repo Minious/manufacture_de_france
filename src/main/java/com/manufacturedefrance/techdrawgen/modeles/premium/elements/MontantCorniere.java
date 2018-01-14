@@ -1,6 +1,7 @@
 package com.manufacturedefrance.techdrawgen.modeles.premium.elements;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
 import com.manufacturedefrance.techdrawgen.DessinProfil;
@@ -11,7 +12,7 @@ public class MontantCorniere extends ElementGenerique {
 	private final int nbMontants = 2;
 	private final String valeurDiametrePercages = "ØM5";
 	
-	public MontantCorniere(HashMap<String, Double> conf, HashMap<String, Object> data) {
+	public MontantCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
 	}
 

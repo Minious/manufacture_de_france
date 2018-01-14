@@ -1,6 +1,7 @@
 package com.manufacturedefrance.techdrawgen.modeles.premium.elements;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
 import com.manufacturedefrance.techdrawgen.DessinProfil;
@@ -11,7 +12,7 @@ public class MontantIntermediaire extends ElementGenerique {
 	private final int nbMontants = (int) (conf.get("nbPartitions") - 1);
 	private final String valeurDiametrePercages = "ØM5";
 	
-	public MontantIntermediaire(HashMap<String, Double> conf, HashMap<String, Object> data) {
+	public MontantIntermediaire(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
 	}
 
