@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +23,7 @@ import com.manufacturedefrance.svgen.Padding;
 import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 
 public class Premium extends ModeleGenerique {	
-	public Premium(HashMap<String,Object> data) {
+	public Premium(Map<String,Object> data) {
 		super(data);
 
 		String fileName = "conf_premium.txt";

@@ -1,13 +1,13 @@
 package com.manufacturedefrance.techdrawgen;
 
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.Map;
 
 import com.manufacturedefrance.techdrawgen.modeles.mecanique.Mecanique;
 import com.manufacturedefrance.techdrawgen.modeles.premium.Premium;
 
 public class Renderer {
-	public static void render(String modele, Path savePath, HashMap<String, Object> data) {
+	public static void render(String modele, Path savePath, Map<String, Object> data) {
 		data.put("modele", modele);
 		switch(modele) {
 			case "Mécanique":

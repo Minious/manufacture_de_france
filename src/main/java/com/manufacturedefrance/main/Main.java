@@ -6,23 +6,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.manufacturedefrance.utils.SpringUtilities;
+import sun.util.resources.cldr.lag.LocaleNames_lag;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main {
 
 	private JFrame frame;
-	//private JLabel lblPath;
 	private Path savePath;
 	private HashMap<String, HashMap<String, MyField>> fields;
 	
@@ -43,7 +45,7 @@ public class Main {
 		initialize();
 	}
 
-	private JSONObject getJSONModeles() throws IOException, JSONException {
+	private JSONObject getJSONModeles() throws IOException {
 		String jsonFileName = "modeles.json";
 		String encodage = "UTF-8";
 
@@ -84,27 +86,33 @@ public class Main {
 					curCard.add(curLabel);
 					
 					JTextField curJTextField = null;
+					FieldType curType;
 					switch(curFieldJSON.getString("type")) {
 						case "String":
 							curJTextField = new JTextField(30);
 							curLabel.setLabelFor(curJTextField);
 							curCard.add(curJTextField);
+							curType = FieldType.STRING;
 							break;
 						case "Double":
 							DecimalFormat doubleFormatter = new DecimalFormat("#.###");
 							curJTextField = new JFormattedTextField(doubleFormatter);
 							curJTextField.setText("0");
 							curCard.add(curJTextField);
+							curType = FieldType.DOUBLE;
 							break;
 						case "Integer":
 							DecimalFormat integerFormatter = new DecimalFormat("#");
 							curJTextField = new JFormattedTextField(integerFormatter);
 							curJTextField.setText("0");
 							curCard.add(curJTextField);
+							curType = FieldType.INTEGER;
 							break;
+						default:
+							throw new JSONException("Invalid modele field");
 					}
 					
-					MyField myField = new MyField(curFieldJSON.getString("type"), curJTextField);
+					MyField myField = new MyField(curType, curJTextField);
 					curFields.put(curFieldJSON.getString("name"), myField);
 				}
 				
@@ -157,25 +165,25 @@ public class Main {
 				@Override public void mouseClicked(MouseEvent arg0) {
 					String curModele = (String) cb.getSelectedItem();
 					
-					HashMap<String, MyField> selectedModelFields = fields.get(curModele);
-					HashMap<String, Object> renderValues = new HashMap<>();
+					Map<String, MyField> selectedModelFields = fields.get(curModele);
+					Map<String, Object> renderValues = new HashMap<>();
 					
-					for(String key : selectedModelFields.keySet()) {
-						String type = selectedModelFields.get(key).getType();
-						String fieldTextValue = selectedModelFields.get(key).getField().getText();
+					for(Map.Entry<String, MyField> entry : selectedModelFields.entrySet()) {
+						FieldType type = entry.getValue().getType();
+						String fieldTextValue = entry.getValue().getField().getText();
 						Object value = null;
 						switch(type) {
-							case("String"):
+							case STRING:
 								value = fieldTextValue;
 								break;
-							case("Double"):
+							case DOUBLE:
 								value = Double.parseDouble(fieldTextValue);
 								break;
-							case("Integer"):
+							case INTEGER:
 								value = Integer.parseInt(fieldTextValue);
 								break;
 						}
-						renderValues.put(key, value);
+						renderValues.put(entry.getKey(), value);
 					}
 					
 					Renderer.render(curModele, savePath, renderValues);
@@ -206,15 +214,15 @@ public class Main {
 	}
 	
 	class MyField {
-		private String type;
+		private FieldType type;
 		private JTextField field;
 		
-		MyField(String type, JTextField field) {
+		MyField(FieldType type, JTextField field) {
 			this.type = type;
 			this.field = field;
 		}
 
-		public String getType() {
+		public FieldType getType() {
 			return this.type;
 		}
 
@@ -222,5 +230,9 @@ public class Main {
 			return this.field;
 		}
 		
+	}
+
+	private static enum FieldType {
+		STRING, DOUBLE, INTEGER
 	}
 }
