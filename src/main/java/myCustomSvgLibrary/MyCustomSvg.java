@@ -16,6 +16,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import myCustomSvgLibrary.tags.GTag;
 import myCustomSvgLibrary.tags.SvgTag;
@@ -29,7 +31,7 @@ public class MyCustomSvg extends SvgComponent{
 	private Padding padding;
 	private boolean hasBorders;
 	private StyleContext borderSc;
-	public StyleContext rememberedSc;
+	private StyleContext rememberedSc;
 	
 	public MyCustomSvg() {
 		super(new StyleContext());
@@ -308,7 +310,7 @@ public class MyCustomSvg extends SvgComponent{
 			Files.createDirectories(outputFilePath.getParent());
 			Files.write(outputFilePath, output.getBytes(Charset.forName("UTF-8")));
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 		}
 	}
 	

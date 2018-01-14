@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import conf.TextFileConf;
 import conf.UnprocessableConfFileException;
@@ -55,7 +57,7 @@ public class Mecanique extends ModeleGenerique {
 		try {
 			this.conf = TextFileConf.loadConf(fileName, initialMap, functions);
 		} catch (UnprocessableConfFileException e) {
-			e.printStackTrace();
+			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 		}
 
 		MontantCorniere montantCorniere = new MontantCorniere(this.conf, this.data);

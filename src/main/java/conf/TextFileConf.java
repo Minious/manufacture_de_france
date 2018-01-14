@@ -7,6 +7,8 @@ import net.objecthunter.exp4j.operator.Operator;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,22 +87,22 @@ public class TextFileConf {
 				eb.functions(customFunctions);
 				eb.operator(getIncludedOperators());
 
-				Expression e = eb.build();
+				Expression exp = eb.build();
 
 				boolean processable = true;
 				for (String var : vars) {
 					if (map.keySet().contains(var))
-						e.setVariable(var, map.get(var));
+						exp.setVariable(var, map.get(var));
 					else
 						processable = false;
 				}
 
 				if (processable) {
 					try {
-						double result = e.evaluate();
+						double result = exp.evaluate();
 						map.put(curAff, result);
-					} catch (ArithmeticException exc) {
-						exc.printStackTrace();
+					} catch (ArithmeticException e) {
+						Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 					}
 
 					exps.remove(exps.get(i));

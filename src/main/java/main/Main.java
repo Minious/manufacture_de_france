@@ -16,6 +16,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
 
@@ -29,12 +31,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
-			try {
-				Main window = new Main();
-				window.frame.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			Main window = new Main();
+			window.frame.setVisible(true);
 		});
 	}
 
@@ -203,7 +201,7 @@ public class Main {
 			frame.pack();
 			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		} catch (IOException | JSONException e) {
-			e.printStackTrace();
+			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 		}
 	}
 	

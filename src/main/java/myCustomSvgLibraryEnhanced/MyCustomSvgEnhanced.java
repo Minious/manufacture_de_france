@@ -40,7 +40,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		AffineTransform orig = this.getTransform();
 		
 		FontMetrics metrics = this.getFontMetrics();
-		int coteStringWidth = metrics.stringWidth(displayedCote);
+		double coteStringWidth = metrics.stringWidth(displayedCote);
 
 		this.translate(p.x, p.y);
 		this.rotate(angle);

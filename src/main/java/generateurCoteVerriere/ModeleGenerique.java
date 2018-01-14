@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class ModeleGenerique {
 	protected HashMap<String, Double> conf;
@@ -53,7 +55,7 @@ public abstract class ModeleGenerique {
 		try {
 			converter.execute();
 		} catch (SVGConverterException e) {
-			e.printStackTrace();
+			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 		}
 		
 		// Merge pdf files
@@ -65,7 +67,7 @@ public abstract class ModeleGenerique {
 			pdf.mergeDocuments();
 			System.out.println("Merge pdf files");
 		} catch (COSVisitorException | IOException e) {
-			e.printStackTrace();
+			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 		}
 		
 		System.out.println("\nTerminé !");
