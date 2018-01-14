@@ -8,8 +8,8 @@ import com.manufacturedefrance.techdrawgen.DessinProfil.Side;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class MontantCorniere extends ElementGenerique {
-	private static final int nbMontants = 2;
-	private static final String valeurDiametreTrous = "ØM5";
+	private static final int NB_MONTANTS = 2;
+	private static final String DIAMETRE_PERCAGES = "ØM5";
 	
 	public MontantCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -20,7 +20,7 @@ public class MontantCorniere extends ElementGenerique {
 		DessinProfil profil = new DessinProfil(conf.get("largeurMontantCorniere"), conf.get("hauteurMontantCorniere"));
 		profil.setCorniere();
 		profil.setChamp(conf.get("epaisseurProfil"), Side.RIGHT	);
-		profil.setValeurPercage(this.valeurDiametreTrous);
+		profil.setValeurPercage(DIAMETRE_PERCAGES);
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantCorniere");
 		profil.addPercage(ordonnee, false);
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere");
@@ -42,6 +42,6 @@ public class MontantCorniere extends ElementGenerique {
 
 	@Override
 	public int getNbElements() {
-		return this.nbMontants;
+		return NB_MONTANTS;
 	}
 }

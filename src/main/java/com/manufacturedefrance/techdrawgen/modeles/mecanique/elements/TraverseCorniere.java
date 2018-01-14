@@ -9,8 +9,8 @@ import com.manufacturedefrance.svgen.MyCustomSvg;
 
 
 public class TraverseCorniere extends ElementGenerique {
-	private static final int nbTraverses = 2;
-	private static final String valeurDiametreTrous = "ØM5";
+	private static final int NB_TRAVERSES = 2;
+	private static final String DIAMETRE_PERCAGES = "ØM5";
 	
 	public TraverseCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -21,7 +21,7 @@ public class TraverseCorniere extends ElementGenerique {
 		DessinProfil profil = new DessinProfil(conf.get("largeurTraverseCorniere"), conf.get("hauteurTraverseCorniere"));
 		profil.setCorniere();
 		profil.setChamp(conf.get("epaisseurProfil"), Side.RIGHT);
-		profil.setValeurPercage(valeurDiametreTrous);
+		profil.setValeurPercage(DIAMETRE_PERCAGES);
 		
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouTraverseCorniere");
 		profil.addPercage(ordonnee, false);
@@ -59,6 +59,6 @@ public class TraverseCorniere extends ElementGenerique {
 
 	@Override
 	public int getNbElements() {
-		return nbTraverses;
+		return NB_TRAVERSES;
 	}
 }

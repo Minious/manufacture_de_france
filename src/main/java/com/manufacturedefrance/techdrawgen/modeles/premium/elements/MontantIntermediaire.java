@@ -9,7 +9,7 @@ import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class MontantIntermediaire extends ElementGenerique {
 	private final int nbMontants = (int) (conf.get("nbPartitions") - 1);
-	private static final String valeurDiametrePercages = "ØM5";
+	private static final String DIAMETRE_PERCAGES = "ØM5";
 	
 	public MontantIntermediaire(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -20,7 +20,7 @@ public class MontantIntermediaire extends ElementGenerique {
 		profil.setSideCoteDemiLargeur(Side.RIGHT);
 		profil.setEpaulement(conf.get("longueurEpaulementMontantIntermediaire"), conf.get("epaisseurEpaulementMontantIntermediaire"), Side.RIGHT);
 		profil.setChamp(conf.get("epaisseurMontantIntermedaire"), Side.RIGHT);
-		profil.setValeurPercage(valeurDiametrePercages);
+		profil.setValeurPercage(DIAMETRE_PERCAGES);
 
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierPercageMontantIntermediaire");
 		for (int i = 0; i < conf.get("nbPercageMontant"); i++) {

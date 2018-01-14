@@ -8,7 +8,7 @@ import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class ContreCadreMontantPartition extends ElementGenerique {
 	private final int nbMontants = (int) (conf.get("nbPartitions") - 1);
-	private static final String valeurDiametreTrous = "Ø7";
+	private static final String DIAMETRE_PERCAGES = "Ø7";
 	
 	public ContreCadreMontantPartition(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -17,7 +17,7 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 	@Override
 	public MyCustomSvg getDessin() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurMontantPartition"), conf.get("hauteurMontantPartition"));
-		profil.setValeurPercage(valeurDiametreTrous);
+		profil.setValeurPercage(DIAMETRE_PERCAGES);
 		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
 			double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantPartition") + i * conf.get("entreAxeMontant");
 			boolean showCote = i == conf.get("nbTrousIntermediairesVerticaux") + 1;
