@@ -48,7 +48,7 @@ public class EllipticalArcSVG extends SvgComponent {
 	}
 
 	@Override
-	public SvgComponent duplicate() {
+	SvgComponent duplicate() {
 		return new EllipticalArcSVG(this.x, this.y, this.width, this.height, this.start, this.end, this.sc.clone());
 	}
 }

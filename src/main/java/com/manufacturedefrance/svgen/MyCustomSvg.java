@@ -299,7 +299,7 @@ public class MyCustomSvg extends SvgComponent{
 			this.bounds.add(curBounds);
 	}
 	
-	public MyCustomSvg duplicate() {
+	MyCustomSvg duplicate() {
 		return new MyCustomSvg(this);
 	}
 }

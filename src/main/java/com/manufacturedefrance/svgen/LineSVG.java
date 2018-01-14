@@ -30,7 +30,7 @@ public class LineSVG extends SvgComponent {
 	}
 
 	@Override
-	public SvgComponent duplicate() {
+	SvgComponent duplicate() {
 		return new LineSVG(x1, y1, x2, y2, sc);
 	}
 }
