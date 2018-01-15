@@ -14,11 +14,6 @@ import static org.junit.Assert.*;
 public class ConfTest {
 
 	@Test
-	public void testTest(){
-		assertEquals(10, 5 + 5);
-	}
-
-	@Test
 	public void test() {
 		String fileName = "confTest.txt";
 		
