@@ -7,19 +7,19 @@ import java.awt.geom.AffineTransform;
 import java.text.DecimalFormat;
 
 import com.manufacturedefrance.svgen.MyCustomSvg;
+import com.manufacturedefrance.svgen.SvgComponent;
 import com.manufacturedefrance.utils.MyPath2D;
 import com.manufacturedefrance.utils.MyPoint2D;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
-	private double underLineGap = 0;
+	private double rememberedUnderLineGap = 0;
 	private double distanceCoteGap = 4;
 
-	private static final double DISTANCE_COTE_OFFSET_DEFAULT = 10;
 	private static final double COTE_ARROW_WIDTH = 10;
 	private static final double COTE_ARROW_HEIGHT = 3;
 	
 	public void setUnderLineGap(double underLineGap) {
-		this.underLineGap = underLineGap;
+		this.rememberedUnderLineGap = underLineGap;
 	}
 
 	public void setFont(int size, String font){
@@ -37,7 +37,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	}
 	
 	public void drawDiameterCote(String displayedCote, MyPoint2D p, double angle, int shift, ShiftMode shiftMode){
-		drawDiameterCote(displayedCote, p, angle, shift, shiftMode, this.underLineGap);
+		drawDiameterCote(displayedCote, p, angle, shift, shiftMode, this.rememberedUnderLineGap);
 	}
 		
 	public void drawDiameterCote(String displayedCote, MyPoint2D p, double angle, int shift, ShiftMode shiftMode, double customUnderLineGap){
@@ -52,12 +52,17 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		if(angle <= 0){
 			double lineLength = shift;
 			
-			if(shiftMode == ShiftMode.LEFT)
-				lineLength += coteStringWidth;
-			if(shiftMode == ShiftMode.CENTER)
-				lineLength += coteStringWidth / 2;
-			if(shiftMode == ShiftMode.RIGHT)
-				lineLength += 0;
+			switch(shiftMode) {
+				case LEFT:
+					lineLength += coteStringWidth;
+					break;
+				case CENTER:
+					lineLength += coteStringWidth / 2;
+					break;
+				case RIGHT:
+					lineLength += 0;
+					break;
+			}
 			
 			this.drawLine(0, 0, 0, (int) lineLength);
 
@@ -70,12 +75,17 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		else{
 			double lineLength = shift;
 			
-			if(shiftMode == ShiftMode.LEFT)
-				lineLength += 0;
-			if(shiftMode == ShiftMode.CENTER)
-				lineLength += coteStringWidth / 2;
-			if(shiftMode == ShiftMode.RIGHT)
-				lineLength += coteStringWidth;
+			switch(shiftMode) {
+				case LEFT:
+					lineLength += 0;
+					break;
+				case CENTER:
+					lineLength += coteStringWidth / 2;
+					break;
+				case RIGHT:
+					lineLength += coteStringWidth;
+					break;
+			}
 			
 			this.drawLine(0, 0, 0, (int) lineLength);
 
@@ -176,89 +186,88 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	}
 
 	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap, boolean reversed){
-		if(!p1.equals(p2)) {
-			AffineTransform orig = this.getTransform();
+		if(p1.equals(p2))
+			throw new IllegalStateException("Impossible de tracer cote : Ancres identiques");
 
-			DecimalFormat myFormatter = new DecimalFormat("#.##");
-			String formatedCote = myFormatter.format(MyPoint2D.distance(p1, p2));
+		AffineTransform orig = this.getTransform();
 
-			this.translate(p1.x, p1.y);
-			this.rotate(-Utils.getAngle(p1, p2));
+		double distance = MyPoint2D.distance(p1, p2);
+		String formatedCote = SvgComponent.DOUBLE_FORMAT.format(distance);
 
-			double distance = MyPoint2D.distance(p1, p2);
+		this.translate(p1.x, p1.y);
+		this.rotate(-Utils.getAngle(p1, p2));
 
-			FontMetrics metrics = this.getFontMetrics();
-			double coteStringWidth = metrics.stringWidth(formatedCote);
+		FontMetrics metrics = this.getFontMetrics();
+		double coteStringWidth = metrics.stringWidth(formatedCote);
 
-			this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
+		this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
 
-			this.translate(0, distance);
+		this.translate(0, distance);
 
-			this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
+		this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
 
-			this.translate(offset, -distance / 2);
+		this.translate(offset, -distance / 2);
 
-			double lowerBound = shift;
-			double upperBound = shift;
+		double lowerBound = shift;
+		double upperBound = shift;
 
-			if (shiftMode == ShiftMode.LEFT) {
-				lowerBound += 0;
-				upperBound += coteStringWidth;
-			} else if(shiftMode == ShiftMode.CENTER) {
-				lowerBound -= coteStringWidth / 2;
-				upperBound += coteStringWidth / 2;
-			} else if(shiftMode == ShiftMode.RIGHT) {
-				lowerBound -= coteStringWidth;
-				upperBound += 0;
-			}
-			
-			double actualLowerBound = Math.min(lowerBound, - distance / 2);
-			double actualUpperBound = Math.max(upperBound, distance / 2);
-			
-			this.drawLine(0, actualLowerBound, 0, actualUpperBound);
-
-			MyPath2D arrowPath = new MyPath2D();
-			arrowPath.moveTo(0, 0);
-			arrowPath.lineTo(- COTE_ARROW_WIDTH, COTE_ARROW_HEIGHT / 2);
-			arrowPath.lineTo(- COTE_ARROW_WIDTH, - COTE_ARROW_HEIGHT / 2);
-			arrowPath.closePath();
-
-			this.rotate(Math.PI / 2);
-			if(reversed)
-				this.rotate(Math.PI);
-
-			this.setFillColor(Color.black);
-			this.translate(- distance / 2, 0);
-			if(distance > 2.5 * COTE_ARROW_WIDTH) {
-				this.rotate(Math.PI);
-				this.drawPath(arrowPath);
-				this.rotate(Math.PI);
-			} else {
-				this.drawPath(arrowPath);
-			}
-			this.translate(distance, 0);
-			if(distance > 2.5 * COTE_ARROW_WIDTH) {
-				this.drawPath(arrowPath);
-			} else {
-				this.rotate(Math.PI);
-				this.drawPath(arrowPath);
-				this.rotate(Math.PI);
-			}
-			this.translate(- distance / 2, 0);
-			this.removeFillColor();
-			
-			this.translate(0, - customUnderLineGap);
-			if(shiftMode == ShiftMode.LEFT)
-				this.translate(shift, 0);
-			if(shiftMode == ShiftMode.CENTER)
-				this.translate(- coteStringWidth / 2 + shift, 0);
-			if(shiftMode == ShiftMode.RIGHT)
-				this.translate(- coteStringWidth + shift, 0);
-			
-			this.drawString(formatedCote, 0, 0);
-			
-			this.setTransform(orig);
+		if (shiftMode == ShiftMode.LEFT) {
+			lowerBound += 0;
+			upperBound += coteStringWidth;
+		} else if(shiftMode == ShiftMode.CENTER) {
+			lowerBound -= coteStringWidth / 2;
+			upperBound += coteStringWidth / 2;
+		} else if(shiftMode == ShiftMode.RIGHT) {
+			lowerBound -= coteStringWidth;
+			upperBound += 0;
 		}
+
+		double actualLowerBound = Math.min(lowerBound, - distance / 2);
+		double actualUpperBound = Math.max(upperBound, distance / 2);
+
+		this.drawLine(0, actualLowerBound, 0, actualUpperBound);
+
+		MyPath2D arrowPath = new MyPath2D();
+		arrowPath.moveTo(0, 0);
+		arrowPath.lineTo(- COTE_ARROW_WIDTH, COTE_ARROW_HEIGHT / 2);
+		arrowPath.lineTo(- COTE_ARROW_WIDTH, - COTE_ARROW_HEIGHT / 2);
+		arrowPath.closePath();
+
+		this.rotate(Math.PI / 2);
+		if(reversed)
+			this.rotate(Math.PI);
+
+		this.setFillColor(Color.black);
+		this.translate(- distance / 2, 0);
+		if(distance > 2.5 * COTE_ARROW_WIDTH) {
+			this.rotate(Math.PI);
+			this.drawPath(arrowPath);
+			this.rotate(Math.PI);
+		} else {
+			this.drawPath(arrowPath);
+		}
+		this.translate(distance, 0);
+		if(distance > 2.5 * COTE_ARROW_WIDTH) {
+			this.drawPath(arrowPath);
+		} else {
+			this.rotate(Math.PI);
+			this.drawPath(arrowPath);
+			this.rotate(Math.PI);
+		}
+		this.translate(- distance / 2, 0);
+		this.removeFillColor();
+
+		this.translate(0, - customUnderLineGap);
+		if(shiftMode == ShiftMode.LEFT)
+			this.translate(shift, 0);
+		if(shiftMode == ShiftMode.CENTER)
+			this.translate(- coteStringWidth / 2 + shift, 0);
+		if(shiftMode == ShiftMode.RIGHT)
+			this.translate(- coteStringWidth + shift, 0);
+
+		this.drawString(formatedCote, 0, 0);
+
+		this.setTransform(orig);
 	}
 	
 	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
@@ -266,7 +275,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	}
 	
 	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode){
-		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, this.underLineGap);
+		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, this.rememberedUnderLineGap);
 	}
 	
 	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift){
@@ -277,16 +286,12 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.drawDistanceCote(p1, p2, offset, 0);
 	}
 	
-	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2){
-		this.drawDistanceCote(p1, p2, DISTANCE_COTE_OFFSET_DEFAULT);
-	}
-	
 	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap){
 		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, customUnderLineGap, true);
 	}
 	
 	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode){
-		this.drawReversedDistanceCote(p1, p2, offset, shift, shiftMode, this.underLineGap);
+		this.drawReversedDistanceCote(p1, p2, offset, shift, shiftMode, this.rememberedUnderLineGap);
 	}
 	
 	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift){
@@ -295,10 +300,6 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	
 	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset){
 		this.drawReversedDistanceCote(p1, p2, offset, 0);
-	}
-	
-	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2){
-		this.drawReversedDistanceCote(p1, p2, DISTANCE_COTE_OFFSET_DEFAULT);
 	}
 	
 	public void drawLine(MyPoint2D p1, MyPoint2D p2){
