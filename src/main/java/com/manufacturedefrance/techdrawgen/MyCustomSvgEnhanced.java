@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 import com.manufacturedefrance.svgen.MyCustomSvg;
 import com.manufacturedefrance.utils.MyPath2D;
-import com.manufacturedefrance.utils.MyVec2d;
+import com.manufacturedefrance.utils.MyPoint2D;
 
 public class MyCustomSvgEnhanced extends MyCustomSvg {
 	private double underLineGap = 0;
@@ -27,20 +27,20 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.setFont(f);
 	}
 	
-	public void drawDiameterCote(String displayedCote, MyVec2d p1, MyVec2d p2, int shift, ShiftMode shiftMode, double customUnderLineGap){
+	public void drawDiameterCote(String displayedCote, MyPoint2D p1, MyPoint2D p2, int shift, ShiftMode shiftMode, double customUnderLineGap){
 		if(p1.x != p2.x || p1.y != p2.y)
 			drawDiameterCote(displayedCote, p1, - Utils.getAngle(p1, p2), shift, shiftMode, customUnderLineGap);
 	}
 	
-	public void drawDiameterCote(String displayedCote, MyVec2d p, double angle, int shift){
+	public void drawDiameterCote(String displayedCote, MyPoint2D p, double angle, int shift){
 		drawDiameterCote(displayedCote, p, angle, shift, ShiftMode.LEFT);
 	}
 	
-	public void drawDiameterCote(String displayedCote, MyVec2d p, double angle, int shift, ShiftMode shiftMode){
+	public void drawDiameterCote(String displayedCote, MyPoint2D p, double angle, int shift, ShiftMode shiftMode){
 		drawDiameterCote(displayedCote, p, angle, shift, shiftMode, this.underLineGap);
 	}
 		
-	public void drawDiameterCote(String displayedCote, MyVec2d p, double angle, int shift, ShiftMode shiftMode, double customUnderLineGap){
+	public void drawDiameterCote(String displayedCote, MyPoint2D p, double angle, int shift, ShiftMode shiftMode, double customUnderLineGap){
 		AffineTransform orig = this.getTransform();
 		
 		FontMetrics metrics = this.getFontMetrics();
@@ -89,7 +89,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.setTransform(orig);
 	}
 	
-	public void drawPercage(String valeurPercage, MyVec2d p){
+	public void drawPercage(String valeurPercage, MyPoint2D p){
 		if(valeurPercage.charAt(0) == 'Ø') {
 			String actualValeurPercage = valeurPercage.substring(1);
 			double diametrePercage;
@@ -105,7 +105,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		}
 	}
 	
-	public void drawPercage(String valeurPercage, MyVec2d p, double angle, int shift, ShiftMode shiftMode, double customUnderLineGap){
+	public void drawPercage(String valeurPercage, MyPoint2D p, double angle, int shift, ShiftMode shiftMode, double customUnderLineGap){
 		this.drawPercage(valeurPercage, p);
 		this.drawDiameterCote(valeurPercage, p, angle, shift, shiftMode, customUnderLineGap);
 	}
@@ -156,11 +156,11 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		}
 	}
 		
-	public void drawString(String displayedStr, MyVec2d p){
+	public void drawString(String displayedStr, MyPoint2D p){
 		this.drawString(displayedStr, p, 0, ShiftMode.LEFT);
 	}
 	
-	public void drawString(String displayedStr, MyVec2d p, double shift, ShiftMode shiftMode){
+	public void drawString(String displayedStr, MyPoint2D p, double shift, ShiftMode shiftMode){
 		FontMetrics metrics = this.getFontMetrics();
 		double stringWidth = metrics.stringWidth(displayedStr);
 		
@@ -175,17 +175,17 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.drawString(displayedStr, abscisse, p.y);
 	}
 
-	public void drawDistanceCote(MyVec2d p1, MyVec2d p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap, boolean reversed){
+	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap, boolean reversed){
 		if(!p1.equals(p2)) {
 			AffineTransform orig = this.getTransform();
 
 			DecimalFormat myFormatter = new DecimalFormat("#.##");
-			String formatedCote = myFormatter.format(MyVec2d.distance(p1, p2));
+			String formatedCote = myFormatter.format(MyPoint2D.distance(p1, p2));
 
 			this.translate(p1.x, p1.y);
 			this.rotate(-Utils.getAngle(p1, p2));
 
-			double distance = MyVec2d.distance(p1, p2);
+			double distance = MyPoint2D.distance(p1, p2);
 
 			FontMetrics metrics = this.getFontMetrics();
 			double coteStringWidth = metrics.stringWidth(formatedCote);
@@ -261,56 +261,56 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		}
 	}
 	
-	public void drawDistanceCote(MyVec2d p1, MyVec2d p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
+	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
 		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, underLineGap, false);
 	}
 	
-	public void drawDistanceCote(MyVec2d p1, MyVec2d p2, double offset, double shift, ShiftMode shiftMode){
+	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode){
 		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, this.underLineGap);
 	}
 	
-	public void drawDistanceCote(MyVec2d p1, MyVec2d p2, double offset, double shift){
+	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift){
 		this.drawDistanceCote(p1, p2, offset, shift, ShiftMode.CENTER);
 	}
 	
-	public void drawDistanceCote(MyVec2d p1, MyVec2d p2, double offset){
+	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset){
 		this.drawDistanceCote(p1, p2, offset, 0);
 	}
 	
-	public void drawDistanceCote(MyVec2d p1, MyVec2d p2){
+	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2){
 		this.drawDistanceCote(p1, p2, DISTANCE_COTE_OFFSET_DEFAULT);
 	}
 	
-	public void drawReversedDistanceCote(MyVec2d p1, MyVec2d p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
-		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, this.underLineGap, true);
+	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap){
+		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, customUnderLineGap, true);
 	}
 	
-	public void drawReversedDistanceCote(MyVec2d p1, MyVec2d p2, double offset, double shift, ShiftMode shiftMode){
+	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode){
 		this.drawReversedDistanceCote(p1, p2, offset, shift, shiftMode, this.underLineGap);
 	}
 	
-	public void drawReversedDistanceCote(MyVec2d p1, MyVec2d p2, double offset, double shift){
+	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift){
 		this.drawReversedDistanceCote(p1, p2, offset, shift, ShiftMode.CENTER);
 	}
 	
-	public void drawReversedDistanceCote(MyVec2d p1, MyVec2d p2, double offset){
+	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset){
 		this.drawReversedDistanceCote(p1, p2, offset, 0);
 	}
 	
-	public void drawReversedDistanceCote(MyVec2d p1, MyVec2d p2){
+	public void drawReversedDistanceCote(MyPoint2D p1, MyPoint2D p2){
 		this.drawReversedDistanceCote(p1, p2, DISTANCE_COTE_OFFSET_DEFAULT);
 	}
 	
-	public void drawLine(MyVec2d p1, MyVec2d p2){
+	public void drawLine(MyPoint2D p1, MyPoint2D p2){
 		this.drawLine(p1.x, p1.y, p2.x, p2.y);
 	}
 	
-	public void drawOval(MyVec2d center, MyVec2d dimensions){
+	public void drawOval(MyPoint2D center, MyPoint2D dimensions){
 		this.drawEllipse(center.x - dimensions.x / 2, center.y - dimensions.y / 2, dimensions.x, dimensions.y);
 	}
 	
-	public void drawCircle(MyVec2d center, double diameter){
-		this.drawOval(center, new MyVec2d(diameter, diameter));
+	public void drawCircle(MyPoint2D center, double diameter){
+		this.drawOval(center, new MyPoint2D(diameter, diameter));
 	}
 	
 	public void setDashArray(StyleTrait styleTrait) {
