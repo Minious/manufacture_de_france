@@ -36,7 +36,7 @@ public class TraverseCorniere extends ElementGenerique {
 			ordonnee += conf.get("entreAxeCentralTraverseCorniere");
 			profil.addPercage(ordonnee, false);
 		}
-		
+
 		if(conf.get("nbPartitions") >= 2) {
 			ordonnee += conf.get("entreAxeT");
 			profil.addPercage(ordonnee, false);
