@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.manufacturedefrance.utils.Point;
+import com.manufacturedefrance.utils.MyVec2d;
 
 public class LignesTexte extends MyCustomSvgEnhanced {
 	private static final int TAILLE_POLICE_PAR_DEFAUT = 15;
@@ -66,6 +66,6 @@ public class LignesTexte extends MyCustomSvgEnhanced {
 	private void render() {
 		this.clear();
 		for(int i=0;i<this.lignes.size();i++)
-			this.drawString(this.lignes.get(i), new Point(0, i * (taillePoliceDonnees + margeEntreLignes)), 0, shiftMode);
+			this.drawString(this.lignes.get(i), new MyVec2d(0, i * (taillePoliceDonnees + margeEntreLignes)), 0, shiftMode);
 	}
 }

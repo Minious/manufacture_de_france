@@ -6,7 +6,7 @@ import java.util.Comparator;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.StyleTrait;
-import com.manufacturedefrance.utils.Point;
+import com.manufacturedefrance.utils.MyVec2d;
 import com.manufacturedefrance.utils.MyPath2D;
 
 public class DessinProfil {
@@ -118,44 +118,44 @@ public class DessinProfil {
 		
 		// Trace le champ
 		double abscisseChamp;
-		Point p1Champ;
-		Point p2Champ;
+		MyVec2d p1Champ;
+		MyVec2d p2Champ;
 		if(this.hasChamp) {
 			abscisseChamp = (this.champSide == Side.LEFT ? - demiLargeurGauche + this.epaisseurChamp : demiLargeurDroite - this.epaisseurChamp);
 			if(this.hasEpaulement && isChampDansEpaulement()) {
-				p1Champ = new Point(abscisseChamp, this.longueurEpaulement);
-				p2Champ = new Point(abscisseChamp, this.longueur - this.longueurEpaulement);
+				p1Champ = new MyVec2d(abscisseChamp, this.longueurEpaulement);
+				p2Champ = new MyVec2d(abscisseChamp, this.longueur - this.longueurEpaulement);
 			} else if(this.isCorniere) {
 				if(this.corniereSide == this.champSide) {
-					p1Champ = new Point(abscisseChamp, this.largeur - this.epaisseurChamp);
-					p2Champ = new Point(abscisseChamp, this.longueur - this.largeur + this.epaisseurChamp);
+					p1Champ = new MyVec2d(abscisseChamp, this.largeur - this.epaisseurChamp);
+					p2Champ = new MyVec2d(abscisseChamp, this.longueur - this.largeur + this.epaisseurChamp);
 				} else {
-					p1Champ = new Point(abscisseChamp, this.epaisseurChamp);
-					p2Champ = new Point(abscisseChamp, this.longueur - this.epaisseurChamp);
+					p1Champ = new MyVec2d(abscisseChamp, this.epaisseurChamp);
+					p2Champ = new MyVec2d(abscisseChamp, this.longueur - this.epaisseurChamp);
 				}
 			} else if(this.isChampCorniere) {
-				p1Champ = new Point(abscisseChamp, this.epaisseurChamp);
-				p2Champ = new Point(abscisseChamp, this.longueur - this.epaisseurChamp);
+				p1Champ = new MyVec2d(abscisseChamp, this.epaisseurChamp);
+				p2Champ = new MyVec2d(abscisseChamp, this.longueur - this.epaisseurChamp);
 			} else {
-				p1Champ = new Point(abscisseChamp, 0);
-				p2Champ = new Point(abscisseChamp, this.longueur);
+				p1Champ = new MyVec2d(abscisseChamp, 0);
+				p2Champ = new MyVec2d(abscisseChamp, this.longueur);
 			}
 			
 			if(this.champFace == Face.BACK)
 				g.setDashArray(StyleTrait.INTERROMPU);
 			g.drawLine(p1Champ, p2Champ);
 			if(this.isChampCorniere) {
-				Point p1ChampCorniere11 = new Point(abscisseChamp, this.largeurChamp);
-				Point p2ChampCorniere11 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.largeurChamp);
-				Point p1ChampCorniere12 = new Point(abscisseChamp, this.longueur - this.largeurChamp);
-				Point p2ChampCorniere12 = new Point(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.longueur - this.largeurChamp);
+				MyVec2d p1ChampCorniere11 = new MyVec2d(abscisseChamp, this.largeurChamp);
+				MyVec2d p2ChampCorniere11 = new MyVec2d(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.largeurChamp);
+				MyVec2d p1ChampCorniere12 = new MyVec2d(abscisseChamp, this.longueur - this.largeurChamp);
+				MyVec2d p2ChampCorniere12 = new MyVec2d(this.champSide == Side.LEFT ? - demiLargeurGauche : demiLargeurDroite, this.longueur - this.largeurChamp);
 				g.drawLine(p1ChampCorniere11, p2ChampCorniere11);
 				g.drawLine(p1ChampCorniere12, p2ChampCorniere12);
 				
-				Point p1ChampCorniere21 = new Point(abscisseChamp, this.epaisseurChamp);
-				Point p2ChampCorniere21 = new Point(this.champSide == Side.LEFT ? demiLargeurDroite : - demiLargeurGauche, this.epaisseurChamp);
-				Point p1ChampCorniere22 = new Point(abscisseChamp, this.longueur - this.epaisseurChamp);
-				Point p2ChampCorniere22 = new Point(this.champSide == Side.LEFT ? demiLargeurDroite : - demiLargeurGauche, this.longueur - this.epaisseurChamp);
+				MyVec2d p1ChampCorniere21 = new MyVec2d(abscisseChamp, this.epaisseurChamp);
+				MyVec2d p2ChampCorniere21 = new MyVec2d(this.champSide == Side.LEFT ? demiLargeurDroite : - demiLargeurGauche, this.epaisseurChamp);
+				MyVec2d p1ChampCorniere22 = new MyVec2d(abscisseChamp, this.longueur - this.epaisseurChamp);
+				MyVec2d p2ChampCorniere22 = new MyVec2d(this.champSide == Side.LEFT ? demiLargeurDroite : - demiLargeurGauche, this.longueur - this.epaisseurChamp);
 				g.drawLine(p1ChampCorniere21, p2ChampCorniere21);
 				g.drawLine(p1ChampCorniere22, p2ChampCorniere22);
 			}
@@ -172,9 +172,9 @@ public class DessinProfil {
 
 		// Cote de largeur puis demi largeur de la Partition avant
 		double curDistanceCotesSuperieures = this.margeEntreProfilEtPremiereCote;
-		Point origine = new Point(0, 0);
-		Point coinSuperieurGaucheProfil = new Point(-demiLargeurGauche, 0);
-		Point coinSuperieurDroitProfil = new Point(demiLargeurDroite, 0);
+		MyVec2d origine = new MyVec2d(0, 0);
+		MyVec2d coinSuperieurGaucheProfil = new MyVec2d(-demiLargeurGauche, 0);
+		MyVec2d coinSuperieurDroitProfil = new MyVec2d(demiLargeurDroite, 0);
 
 		if(!this.percages.isEmpty()) {
 			if(this.sideCoteDemiLargeur == Side.LEFT)
@@ -191,22 +191,22 @@ public class DessinProfil {
 		sortedPercages.sort(Comparator.comparing(Percage::getHauteurPercage));
 
 		// Trace les cotes gauches + percages + traits d'axe horizontaux
-		Point origineCotesGauches = new Point(-demiLargeurGauche, this.longueur);
+		MyVec2d origineCotesGauches = new MyVec2d(-demiLargeurGauche, this.longueur);
 		double curDistanceCotesGauches = this.margeEntreProfilEtPremiereCote;
 		for (Percage percage : sortedPercages) {
 			// Cotes gauches
-			Point extremiteCote = new Point(-demiLargeurGauche, this.longueur - percage.getHauteurPercage());
+			MyVec2d extremiteCote = new MyVec2d(-demiLargeurGauche, this.longueur - percage.getHauteurPercage());
 			g.drawDistanceCote(origineCotesGauches, extremiteCote, curDistanceCotesGauches);
 			curDistanceCotesGauches = decalerCote(curDistanceCotesGauches);
 
 			// Percages
-			Point coordPercage = new Point(0, this.longueur - percage.getHauteurPercage());
+			MyVec2d coordPercage = new MyVec2d(0, this.longueur - percage.getHauteurPercage());
 			if (percage.getShowCote())
 				g.drawDiameterCote(percage.getValeurAfficheePercage(), coordPercage, - 3 * Math.PI / 4, 50);
 			g.drawPercage(percage.getValeurPercage(), coordPercage);
 
 			// Traits d'axe
-			Point extremiteTraitDAxe = new Point(demiLargeurDroite, this.longueur - percage.getHauteurPercage());
+			MyVec2d extremiteTraitDAxe = new MyVec2d(demiLargeurDroite, this.longueur - percage.getHauteurPercage());
 			g.setDashArray(StyleTrait.MIXTE);
 			g.drawLine(extremiteCote, extremiteTraitDAxe);
 			g.removeDashArray();
@@ -225,8 +225,8 @@ public class DessinProfil {
 			double ordonnee2 = coteDroite.getHauteur2();
 			double ordonneeBasse = ordonnee1 < ordonnee2 ? ordonnee1 : ordonnee2;
 			double ordonneeHaute = ordonnee1 > ordonnee2 ? ordonnee1 : ordonnee2;
-			Point extremiteCote1 = new Point(demiLargeurDroite, this.longueur - ordonneeHaute);
-			Point extremiteCote2 = new Point(demiLargeurDroite, this.longueur - ordonneeBasse);
+			MyVec2d extremiteCote1 = new MyVec2d(demiLargeurDroite, this.longueur - ordonneeHaute);
+			MyVec2d extremiteCote2 = new MyVec2d(demiLargeurDroite, this.longueur - ordonneeBasse);
 			g.drawReversedDistanceCote(extremiteCote1, extremiteCote2, this.margeEntreProfilEtPremiereCote	+ coteDroite.getEtage() * (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote));
 		}
 
