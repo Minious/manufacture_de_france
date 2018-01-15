@@ -7,7 +7,7 @@ public class MyPath2D {
 	private Path2D path;
 	private double x;
 	private double y;
-	
+
 	public MyPath2D() {
 		this.path = new Path2D.Double();
 		this.x = 0;
@@ -19,9 +19,9 @@ public class MyPath2D {
 		this.x = x;
 		this.y = y;
 	}
-	
-	public MyPath2D clone() {
-		return new MyPath2D(this.path, this.x, this.y);
+
+	public MyPath2D(MyPath2D myPath2D) {
+		this(myPath2D.path, myPath2D.x, myPath2D.y);
 	}
 	
 	public void moveTo(double x, double y) {

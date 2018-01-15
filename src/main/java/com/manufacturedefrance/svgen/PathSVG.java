@@ -38,6 +38,6 @@ public class PathSVG extends SvgComponent {
 
 	@Override
 	SvgComponent duplicate() {
-		return new PathSVG(this.path.clone(), sc);
+		return new PathSVG(new MyPath2D(path), sc);
 	}
 }

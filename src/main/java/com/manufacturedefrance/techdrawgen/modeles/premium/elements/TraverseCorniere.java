@@ -20,7 +20,6 @@ public class TraverseCorniere extends ElementGenerique {
 
 	@Override
 	public MyCustomSvg getDessin() {
-		int nbPartitions = conf.get("nbPartitions").intValue();
 		double entreAxePercageMontantEtParcloseTraverseCorniere = conf.get("entreAxePercageMontantEtParcloseTraverseCorniere");
 		double entreAxePercageMontantTraverseCorniere = conf.get("entreAxePercageMontantTraverseCorniere");
 		double longueurTraverseCorniere = conf.get("longueurTraverseCorniere");
@@ -35,7 +34,7 @@ public class TraverseCorniere extends ElementGenerique {
 		ordonnee += conf.get("ecartEntreExtremiteEtPremierPercageParcloseTraverseCorniere");
 		profil.addPercage(ordonnee, DIAMETRE_PERCAGES_PARCLOSE, true);
 		ordonnee += entreAxePercageMontantTraverseCorniere - entreAxePercageMontantEtParcloseTraverseCorniere;
-		for(int i=0;i<nbPartitions - 1;i++) {
+		for(int i=0;i<conf.get("nbPartitions") - 1;i++) {
 			profil.addPercage(ordonnee - entreAxePercageMontantTraverseCorniere / 2, DIAMETRE_PERCAGES_FIXATION, DIAMETRE_PERCAGES_FIXATION_AFFICHE);
 			profil.addPercage(ordonnee - entreAxePercageMontantEtParcloseTraverseCorniere, DIAMETRE_PERCAGES_PARCLOSE, true);
 
@@ -45,7 +44,7 @@ public class TraverseCorniere extends ElementGenerique {
 			ordonnee += entreAxePercageMontantTraverseCorniere;
 		}
 		
-		if(nbPartitions == 1) {
+		if(conf.get("nbPartitions") == 1) {
 			profil.addPercage(conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"), DIAMETRE_PERCAGES_FIXATION, DIAMETRE_PERCAGES_FIXATION_AFFICHE);
 			profil.addPercage(longueurTraverseCorniere - conf.get("ecartEntreExtremiteEtPercageFixationSiUneSeulePartitionTraverseCorniere"), DIAMETRE_PERCAGES_FIXATION, DIAMETRE_PERCAGES_FIXATION_AFFICHE);
 		} else {
@@ -53,7 +52,7 @@ public class TraverseCorniere extends ElementGenerique {
 		}
 		profil.addPercage(ordonnee - entreAxePercageMontantEtParcloseTraverseCorniere, DIAMETRE_PERCAGES_PARCLOSE, true);
 
-		if(nbPartitions >= 3) {
+		if(conf.get("nbPartitions") >= 3) {
 			profil.addCoteDroiteEntrePercages(0, 4, 2);
 			profil.addCoteDroiteEntrePercages(1, 5, 3);
 			profil.addCoteDroiteEntrePercages(2, 6, 4);
