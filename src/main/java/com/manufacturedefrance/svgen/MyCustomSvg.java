@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 import com.manufacturedefrance.svgen.tags.GTag;
 import com.manufacturedefrance.svgen.tags.RectTag;
 import com.manufacturedefrance.svgen.tags.SvgTag;
-import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 import com.manufacturedefrance.utils.MyPath2D;
 
 public class MyCustomSvg extends SvgComponent{
@@ -197,17 +196,14 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public void drawSvg(MyCustomSvg svg, double x, double y, ShapeMode mode) {
-		double actualX = x;
-		double actualY = y;
-		switch(mode) {
-			case CENTER:
-				actualX = x - svg.getWidth() / 2;
-				actualY = y - svg.getHeight() / 2;
-				break;
-			case CORNER:
-				actualX = x;
-				actualY = y;
-				break;
+		double actualX = 0;
+		double actualY = 0;
+		if(mode == ShapeMode.CENTER) {
+			actualX = x - svg.getWidth() / 2;
+			actualY = y - svg.getHeight() / 2;
+		} else if(mode == ShapeMode.CORNER) {
+			actualX = x;
+			actualY = y;
 		}
 
 		MyCustomSvg svgClone = svg.duplicate();
@@ -234,16 +230,14 @@ public class MyCustomSvg extends SvgComponent{
 			double curW = this.bounds.getWidth() + this.padding.getHorizontalPadding();
 			double curH = this.bounds.getHeight() + this.padding.getVerticalPadding();
 
-			String gBorder = "";
-			gBorder += "<rect ";
-			gBorder += "x=\"" + this.bounds.getX() + "\" ";
-			gBorder += "y=\"" + this.bounds.getY() + "\" ";
-			gBorder += "width=\"" + curW + "\" ";
-			gBorder += "height=\"" + curH + "\" ";
-			gBorder += "style=\"" + this.borderSc.getStrokeStyle() + " " + this.borderSc.getShapeStyle() + "\" ";
-			gBorder += "/>\n";
+			RectTag rectTag = new RectTag();
+			rectTag.x(this.bounds.getX());
+			rectTag.y(this.bounds.getY());
+			rectTag.width(curW);
+			rectTag.height(curH);
+			rectTag.style(this.borderSc.getStrokeStyle() + " " + this.borderSc.getShapeStyle());
 
-			gPadding = gBorder += gPadding;
+			gPadding = rectTag.render() + gPadding;
 		}
 
 		GTag gTagTransform = new GTag();
