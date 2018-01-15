@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.manufacturedefrance.svgen.tags.GTag;
+import com.manufacturedefrance.svgen.tags.RectTag;
 import com.manufacturedefrance.svgen.tags.SvgTag;
 import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 import com.manufacturedefrance.utils.MyPath2D;
@@ -192,35 +193,19 @@ public class MyCustomSvg extends SvgComponent{
 	}
 	
 	public void drawSvg(MyCustomSvg svg, double x, double y) {
-		this.drawSvg(svg, x, y, ShiftMode.LEFT);
+		this.drawSvg(svg, x, y, ShapeMode.CORNER);
 	}
 	
-	public void drawSvg(MyCustomSvg svg, double x, double y, ShiftMode hShift) {
-		this.drawSvg(svg, x, y, hShift, ShiftMode.TOP);
-	}
-	
-	public void drawSvg(MyCustomSvg svg, double x, double y, ShiftMode hShift, ShiftMode vShift) {
-		double actualX;
-		double actualY;
-		switch(hShift) {
+	public void drawSvg(MyCustomSvg svg, double x, double y, ShapeMode mode) {
+		double actualX = x;
+		double actualY = y;
+		switch(mode) {
 			case CENTER:
 				actualX = x - svg.getWidth() / 2;
-				break;
-			case RIGHT:
-				actualX = x - svg.getWidth();
-				break;
-			default: // or LEFT
-				actualX = x;
-				break;
-		}
-			switch(vShift) {
-			case CENTER:
 				actualY = y - svg.getHeight() / 2;
 				break;
-			case BOTTOM:
-				actualY = y - svg.getHeight();
-				break;
-			default: // or TOP
+			case CORNER:
+				actualX = x;
 				actualY = y;
 				break;
 		}
@@ -301,5 +286,10 @@ public class MyCustomSvg extends SvgComponent{
 	
 	MyCustomSvg duplicate() {
 		return new MyCustomSvg(this);
+	}
+
+	public enum ShapeMode{
+		CENTER,
+		CORNER
 	}
 }

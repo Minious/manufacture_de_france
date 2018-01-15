@@ -327,17 +327,15 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		}
 	}
 	
-	public enum ShiftMode{
-		CENTER,
-		LEFT,
-		RIGHT,
-		TOP,
-		BOTTOM
-	}
-	
 	public enum StyleTrait {
 		MIXTE,
 		INTERROMPU,
 		CONTINU
+	}
+
+	public enum ShiftMode{
+		CENTER,
+		LEFT,
+		RIGHT
 	}
 }
