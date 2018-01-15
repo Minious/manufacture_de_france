@@ -10,7 +10,7 @@ public class SvgCoomponentTest {
     @Test
     public void formatterTest(){
         double myNumber = -01234.56789;
-        assertEquals(DOUBLE_FORMAT.format(myNumber), "-1234.568");
+        assertEquals("-1234.568", DOUBLE_FORMAT.format(myNumber));
     }
 
 }
