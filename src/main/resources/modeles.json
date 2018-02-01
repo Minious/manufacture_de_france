@@ -24,6 +24,16 @@
 				"name": "nbPartitions",
 				"displayName": "Nombre de partitions",
 				"type": "Integer"
+			}, {
+				"name": "natureVitrage",
+				"displayName": "Nature du vitrage",
+				"type": "Dropdown",
+				"values": [
+					"44.2  clair",
+					"33.2  clair",
+					"44.2  opal",
+					"33.2  opal"
+				]
 			}
 		],
 		"Premium": [ {
@@ -50,6 +60,16 @@
 				"name": "nbPartitions",
 				"displayName": "Nombre de partitions",
 				"type": "Integer"
+			}, {
+				"name": "natureVitrage",
+				"displayName": "Nature du vitrage",
+				"type": "Dropdown",
+				"values": [
+					"44.2  clair",
+					"33.2  clair",
+					"44.2  opal",
+					"33.2  opal"
+				]
 			}
 		],
 		"Mecanica": [ {
@@ -76,6 +96,16 @@
 				"name": "nbPartitions",
 				"displayName": "Nombre de partitions",
 				"type": "Integer"
+			}, {
+				"name": "natureVitrage",
+				"displayName": "Nature du vitrage",
+				"type": "Dropdown",
+				"values": [
+					"44.2  clair",
+					"33.2  clair",
+					"44.2  opal",
+					"33.2  opal"
+				]
 			}
 		]
 	}

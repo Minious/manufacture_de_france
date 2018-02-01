@@ -10,6 +10,7 @@ public class MainDebug {
 		double hauteurVerriere = 1200d;
 		double largeurVerriere = 1400d;
 		int nbPartitions = 5;
+		String natureVitrage = "44.2 opal";
 		
 		HashMap<String, Object> myArgs = new HashMap<>();
 		myArgs.put("ARC", "190000310");
@@ -18,6 +19,7 @@ public class MainDebug {
 		myArgs.put("hauteurVerriere", hauteurVerriere);
 		myArgs.put("largeurVerriere", largeurVerriere);
 		myArgs.put("nbPartitions", nbPartitions);
+		myArgs.put("natureVitrage", natureVitrage);
 		
 		Renderer.render("Mecanica", Paths.get("").toAbsolutePath(), myArgs);
 	}

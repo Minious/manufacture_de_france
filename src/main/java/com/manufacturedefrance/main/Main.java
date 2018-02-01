@@ -83,34 +83,44 @@ public class Main {
 					JLabel curLabel = new JLabel(displayName+" :", JLabel.TRAILING);
 					curCard.add(curLabel);
 					
-					JTextField curJTextField = null;
+					JComponent curJComponent = null;
 					FieldType curType;
 					switch(curFieldJSON.getString("type")) {
 						case "String":
-							curJTextField = new JTextField(30);
-							curLabel.setLabelFor(curJTextField);
-							curCard.add(curJTextField);
+							JTextField curJTextFieldString = new JTextField(30);
+							curLabel.setLabelFor(curJTextFieldString);
+							curCard.add(curJTextFieldString);
 							curType = FieldType.STRING;
+							curJComponent = curJTextFieldString;
 							break;
 						case "Double":
 							DecimalFormat doubleFormatter = new DecimalFormat("#.###");
-							curJTextField = new JFormattedTextField(doubleFormatter);
-							curJTextField.setText("0");
-							curCard.add(curJTextField);
+							JFormattedTextField curJTextFieldDouble = new JFormattedTextField(doubleFormatter);
+							curJTextFieldDouble.setText("0");
+							curCard.add(curJTextFieldDouble);
 							curType = FieldType.DOUBLE;
+							curJComponent = curJTextFieldDouble;
 							break;
 						case "Integer":
 							DecimalFormat integerFormatter = new DecimalFormat("#");
-							curJTextField = new JFormattedTextField(integerFormatter);
-							curJTextField.setText("0");
-							curCard.add(curJTextField);
+							JFormattedTextField curJFormattedTextFieldInteger = new JFormattedTextField(integerFormatter);
+							curJFormattedTextFieldInteger.setText("0");
+							curCard.add(curJFormattedTextFieldInteger);
 							curType = FieldType.INTEGER;
+							curJComponent = curJFormattedTextFieldInteger;
+							break;
+						case "Dropdown":
+							Object[] values = curFieldJSON.getJSONArray("values").toList().toArray();
+							JComboBox curJComboBoxDropDown = new JComboBox(values);
+							curCard.add(curJComboBoxDropDown);
+							curType = FieldType.DROPDOWN;
+							curJComponent = curJComboBoxDropDown;
 							break;
 						default:
 							throw new JSONException("Invalid modele field");
 					}
 					
-					MyField myField = new MyField(curType, curJTextField);
+					MyField myField = new MyField(curType, curJComponent);
 					curFields.put(curFieldJSON.getString("name"), myField);
 				}
 				
@@ -168,7 +178,11 @@ public class Main {
 					
 					for(Map.Entry<String, MyField> entry : selectedModelFields.entrySet()) {
 						FieldType type = entry.getValue().getType();
-						String fieldTextValue = entry.getValue().getField().getText();
+						String fieldTextValue;
+						if(entry.getValue().getType() == FieldType.DROPDOWN)
+							fieldTextValue = (String) ((JComboBox) entry.getValue().getComponent()).getSelectedItem();
+						else
+							fieldTextValue = ((JTextField) entry.getValue().getComponent()).getText();
 						Object value = null;
 						switch(type) {
 							case STRING:
@@ -177,9 +191,12 @@ public class Main {
 							case DOUBLE:
 								value = Double.parseDouble(fieldTextValue);
 								break;
-							case INTEGER:
-								value = Integer.parseInt(fieldTextValue);
-								break;
+                            case INTEGER:
+                                value = Integer.parseInt(fieldTextValue);
+                                break;
+                            case DROPDOWN:
+                                value = fieldTextValue;
+                                break;
 						}
 						renderValues.put(entry.getKey(), value);
 					}
@@ -213,24 +230,23 @@ public class Main {
 	
 	class MyField {
 		private FieldType type;
-		private JTextField field;
+		private JComponent component;
 		
-		MyField(FieldType type, JTextField field) {
+		MyField(FieldType type, JComponent component) {
 			this.type = type;
-			this.field = field;
+			this.component = component;
 		}
 
 		public FieldType getType() {
 			return this.type;
 		}
 
-		public JTextField getField() {
-			return this.field;
+		public JComponent getComponent() {
+			return this.component;
 		}
-		
 	}
 
 	private enum FieldType {
-		STRING, DOUBLE, INTEGER
+		STRING, DOUBLE, INTEGER, DROPDOWN
 	}
 }
