@@ -7,9 +7,9 @@ import com.manufacturedefrance.techdrawgen.Renderer;
 
 public class MainDebug {
 	public static void main(String[] args) {
-		double hauteurVerriere = 1297d;
-		double largeurVerriere = 1465d;
-		int nbPartitions = 4;
+		double hauteurVerriere = 1200d;
+		double largeurVerriere = 1400d;
+		int nbPartitions = 5;
 		
 		HashMap<String, Object> myArgs = new HashMap<>();
 		myArgs.put("ARC", "190000310");
@@ -19,6 +19,6 @@ public class MainDebug {
 		myArgs.put("largeurVerriere", largeurVerriere);
 		myArgs.put("nbPartitions", nbPartitions);
 		
-		Renderer.render("Mécanique", Paths.get("").toAbsolutePath(), myArgs);
+		Renderer.render("Mecanica", Paths.get("").toAbsolutePath(), myArgs);
 	}
 }

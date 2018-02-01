@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.geom.AffineTransform;
-import java.text.DecimalFormat;
 
 import com.manufacturedefrance.svgen.MyCustomSvg;
 import com.manufacturedefrance.svgen.SvgComponent;

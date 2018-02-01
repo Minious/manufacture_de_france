@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 
 public class TextFileConf {
 
+	private static String[] BUILTIN_FUNCTIONS = { "abs", "acos", "asin", "atan", "cbrt", "ceil", "cos", "cosh", "exp", "floor", "log", "log10", "log2", "sin", "sinh", "sqrt", "tan", "tanh", "signum" };
+
 	private TextFileConf() {
 		throw new IllegalStateException("Utility class");
 	}
@@ -26,17 +28,15 @@ public class TextFileConf {
 		return loadConf(fileName, initialMap, new ArrayList<>());
 	}
 
-	public static Map<String, Double> loadConf(String fileName, Map<String, Double> initialMap, List<Function> customFunctions) throws UnprocessableConfFileException {
-		InputStream stream = TextFileConf.class.getResourceAsStream("/" + fileName);
-				
+	public static List<String> getExps(InputStream stream){
 		ArrayList<String> exps = new ArrayList<>();
 		Pattern pExp = Pattern.compile(".*(?<![=!])=(?!=).*"); // compliqué du cul
 
 		Scanner scanner = new Scanner(stream);
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
-			
-			String exp = line.split("//", -1)[0].replaceAll("\\s", "");
+
+			String exp = line.split("//", -1)[0].replaceAll("\\s+", "");
 			if (!exp.isEmpty()) {
 				Matcher mExp = pExp.matcher(exp);
 				if (mExp.matches())
@@ -49,9 +49,37 @@ public class TextFileConf {
 		}
 		scanner.close();
 
-		HashMap<String, Double> map = new HashMap<>(initialMap);
+		return exps;
+	}
 
-		String[] builtinFunctions = { "abs", "acos", "asin", "atan", "cbrt", "ceil", "cos", "cosh", "exp", "floor", "log", "log10", "log2", "sin", "sinh", "sqrt", "tan", "tanh", "signum" };
+	private static String[] getSplitCurOp(String curOp){
+		String separator = "[-+*/)(<>,]|==|!=|<=|>=";
+		Pattern pSplitOp = Pattern.compile("(?<="+separator+")|(?="+separator+")");
+
+		String[] splitCurOp = pSplitOp.split(curOp);
+
+		return splitCurOp;
+	}
+
+	private static List<String> getOpVars(String[] splitCurOp, ArrayList<String> functionsNames){
+		ArrayList<String> vars = new ArrayList<>();
+		Pattern p = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_]*$");
+		for (String token : splitCurOp) {
+			Matcher m = p.matcher(token);
+
+			if (m.matches() && !functionsNames.contains(token))
+				vars.add(token);
+		}
+
+		return vars;
+	}
+
+	public static Map<String, Double> loadConf(String fileName, Map<String, Double> initialMap, List<Function> customFunctions) throws UnprocessableConfFileException {
+		InputStream stream = TextFileConf.class.getResourceAsStream("/" + fileName);
+
+		List<String> exps = getExps(stream);
+
+		HashMap<String, Double> map = new HashMap<>(initialMap);
 
 		while (!exps.isEmpty()) {
 			int i = 0;
@@ -59,32 +87,23 @@ public class TextFileConf {
 			List<String> unprocessedExp = new ArrayList<>();
 			while (i < exps.size()) {
 				String curExp = exps.get(i);
-				String curAff = curExp.split("=", 2)[0];
-				String curOp = curExp.split("=", 2)[1];
+				String[] splitCurExp = curExp.split("=", 2);
+				String curAff = splitCurExp[0];
+				String curOp = splitCurExp[1];
 
 				ExpressionBuilder eb = new ExpressionBuilder(curOp);
 
-				String separator = "[-+*/)(<>,]|==|!=|<=|>=";
-				Pattern pTest = Pattern.compile("(?<="+separator+")|(?="+separator+")");
+				String[] splitCurOp = getSplitCurOp(curOp);
 
-				String[] curOpArr = pTest.split(curOp);
-				
 				ArrayList<Function> includedFunctions = getIncludedFunctions();
-				
-				ArrayList<String> functionsNames = new ArrayList<>(Arrays.asList(builtinFunctions));
+
+				ArrayList<String> functionsNames = new ArrayList<>(Arrays.asList(BUILTIN_FUNCTIONS));
 				for(Function curFunc : includedFunctions)
 					functionsNames.add(curFunc.getName());
 				for(Function curFunc : customFunctions)
 					functionsNames.add(curFunc.getName());
 
-				ArrayList<String> vars = new ArrayList<>();
-				Pattern p = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_]*$");
-				for (String token : curOpArr) {
-					Matcher m = p.matcher(token);
-
-					if (m.matches() && !functionsNames.contains(token))
-						vars.add(token);
-				}
+				List<String> vars = getOpVars(splitCurOp, functionsNames);
 				
 				eb.variables(new HashSet<>(vars));
 				eb.functions(includedFunctions);
@@ -97,8 +116,10 @@ public class TextFileConf {
 				for (String var : vars) {
 					if (map.keySet().contains(var))
 						exp.setVariable(var, map.get(var));
-					else
+					else {
 						processable = false;
+						break;
+					}
 				}
 
 				if (processable) {
