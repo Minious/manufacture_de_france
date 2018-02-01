@@ -9,7 +9,8 @@ import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class AttachesTraverseCorniere extends ElementGenerique {
 	private static final int NB_TRAVERSES = 2;
-	private static final String DIAMETRE_PERCAGES = "ØM5";
+	private static final String DIAMETRE_PERCAGES = "Ø5.5";
+	private static final String DIAMETRE_PERCAGES_AFFICHE = "Ø5.5 + fr";
 
 	public AttachesTraverseCorniere(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -28,7 +29,7 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 		for(int i=0;i<conf.get("nbAttachesIntermediaires")+1;i++) {
 			ordonnee += conf.get("entreAxeAttachesTraverseCorniere");
 			if(i == conf.get("nbAttachesIntermediaires"))
-				profil.addPercage(ordonnee, true);
+				profil.addPercage(ordonnee, DIAMETRE_PERCAGES, DIAMETRE_PERCAGES_AFFICHE);
 			else
 				profil.addPercage(ordonnee, false);
 		}
