@@ -118,7 +118,8 @@ public class Premium extends ModeleGenerique {
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
 			"Modèle : Premium",
-			"Dimensions : " + conf.get("largeurVerriere") + " LARG x " + conf.get("hauteurVerriere") + " HT"
+			"Dimensions : " + conf.get("largeurVerriere") + " LARG x " + conf.get("hauteurVerriere") + " HT",
+			"Partitions : " + conf.get("nbPartitions").intValue()
 		));
 		cartoucheDroite.setPadding(new Padding(10));
 		cartoucheDroite.setBorders(true);
