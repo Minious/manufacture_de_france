@@ -149,7 +149,8 @@ public class Mecanique extends ModeleGenerique {
 			"Modèle : " + data.get("modele"),
 			"Dimensions : " + conf.get("largeurVerriere") + " x " + conf.get("hauteurVerriere"),
 			"Partitions : " + conf.get("nbPartitions").intValue(),
-			"Nature vitrage : " + data.get("natureVitrage")
+            "Nature vitrage : " + data.get("natureVitrage"),
+            "Finition : " + data.get("finition")
 		));
 		cartoucheDroite.setPadding(new Padding(10));
 		cartoucheDroite.setBorders(true);

@@ -34,7 +34,23 @@
 					"44.2  opal",
 					"33.2  opal"
 				]
-			}
+			}, {
+                "name": "finition",
+                "displayName": "Finition",
+                "type": "Dropdown",
+                "values": [
+                    "Métal brut protégé",
+                    "Métal brut non protégé",
+                    "Rouille",
+                    "Noir 2100 sablé",
+                    "Noir 9005 satiné",
+                    "Blanc 9016 satiné",
+                    "Gris anthracite 9016 satiné",
+                    "Noir 9005 texturé",
+                    "Blanc 9016 texturé",
+                    "Gris anthracite 9016 texturé"
+                ]
+          }
 		],
 		"Premium": [ {
 				"name": "ARC",
@@ -70,7 +86,23 @@
 					"44.2  opal",
 					"33.2  opal"
 				]
-			}
+			}, {
+                "name": "finition",
+                "displayName": "Finition",
+                "type": "Dropdown",
+                "values": [
+                    "Métal brut protégé",
+                    "Métal brut non protégé",
+                    "Rouille",
+                    "Noir 2100 sablé",
+                    "Noir 9005 satiné",
+                    "Blanc 9016 satiné",
+                    "Gris anthracite 9016 satiné",
+                    "Noir 9005 texturé",
+                    "Blanc 9016 texturé",
+                    "Gris anthracite 9016 texturé"
+                ]
+            }
 		],
 		"Mecanica": [ {
 				"name": "ARC",
@@ -97,16 +129,32 @@
 				"displayName": "Nombre de partitions",
 				"type": "Integer"
 			}, {
-				"name": "natureVitrage",
-				"displayName": "Nature du vitrage",
-				"type": "Dropdown",
-				"values": [
-					"44.2  clair",
-					"33.2  clair",
-					"44.2  opal",
-					"33.2  opal"
-				]
-			}
+                "name": "natureVitrage",
+                "displayName": "Nature du vitrage",
+                "type": "Dropdown",
+                "values": [
+                  "44.2  clair",
+                  "33.2  clair",
+                  "44.2  opal",
+                  "33.2  opal"
+                ]
+            }, {
+                "name": "finition",
+                "displayName": "Finition",
+                "type": "Dropdown",
+                "values": [
+                  "Métal brut protégé",
+                  "Métal brut non protégé",
+                  "Rouille",
+                  "Noir 2100 sablé",
+                  "Noir 9005 satiné",
+                  "Blanc 9016 satiné",
+                  "Gris anthracite 9016 satiné",
+                  "Noir 9005 texturé",
+                  "Blanc 9016 texturé",
+                  "Gris anthracite 9016 texturé"
+                ]
+            }
 		]
 	}
 }
