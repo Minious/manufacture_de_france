@@ -187,7 +187,7 @@ public class MyCustomSvg extends SvgComponent{
 		
 		StrSVG str = new StrSVG(text, x, y, this.rememberedSc);
 		svgTree.add(str);
-		
+
 		this.enlargeBounds(strBounds);
 	}
 	

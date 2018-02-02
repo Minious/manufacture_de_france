@@ -196,7 +196,8 @@ public class DessinProfil {
 		for (Percage percage : sortedPercages) {
 			// Cotes gauches
 			MyPoint2D extremiteCote = new MyPoint2D(-demiLargeurGauche, this.longueur - percage.getHauteurPercage());
-			g.drawDistanceCote(origineCotesGauches, extremiteCote, curDistanceCotesGauches);
+			//g.drawDistanceCote(origineCotesGauches, extremiteCote, curDistanceCotesGauches);
+			g.drawSimpleDistanceCote(origineCotesGauches, extremiteCote, curDistanceCotesGauches);
 			curDistanceCotesGauches = decalerCote(curDistanceCotesGauches);
 
 			// Percages
@@ -213,6 +214,7 @@ public class DessinProfil {
 		}
 
 		// Trace la cote de longueur totale
+		//curDistanceCotesGauches = decalerCote(curDistanceCotesGauches);
 		g.drawDistanceCote(origineCotesGauches, coinSuperieurGaucheProfil, curDistanceCotesGauches);
 
 		// Cotes droites ordonnees de le moins a la plus eloignee

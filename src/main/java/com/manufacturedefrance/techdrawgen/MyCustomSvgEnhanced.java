@@ -184,6 +184,65 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.drawString(displayedStr, abscisse, p.y);
 	}
 
+	public void drawSimpleDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset) {
+		this.drawSimpleDistanceCote(p1, p2, offset, 0, ShiftMode.RIGHT, this.rememberedUnderLineGap, false);
+	}
+
+	public void drawSimpleDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap, boolean reversed){
+		if(p1.equals(p2))
+			throw new IllegalStateException("Impossible de tracer cote : Ancres identiques");
+
+		AffineTransform orig = this.getTransform();
+
+		double distance = MyPoint2D.distance(p1, p2);
+		String formatedCote = SvgComponent.DOUBLE_FORMAT.format(distance);
+
+		this.translate(p2.x, p2.y);
+		this.rotate(-Utils.getAngle(p1, p2));
+
+		FontMetrics metrics = this.getFontMetrics();
+		double coteStringWidth = metrics.stringWidth(formatedCote);
+
+		this.drawLine(this.distanceCoteGap, 0, offset, 0);
+
+		this.translate(offset, 0);
+
+		double lowerBound = shift;
+		double upperBound = shift;
+
+		if (shiftMode == ShiftMode.LEFT) {
+			lowerBound += 0;
+			upperBound += coteStringWidth;
+		} else if(shiftMode == ShiftMode.CENTER) {
+			lowerBound -= coteStringWidth / 2;
+			upperBound += coteStringWidth / 2;
+		} else if(shiftMode == ShiftMode.RIGHT) {
+			lowerBound -= coteStringWidth;
+			upperBound += 0;
+		}
+
+		double actualLowerBound = Math.min(lowerBound, 0);
+		double actualUpperBound = Math.max(upperBound, 0);
+
+		this.drawLine(0, actualLowerBound, 0, actualUpperBound);
+
+		this.rotate(Math.PI / 2);
+		if(reversed)
+			this.rotate(Math.PI);
+
+		this.translate(0, - customUnderLineGap);
+		if(shiftMode == ShiftMode.LEFT)
+			this.translate(shift, 0);
+		if(shiftMode == ShiftMode.CENTER)
+			this.translate(- coteStringWidth / 2 + shift, 0);
+		if(shiftMode == ShiftMode.RIGHT)
+			this.translate(- coteStringWidth + shift, 0);
+
+		this.drawString(formatedCote, 0, 0);
+
+		this.setTransform(orig);
+	}
+
 	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap, boolean reversed){
 		if(p1.equals(p2))
 			throw new IllegalStateException("Impossible de tracer cote : Ancres identiques");
