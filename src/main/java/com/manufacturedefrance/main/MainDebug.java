@@ -11,6 +11,7 @@ public class MainDebug {
 		double largeurVerriere = 1400d;
 		int nbPartitions = 5;
 		String natureVitrage = "44.2 opal";
+		String finition = "Noir 2100 sablé";
 		
 		HashMap<String, Object> myArgs = new HashMap<>();
 		myArgs.put("ARC", "190000310");
@@ -20,7 +21,8 @@ public class MainDebug {
 		myArgs.put("largeurVerriere", largeurVerriere);
 		myArgs.put("nbPartitions", nbPartitions);
 		myArgs.put("natureVitrage", natureVitrage);
-		
-		Renderer.render("Mecanica", Paths.get("").toAbsolutePath(), myArgs);
+		myArgs.put("finition", finition);
+
+		Renderer.render("Premium", Paths.get("").toAbsolutePath(), myArgs);
 	}
 }

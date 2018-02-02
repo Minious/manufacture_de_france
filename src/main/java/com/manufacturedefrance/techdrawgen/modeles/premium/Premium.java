@@ -43,6 +43,12 @@ public class Premium extends ModeleGenerique {
 		MontantCorniere montantCorniere = new MontantCorniere(this.conf, this.data);
 		MontantIntermediaire montantIntermediaire = new MontantIntermediaire(this.conf, this.data);
 		TraverseCorniere traverseCorniere = new TraverseCorniere(this.conf, this.data);
+
+		int taillePoliceTitre1 = 16;
+		int taillePoliceTitre2 = 14;
+
+		MyCustomSvg corniere30x20x3 = new LignesTexte("CORNIERE 30x20x3", taillePoliceTitre2);
+		MyCustomSvg T30x3 = new LignesTexte("T de 30x30x3", taillePoliceTitre2);
 		
 		MyHandyLayout traverseCorniereLayout = new MyHandyLayout();
 		MyCustomSvg traverseCorniereChampSvg = new MyCustomSvg();
@@ -62,23 +68,23 @@ public class Premium extends ModeleGenerique {
 		montantCorniereSvg.drawSvg(montantCorniere.getDessin(), 0, 0);
 		montantIntermediaireSvg.drawSvg(montantIntermediaire.getDessin(), 0, 0);
 		
-		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
-		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements());
-		MyCustomSvg traverseCorniereDesc = new LignesTexte("CORNIERE 30x20x3");
-		MyCustomSvg montantCorniereTitre = new LignesTexte("MT LATERAL");
-		MyCustomSvg montantCorniereQte = new LignesTexte("QTE : "+montantCorniere.getNbElements());
-		MyCustomSvg montantCorniereDesc = new LignesTexte("CORNIERE 30x20x3");
-		MyCustomSvg montantIntermediaireTitre = new LignesTexte("MT INTERMEDIAIRE");
-		MyCustomSvg montantIntermediaireQte = new LignesTexte("QTE : "+montantIntermediaire.getNbElements());
-		MyCustomSvg montantIntermediaireDesc = new LignesTexte("T de 30x30x3");
+		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE", taillePoliceTitre1);
+		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements(), taillePoliceTitre1);
+		MyCustomSvg montantCorniereTitre = new LignesTexte("MT LATERAL", taillePoliceTitre1);
+		MyCustomSvg montantCorniereQte = new LignesTexte("QTE : "+montantCorniere.getNbElements(), taillePoliceTitre1);
+		MyCustomSvg montantIntermediaireTitre = new LignesTexte("MT INTERMEDIAIRE", taillePoliceTitre1);
+		MyCustomSvg montantIntermediaireQte = new LignesTexte("QTE : "+montantIntermediaire.getNbElements(), taillePoliceTitre1);
 
 		MyHandyLayout layoutDessins = new MyHandyLayout();
-		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte, traverseCorniereDesc}, ShiftMode.LEFT);
+		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);
+		layoutDessins.addRow(corniere30x20x3, ShiftMode.LEFT);
 		layoutDessins.addRow(traverseCorniereSvg, ShiftMode.CENTER);
-		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte, montantCorniereDesc}, ShiftMode.LEFT);
+		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
+		layoutDessins.addRow(corniere30x20x3, ShiftMode.LEFT);
 		layoutDessins.addRow(montantCorniereSvg, ShiftMode.CENTER);
 		if(montantIntermediaire.getNbElements() > 0) {
-			layoutDessins.addRow(new MyCustomSvg[] {montantIntermediaireTitre, montantIntermediaireQte, montantIntermediaireDesc}, ShiftMode.LEFT);
+			layoutDessins.addRow(new MyCustomSvg[] {montantIntermediaireTitre, montantIntermediaireQte}, ShiftMode.LEFT);
+			layoutDessins.addRow(T30x3, ShiftMode.LEFT);
 			layoutDessins.addRow(montantIntermediaireSvg, ShiftMode.CENTER);
 		}
 		

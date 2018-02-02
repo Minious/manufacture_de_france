@@ -64,6 +64,12 @@ public class Mecanique extends ModeleGenerique {
 		TraverseCorniere traverseCorniere = new TraverseCorniere(this.conf, this.data);
 		ContreCadreTraverseCorniere contreCadreTraverseCorniere = new ContreCadreTraverseCorniere(this.conf, this.data);
 		AttachesTraverseCorniere attachesTraverseCorniere = new AttachesTraverseCorniere(this.conf, this.data);
+
+		int taillePoliceTitre1 = 16;
+		int taillePoliceTitre2 = 14;
+
+		MyCustomSvg corniere30x30x3 = new LignesTexte("CORNIERE 30x30x3", taillePoliceTitre2);
+		MyCustomSvg plat30x3 = new LignesTexte("PLAT 30x3", taillePoliceTitre2);
 		
 		// Montant corniere
 		MyHandyLayout montantCorniereLayout = new MyHandyLayout();
@@ -75,8 +81,10 @@ public class Mecanique extends ModeleGenerique {
 		
 		montantCorniereSvg.drawSvg(montantCorniere.getDessin(), 0, 0);
 		contreCadreMontantCorniereSvg.drawSvg(contreCadreMontantCorniere.getDessin(), 0, 0);
-		
+
+		montantCorniereLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
 		montantCorniereLayout.addRow(montantCorniereSvg, ShiftMode.CENTER);
+		montantCorniereLayout.addRow(plat30x3, ShiftMode.LEFT);
 		montantCorniereLayout.addRow(contreCadreMontantCorniereSvg, ShiftMode.CENTER);
 		
 		// Montant partition
@@ -89,8 +97,10 @@ public class Mecanique extends ModeleGenerique {
 		
 		montantPartitionSvg.drawSvg(montantPartition.getDessin(), 0, 0);
 		contreCadreMontantPartitionSvg.drawSvg(contreCadreMontantPartition.getDessin(), 0, 0);
-		
+
+		montantPartitionLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
 		montantPartitionLayout.addRow(montantPartitionSvg, ShiftMode.CENTER);
+		montantPartitionLayout.addRow(plat30x3, ShiftMode.LEFT);
 		montantPartitionLayout.addRow(contreCadreMontantPartitionSvg, ShiftMode.CENTER);
 		
 		// Traverse corniere
@@ -106,18 +116,20 @@ public class Mecanique extends ModeleGenerique {
 		traverseCorniereSvg.drawSvg(traverseCorniere.getDessin(), 0, 0);
 		contreCadreTraverseCorniereSvg.drawSvg(contreCadreTraverseCorniere.getDessin(), 0, 0);
 		attachesTraverseCorniereSvg.drawSvg(attachesTraverseCorniere.getDessin(), 0, 0);
-		
+
+		traverseCorniereLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
 		traverseCorniereLayout.addRow(traverseCorniereSvg, ShiftMode.CENTER);
 		traverseCorniereLayout.addRow(attachesTraverseCorniereSvg, ShiftMode.CENTER);
+		traverseCorniereLayout.addRow(plat30x3, ShiftMode.LEFT);
 		traverseCorniereLayout.addRow(contreCadreTraverseCorniereSvg, ShiftMode.CENTER);
 
 		// Final		
-		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE");
-		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements());
-		MyCustomSvg montantCorniereTitre = new LignesTexte("MT CORNIERE LATERAL");
-		MyCustomSvg montantCorniereQte = new LignesTexte("QTE : "+montantCorniere.getNbElements());
-		MyCustomSvg montantPartitionTitre = new LignesTexte("MT INTERMEDIAIRE");
-		MyCustomSvg montantPartitionQte = new LignesTexte("QTE : "+montantPartition.getNbElements());
+		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE", taillePoliceTitre1);
+		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements(), taillePoliceTitre1);
+		MyCustomSvg montantCorniereTitre = new LignesTexte("MT CORNIERE LATERAL", taillePoliceTitre1);
+		MyCustomSvg montantCorniereQte = new LignesTexte("QTE : "+montantCorniere.getNbElements(), taillePoliceTitre1);
+		MyCustomSvg montantPartitionTitre = new LignesTexte("MT INTERMEDIAIRE", taillePoliceTitre1);
+		MyCustomSvg montantPartitionQte = new LignesTexte("QTE : "+montantPartition.getNbElements(), taillePoliceTitre1);
 
 		MyHandyLayout layoutDessins = new MyHandyLayout();
 		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);
