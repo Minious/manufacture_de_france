@@ -35,7 +35,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>main.Main</mainClass>
+                                    <mainClass>com.manufacturedefrance.main.Main</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
