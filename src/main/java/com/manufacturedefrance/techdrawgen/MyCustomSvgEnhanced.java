@@ -16,6 +16,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 
 	private static final double COTE_ARROW_WIDTH = 10;
 	private static final double COTE_ARROW_HEIGHT = 3;
+	private static final MyPath2D ARROW_PATH = getArrowPath();
 	
 	public void setUnderLineGap(double underLineGap) {
 		this.rememberedUnderLineGap = underLineGap;
@@ -284,12 +285,6 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 
 		this.drawLine(actualLowerBound, 0, actualUpperBound, 0);
 
-		MyPath2D arrowPath = new MyPath2D();
-		arrowPath.moveTo(0, 0);
-		arrowPath.lineTo(- COTE_ARROW_WIDTH, COTE_ARROW_HEIGHT / 2);
-		arrowPath.lineTo(- COTE_ARROW_WIDTH, - COTE_ARROW_HEIGHT / 2);
-		arrowPath.closePath();
-
 		if(reversed)
 			this.rotate(Math.PI);
 
@@ -297,17 +292,17 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.translate(- distance / 2, 0);
 		if(distance > 2.5 * COTE_ARROW_WIDTH) {
 			this.rotate(Math.PI);
-			this.drawPath(arrowPath);
+			this.drawPath(ARROW_PATH);
 			this.rotate(Math.PI);
 		} else {
-			this.drawPath(arrowPath);
+			this.drawPath(ARROW_PATH);
 		}
 		this.translate(distance, 0);
 		if(distance > 2.5 * COTE_ARROW_WIDTH) {
-			this.drawPath(arrowPath);
+			this.drawPath(ARROW_PATH);
 		} else {
 			this.rotate(Math.PI);
-			this.drawPath(arrowPath);
+			this.drawPath(ARROW_PATH);
 			this.rotate(Math.PI);
 		}
 		this.translate(- distance / 2, 0);
@@ -326,8 +321,8 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.setTransform(orig);
 	}
 	
-	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double underLineGap){
-		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, underLineGap, false);
+	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode, double customUnderLineGap){
+		this.drawDistanceCote(p1, p2, offset, shift, shiftMode, customUnderLineGap, false);
 	}
 	
 	public void drawDistanceCote(MyPoint2D p1, MyPoint2D p2, double offset, double shift, ShiftMode shiftMode){
@@ -368,6 +363,16 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	
 	public void drawCircle(MyPoint2D center, double diameter){
 		this.drawOval(center, new MyPoint2D(diameter, diameter));
+	}
+
+	private static MyPath2D getArrowPath(){
+		MyPath2D arrowPath = new MyPath2D();
+		arrowPath.moveTo(0, 0);
+		arrowPath.lineTo(- COTE_ARROW_WIDTH, COTE_ARROW_HEIGHT / 2);
+		arrowPath.lineTo(- COTE_ARROW_WIDTH, - COTE_ARROW_HEIGHT / 2);
+		arrowPath.closePath();
+
+		return arrowPath;
 	}
 	
 	public void setDashArray(StyleTrait styleTrait) {

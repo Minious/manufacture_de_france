@@ -13,8 +13,16 @@ public class StyleContext {
 	private Font curFont;
 	private BasicStroke curStroke;
 
+	private static AffineTransform DEFAULT_TRANSFORM = new AffineTransform();
+	private static Color DEFAULT_STROKE_COLOR = Color.BLACK;
+	private static Color DEFAULT_FILL_COLOR = null;
+	private static Color DEFAULT_FONT_COLOR = Color.BLACK;
+	private static int DEFAULT_FONT_SIZE = 12;
+	private static Font DEFAULT_FONT = new Font("Century Gothic", Font.PLAIN, DEFAULT_FONT_SIZE);
+	private static BasicStroke DEFAULT_STROKE = new BasicStroke(1);
+
 	StyleContext() {
-		this(new AffineTransform(), Color.BLACK, null, Color.BLACK, new Font("Century Gothic", Font.PLAIN, 12), new BasicStroke(1));
+		this(DEFAULT_TRANSFORM, DEFAULT_STROKE_COLOR, DEFAULT_FILL_COLOR, DEFAULT_FONT_COLOR, DEFAULT_FONT, DEFAULT_STROKE);
 	}
 
 	StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, BasicStroke s) {
