@@ -5,23 +5,31 @@ public class Stroke {
     private CAP cap;
     private JOIN join;
     private double miterLimit;
+    private boolean isDashed;
     private double[] dashArray;
     private double dashOffset;
+    private double opacity;
 
     private static double DEFAULT_WIDTH = 1;
     private static double DEFAULT_MITER_LIMIT = 10;
+    private static double DEFAULT_OPACITY = 1;
 
     public Stroke(Stroke clone) {
-        this(clone.width, clone.cap, clone.join, clone.miterLimit, clone.dashArray, clone.dashOffset);
+        this(clone.width, clone.cap, clone.join, clone.miterLimit, clone.dashArray, clone.dashOffset, clone.opacity);
     }
 
-    public Stroke(double width, CAP cap, JOIN join, double miterLimit, double[] dashArray, double dashOffset){
+    public Stroke(double width, CAP cap, JOIN join, double miterLimit, double[] dashArray, double dashOffset, double opacity){
         this.width = width;
         this.cap = cap;
         this.join = join;
         this.miterLimit = miterLimit;
-        this.dashArray = dashArray;
+        this.setDashArray(dashArray);
         this.dashOffset = dashOffset;
+        this.opacity = opacity;
+    }
+
+    public Stroke(double width, CAP cap, JOIN join, double miterLimit, double[] dash, double dashOffset){
+        this(width, cap, join, miterLimit, dash, dashOffset, DEFAULT_OPACITY);
     }
 
     public Stroke(double width, CAP cap, JOIN join, double miterLimit, double[] dash){
@@ -29,7 +37,7 @@ public class Stroke {
     }
 
     public Stroke(double width, CAP cap, JOIN join, double miterLimit){
-        this(width, cap, join, miterLimit, null);
+        this(width, cap, join, miterLimit, new double[]{});
     }
 
     public Stroke(double width, CAP cap, JOIN join){
@@ -77,19 +85,31 @@ public class Stroke {
     }
 
     public void setMiterLimit(double miterLimit) {
+        if(miterLimit < 1)
+            throw new IllegalArgumentException();
         this.miterLimit = miterLimit;
     }
 
+    public boolean isDashed() {
+        return isDashed;
+    }
+
     public void setDashArray(double[] dashArray){
+        if(dashArray.length % 2 != 0)
+            throw new IllegalArgumentException();
         this.dashArray = dashArray;
+        if(dashArray.length >= 2)
+            this.isDashed = true;
     }
 
     public double[] getDashArray(){
         return this.dashArray;
+
     }
 
     public void removeDashArray(){
-        this.dashArray = null;
+        this.dashArray = new double[]{};
+        this.isDashed = false;
     }
 
     public double getDashOffset() {

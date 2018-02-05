@@ -18,10 +18,16 @@ public class StyleContext {
 	private static Color DEFAULT_FONT_COLOR = Color.BLACK;
 	private static int DEFAULT_FONT_SIZE = 12;
 	private static Font DEFAULT_FONT = new Font("Century Gothic", Font.PLAIN, DEFAULT_FONT_SIZE);
-	private static Stroke DEFAULT_STROKE = new Stroke();
 
 	public StyleContext(StyleContext styleContext) {
-		this((AffineTransform) styleContext.curTransform.clone(), styleContext.curStrokeColor, styleContext.curFillColor, styleContext.curFontColor, styleContext.curFont, new Stroke(styleContext.stroke));
+		this(
+			(AffineTransform) styleContext.curTransform.clone(),
+			styleContext.curStrokeColor,
+			styleContext.curFillColor,
+			styleContext.curFontColor,
+			styleContext.curFont,
+			new Stroke(styleContext.stroke)
+		);
 	}
 
 	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, Stroke stroke) {
@@ -34,7 +40,14 @@ public class StyleContext {
 	}
 
 	public StyleContext() {
-		this(DEFAULT_TRANSFORM, DEFAULT_STROKE_COLOR, DEFAULT_FILL_COLOR, DEFAULT_FONT_COLOR, DEFAULT_FONT, DEFAULT_STROKE);
+		this(
+			DEFAULT_TRANSFORM,
+			DEFAULT_STROKE_COLOR,
+			DEFAULT_FILL_COLOR,
+			DEFAULT_FONT_COLOR,
+			DEFAULT_FONT,
+			new Stroke()
+		);
 	}
 	
 	public Font getFont() {
@@ -116,12 +129,12 @@ public class StyleContext {
 		String joinStr = this.getJoinStr(this.stroke.getJoin());
 
 		StringBuilder dashArraySb = new StringBuilder();
-		double[] dashArray = this.stroke.getDashArray();
-		if(dashArray != null) {
+		if(this.stroke.isDashed()) {
+			double[] dashArray = this.stroke.getDashArray();
 			for(int i=0;i<dashArray.length;i++) {
 				dashArraySb.append(dashArray[i]);
 				if(i<dashArray.length-1)
-					dashArraySb.append(",");
+					dashArraySb.append(" ");
 			}
 		}
 
