@@ -2,6 +2,7 @@ package com.manufacturedefrance.svgen;
 
 import java.text.DecimalFormat;
 
+import com.manufacturedefrance.svgen.styling.StyleContext;
 import com.manufacturedefrance.techdrawgen.Utils;
 import com.manufacturedefrance.svgen.tags.PathTag;
 

@@ -378,10 +378,10 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	public void setDashArray(StyleTrait styleTrait) {
 		switch(styleTrait) {
 			case MIXTE:
-				this.setDashArray(new float[]{10, 2, 2, 2});
+				this.setDashArray(new double[]{10, 2, 2, 2});
 				break;
 			case INTERROMPU:
-				this.setDashArray(new float[]{4, 1});
+				this.setDashArray(new double[]{4, 1});
 				break;
 			case CONTINU:
 				this.removeDashArray();

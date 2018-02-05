@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.manufacturedefrance.svgen.styling.Stroke;
+import com.manufacturedefrance.svgen.styling.StyleContext;
 import com.manufacturedefrance.svgen.tags.GTag;
 import com.manufacturedefrance.svgen.tags.RectTag;
 import com.manufacturedefrance.svgen.tags.SvgTag;
@@ -127,15 +129,15 @@ public class MyCustomSvg extends SvgComponent{
 		this.rememberedSc.setFontSize(size);
 	}
 	
-	public void setStroke(BasicStroke s) {
-		this.rememberedSc.setStroke(s);
+	public void setStroke(Stroke stroke) {
+		this.rememberedSc.setStroke(stroke);
 	}
 	
-	public void setStrokeWidth(float w) {
-		this.rememberedSc.setStrokeWidth(w);
+	public void setStrokeWidth(double strokeWidth) {
+		this.rememberedSc.setStrokeWidth(strokeWidth);
 	}
 	
-	public void setDashArray(float[] dashArray) {
+	public void setDashArray(double[] dashArray) {
 		this.rememberedSc.setDashArray(dashArray);
 	}
 	

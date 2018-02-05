@@ -1,6 +1,5 @@
-package com.manufacturedefrance.svgen;
+package com.manufacturedefrance.svgen.styling;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.AffineTransform;
@@ -11,7 +10,7 @@ public class StyleContext {
 	private Color curFillColor;
 	private Color curFontColor;
 	private Font curFont;
-	private BasicStroke curStroke;
+	private Stroke stroke;
 
 	private static AffineTransform DEFAULT_TRANSFORM = new AffineTransform();
 	private static Color DEFAULT_STROKE_COLOR = Color.BLACK;
@@ -19,23 +18,23 @@ public class StyleContext {
 	private static Color DEFAULT_FONT_COLOR = Color.BLACK;
 	private static int DEFAULT_FONT_SIZE = 12;
 	private static Font DEFAULT_FONT = new Font("Century Gothic", Font.PLAIN, DEFAULT_FONT_SIZE);
-	private static BasicStroke DEFAULT_STROKE = new BasicStroke(1);
+	private static Stroke DEFAULT_STROKE = new Stroke();
 
-	StyleContext() {
-		this(DEFAULT_TRANSFORM, DEFAULT_STROKE_COLOR, DEFAULT_FILL_COLOR, DEFAULT_FONT_COLOR, DEFAULT_FONT, DEFAULT_STROKE);
+	public StyleContext(StyleContext styleContext) {
+		this((AffineTransform) styleContext.curTransform.clone(), styleContext.curStrokeColor, styleContext.curFillColor, styleContext.curFontColor, styleContext.curFont, new Stroke(styleContext.stroke));
 	}
 
-	StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, BasicStroke s) {
+	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, Stroke stroke) {
 		this.curTransform = t;
 		this.curStrokeColor = strokeC;
 		this.curFillColor = fillC;
 		this.curFontColor = fontC;
 		this.curFont = f;
-		this.curStroke = s;
+		this.stroke = stroke;
 	}
 
-	StyleContext(StyleContext styleContext) {
-		this((AffineTransform) styleContext.curTransform.clone(), styleContext.curStrokeColor, styleContext.curFillColor, styleContext.curFontColor, styleContext.curFont, styleContext.curStroke);
+	public StyleContext() {
+		this(DEFAULT_TRANSFORM, DEFAULT_STROKE_COLOR, DEFAULT_FILL_COLOR, DEFAULT_FONT_COLOR, DEFAULT_FONT, DEFAULT_STROKE);
 	}
 	
 	public Font getFont() {
@@ -92,62 +91,48 @@ public class StyleContext {
 		this.curFont = this.curFont.deriveFont(size);
 	}
 	
-	public void setStroke(BasicStroke s) {
-		this.curStroke = s;
+	public void setStroke(Stroke stroke) {
+		this.stroke = stroke;
 	}
 	
 	public void setTransform(AffineTransform t) {
 		this.curTransform = t;
 	}
 	
-	public void setStrokeWidth(float w) {
-		this.curStroke = new BasicStroke(
-				w,
-				this.curStroke.getEndCap(),
-				this.curStroke.getLineJoin(),
-				this.curStroke.getMiterLimit(),
-				this.curStroke.getDashArray(),
-				this.curStroke.getDashPhase()
-			);
+	public void setStrokeWidth(double strokeWidth) {
+		this.stroke.setWidth(strokeWidth);
 	}
 	
-	public void setDashArray(float[] dashArray) {
-		this.curStroke = new BasicStroke(
-			this.curStroke.getLineWidth(),
-			this.curStroke.getEndCap(),
-			this.curStroke.getLineJoin(),
-			this.curStroke.getMiterLimit(),
-			dashArray,
-			0
-		);
+	public void setDashArray(double[] dashArray) {
+		this.stroke.setDashArray(dashArray);
 	}
 	
 	public void removeDashArray() {
-		this.curStroke = new BasicStroke(
-			this.curStroke.getLineWidth(),
-			this.curStroke.getEndCap(),
-			this.curStroke.getLineJoin(),
-			this.curStroke.getMiterLimit()
-		);
+		this.stroke.removeDashArray();
 	}
 
 	public String getStrokeStyle() {
-		float[] dashArray = this.curStroke.getDashArray();
+		String capStr = this.getCapStr(this.stroke.getCap());
+		String joinStr = this.getJoinStr(this.stroke.getJoin());
 
-		String outputStr = "";
-		outputStr += "stroke-width: " + this.curStroke.getLineWidth() + "; ";
-		outputStr += "stroke: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ";
-		outputStr += "stroke-linecap: butt; ";
+		StringBuilder dashArraySb = new StringBuilder();
+		double[] dashArray = this.stroke.getDashArray();
 		if(dashArray != null) {
-			StringBuilder dashArraySb = new StringBuilder();
 			for(int i=0;i<dashArray.length;i++) {
 				dashArraySb.append(dashArray[i]);
 				if(i<dashArray.length-1)
-				dashArraySb.append(",");
+					dashArraySb.append(",");
 			}
-			outputStr += "stroke-dasharray: "+dashArraySb.toString()+";";
 		}
-		return outputStr;
+
+		StringBuilder outputStr = new StringBuilder();
+		outputStr.append("stroke-width: " + this.stroke.getWidth() + "; ");
+		outputStr.append("stroke: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ");
+		outputStr.append("stroke-linecap: " + capStr + "; ");
+		outputStr.append("stroke-linejoin: " + joinStr + "; ");
+		outputStr.append("stroke-dasharray: "+ dashArraySb.toString() +";");
+
+		return outputStr.toString();
 	}
 
 	public String getShapeStyle() {
@@ -206,5 +191,31 @@ public class StyleContext {
 
 	public boolean isTranformIdentity(){
 		return this.curTransform.isIdentity();
+	}
+
+	public String getJoinStr(Stroke.JOIN join) {
+		switch(join){
+			case ROUND:
+				return "round";
+			case BEVEL:
+				return "bevel";
+			case MITER:
+				return "miter";
+			default:
+				throw new IllegalArgumentException();
+		}
+	}
+
+	public String getCapStr(Stroke.CAP cap) {
+		switch(cap){
+			case BUTT:
+				return "butt";
+			case ROUND:
+				return "round";
+			case SQUARE:
+				return "square";
+			default:
+				throw new IllegalArgumentException();
+		}
 	}
 }

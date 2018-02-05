@@ -1,5 +1,6 @@
 package com.manufacturedefrance.svgen;
 
+import com.manufacturedefrance.svgen.styling.StyleContext;
 import com.manufacturedefrance.svgen.tags.RectTag;
 
 public class RectSVG extends SvgComponent {

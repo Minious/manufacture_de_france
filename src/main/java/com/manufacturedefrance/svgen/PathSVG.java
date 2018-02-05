@@ -2,6 +2,7 @@ package com.manufacturedefrance.svgen;
 
 import java.awt.geom.PathIterator;
 
+import com.manufacturedefrance.svgen.styling.StyleContext;
 import com.manufacturedefrance.svgen.tags.PathTag;
 import com.manufacturedefrance.utils.MyPath2D;
 
