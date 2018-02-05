@@ -1,12 +1,12 @@
 package com.manufacturedefrance.techdrawgen;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.geom.AffineTransform;
 
 import com.manufacturedefrance.svgen.MyCustomSvg;
 import com.manufacturedefrance.svgen.SvgComponent;
+import com.manufacturedefrance.svgen.styling.Color;
+import com.manufacturedefrance.svgen.styling.Font;
 import com.manufacturedefrance.utils.MyPath2D;
 import com.manufacturedefrance.utils.MyPoint2D;
 
@@ -22,9 +22,9 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.rememberedUnderLineGap = underLineGap;
 	}
 
-	public void setFont(int size, String font){
-		Font f = new Font(font, Font.PLAIN, size);
-		this.setFont(f);
+	public void setFont(int size, String name){
+		Font font = new Font(name, size);
+		this.setFont(font);
 	}
 	
 	public void drawDiameterCote(String displayedCote, MyPoint2D p1, MyPoint2D p2, int shift, ShiftMode shiftMode, double customUnderLineGap){
@@ -288,7 +288,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		if(reversed)
 			this.rotate(Math.PI);
 
-		this.setFillColor(Color.black);
+		this.setFillColor(Color.BLACK);
 		this.translate(- distance / 2, 0);
 		if(distance > 2.5 * COTE_ARROW_WIDTH) {
 			this.rotate(Math.PI);

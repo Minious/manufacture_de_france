@@ -1,9 +1,6 @@
 package com.manufacturedefrance.svgen;
 
-import java.awt.BasicStroke;
 import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
@@ -19,6 +16,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.manufacturedefrance.svgen.styling.Color;
+import com.manufacturedefrance.svgen.styling.Font;
 import com.manufacturedefrance.svgen.styling.Stroke;
 import com.manufacturedefrance.svgen.styling.StyleContext;
 import com.manufacturedefrance.svgen.tags.GTag;
@@ -86,7 +85,8 @@ public class MyCustomSvg extends SvgComponent{
 	
 	public FontMetrics getFontMetrics() {
 		Canvas c = new Canvas();
-		return c.getFontMetrics(this.rememberedSc.getFont());
+		Font font = this.rememberedSc.getFont();
+		return c.getFontMetrics(getAwtFont(font));
 	}
 	
 	public AffineTransform getTransform() {
@@ -121,11 +121,11 @@ public class MyCustomSvg extends SvgComponent{
 		this.rememberedSc.setFillColor(null);
 	}
 	
-	public void setFont(Font f) {
-		this.rememberedSc.setFont(f);
+	public void setFont(Font font) {
+		this.rememberedSc.setFont(font);
 	}
 	
-	public void setFontSize(float size) {
+	public void setFontSize(int size) {
 		this.rememberedSc.setFontSize(size);
 	}
 	
@@ -181,10 +181,14 @@ public class MyCustomSvg extends SvgComponent{
 		svgTree.add(line);
 		this.enlargeBounds(new Line2D.Double(x1, y1, x2, y2));
 	}
+
+	private java.awt.Font getAwtFont(Font font){
+		return new java.awt.Font(font.getName(), java.awt.Font.PLAIN, font.getSize());
+	}
 	
 	public void drawString(String text, double x, double y) {
-		Rectangle2D strBoundsH = this.rememberedSc.getFont().getStringBounds(text, new FontRenderContext(null, true, true));
-		Rectangle2D strBoundsV = this.rememberedSc.getFont().createGlyphVector(this.getFontMetrics().getFontRenderContext(), text).getVisualBounds();
+		Rectangle2D strBoundsH = getAwtFont(this.rememberedSc.getFont()).getStringBounds(text, new FontRenderContext(null, true, true));
+		Rectangle2D strBoundsV = getAwtFont(this.rememberedSc.getFont()).createGlyphVector(this.getFontMetrics().getFontRenderContext(), text).getVisualBounds();
 		Rectangle2D strBounds = new Rectangle2D.Double(strBoundsH.getX() + x, strBoundsV.getY() + y, strBoundsH.getWidth(), strBoundsV.getHeight());
 		
 		StrSVG str = new StrSVG(text, x, y, this.rememberedSc);

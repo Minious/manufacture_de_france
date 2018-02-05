@@ -33,7 +33,7 @@ public class DessinProfil {
 	private double epaisseurEpaulement;
 
 	private double curUnderLineGap;
-	private float taillePoliceCote;
+	private int taillePoliceCote;
 	private Side sideCoteDemiLargeur;
 	private float margeEntreProfilEtPremiereCote;
 	private double margeInterCote;

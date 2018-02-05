@@ -1,41 +1,39 @@
 package com.manufacturedefrance.svgen.styling;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.geom.AffineTransform;
 
 public class StyleContext {
-	private AffineTransform curTransform;
-	private Color curStrokeColor;
-	private Color curFillColor;
-	private Color curFontColor;
-	private Font curFont;
+	private AffineTransform transform;
+	private Color strokeColor;
+	private Color fillColor;
+	private Color fontColor;
+	private Font font;
 	private Stroke stroke;
 
 	private static AffineTransform DEFAULT_TRANSFORM = new AffineTransform();
 	private static Color DEFAULT_STROKE_COLOR = Color.BLACK;
 	private static Color DEFAULT_FILL_COLOR = null;
 	private static Color DEFAULT_FONT_COLOR = Color.BLACK;
-	private static int DEFAULT_FONT_SIZE = 12;
-	private static Font DEFAULT_FONT = new Font("Century Gothic", Font.PLAIN, DEFAULT_FONT_SIZE);
+	private static int DEFAULT_FONT_SIZE = 18;
+	private static Font DEFAULT_FONT = new Font("Century Gothic", DEFAULT_FONT_SIZE);
 
 	public StyleContext(StyleContext styleContext) {
 		this(
-			(AffineTransform) styleContext.curTransform.clone(),
-			styleContext.curStrokeColor,
-			styleContext.curFillColor,
-			styleContext.curFontColor,
-			styleContext.curFont,
+			(AffineTransform) styleContext.transform.clone(),
+			styleContext.strokeColor,
+			styleContext.fillColor,
+			styleContext.fontColor,
+			new Font(styleContext.font),
 			new Stroke(styleContext.stroke)
 		);
 	}
 
-	public StyleContext(AffineTransform t, Color strokeC, Color fillC, Color fontC, Font f, Stroke stroke) {
-		this.curTransform = t;
-		this.curStrokeColor = strokeC;
-		this.curFillColor = fillC;
-		this.curFontColor = fontC;
-		this.curFont = f;
+	public StyleContext(AffineTransform transform, Color strokeColor, Color fillColor, Color fontColor, Font font, Stroke stroke) {
+		this.transform = transform;
+		this.strokeColor = strokeColor;
+		this.fillColor = fillColor;
+		this.fontColor = fontColor;
+		this.font = font;
 		this.stroke = stroke;
 	}
 
@@ -51,57 +49,45 @@ public class StyleContext {
 	}
 	
 	public Font getFont() {
-		return this.curFont;
-	}
-	
-	public Color getStrokeColor() {
-		return this.curStrokeColor;
-	}
-	
-	public Color getFillColor() {
-		return this.curFillColor;
-	}
-	
-	public Color getFontColor() {
-		return this.curFontColor;
+		return this.font;
 	}
 	
 	public AffineTransform getTransform() {
-		return this.curTransform;
+		return this.transform;
 	}
 	
 	public void translate(double tx, double ty) {
-		this.curTransform = (AffineTransform) this.curTransform.clone();
-		this.curTransform.translate(tx, ty);
+		this.transform = (AffineTransform) this.transform.clone();
+		this.transform.translate(tx, ty);
 	}
 	
 	public void rotate(double theta) {
-		this.curTransform = (AffineTransform) this.curTransform.clone();
-		this.curTransform.rotate(theta);
+		this.transform = (AffineTransform) this.transform.clone();
+		this.transform.rotate(theta);
 	}
 	
 	public void resetTransform() {
-		this.curTransform = new AffineTransform();
+		this.transform = new AffineTransform();
 	}
 	
-	public void setStrokeColor(Color c) {
-		this.curStrokeColor = c;
+	public void setStrokeColor(Color strokeColor) {
+		this.strokeColor = strokeColor;
 	}
 	
-	public void setFillColor(Color c) {
-		this.curFillColor = c;
+	public void setFillColor(Color fillColor) {
+		this.fillColor = fillColor;
 	}
 	
-	public void setFontColor(Color c) {
-		this.curFontColor = c;
+	public void setFontColor(Color fontColor) {
+		this.fontColor = fontColor;
 	}
 	
 	public void setFont(Font f) {
-		this.curFont = f;
+		this.font = f;
 	}
 	
-	public void setFontSize(float size) {
-		this.curFont = this.curFont.deriveFont(size);
+	public void setFontSize(int fontSize) {
+		this.font.setSize(fontSize);
 	}
 	
 	public void setStroke(Stroke stroke) {
@@ -109,7 +95,7 @@ public class StyleContext {
 	}
 	
 	public void setTransform(AffineTransform t) {
-		this.curTransform = t;
+		this.transform = t;
 	}
 	
 	public void setStrokeWidth(double strokeWidth) {
@@ -140,7 +126,7 @@ public class StyleContext {
 
 		StringBuilder outputStr = new StringBuilder();
 		outputStr.append("stroke-width: " + this.stroke.getWidth() + "; ");
-		outputStr.append("stroke: rgb(" + this.curStrokeColor.getRed() + "," + this.curStrokeColor.getGreen() + "," + this.curStrokeColor.getBlue() + "); ");
+		outputStr.append("stroke: " + this.strokeColor.getHex() + "; ");
 		outputStr.append("stroke-linecap: " + capStr + "; ");
 		outputStr.append("stroke-linejoin: " + joinStr + "; ");
 		outputStr.append("stroke-dasharray: "+ dashArraySb.toString() +";");
@@ -150,18 +136,18 @@ public class StyleContext {
 
 	public String getShapeStyle() {
 		String outputStr = "";
-		if(this.curFillColor == null)
+		if(this.fillColor == null)
 			outputStr += "fill: none;";
 		else
-			outputStr += "fill: rgb(" + this.curFillColor.getRed() + "," + this.curFillColor.getGreen() + "," + this.curFillColor.getBlue() + ");";
+			outputStr += "fill: " + this.fillColor.getHex() + ";";
 		return outputStr;
 	}
 	
 	public String getFontStyle() {
 		String outputStr = "";
-		outputStr += "fill: rgb(" + this.curFontColor.getRed() + "," + this.curFontColor.getGreen() + "," + this.curFontColor.getBlue() + "); ";
-		outputStr += "font-family: " + this.curFont.getFontName() + "; ";
-		outputStr += "font-size: " + this.curFont.getSize() + "px; ";
+		outputStr += "fill: " + this.fontColor.getHex() + ";";
+		outputStr += "font-family: " + this.font.getName() + "; ";
+		outputStr += "font-size: " + this.font.getSize() + "px; ";
 		
 		return outputStr;
 	}
@@ -169,7 +155,7 @@ public class StyleContext {
 	public String getTransformSvgNotation() {
 		String outputStr = "";
 
-		int type = this.curTransform.getType();
+		int type = this.transform.getType();
 		boolean isIdentity = type == AffineTransform.TYPE_IDENTITY;
 		boolean isQuadrantRotation = (type & AffineTransform.TYPE_QUADRANT_ROTATION) == AffineTransform.TYPE_QUADRANT_ROTATION;
 		boolean isRotation = (type & AffineTransform.TYPE_GENERAL_ROTATION) == AffineTransform.TYPE_GENERAL_ROTATION;
@@ -177,12 +163,12 @@ public class StyleContext {
 
 		if (!isIdentity) {
 			if(isTranslation) {
-				double translateX = this.curTransform.getTranslateX();
-				double translateY = this.curTransform.getTranslateY();
+				double translateX = this.transform.getTranslateX();
+				double translateY = this.transform.getTranslateY();
 				outputStr += "translate(" + translateX + " " + translateY + ") ";
 			}
 			if(isQuadrantRotation || isRotation) {
-				double rotation = Math.toDegrees(Math.atan2(this.curTransform.getShearY(), this.curTransform.getScaleY()));
+				double rotation = Math.toDegrees(Math.atan2(this.transform.getShearY(), this.transform.getScaleY()));
 				outputStr += "rotate(" + rotation + ") ";
 			}
 		}
@@ -191,19 +177,19 @@ public class StyleContext {
 	}
 
 	public double getTranslateX(){
-		return this.curTransform.getTranslateX();
+		return this.transform.getTranslateX();
 	}
 
 	public double getTranslateY(){
-		return this.curTransform.getTranslateY();
+		return this.transform.getTranslateY();
 	}
 
 	public double getRotation(){
-		return Math.toDegrees(Math.atan2(this.curTransform.getShearY(), this.curTransform.getScaleY()));
+		return Math.toDegrees(Math.atan2(this.transform.getShearY(), this.transform.getScaleY()));
 	}
 
 	public boolean isTranformIdentity(){
-		return this.curTransform.isIdentity();
+		return this.transform.isIdentity();
 	}
 
 	public String getJoinStr(Stroke.JOIN join) {
