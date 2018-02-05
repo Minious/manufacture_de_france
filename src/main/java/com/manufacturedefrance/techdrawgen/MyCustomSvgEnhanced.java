@@ -28,7 +28,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	
 	public void drawDiameterCote(String displayedCote, MyPoint2D p1, MyPoint2D p2, int shift, ShiftMode shiftMode, double customUnderLineGap){
 		if(p1.x != p2.x || p1.y != p2.y)
-			drawDiameterCote(displayedCote, p1, - Utils.getAngle(p1, p2), shift, shiftMode, customUnderLineGap);
+			drawDiameterCote(displayedCote, p1, Utils.getAngle(p1, p2), shift, shiftMode, customUnderLineGap);
 	}
 	
 	public void drawDiameterCote(String displayedCote, MyPoint2D p, double angle, int shift){
@@ -198,14 +198,14 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		String formatedCote = SvgComponent.DOUBLE_FORMAT.format(distance);
 
 		this.translate(p2.x, p2.y);
-		this.rotate(-Utils.getAngle(p1, p2));
+		this.rotate(Utils.getAngle(p1, p2));
 
 		FontMetrics metrics = this.getFontMetrics();
 		double coteStringWidth = metrics.stringWidth(formatedCote);
 
-		this.drawLine(this.distanceCoteGap, 0, offset, 0);
+		this.drawLine(0, - this.distanceCoteGap, 0, - offset);
 
-		this.translate(offset, 0);
+		this.translate(0, - offset);
 
 		double lowerBound = shift;
 		double upperBound = shift;
@@ -224,9 +224,8 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		double actualLowerBound = Math.min(lowerBound, 0);
 		double actualUpperBound = Math.max(upperBound, 0);
 
-		this.drawLine(0, actualLowerBound, 0, actualUpperBound);
+		this.drawLine(actualLowerBound, 0, actualUpperBound, 0);
 
-		this.rotate(Math.PI / 2);
 		if(reversed)
 			this.rotate(Math.PI);
 
@@ -253,18 +252,18 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		String formatedCote = SvgComponent.DOUBLE_FORMAT.format(distance);
 
 		this.translate(p1.x, p1.y);
-		this.rotate(-Utils.getAngle(p1, p2));
+		this.rotate(Utils.getAngle(p1, p2));
 
 		FontMetrics metrics = this.getFontMetrics();
 		double coteStringWidth = metrics.stringWidth(formatedCote);
 
-		this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
+		this.drawLine(0, - this.distanceCoteGap, 0,  - (offset + this.distanceCoteGap));
 
-		this.translate(0, distance);
+		this.translate(distance, 0);
 
-		this.drawLine(this.distanceCoteGap, 0, offset + this.distanceCoteGap, 0);
+		this.drawLine(0, - this.distanceCoteGap, 0,  - (offset + this.distanceCoteGap));
 
-		this.translate(offset, -distance / 2);
+		this.translate(- distance / 2, - offset);
 
 		double lowerBound = shift;
 		double upperBound = shift;
@@ -283,7 +282,7 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		double actualLowerBound = Math.min(lowerBound, - distance / 2);
 		double actualUpperBound = Math.max(upperBound, distance / 2);
 
-		this.drawLine(0, actualLowerBound, 0, actualUpperBound);
+		this.drawLine(actualLowerBound, 0, actualUpperBound, 0);
 
 		MyPath2D arrowPath = new MyPath2D();
 		arrowPath.moveTo(0, 0);
@@ -291,7 +290,6 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		arrowPath.lineTo(- COTE_ARROW_WIDTH, - COTE_ARROW_HEIGHT / 2);
 		arrowPath.closePath();
 
-		this.rotate(Math.PI / 2);
 		if(reversed)
 			this.rotate(Math.PI);
 
