@@ -15,7 +15,7 @@ public class StyleContext {
 	private static Color DEFAULT_FILL_COLOR = null;
 	private static Color DEFAULT_FONT_COLOR = Color.BLACK;
 	private static int DEFAULT_FONT_SIZE = 18;
-	private static Font DEFAULT_FONT = new Font("Century Gothic", DEFAULT_FONT_SIZE);
+	private static Font DEFAULT_FONT = new Font(Font.CENTURY_GOTHIC, DEFAULT_FONT_SIZE);
 
 	public StyleContext(StyleContext styleContext) {
 		this(
@@ -82,8 +82,8 @@ public class StyleContext {
 		this.fontColor = fontColor;
 	}
 	
-	public void setFont(Font f) {
-		this.font = f;
+	public void setFont(Font font) {
+		this.font = font;
 	}
 	
 	public void setFontSize(int fontSize) {
@@ -94,8 +94,8 @@ public class StyleContext {
 		this.stroke = stroke;
 	}
 	
-	public void setTransform(AffineTransform t) {
-		this.transform = t;
+	public void setTransform(AffineTransform transform) {
+		this.transform = transform;
 	}
 	
 	public void setStrokeWidth(double strokeWidth) {
@@ -110,70 +110,21 @@ public class StyleContext {
 		this.stroke.removeDashArray();
 	}
 
-	public String getStrokeStyle() {
-		String capStr = this.getCapStr(this.stroke.getCap());
-		String joinStr = this.getJoinStr(this.stroke.getJoin());
-
-		StringBuilder dashArraySb = new StringBuilder();
-		if(this.stroke.isDashed()) {
-			double[] dashArray = this.stroke.getDashArray();
-			for(int i=0;i<dashArray.length;i++) {
-				dashArraySb.append(dashArray[i]);
-				if(i<dashArray.length-1)
-					dashArraySb.append(" ");
-			}
-		}
-
-		StringBuilder outputStr = new StringBuilder();
-		outputStr.append("stroke-width: " + this.stroke.getWidth() + "; ");
-		outputStr.append("stroke: " + this.strokeColor.getHex() + "; ");
-		outputStr.append("stroke-linecap: " + capStr + "; ");
-		outputStr.append("stroke-linejoin: " + joinStr + "; ");
-		outputStr.append("stroke-dasharray: "+ dashArraySb.toString() +";");
-
-		return outputStr.toString();
+	public Color getFillColor() {
+		return fillColor;
 	}
 
-	public String getShapeStyle() {
-		String outputStr = "";
-		if(this.fillColor == null)
-			outputStr += "fill: none;";
-		else
-			outputStr += "fill: " + this.fillColor.getHex() + ";";
-		return outputStr;
+	public Color getFontColor() {
+		return fontColor;
 	}
-	
-	public String getFontStyle() {
-		String outputStr = "";
-		outputStr += "fill: " + this.fontColor.getHex() + ";";
-		outputStr += "font-family: " + this.font.getName() + "; ";
-		outputStr += "font-size: " + this.font.getSize() + "px; ";
-		
-		return outputStr;
+
+	public Color getStrokeColor() {
+
+		return strokeColor;
 	}
-	
-	public String getTransformSvgNotation() {
-		String outputStr = "";
 
-		int type = this.transform.getType();
-		boolean isIdentity = type == AffineTransform.TYPE_IDENTITY;
-		boolean isQuadrantRotation = (type & AffineTransform.TYPE_QUADRANT_ROTATION) == AffineTransform.TYPE_QUADRANT_ROTATION;
-		boolean isRotation = (type & AffineTransform.TYPE_GENERAL_ROTATION) == AffineTransform.TYPE_GENERAL_ROTATION;
-		boolean isTranslation = (type & AffineTransform.TYPE_TRANSLATION) == AffineTransform.TYPE_TRANSLATION;
-
-		if (!isIdentity) {
-			if(isTranslation) {
-				double translateX = this.transform.getTranslateX();
-				double translateY = this.transform.getTranslateY();
-				outputStr += "translate(" + translateX + " " + translateY + ") ";
-			}
-			if(isQuadrantRotation || isRotation) {
-				double rotation = Math.toDegrees(Math.atan2(this.transform.getShearY(), this.transform.getScaleY()));
-				outputStr += "rotate(" + rotation + ") ";
-			}
-		}
-
-		return outputStr;
+	public Stroke getStroke() {
+		return stroke;
 	}
 
 	public double getTranslateX(){
@@ -186,10 +137,6 @@ public class StyleContext {
 
 	public double getRotation(){
 		return Math.toDegrees(Math.atan2(this.transform.getShearY(), this.transform.getScaleY()));
-	}
-
-	public boolean isTranformIdentity(){
-		return this.transform.isIdentity();
 	}
 
 	public String getJoinStr(Stroke.JOIN join) {

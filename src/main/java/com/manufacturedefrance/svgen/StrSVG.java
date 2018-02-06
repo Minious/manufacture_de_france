@@ -19,7 +19,7 @@ public class StrSVG extends SvgComponent {
 		TextTag tag = new TextTag();
 		tag.x(this.x);
 		tag.y(this.y);
-		tag.style(this.sc.getFontStyle());
+		tag.font(this.sc.getFont(), this.sc.getFontColor());
 		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
 		tag.rotate(this.sc.getRotation());
 

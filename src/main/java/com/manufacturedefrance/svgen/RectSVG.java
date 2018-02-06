@@ -23,7 +23,8 @@ public class RectSVG extends SvgComponent {
 		tag.y(this.y);
 		tag.width(this.width);
 		tag.height(this.height);
-		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
+		tag.stroke(this.sc.getStroke(), this.sc.getStrokeColor());
+		tag.shape(this.sc.getFillColor());
 		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
 		tag.rotate(this.sc.getRotation());
 

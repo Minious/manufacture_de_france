@@ -23,7 +23,7 @@ public class LineSVG extends SvgComponent {
 		tag.y1(y1);
 		tag.x2(x2);
 		tag.y2(y2);
-		tag.style(this.sc.getStrokeStyle());
+		tag.stroke(this.sc.getStroke(), this.sc.getStrokeColor());
 		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
 		tag.rotate(this.sc.getRotation());
 

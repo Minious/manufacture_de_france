@@ -30,7 +30,8 @@ public class PathSVG extends SvgComponent {
 		}
 		if(state == PathIterator.SEG_CLOSE)
 			tag.closePath();
-		tag.style(this.sc.getStrokeStyle() + " " + this.sc.getShapeStyle());
+		tag.stroke(this.sc.getStroke(), this.sc.getStrokeColor());
+		tag.shape(this.sc.getFillColor());
 		tag.translate(this.sc.getTranslateX(), this.sc.getTranslateY());
 		tag.rotate(this.sc.getRotation());
 

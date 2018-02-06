@@ -241,7 +241,8 @@ public class MyCustomSvg extends SvgComponent{
 			rectTag.y(this.bounds.getY());
 			rectTag.width(curW);
 			rectTag.height(curH);
-			rectTag.style(this.borderSc.getStrokeStyle() + " " + this.borderSc.getShapeStyle());
+			rectTag.stroke(this.borderSc.getStroke(), this.borderSc.getStrokeColor());
+			rectTag.shape(this.borderSc.getFillColor());
 
 			gPadding = rectTag.render() + gPadding;
 		}

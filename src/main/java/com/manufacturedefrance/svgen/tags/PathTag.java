@@ -20,14 +20,14 @@ public class PathTag extends AbstractTag {
     }
 
     public void arcto(double width, double height, boolean largeArcFlag, boolean sweepFlag, double xEnd, double yEnd){
-        this.addPathInstruction(PathInstructionType.ARCTO, width, height, 0, largeArcFlag ? 1 : 0, sweepFlag ? 1 : 0, xEnd, yEnd);
+        this.addPathInstruction(PathInstructionType.ARCTO, width, height, 0d, largeArcFlag ? 1d : 0d, sweepFlag ? 1d : 0d, xEnd, yEnd);
     }
 
     public void closePath(){
         this.addPathInstruction(PathInstructionType.CLOSEPATH);
     }
 
-    private void addPathInstruction(PathInstructionType type, double... values) {
+    private void addPathInstruction(PathInstructionType type, Double... values) {
         if (!this.hashAttrs.containsKey("d")) {
             PathDescAtt pathDescAtt = new PathDescAtt();
             hashAttrs.put(pathDescAtt.getName(), pathDescAtt);
