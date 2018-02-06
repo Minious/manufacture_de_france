@@ -79,34 +79,40 @@ public abstract class AbstractTag {
     }
 
     private void strokeLineCap(Stroke.CAP cap){
-        String capStr = "";
+        String capStr;
 
         switch(cap){
             case BUTT:
                 capStr = "butt";
+                break;
             case ROUND:
                 capStr = "round";
+                break;
             case SQUARE:
-                capStr = "square";/*
+                capStr = "square";
+                break;
             default:
-                throw new IllegalArgumentException();*/
+                throw new IllegalArgumentException();
         }
 
         this.style(StyleAttType.STROKE_LINECAP, capStr);
     }
 
     private void strokeLineJoin(Stroke.JOIN join){
-        String joinStr = "";
+        String joinStr;
 
         switch(join){
             case ROUND:
                 joinStr = "round";
+                break;
             case BEVEL:
                 joinStr = "bevel";
+                break;
             case MITER:
-                joinStr = "miter";/*
+                joinStr = "miter";
+                break;
             default:
-                throw new IllegalArgumentException();*/
+                throw new IllegalArgumentException();
         }
 
         this.style(StyleAttType.STROKE_LINEJOIN, joinStr);
