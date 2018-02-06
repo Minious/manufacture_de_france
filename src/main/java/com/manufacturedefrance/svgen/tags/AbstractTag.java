@@ -54,7 +54,10 @@ public abstract class AbstractTag {
         this.stroke(strokeColor);
         this.strokeLineCap(stroke.getCap());
         this.strokeLineJoin(stroke.getJoin());
-        this.strokeDashArray(stroke.getDashArray());
+        if(stroke.isDashed()) {
+            this.strokeDashArray(stroke.getDashArray());
+            this.strokeDashOffset(stroke.getDashOffset());
+        }
     }
 
     public void shape(Color shapeColor) {
@@ -110,14 +113,21 @@ public abstract class AbstractTag {
     }
 
     private void strokeDashArray(double[] dashArray){
-        StringBuilder dashArraySb = new StringBuilder();
-        for(int i=0;i<dashArray.length;i++) {
-            dashArraySb.append(dashArray[i]);
-            if(i<dashArray.length-1)
-                dashArraySb.append(" ");
-        }
+        if(dashArray.length != 0) {
+            StringBuilder dashArraySb = new StringBuilder();
+            for (int i = 0; i < dashArray.length; i++) {
+                dashArraySb.append(dashArray[i]);
+                if (i < dashArray.length - 1)
+                    dashArraySb.append(" ");
+            }
 
-        this.style(StyleAttType.STROKE_DASHARRAY, dashArraySb);
+            this.style(StyleAttType.STROKE_DASHARRAY, dashArraySb);
+        }
+    }
+
+    private void strokeDashOffset(double dashOffset){
+        if(dashOffset != 0)
+            this.style(StyleAttType.STROKE_DASHOFFSET, dashOffset);
     }
 
     private void fill(Color color){
@@ -220,6 +230,7 @@ public abstract class AbstractTag {
         STROKE_LINECAP,
         STROKE_LINEJOIN,
         STROKE_DASHARRAY,
+        STROKE_DASHOFFSET,
         FILL,
         FONT_FAMILY,
         FONT_SIZE
@@ -244,6 +255,8 @@ public abstract class AbstractTag {
                     return "stroke-linejoin";
                 case STROKE_DASHARRAY:
                     return "stroke-dasharray";
+                case STROKE_DASHOFFSET:
+                    return "stroke-dashoffset";
                 case FILL:
                     return "fill";
                 case FONT_FAMILY:
