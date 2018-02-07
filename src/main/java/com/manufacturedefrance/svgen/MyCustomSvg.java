@@ -24,6 +24,7 @@ import com.manufacturedefrance.svgen.tags.GTag;
 import com.manufacturedefrance.svgen.tags.RectTag;
 import com.manufacturedefrance.svgen.tags.SvgTag;
 import com.manufacturedefrance.utils.MyPath2D;
+import org.w3c.dom.css.Rect;
 
 public class MyCustomSvg extends SvgComponent{
 	private double x;
@@ -185,14 +186,28 @@ public class MyCustomSvg extends SvgComponent{
 	private java.awt.Font getAwtFont(Font font){
 		return new java.awt.Font(font.getName(), java.awt.Font.PLAIN, font.getSize());
 	}
-	
-	public void drawString(String text, double x, double y) {
+
+	protected Rectangle2D getStringBounds(String text){
+		return getStringBounds(text, 0, 0);
+	}
+
+	protected Rectangle2D getStringBounds(String text, double x, double y){
 		Rectangle2D strBoundsH = getAwtFont(this.rememberedSc.getFont()).getStringBounds(text, new FontRenderContext(null, true, true));
 		Rectangle2D strBoundsV = getAwtFont(this.rememberedSc.getFont()).createGlyphVector(this.getFontMetrics().getFontRenderContext(), text).getVisualBounds();
 		Rectangle2D strBounds = new Rectangle2D.Double(strBoundsH.getX() + x, strBoundsV.getY() + y, strBoundsH.getWidth(), strBoundsV.getHeight());
-		
+
+		return strBounds;
+	}
+	
+	public void drawString(String text, double x, double y) {
+		Rectangle2D strBounds = getStringBounds(text, x ,y);
+
 		StrSVG str = new StrSVG(text, x, y, this.rememberedSc);
 		svgTree.add(str);
+		/*
+		RectSVG rectSVG = new RectSVG(strBounds.getX(), strBounds.getY(), strBounds.getWidth(), strBounds.getHeight(), this.rememberedSc);
+		svgTree.add(rectSVG);
+		*/
 
 		this.enlargeBounds(strBounds);
 	}

@@ -2,6 +2,7 @@ package com.manufacturedefrance.techdrawgen;
 
 import java.awt.FontMetrics;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 import com.manufacturedefrance.svgen.MyCustomSvg;
 import com.manufacturedefrance.svgen.SvgComponent;
@@ -171,8 +172,8 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 	}
 	
 	public void drawString(String displayedStr, MyPoint2D p, double shift, ShiftMode shiftMode){
-		FontMetrics metrics = this.getFontMetrics();
-		double stringWidth = metrics.stringWidth(displayedStr);
+		Rectangle2D strBounds = getStringBounds(displayedStr);
+		double stringWidth = strBounds.getWidth();
 		
 		double abscisse = p.x + shift;
 		if(shiftMode == ShiftMode.LEFT)
@@ -201,8 +202,8 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.translate(p2.x, p2.y);
 		this.rotate(Utils.getAngle(p1, p2));
 
-		FontMetrics metrics = this.getFontMetrics();
-		double coteStringWidth = metrics.stringWidth(formatedCote);
+		Rectangle2D strBounds = getStringBounds(formatedCote);
+		double coteStringWidth = strBounds.getWidth();
 
 		this.drawLine(0, - this.distanceCoteGap, 0, - offset);
 
@@ -255,8 +256,8 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.translate(p1.x, p1.y);
 		this.rotate(Utils.getAngle(p1, p2));
 
-		FontMetrics metrics = this.getFontMetrics();
-		double coteStringWidth = metrics.stringWidth(formatedCote);
+		Rectangle2D strBounds = getStringBounds(formatedCote);
+		double coteStringWidth = strBounds.getWidth();
 
 		this.drawLine(0, - this.distanceCoteGap, 0,  - (offset + this.distanceCoteGap));
 
