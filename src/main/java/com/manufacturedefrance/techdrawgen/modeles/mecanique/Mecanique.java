@@ -70,6 +70,7 @@ public class Mecanique extends ModeleGenerique {
 
 		MyCustomSvg corniere30x30x3 = new LignesTexte("CORNIERE 30x30x3", taillePoliceTitre2);
 		MyCustomSvg plat30x3 = new LignesTexte("PLAT 30x3", taillePoliceTitre2);
+		MyCustomSvg plat25x3 = new LignesTexte("PLAT 25x3", taillePoliceTitre2);
 		
 		// Montant corniere
 		MyHandyLayout montantCorniereLayout = new MyHandyLayout();
@@ -84,7 +85,7 @@ public class Mecanique extends ModeleGenerique {
 
 		montantCorniereLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
 		montantCorniereLayout.addRow(montantCorniereSvg, ShiftMode.CENTER);
-		montantCorniereLayout.addRow(plat30x3, ShiftMode.LEFT);
+		montantCorniereLayout.addRow(plat25x3, ShiftMode.LEFT);
 		montantCorniereLayout.addRow(contreCadreMontantCorniereSvg, ShiftMode.CENTER);
 		
 		// Montant partition
@@ -98,7 +99,7 @@ public class Mecanique extends ModeleGenerique {
 		montantPartitionSvg.drawSvg(montantPartition.getDessin(), 0, 0);
 		contreCadreMontantPartitionSvg.drawSvg(contreCadreMontantPartition.getDessin(), 0, 0);
 
-		montantPartitionLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
+		montantPartitionLayout.addRow(plat30x3, ShiftMode.LEFT);
 		montantPartitionLayout.addRow(montantPartitionSvg, ShiftMode.CENTER);
 		montantPartitionLayout.addRow(plat30x3, ShiftMode.LEFT);
 		montantPartitionLayout.addRow(contreCadreMontantPartitionSvg, ShiftMode.CENTER);
@@ -120,7 +121,7 @@ public class Mecanique extends ModeleGenerique {
 		traverseCorniereLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
 		traverseCorniereLayout.addRow(traverseCorniereSvg, ShiftMode.CENTER);
 		traverseCorniereLayout.addRow(attachesTraverseCorniereSvg, ShiftMode.CENTER);
-		traverseCorniereLayout.addRow(plat30x3, ShiftMode.LEFT);
+		traverseCorniereLayout.addRow(plat25x3, ShiftMode.LEFT);
 		traverseCorniereLayout.addRow(contreCadreTraverseCorniereSvg, ShiftMode.CENTER);
 
 		// Final		

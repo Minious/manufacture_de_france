@@ -23,6 +23,6 @@ public class MainDebug {
 		myArgs.put("natureVitrage", natureVitrage);
 		myArgs.put("finition", finition);
 
-		Renderer.render("Premium", Paths.get("").toAbsolutePath(), myArgs);
+		Renderer.render("Mécanique", Paths.get("").toAbsolutePath(), myArgs);
 	}
 }
