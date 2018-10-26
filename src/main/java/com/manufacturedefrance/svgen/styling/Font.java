@@ -6,6 +6,7 @@ import java.util.List;
 public class Font {
     private String name;
     private int size;
+    private boolean bold;
 
     public static String ARIAL = "Arial";
     public static String CENTURY_GOTHIC = "Century Gothic";
@@ -18,13 +19,18 @@ public class Font {
     private static int DEFAULT_SIZE = 12;
 
     public Font(Font clone){
-        this(clone.name, clone.size);
+        this(clone.name, clone.size, clone.bold);
 
     }
 
-    public Font(String name, int size){
+    public Font(String name, int size, boolean bold){
         this.name = name;
         this.size = size;
+        this.bold = bold;
+    }
+
+    public Font(String name, int size){
+        this(name, size, false);
     }
 
     public Font(String name){
@@ -51,5 +57,13 @@ public class Font {
 
     public void setSize(int size) {
         this.size = size;
+    }
+    
+    public boolean isBold() {
+    	return this.bold;
+    }
+    
+    public void setBold(boolean bold) {
+    	this.bold = bold;
     }
 }

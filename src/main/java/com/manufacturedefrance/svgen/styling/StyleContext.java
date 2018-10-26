@@ -90,6 +90,10 @@ public class StyleContext {
 		this.font.setSize(fontSize);
 	}
 	
+	public void setFontBold(boolean bold) {
+		this.font.setBold(bold);
+	}
+	
 	public void setStroke(Stroke stroke) {
 		this.stroke = stroke;
 	}

@@ -23,6 +23,11 @@ public class MyCustomSvgEnhanced extends MyCustomSvg {
 		this.rememberedUnderLineGap = underLineGap;
 	}
 
+	public void setFont(int size, String name, boolean bold){
+		Font font = new Font(name, size, bold);
+		this.setFont(font);
+	}
+
 	public void setFont(int size, String name){
 		Font font = new Font(name, size);
 		this.setFont(font);

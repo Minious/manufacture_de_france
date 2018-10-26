@@ -27,8 +27,12 @@ public class LignesTexte extends MyCustomSvgEnhanced {
 		this(Arrays.asList(ligne), taillePoliceDonnees);
 	}
 	
-	public LignesTexte(String ligne, int taillePoliceDonnees, ShiftMode shiftMode) {
-		this(Arrays.asList(ligne), taillePoliceDonnees, shiftMode);
+	public LignesTexte(String ligne, int taillePoliceDonnees, boolean isBold) {
+		this(Arrays.asList(ligne), taillePoliceDonnees, isBold);
+	}
+	
+	public LignesTexte(String ligne, int taillePoliceDonnees, boolean isBold, ShiftMode shiftMode) {
+		this(Arrays.asList(ligne), taillePoliceDonnees, isBold, shiftMode);
 	}
 	
 	public LignesTexte(List<String> lignes) {
@@ -36,20 +40,25 @@ public class LignesTexte extends MyCustomSvgEnhanced {
 	}
 	
 	public LignesTexte(List<String> lignes, int taillePoliceDonnees) {
-		this(lignes, taillePoliceDonnees, ShiftMode.LEFT);
+		this(lignes, taillePoliceDonnees, false);
 	}
 	
-	public LignesTexte(List<String> lignes, int taillePoliceDonnees, ShiftMode shiftMode) {
-		this(lignes, taillePoliceDonnees, shiftMode, MARGE_ENTRE_LIGNES_PAR_DEFAUT);
+	public LignesTexte(List<String> lignes, int taillePoliceDonnees, boolean isBold) {
+		this(lignes, taillePoliceDonnees, isBold, ShiftMode.LEFT);
 	}
 	
-	public LignesTexte(List<String> lignes, int taillePoliceDonnees, ShiftMode shiftMode, double margeEntreLignes) {
+	public LignesTexte(List<String> lignes, int taillePoliceDonnees, boolean isBold, ShiftMode shiftMode) {
+		this(lignes, taillePoliceDonnees, isBold, shiftMode, MARGE_ENTRE_LIGNES_PAR_DEFAUT);
+	}
+	
+	public LignesTexte(List<String> lignes, int taillePoliceDonnees, boolean isBold, ShiftMode shiftMode, double margeEntreLignes) {
 		this.lignes = new ArrayList<>();
 		this.lignes.addAll(lignes);
 		this.taillePoliceDonnees = taillePoliceDonnees;
 		this.shiftMode = shiftMode;
 		this.margeEntreLignes = margeEntreLignes;
 		this.setFontSize(taillePoliceDonnees);
+		this.setFontBold(isBold);
 		
 		render();
 	}

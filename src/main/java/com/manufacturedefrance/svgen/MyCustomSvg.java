@@ -130,6 +130,10 @@ public class MyCustomSvg extends SvgComponent{
 		this.rememberedSc.setFontSize(size);
 	}
 	
+	public void setFontBold(boolean bold) {
+		this.rememberedSc.setFontBold(bold);
+	}
+	
 	public void setStroke(Stroke stroke) {
 		this.rememberedSc.setStroke(stroke);
 	}

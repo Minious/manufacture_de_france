@@ -68,6 +68,7 @@ public abstract class AbstractTag {
         this.fill(fontColor);
         this.fontFamily(font.getName());
         this.fontSize(font.getSize());
+        this.fontWeight(font.isBold());
     }
 
     private void strokeWidth(double strokeWidth){
@@ -149,6 +150,10 @@ public abstract class AbstractTag {
 
     private void fontSize(double fontSize){
         this.style(StyleAttType.FONT_SIZE, fontSize);
+    }
+
+    private void fontWeight(boolean bold){
+        this.style(StyleAttType.FONT_WEIGHT, bold ? "bold" : "normal");
     }
 
     private void style(StyleAttType type, Object... values){
@@ -239,7 +244,8 @@ public abstract class AbstractTag {
         STROKE_DASHOFFSET,
         FILL,
         FONT_FAMILY,
-        FONT_SIZE
+        FONT_SIZE,
+        FONT_WEIGHT
     }
 
     public class StyleAtt extends MultipleValuesAtt<StyleAttType> {
@@ -269,6 +275,8 @@ public abstract class AbstractTag {
                     return "font-family";
                 case FONT_SIZE:
                     return "font-size";
+                case FONT_WEIGHT:
+                    return "font-weight";
             }
             return null;
         }
