@@ -74,6 +74,7 @@ public class Mecanique extends ModeleGenerique {
 		
 		// Montant corniere
 		MyHandyLayout montantCorniereLayout = new MyHandyLayout();
+		MyHandyLayout contreCadreMontantCorniereLayout = new MyHandyLayout();
 		MyCustomSvg montantCorniereSvg = new MyCustomSvg();
 		MyCustomSvg contreCadreMontantCorniereSvg = new MyCustomSvg();
 		
@@ -85,11 +86,12 @@ public class Mecanique extends ModeleGenerique {
 
 		montantCorniereLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
 		montantCorniereLayout.addRow(montantCorniereSvg, ShiftMode.CENTER);
-		montantCorniereLayout.addRow(plat25x3, ShiftMode.LEFT);
-		montantCorniereLayout.addRow(contreCadreMontantCorniereSvg, ShiftMode.CENTER);
+		contreCadreMontantCorniereLayout.addRow(plat25x3, ShiftMode.LEFT);
+		contreCadreMontantCorniereLayout.addRow(contreCadreMontantCorniereSvg, ShiftMode.CENTER);
 		
 		// Montant partition
 		MyHandyLayout montantPartitionLayout = new MyHandyLayout();
+		MyHandyLayout contreCadreMontantPartitionLayout = new MyHandyLayout();
 		MyCustomSvg montantPartitionSvg = new MyCustomSvg();
 		MyCustomSvg contreCadreMontantPartitionSvg = new MyCustomSvg();
 		
@@ -101,11 +103,12 @@ public class Mecanique extends ModeleGenerique {
 
 		montantPartitionLayout.addRow(plat30x3, ShiftMode.LEFT);
 		montantPartitionLayout.addRow(montantPartitionSvg, ShiftMode.CENTER);
-		montantPartitionLayout.addRow(plat30x3, ShiftMode.LEFT);
-		montantPartitionLayout.addRow(contreCadreMontantPartitionSvg, ShiftMode.CENTER);
+		contreCadreMontantPartitionLayout.addRow(plat30x3, ShiftMode.LEFT);
+		contreCadreMontantPartitionLayout.addRow(contreCadreMontantPartitionSvg, ShiftMode.CENTER);
 		
 		// Traverse corniere
 		MyHandyLayout traverseCorniereLayout = new MyHandyLayout();
+		MyHandyLayout contreCadreTraverseCorniereLayout = new MyHandyLayout();
 		MyCustomSvg traverseCorniereSvg = new MyCustomSvg();
 		MyCustomSvg contreCadreTraverseCorniereSvg = new MyCustomSvg();
 		MyCustomSvg attachesTraverseCorniereSvg = new MyCustomSvg();
@@ -121,26 +124,35 @@ public class Mecanique extends ModeleGenerique {
 		traverseCorniereLayout.addRow(corniere30x30x3, ShiftMode.LEFT);
 		traverseCorniereLayout.addRow(traverseCorniereSvg, ShiftMode.CENTER);
 		traverseCorniereLayout.addRow(attachesTraverseCorniereSvg, ShiftMode.CENTER);
-		traverseCorniereLayout.addRow(plat25x3, ShiftMode.LEFT);
-		traverseCorniereLayout.addRow(contreCadreTraverseCorniereSvg, ShiftMode.CENTER);
+		contreCadreTraverseCorniereLayout.addRow(plat25x3, ShiftMode.LEFT);
+		contreCadreTraverseCorniereLayout.addRow(contreCadreTraverseCorniereSvg, ShiftMode.CENTER);
 
 		// Final		
 		MyCustomSvg traverseCorniereTitre = new LignesTexte("TRAVERSES HAUTE ET BASSE", taillePoliceTitre1);
+		MyCustomSvg contreCadreTraverseCorniereTitre = new LignesTexte("CONTRE-CADRE TRAVERSES", taillePoliceTitre1);
 		MyCustomSvg traverseCorniereQte = new LignesTexte("QTE : "+traverseCorniere.getNbElements(), taillePoliceTitre1);
 		MyCustomSvg montantCorniereTitre = new LignesTexte("MT CORNIERE LATERAL", taillePoliceTitre1);
+		MyCustomSvg contreCadreMontantCorniereTitre = new LignesTexte("CONTRE-CADRE MT LATERAL", taillePoliceTitre1);
 		MyCustomSvg montantCorniereQte = new LignesTexte("QTE : "+montantCorniere.getNbElements(), taillePoliceTitre1);
 		MyCustomSvg montantPartitionTitre = new LignesTexte("MT INTERMEDIAIRE", taillePoliceTitre1);
+		MyCustomSvg contreCadreMontantPartitionTitre = new LignesTexte("CONTRE-CADRE MT INTERMEDIAIRE", taillePoliceTitre1);
 		MyCustomSvg montantPartitionQte = new LignesTexte("QTE : "+montantPartition.getNbElements(), taillePoliceTitre1);
 
 		MyHandyLayout layoutDessins = new MyHandyLayout();
 		layoutDessins.addRow(new MyCustomSvg[] {traverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);
 		layoutDessins.addRow(traverseCorniereLayout.getSvg(), ShiftMode.CENTER);
+		layoutDessins.addRow(new MyCustomSvg[] {contreCadreTraverseCorniereTitre, traverseCorniereQte}, ShiftMode.LEFT);
+		layoutDessins.addRow(contreCadreTraverseCorniereLayout.getSvg(), ShiftMode.CENTER);
 		if(montantPartition.getNbElements() > 0) {
 			layoutDessins.addRow(new MyCustomSvg[] {montantPartitionTitre, montantPartitionQte}, ShiftMode.LEFT);
 			layoutDessins.addRow(montantPartitionLayout.getSvg(), ShiftMode.CENTER);
+			layoutDessins.addRow(new MyCustomSvg[] {contreCadreMontantPartitionTitre, montantPartitionQte}, ShiftMode.LEFT);
+			layoutDessins.addRow(contreCadreMontantPartitionLayout.getSvg(), ShiftMode.CENTER);
 		}
 		layoutDessins.addRow(new MyCustomSvg[] {montantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
 		layoutDessins.addRow(montantCorniereLayout.getSvg(), ShiftMode.CENTER);
+		layoutDessins.addRow(new MyCustomSvg[] {contreCadreMontantCorniereTitre, montantCorniereQte}, ShiftMode.LEFT);
+		layoutDessins.addRow(contreCadreMontantCorniereLayout.getSvg(), ShiftMode.CENTER);
 
 		MyCustomSvg dessins = layoutDessins.getSvg();
 
