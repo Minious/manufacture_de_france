@@ -94,7 +94,7 @@ public class Premium extends ModeleGenerique {
 		DecimalFormat myFormatter = new DecimalFormat("#.##");
 		LignesTexte parcloses = new LignesTexte();
 		parcloses.addLignes(Arrays.asList(
-			"PARCLOSES : " + conf.get("hauteurParcloseCorniere").intValue(),
+			"PARCLOSES DE " + conf.get("hauteurParcloseCorniere").intValue(),
 			"- " + myFormatter.format(conf.get("longueurParcloseTraverseLaterale")) + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
 			"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
 		));
@@ -102,7 +102,7 @@ public class Premium extends ModeleGenerique {
 			parcloses.addLigne("- " + myFormatter.format(conf.get("longueurParcloseTraverseCentrale")) + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
 		if(conf.get("nbParcloseMontantIntermediaire") > 0)
 			parcloses.addLignes(Arrays.asList(
-				"PARCLOSES : " + conf.get("hauteurParcloseT").intValue(),
+				"PARCLOSES DE " + conf.get("hauteurParcloseT").intValue(),
 				"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue()
 			));
 
