@@ -56,6 +56,7 @@ public class TraverseCorniere extends ElementGenerique {
 			profil.addCoteDroiteEntrePercages(0, 4, 2);
 			profil.addCoteDroiteEntrePercages(1, 5, 3);
 			profil.addCoteDroiteEntrePercages(2, 6, 4);
+			profil.addCoteDroiteEntrePercages(3, 7, 5);
 		}
 		
 		return profil.render();
