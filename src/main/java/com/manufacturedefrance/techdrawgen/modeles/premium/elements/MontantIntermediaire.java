@@ -9,7 +9,7 @@ import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class MontantIntermediaire extends ElementGenerique {
 	private final int nbMontants = (int) (conf.get("nbPartitions") - 1);
-	private static final String DIAMETRE_PERCAGES = "ØM5";
+	private static final String DIAMETRE_PERCAGES = "Ø5.5";
 	
 	public MontantIntermediaire(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
