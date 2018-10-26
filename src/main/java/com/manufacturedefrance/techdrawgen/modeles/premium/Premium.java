@@ -33,6 +33,7 @@ public class Premium extends ModeleGenerique {
 		initialMap.put("hauteurVerriere", (Double) data.get("hauteurVerriere"));
 		initialMap.put("largeurVerriere", (Double) data.get("largeurVerriere"));
 		initialMap.put("nbPartitions", ((Integer) data.get("nbPartitions")).doubleValue());
+		initialMap.put("epaisseurVitrage", (Double) data.get("epaisseurVitrage"));
 
 		try {
 			this.conf = TextFileConf.loadConf(fileName, initialMap);
@@ -126,7 +127,7 @@ public class Premium extends ModeleGenerique {
 			"Modèle : Premium",
 			"Dimensions : " + conf.get("largeurVerriere") + " LARG x " + conf.get("hauteurVerriere") + " HT",
 			"Partitions : " + conf.get("nbPartitions").intValue(),
-			"Nature vitrage : " + data.get("natureVitrage"),
+			"Nature vitrage : " + data.get("epaisseurVitrage") + " " + data.get("natureVitrage"),
 			"Finition : " + data.get("finition")
 		));
 		cartoucheDroite.setPadding(new Padding(10));

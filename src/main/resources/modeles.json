@@ -25,14 +25,20 @@
 				"displayName": "Nombre de partitions",
 				"type": "Integer"
 			}, {
+				"name": "epaisseurVitrage",
+				"displayName": "Epaisseur du vitrage",
+				"type": "Dropdown",
+				"values": [
+					"44.2",
+					"33.2"
+				]
+			}, {
 				"name": "natureVitrage",
 				"displayName": "Nature du vitrage",
 				"type": "Dropdown",
 				"values": [
-					"44.2  clair",
-					"33.2  clair",
-					"44.2  opal",
-					"33.2  opal"
+					"clair",
+					"opal"
 				]
 			}, {
                 "name": "finition",
@@ -77,14 +83,20 @@
 				"displayName": "Nombre de partitions",
 				"type": "Integer"
 			}, {
+				"name": "epaisseurVitrage",
+				"displayName": "Epaisseur du vitrage",
+				"type": "Dropdown",
+				"values": [
+					"44.2",
+					"33.2"
+				]
+			}, {
 				"name": "natureVitrage",
 				"displayName": "Nature du vitrage",
 				"type": "Dropdown",
 				"values": [
-					"44.2  clair",
-					"33.2  clair",
-					"44.2  opal",
-					"33.2  opal"
+					"clair",
+					"opal"
 				]
 			}, {
                 "name": "finition",
@@ -129,16 +141,22 @@
 				"displayName": "Nombre de partitions",
 				"type": "Integer"
 			}, {
-                "name": "natureVitrage",
-                "displayName": "Nature du vitrage",
-                "type": "Dropdown",
-                "values": [
-                  "44.2  clair",
-                  "33.2  clair",
-                  "44.2  opal",
-                  "33.2  opal"
-                ]
-            }, {
+				"name": "epaisseurVitrage",
+				"displayName": "Epaisseur du vitrage",
+				"type": "Dropdown",
+				"values": [
+					"44.2",
+					"33.2"
+				]
+			}, {
+				"name": "natureVitrage",
+				"displayName": "Nature du vitrage",
+				"type": "Dropdown",
+				"values": [
+					"clair",
+					"opal"
+				]
+			}, {
                 "name": "finition",
                 "displayName": "Finition",
                 "type": "Dropdown",
