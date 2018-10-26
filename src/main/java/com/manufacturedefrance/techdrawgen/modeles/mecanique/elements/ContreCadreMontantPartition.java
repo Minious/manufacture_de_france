@@ -8,7 +8,8 @@ import com.manufacturedefrance.svgen.MyCustomSvg;
 
 public class ContreCadreMontantPartition extends ElementGenerique {
 	private final int nbMontants = (int) (conf.get("nbPartitions") - 1);
-	private static final String DIAMETRE_PERCAGES = "Ø7";
+	private static final String DIAMETRE_PERCAGES_EXTREMITE = "Ø9";
+	private static final String DIAMETRE_PERCAGES_INTERMEDIAIRE = "Ø7";
 	
 	public ContreCadreMontantPartition(Map<String, Double> conf, Map<String, Object> data) {
 		super(conf, data);
@@ -17,10 +18,14 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 	@Override
 	public MyCustomSvg getDessin() {
 		DessinProfil profil = new DessinProfil(conf.get("largeurMontantPartition"), conf.get("hauteurMontantPartition"));
-		profil.setValeurPercage(DIAMETRE_PERCAGES);
+		profil.setValeurPercage(DIAMETRE_PERCAGES_EXTREMITE);
 		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
 			double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantPartition") + i * conf.get("entreAxeMontant");
-			boolean showCote = i == conf.get("nbTrousIntermediairesVerticaux") + 1;
+			if(i == 0 || i == conf.get("nbTrousIntermediairesVerticaux")+1)
+				profil.setValeurPercage(DIAMETRE_PERCAGES_EXTREMITE);
+			else
+				profil.setValeurPercage(DIAMETRE_PERCAGES_INTERMEDIAIRE);
+			boolean showCote = i >= conf.get("nbTrousIntermediairesVerticaux");
 			profil.addPercage(ordonnee, showCote);
 		}
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
