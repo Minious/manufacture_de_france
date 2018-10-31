@@ -20,6 +20,7 @@ import com.manufacturedefrance.techdrawgen.modeles.premium.elements.TraverseCorn
 import com.manufacturedefrance.svgen.MyCustomSvg;
 import com.manufacturedefrance.svgen.MyHandyLayout;
 import com.manufacturedefrance.svgen.Padding;
+import com.manufacturedefrance.svgen.SvgComponent;
 import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 
 public class Premium extends ModeleGenerique {	
@@ -91,24 +92,23 @@ public class Premium extends ModeleGenerique {
 		
 		MyCustomSvg dessins = layoutDessins.getSvg();
 
-		DecimalFormat myFormatter = new DecimalFormat("#.##");
 		LignesTexte parcloses = new LignesTexte();
 		parcloses.addLignes(Arrays.asList(
 			"PARCLOSES DE " + conf.get("hauteurParcloseCorniere").intValue(),
-			"- " + myFormatter.format(conf.get("longueurParcloseTraverseLaterale")) + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
-			"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
+			"- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseTraverseLaterale")) + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
+			"- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
 		));
 		if(conf.get("nbParcloseTraverseCentrale") > 0)
-			parcloses.addLigne("- " + myFormatter.format(conf.get("longueurParcloseTraverseCentrale")) + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
+			parcloses.addLigne("- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseTraverseCentrale")) + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
 		if(conf.get("nbParcloseMontantIntermediaire") > 0)
 			parcloses.addLignes(Arrays.asList(
 				"PARCLOSES DE " + conf.get("hauteurParcloseT").intValue(),
-				"- " + myFormatter.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue()
+				"- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue()
 			));
 
 		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(
 			"VITRAGE :",
-				myFormatter.format(conf.get("largeurVitrage")) + " x " + myFormatter.format(conf.get("hauteurVitrage")) + " QTE " + conf.get("nbVitrage").intValue()
+			SvgComponent.DOUBLE_FORMAT.format(conf.get("hauteurVitrage")) + " x " + SvgComponent.DOUBLE_FORMAT.format(conf.get("largeurVitrage")) + " QTE " + conf.get("nbVitrage").intValue()
 		));
 		
 		MyHandyLayout layoutCartoucheGauche = new MyHandyLayout();
@@ -125,7 +125,7 @@ public class Premium extends ModeleGenerique {
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
 			"Modèle : Premium",
-			"Dimensions : " + conf.get("largeurVerriere") + " LARG x " + conf.get("hauteurVerriere") + " HT",
+			"Dimensions : " + conf.get("hauteurVerriere") + " HT x " + conf.get("largeurVerriere") + " LARG",
 			"Partitions : " + conf.get("nbPartitions").intValue(),
 			"Nature vitrage : " + data.get("epaisseurVitrage") + " " + data.get("natureVitrage"),
 			"Finition : " + data.get("finition")

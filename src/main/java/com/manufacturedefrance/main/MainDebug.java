@@ -8,8 +8,8 @@ import com.manufacturedefrance.techdrawgen.Renderer;
 public class MainDebug {
 	public static void main(String[] args) {
 		double hauteurVerriere = 1200d;
-		double largeurVerriere = 1400d;
-		int nbPartitions = 5;
+		double largeurVerriere = 1403d;
+		int nbPartitions = 3;
 		double epaisseurVitrage = 44.2;
 		String natureVitrage = "opal";
 		String finition = "Noir 2100 sablé";

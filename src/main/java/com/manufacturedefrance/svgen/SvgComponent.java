@@ -9,7 +9,7 @@ import java.util.Locale;
 public abstract class SvgComponent {
 	protected StyleContext sc;
 
-	public static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("#.###", new DecimalFormatSymbols(Locale.ENGLISH));
+	public static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.ENGLISH));
 	
 	SvgComponent(StyleContext sc) {
 		this.sc = new StyleContext(sc);

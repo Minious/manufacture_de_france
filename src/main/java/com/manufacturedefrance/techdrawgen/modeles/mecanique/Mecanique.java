@@ -20,6 +20,7 @@ import com.manufacturedefrance.techdrawgen.modeles.mecanique.elements.TraverseCo
 import com.manufacturedefrance.svgen.MyCustomSvg;
 import com.manufacturedefrance.svgen.MyHandyLayout;
 import com.manufacturedefrance.svgen.Padding;
+import com.manufacturedefrance.svgen.SvgComponent;
 import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 import net.objecthunter.exp4j.function.Function;
 
@@ -158,7 +159,7 @@ public class Mecanique extends ModeleGenerique {
 
 		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(
 			"VITRAGE :",
-			conf.get("largeurVitrage") + " x " + conf.get("hauteurVitrage") + " QTE " + conf.get("nbVitrage").intValue()
+			SvgComponent.DOUBLE_FORMAT.format(conf.get("hauteurVitrage")) + " x " + SvgComponent.DOUBLE_FORMAT.format(conf.get("largeurVitrage")) + " QTE " + conf.get("nbVitrage").intValue()
 		));
 
 		vitrages.setPadding(new Padding(10));
