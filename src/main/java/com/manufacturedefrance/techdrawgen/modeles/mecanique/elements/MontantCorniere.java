@@ -22,18 +22,18 @@ public class MontantCorniere extends ElementGenerique {
 		profil.setChamp(conf.get("epaisseurProfil"), Side.RIGHT	);
 		profil.setValeurPercage(DIAMETRE_PERCAGES);
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantCorniere");
-		profil.addPercage(ordonnee, false);
+		profil.addPercage(ordonnee, 0, false);
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere");
 		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
 			if(i != conf.get("nbTrousIntermediairesVerticaux") + 1) {
-				profil.addPercage(ordonnee, false);
+				profil.addPercage(ordonnee, i == 0 ? 1 : 0, false);
 				ordonnee += conf.get("entreAxeMontant");
 			}
 			else
-				profil.addPercage(ordonnee, true);
+				profil.addPercage(ordonnee, 0, true);
 		}
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouMontantCorniere");
-		profil.addPercage(ordonnee, false);
+		profil.addPercage(ordonnee, 1, false);
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		profil.addCoteDroiteEntrePercages(1, 2, 0);
 		

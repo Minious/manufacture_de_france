@@ -24,14 +24,14 @@ public class AttachesTraverseCorniere extends ElementGenerique {
 		profil.setIsChampCorniere(true);
 		
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouAttachesTraverseCorniere");
-		profil.addPercage(ordonnee);
+		profil.addPercage(ordonnee, 0);
 		
 		for(int i=0;i<conf.get("nbAttachesIntermediaires")+1;i++) {
 			ordonnee += conf.get("entreAxeAttachesTraverseCorniere");
 			if(i == conf.get("nbAttachesIntermediaires"))
-				profil.addPercage(ordonnee, DIAMETRE_PERCAGES, DIAMETRE_PERCAGES_AFFICHE);
+				profil.addPercage(ordonnee, 0, DIAMETRE_PERCAGES, DIAMETRE_PERCAGES_AFFICHE);
 			else
-				profil.addPercage(ordonnee, false);
+				profil.addPercage(ordonnee, 0, false);
 		}
 		
 		profil.addCoteDroiteEntrePercages(0, 1, 0);

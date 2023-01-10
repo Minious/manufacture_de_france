@@ -25,10 +25,9 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 				profil.setValeurPercage(DIAMETRE_PERCAGES_EXTREMITE);
 			else
 				profil.setValeurPercage(DIAMETRE_PERCAGES_INTERMEDIAIRE);
-			boolean showCote = i >= conf.get("nbTrousIntermediairesVerticaux");
-			profil.addPercage(ordonnee, showCote);
+			profil.addPercage(ordonnee, 0, true);
 		}
-		profil.addCoteDroiteEntrePercages(0, 1, 0);
+		profil.addCoteDroiteEntrePercages(0, 1, 1);
 		
 		return profil.render();
 	}

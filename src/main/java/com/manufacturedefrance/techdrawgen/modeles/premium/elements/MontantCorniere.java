@@ -27,11 +27,11 @@ public class MontantCorniere extends ElementGenerique {
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierPercageMontantCorniere");
 		for(int i=0;i<conf.get("nbPercageMontant");i++) {
 			if(i < conf.get("nbPercageMontant") - 1) {
-				profil.addPercage(ordonnee, false);
+				profil.addPercage(ordonnee, 0, false);
 				ordonnee += conf.get("entreAxePercagesMontant");
 			}
 			else
-				profil.addPercage(ordonnee, true);
+				profil.addPercage(ordonnee, 0, true);
 		}
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		

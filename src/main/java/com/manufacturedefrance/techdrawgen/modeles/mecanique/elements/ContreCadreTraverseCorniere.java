@@ -20,24 +20,24 @@ public class ContreCadreTraverseCorniere extends ElementGenerique {
 		profil.setCorniere();
 		profil.setValeurPercage(DIAMETRE_PERCAGES);
 		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouContreCadreTraverseCorniere");
-		profil.addPercage(ordonnee, false);
+		profil.addPercage(ordonnee, 0, false);
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere");
-		profil.addPercage(ordonnee, false);
+		profil.addPercage(ordonnee, 1, false);
 		ordonnee += conf.get("entreAxeLateralTraverseCorniere");
-		profil.addPercage(ordonnee, false);
+		profil.addPercage(ordonnee, 0, false);
 		
 		for(int i=0;i<conf.get("nbPartitions") - 2;i++) {
 			ordonnee += conf.get("entreAxeT");
-			profil.addPercage(ordonnee, false);
+			profil.addPercage(ordonnee, 1, false);
 			ordonnee += conf.get("entreAxeCentralTraverseCorniere");
-			profil.addPercage(ordonnee, false);
+			profil.addPercage(ordonnee, 0, false);
 		}
 		
 		if(conf.get("nbPartitions") >= 2) {
 			ordonnee += conf.get("entreAxeT");
-			profil.addPercage(ordonnee, false);
+			profil.addPercage(ordonnee, 1, false);
 			ordonnee += conf.get("entreAxeLateralTraverseCorniere");
-			profil.addPercage(ordonnee, false);
+			profil.addPercage(ordonnee, 0, false);
 			profil.addCoteDroiteEntrePercages(2, 3, 0);
 		}
 
@@ -45,7 +45,7 @@ public class ContreCadreTraverseCorniere extends ElementGenerique {
 			profil.addCoteDroiteEntrePercages(3, 4, 0);
 		
 		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere");
-		profil.addPercage(ordonnee, true);
+		profil.addPercage(ordonnee, 1, true);
 		
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		profil.addCoteDroiteEntrePercages(1, 2, 0);

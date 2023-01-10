@@ -21,9 +21,9 @@ public class MontantPartition extends ElementGenerique {
 		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
 			double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantPartition") + i * conf.get("entreAxeMontant");
 			if(i != conf.get("nbTrousIntermediairesVerticaux") + 1)
-				profil.addPercage(ordonnee, false);
+				profil.addPercage(ordonnee, 0, false);
 			else
-				profil.addPercage(ordonnee, true);
+				profil.addPercage(ordonnee, 0, true);
 		}
 		profil.addCoteDroiteEntrePercages(0, 1, 0);
 		

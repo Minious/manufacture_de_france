@@ -66,7 +66,7 @@ public class DessinProfil {
 		this.epaisseurEpaulement = 0;
 
 		this.curUnderLineGap = 5;
-		this.taillePoliceCote = 10;
+		this.taillePoliceCote = 16;
 		this.sideCoteDemiLargeur = Side.LEFT;
 		this.margeEntreProfilEtPremiereCote = 20;
 		this.margeInterCote = 2;
@@ -192,13 +192,17 @@ public class DessinProfil {
 
 		// Trace les cotes gauches + percages + traits d'axe horizontaux
 		MyPoint2D origineCotesGauches = new MyPoint2D(-demiLargeurGauche, this.longueur);
-		double curDistanceCotesGauches = this.margeEntreProfilEtPremiereCote;
+		double curDistanceCotesGauches;
+		int maxNumRangeeCote = 0;
 		for (Percage percage : sortedPercages) {
 			// Cotes gauches
 			MyPoint2D extremiteCote = new MyPoint2D(-demiLargeurGauche, this.longueur - percage.getHauteurPercage());
 			//g.drawDistanceCote(origineCotesGauches, extremiteCote, curDistanceCotesGauches);
+			if (maxNumRangeeCote < percage.getNumRangeeCote()) {
+				maxNumRangeeCote = percage.getNumRangeeCote();
+			}
+			curDistanceCotesGauches = getDistanceCotePercage(percage.getNumRangeeCote());
 			g.drawSimpleDistanceCote(origineCotesGauches, extremiteCote, curDistanceCotesGauches);
-			curDistanceCotesGauches = decalerCote(curDistanceCotesGauches);
 
 			// Percages
 			MyPoint2D coordPercage = new MyPoint2D(0, this.longueur - percage.getHauteurPercage());
@@ -215,6 +219,7 @@ public class DessinProfil {
 
 		// Trace la cote de longueur totale
 		//curDistanceCotesGauches = decalerCote(curDistanceCotesGauches);
+		curDistanceCotesGauches = getDistanceCotePercage(maxNumRangeeCote + 1);
 		g.drawDistanceCote(origineCotesGauches, coinSuperieurGaucheProfil, curDistanceCotesGauches);
 
 		// Cotes droites ordonnees de le moins a la plus eloignee
@@ -241,6 +246,10 @@ public class DessinProfil {
 
 	private double decalerCote(double curDistance) {
 		return curDistance + this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote;
+	}
+
+	private double getDistanceCotePercage(int numRangeeCote) {
+		return this.margeEntreProfilEtPremiereCote + numRangeeCote * (this.curUnderLineGap + this.taillePoliceCote + this.margeInterCote);
 	}
 
 	public void setCorniere(Side side) {
@@ -316,24 +325,24 @@ public class DessinProfil {
 		this.valeurPercageEnregistree = valeurPercage;
 	}
 
-	public void addPercage(double hauteurPercage) {
-		this.percages.add(new Percage(hauteurPercage, this.valeurPercageEnregistree));
+	public void addPercage(double hauteurPercage, int numRangeeCote) {
+		this.percages.add(new Percage(hauteurPercage, numRangeeCote, this.valeurPercageEnregistree));
 	}
 
-	public void addPercage(double hauteurPercage, boolean showCote) {
-		this.percages.add(new Percage(hauteurPercage, this.valeurPercageEnregistree, showCote));
+	public void addPercage(double hauteurPercage, int numRangeeCote, boolean showCote) {
+		this.percages.add(new Percage(hauteurPercage, numRangeeCote, this.valeurPercageEnregistree, showCote));
 	}
 
-	public void addPercage(double hauteurPercage, String valeurPercage) {
-		this.percages.add(new Percage(hauteurPercage, valeurPercage));
+	public void addPercage(double hauteurPercage, int numRangeeCote, String valeurPercage) {
+		this.percages.add(new Percage(hauteurPercage, numRangeeCote, valeurPercage));
 	}
 
-    public void addPercage(double hauteurPercage, String valeurPercage, boolean showCote) {
-        this.percages.add(new Percage(hauteurPercage, valeurPercage, showCote));
+    public void addPercage(double hauteurPercage, int numRangeeCote, String valeurPercage, boolean showCote) {
+        this.percages.add(new Percage(hauteurPercage, numRangeeCote, valeurPercage, showCote));
     }
 
-    public void addPercage(double hauteurPercage, String valeurPercage, String valeurAfficheePercage) {
-        this.percages.add(new Percage(hauteurPercage, valeurPercage, valeurAfficheePercage));
+    public void addPercage(double hauteurPercage, int numRangeeCote, String valeurPercage, String valeurAfficheePercage) {
+        this.percages.add(new Percage(hauteurPercage, numRangeeCote, valeurPercage, valeurAfficheePercage));
     }
 
 	public void addCoteDroiteEntrePercages(int percage1, int percage2, int etage) {
@@ -382,32 +391,36 @@ public class DessinProfil {
 
 	class Percage {
 		private double hauteurPercage;
+		private int numRangeeCote;
 		private String valeurPercage;
 		private String valeurAfficheePercage;
 		private boolean showCote;
 
-        Percage(double hauteurPercage, String valeurPercage, String valeurAfficheePercage) {
-            this(hauteurPercage, valeurPercage, true, valeurAfficheePercage);
+        Percage(double hauteurPercage, int numRangeeCote, String valeurPercage, String valeurAfficheePercage) {
+            this(hauteurPercage, numRangeeCote, valeurPercage, true, valeurAfficheePercage);
         }
 
-        Percage(double hauteurPercage, String valeurPercage, boolean showCote) {
-            this(hauteurPercage, valeurPercage, showCote, null);
+        Percage(double hauteurPercage, int numRangeeCote, String valeurPercage, boolean showCote) {
+            this(hauteurPercage, numRangeeCote, valeurPercage, showCote, null);
         }
 
-        private Percage(double hauteurPercage, String valeurPercage, boolean showCote, String valeurAfficheePercage){
-            this.hauteurPercage = hauteurPercage;
+        private Percage(double hauteurPercage, int numRangeeCote, String valeurPercage, boolean showCote, String valeurAfficheePercage){
+			this.hauteurPercage = hauteurPercage;
+			this.numRangeeCote = numRangeeCote;
             this.valeurPercage = valeurPercage;
             this.showCote = showCote;
             this.valeurAfficheePercage = valeurAfficheePercage;
         }
 
-		Percage(double hauteurPercage, String valeurPercage) {
-			this(hauteurPercage, valeurPercage, false);
+		Percage(double hauteurPercage, int numRangeeCote, String valeurPercage) {
+			this(hauteurPercage, numRangeeCote, valeurPercage, false);
 		}
 
 		double getHauteurPercage() {
 			return this.hauteurPercage;
 		}
+
+		int getNumRangeeCote() { return this.numRangeeCote; }
 
         String getValeurPercage() {
             return this.valeurPercage;
