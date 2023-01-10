@@ -200,10 +200,20 @@ public class Main {
 						}
 						renderValues.put(entry.getKey(), value);
 					}
-					
-					Renderer.render(curModele, savePath, renderValues);
-					
-					JOptionPane.showMessageDialog(frame, "Opération terminée avec succès !");
+
+					frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					try {
+						Renderer.render(curModele, savePath, renderValues);
+						JOptionPane.showMessageDialog(frame, "Opération terminée avec succès !");
+					} catch(Exception e) {
+						JOptionPane.showMessageDialog(
+								frame,
+								"Veuillez contacter le développeur.",
+								"Erreur",
+								JOptionPane.ERROR_MESSAGE);
+					} finally {
+						frame.setCursor(Cursor.getDefaultCursor());
+					}
 				}
 			});
 			btnGenerer.setMnemonic(KeyEvent.VK_G);
