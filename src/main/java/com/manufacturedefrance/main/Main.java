@@ -211,6 +211,7 @@ public class Main {
 								"Veuillez contacter le développeur.",
 								"Erreur",
 								JOptionPane.ERROR_MESSAGE);
+						Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
 					} finally {
 						frame.setCursor(Cursor.getDefaultCursor());
 					}

@@ -2,53 +2,54 @@ package com.manufacturedefrance.techdrawgen.modeles.mecanique.elements;
 
 import java.util.Map;
 
+import com.manufacturedefrance.conf.MecaniqueConf;
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
 import com.manufacturedefrance.techdrawgen.DessinProfil;
 import com.manufacturedefrance.techdrawgen.DessinProfil.Side;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
 
-public class TraverseCorniere extends ElementGenerique {
+public class TraverseCorniere extends ElementMecanique {
 	private static final int NB_TRAVERSES = 2;
 	private static final String DIAMETRE_PERCAGES = "ØM5";
 	
-	public TraverseCorniere(Map<String, Double> conf, Map<String, Object> data) {
-		super(conf, data);
+	public TraverseCorniere(Map<String, Object> data, MecaniqueConf conf) {
+		super(data, conf);
 	}
 
 	@Override
 	public MyCustomSvg getDessin() {
-		DessinProfil profil = new DessinProfil(conf.get("largeurTraverseCorniere"), conf.get("hauteurTraverseCorniere"));
+		DessinProfil profil = new DessinProfil(conf.largeurTraverseCorniere(), conf.hauteurTraverseCorniere());
 		profil.setCorniere();
-		profil.setChamp(conf.get("epaisseurProfil"), Side.RIGHT);
+		profil.setChamp(conf.epaisseurProfil(), Side.RIGHT);
 		profil.setValeurPercage(DIAMETRE_PERCAGES);
 		
-		double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouTraverseCorniere");
+		double ordonnee = conf.ecartEntreExtremiteEtPremierTrouTraverseCorniere();
 		profil.addPercage(ordonnee, 0, false);
-		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere");
+		ordonnee += conf.ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere();
 		profil.addPercage(ordonnee, 1, false);
-		ordonnee += conf.get("entreAxeLateralTraverseCorniere");
+		ordonnee += conf.entreAxeLateralTraverseCorniere();
 		profil.addPercage(ordonnee, 0, false);
 		
-		for(int i=0;i<conf.get("nbPartitions") - 2;i++) {
-			ordonnee += conf.get("entreAxeT");
+		for(int i=0;i<conf.getNbPartitions() - 2;i++) {
+			ordonnee += conf.entreAxeT();
 			profil.addPercage(ordonnee, 1, false);
-			ordonnee += conf.get("entreAxeCentralTraverseCorniere");
+			ordonnee += conf.entreAxeCentralTraverseCorniere();
 			profil.addPercage(ordonnee, 0, false);
 		}
 
-		if(conf.get("nbPartitions") >= 2) {
-			ordonnee += conf.get("entreAxeT");
+		if(conf.getNbPartitions() >= 2) {
+			ordonnee += conf.entreAxeT();
 			profil.addPercage(ordonnee, 1, false);
-			ordonnee += conf.get("entreAxeLateralTraverseCorniere");
+			ordonnee += conf.entreAxeLateralTraverseCorniere();
 			profil.addPercage(ordonnee, 0, false);
 			profil.addCoteDroiteEntrePercages(2, 3, 0);
 		}
 
-		if(conf.get("nbPartitions") >= 3)
+		if(conf.getNbPartitions() >= 3)
 			profil.addCoteDroiteEntrePercages(3, 4, 0);
 		
-		ordonnee += conf.get("ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere");
+		ordonnee += conf.ecartEntrePremierTrouEtDeuxiemeTrouTraverseCorniere();
 		profil.addPercage(ordonnee, 1, true);
 		
 		profil.addCoteDroiteEntrePercages(0, 1, 0);

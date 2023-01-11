@@ -1,14 +1,9 @@
 package com.manufacturedefrance.conf;
 
-public class MecaniqueConf {
-	public double hauteurVerriere;
-	public double largeurVerriere;
-	public int nbPartitions;
+public class MecaniqueConf extends GenericConf {
 
 	public MecaniqueConf(double hauteurVerriere, double largeurVerriere, int nbPartitions) {
-		this.hauteurVerriere = hauteurVerriere;
-		this.largeurVerriere = largeurVerriere;
-		this.nbPartitions = nbPartitions;
+		super(hauteurVerriere, largeurVerriere, nbPartitions);
 	}
 
 	//region Nb trous

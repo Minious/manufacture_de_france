@@ -6,8 +6,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.manufacturedefrance.conf.TextFileConf;
-import com.manufacturedefrance.conf.UnprocessableConfFileException;
+import com.manufacturedefrance.conf.MecaniqueConf;
 import com.manufacturedefrance.techdrawgen.LignesTexte;
 import com.manufacturedefrance.techdrawgen.ModeleGenerique;
 import com.manufacturedefrance.techdrawgen.modeles.mecanique.elements.AttachesTraverseCorniere;
@@ -25,46 +24,24 @@ import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 import net.objecthunter.exp4j.function.Function;
 
 public class Mecanique extends ModeleGenerique {
-	public Mecanique(Map<String,Object> data) {
+	private MecaniqueConf conf;
+
+	public Mecanique(Map<String, Object> data) {
 		super(data);
 
-		String fileName = "conf_mecanique.txt";
+		this.conf = new MecaniqueConf(
+			(double) data.get("hauteurVerriere"),
+			(double) data.get("largeurVerriere"),
+			(int) data.get("nbPartitions")
+		);
 
-		HashMap<String, Double> initialMap = new HashMap<>();
-
-		initialMap.put("hauteurVerriere", (Double) data.get("hauteurVerriere"));
-		initialMap.put("largeurVerriere", (Double) data.get("largeurVerriere"));
-		initialMap.put("nbPartitions", ((Integer) data.get("nbPartitions")).doubleValue());
-
-		ArrayList<Function> functions = new ArrayList<>();
-		functions.add(new Function("getNbAttachesIntermediairesTraverseCorniere", 2) {
-			@Override
-			public double apply(double... args) {
-				double entreAxeAttachesSouhaite = args[0];
-				double longueurADiviser = args[1];
-				int nbAttaches = (int) Math.floor(longueurADiviser / entreAxeAttachesSouhaite);
-				double entreAxeAttaches1 = longueurADiviser / nbAttaches;
-				double entreAxeAttaches2 = longueurADiviser / (1 + nbAttaches);
-				double ecartEntreSouhaiteEtReel1 = Math.abs(entreAxeAttachesSouhaite - entreAxeAttaches1);
-				double ecartEntreSouhaiteEtReel2 = Math.abs(entreAxeAttachesSouhaite - entreAxeAttaches2);
-				
-				return ecartEntreSouhaiteEtReel1 < ecartEntreSouhaiteEtReel2 ? nbAttaches - 1 : nbAttaches;
-			}
-		});
-
-		try {
-			this.conf = TextFileConf.loadConf(fileName, initialMap, functions);
-		} catch (UnprocessableConfFileException e) {
-			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
-		}
-
-		MontantCorniere montantCorniere = new MontantCorniere(this.conf, this.data);
-		ContreCadreMontantCorniere contreCadreMontantCorniere = new ContreCadreMontantCorniere(this.conf, this.data);
-		MontantPartition montantPartition = new MontantPartition(this.conf, this.data);
-		ContreCadreMontantPartition contreCadreMontantPartition = new ContreCadreMontantPartition(this.conf, this.data);
-		TraverseCorniere traverseCorniere = new TraverseCorniere(this.conf, this.data);
-		ContreCadreTraverseCorniere contreCadreTraverseCorniere = new ContreCadreTraverseCorniere(this.conf, this.data);
-		AttachesTraverseCorniere attachesTraverseCorniere = new AttachesTraverseCorniere(this.conf, this.data);
+		MontantCorniere montantCorniere = new MontantCorniere(this.data, this.conf);
+		ContreCadreMontantCorniere contreCadreMontantCorniere = new ContreCadreMontantCorniere(this.data, this.conf);
+		MontantPartition montantPartition = new MontantPartition(this.data, this.conf);
+		ContreCadreMontantPartition contreCadreMontantPartition = new ContreCadreMontantPartition(this.data, this.conf);
+		TraverseCorniere traverseCorniere = new TraverseCorniere(this.data, this.conf);
+		ContreCadreTraverseCorniere contreCadreTraverseCorniere = new ContreCadreTraverseCorniere(this.data, this.conf);
+		AttachesTraverseCorniere attachesTraverseCorniere = new AttachesTraverseCorniere(this.data, this.conf);
 
 		int taillePoliceTitre1 = 20;
 		int taillePoliceTitre2 = 16;
@@ -159,7 +136,7 @@ public class Mecanique extends ModeleGenerique {
 
 		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(
 			"VITRAGE :",
-			SvgComponent.DOUBLE_FORMAT.format(conf.get("hauteurVitrage")) + " x " + SvgComponent.DOUBLE_FORMAT.format(conf.get("largeurVitrage")) + " QTE " + conf.get("nbVitrage").intValue()
+			SvgComponent.DOUBLE_FORMAT.format(conf.hauteurVitrage()) + " x " + SvgComponent.DOUBLE_FORMAT.format(conf.largeurVitrage()) + " QTE " + conf.nbVitrage()
 		));
 
 		vitrages.setPadding(new Padding(10));
@@ -173,8 +150,8 @@ public class Mecanique extends ModeleGenerique {
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
 			"Modèle : " + data.get("modele"),
-			"Dimensions : " + conf.get("largeurVerriere") + " x " + conf.get("hauteurVerriere"),
-			"Partitions : " + conf.get("nbPartitions").intValue(),
+			"Dimensions : " + conf.getLargeurVerriere() + " x " + conf.getHauteurVerriere(),
+			"Partitions : " + conf.getNbPartitions(),
             "Nature vitrage : " + data.get("epaisseurVitrage") + " " + data.get("natureVitrage"),
             "Finition : " + data.get("finition")
 		));

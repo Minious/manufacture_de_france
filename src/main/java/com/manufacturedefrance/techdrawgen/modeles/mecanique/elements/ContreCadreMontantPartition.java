@@ -2,26 +2,27 @@ package com.manufacturedefrance.techdrawgen.modeles.mecanique.elements;
 
 import java.util.Map;
 
+import com.manufacturedefrance.conf.MecaniqueConf;
 import com.manufacturedefrance.techdrawgen.ElementGenerique;
 import com.manufacturedefrance.techdrawgen.DessinProfil;
 import com.manufacturedefrance.svgen.MyCustomSvg;
 
-public class ContreCadreMontantPartition extends ElementGenerique {
-	private final int nbMontants = (int) (conf.get("nbPartitions") - 1);
+public class ContreCadreMontantPartition extends ElementMecanique {
 	private static final String DIAMETRE_PERCAGES_EXTREMITE = "Ø9";
 	private static final String DIAMETRE_PERCAGES_INTERMEDIAIRE = "Ø7";
 	
-	public ContreCadreMontantPartition(Map<String, Double> conf, Map<String, Object> data) {
-		super(conf, data);
+	public ContreCadreMontantPartition(Map<String, Object> data, MecaniqueConf conf) {
+		super(data, conf);
+
 	}
 
 	@Override
 	public MyCustomSvg getDessin() {
-		DessinProfil profil = new DessinProfil(conf.get("largeurMontantPartition"), conf.get("hauteurMontantPartition"));
+		DessinProfil profil = new DessinProfil(conf.largeurMontantPartition(), conf.hauteurMontantPartition());
 		profil.setValeurPercage(DIAMETRE_PERCAGES_EXTREMITE);
-		for(int i=0;i<conf.get("nbTrousIntermediairesVerticaux")+2;i++) {
-			double ordonnee = conf.get("ecartEntreExtremiteEtPremierTrouMontantPartition") + i * conf.get("entreAxeMontant");
-			if(i == 0 || i == conf.get("nbTrousIntermediairesVerticaux")+1)
+		for(int i=0;i<conf.nbTrousIntermediairesVerticaux()+2;i++) {
+			double ordonnee = conf.ecartEntreExtremiteEtPremierTrouMontantPartition() + i * conf.entreAxeMontant();
+			if(i == 0 || i == conf.nbTrousIntermediairesVerticaux()+1)
 				profil.setValeurPercage(DIAMETRE_PERCAGES_EXTREMITE);
 			else
 				profil.setValeurPercage(DIAMETRE_PERCAGES_INTERMEDIAIRE);
@@ -34,6 +35,6 @@ public class ContreCadreMontantPartition extends ElementGenerique {
 
 	@Override
 	public int getNbElements() {
-		return this.nbMontants;
+		return conf.getNbPartitions() - 1;
 	}
 }

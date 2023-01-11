@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.manufacturedefrance.conf.PremiumConf;
 import com.manufacturedefrance.conf.TextFileConf;
 import com.manufacturedefrance.conf.UnprocessableConfFileException;
 import com.manufacturedefrance.techdrawgen.LignesTexte;
@@ -23,28 +24,22 @@ import com.manufacturedefrance.svgen.Padding;
 import com.manufacturedefrance.svgen.SvgComponent;
 import com.manufacturedefrance.techdrawgen.MyCustomSvgEnhanced.ShiftMode;
 
-public class Premium extends ModeleGenerique {	
+public class Premium extends ModeleGenerique {
+	private PremiumConf conf;
+
 	public Premium(Map<String,Object> data) {
 		super(data);
 
-		String fileName = "conf_premium.txt";
+		this.conf = new PremiumConf(
+			(double) data.get("hauteurVerriere"),
+			(double) data.get("largeurVerriere"),
+			(int) data.get("nbPartitions"),
+			Double.parseDouble((String) data.get("epaisseurVitrage"))
+		);
 
-		HashMap<String, Double> initialMap = new HashMap<>();
-		
-		initialMap.put("hauteurVerriere", (Double) data.get("hauteurVerriere"));
-		initialMap.put("largeurVerriere", (Double) data.get("largeurVerriere"));
-		initialMap.put("nbPartitions", ((Integer) data.get("nbPartitions")).doubleValue());
-		initialMap.put("epaisseurVitrage", (Double) data.get("epaisseurVitrage"));
-
-		try {
-			this.conf = TextFileConf.loadConf(fileName, initialMap);
-		} catch (UnprocessableConfFileException e) {
-			Logger.getAnonymousLogger().log(Level.SEVERE, e.toString());
-		}
-
-		MontantCorniere montantCorniere = new MontantCorniere(this.conf, this.data);
-		MontantIntermediaire montantIntermediaire = new MontantIntermediaire(this.conf, this.data);
-		TraverseCorniere traverseCorniere = new TraverseCorniere(this.conf, this.data);
+		MontantCorniere montantCorniere = new MontantCorniere(this.data, this.conf);
+		MontantIntermediaire montantIntermediaire = new MontantIntermediaire(this.data, this.conf);
+		TraverseCorniere traverseCorniere = new TraverseCorniere(this.data, this.conf);
 
 		int taillePoliceTitre1 = 20;
 		int taillePoliceTitre2 = 16;
@@ -94,21 +89,21 @@ public class Premium extends ModeleGenerique {
 
 		LignesTexte parcloses = new LignesTexte();
 		parcloses.addLignes(Arrays.asList(
-			"PARCLOSES DE " + conf.get("hauteurParcloseCorniere").intValue(),
-			"- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseTraverseLaterale")) + " QTE " + conf.get("nbParcloseTraverseLaterale").intValue(),
-			"- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantCorniere").intValue()
+			"PARCLOSES DE " + conf.hauteurParcloseCorniere(),
+			"- " + SvgComponent.DOUBLE_FORMAT.format(conf.longueurParcloseTraverseLaterale()) + " QTE " + conf.nbParcloseTraverseLaterale(),
+			"- " + SvgComponent.DOUBLE_FORMAT.format(conf.longueurParcloseMontant()) + " QTE " + conf.nbParcloseMontantCorniere()
 		));
-		if(conf.get("nbParcloseTraverseCentrale") > 0)
-			parcloses.addLigne("- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseTraverseCentrale")) + " QTE " + conf.get("nbParcloseTraverseCentrale").intValue());
-		if(conf.get("nbParcloseMontantIntermediaire") > 0)
+		if(conf.nbParcloseTraverseCentrale() > 0)
+			parcloses.addLigne("- " + SvgComponent.DOUBLE_FORMAT.format(conf.longueurParcloseTraverseCentrale()) + " QTE " + conf.nbParcloseTraverseCentrale());
+		if(conf.nbParcloseMontantIntermediaire() > 0)
 			parcloses.addLignes(Arrays.asList(
-				"PARCLOSES DE " + conf.get("hauteurParcloseT").intValue(),
-				"- " + SvgComponent.DOUBLE_FORMAT.format(conf.get("longueurParcloseMontant")) + " QTE " + conf.get("nbParcloseMontantIntermediaire").intValue()
+				"PARCLOSES DE " + conf.hauteurParcloseT(),
+				"- " + SvgComponent.DOUBLE_FORMAT.format(conf.longueurParcloseMontant()) + " QTE " + conf.nbParcloseMontantIntermediaire()
 			));
 
 		MyCustomSvg vitrages = new LignesTexte(Arrays.asList(
 			"VITRAGE :",
-			SvgComponent.DOUBLE_FORMAT.format(conf.get("hauteurVitrage")) + " x " + SvgComponent.DOUBLE_FORMAT.format(conf.get("largeurVitrage")) + " QTE " + conf.get("nbVitrage").intValue()
+			SvgComponent.DOUBLE_FORMAT.format(conf.hauteurVitrage()) + " x " + SvgComponent.DOUBLE_FORMAT.format(conf.largeurVitrage()) + " QTE " + conf.nbVitrage()
 		));
 		
 		MyHandyLayout layoutCartoucheGauche = new MyHandyLayout();
@@ -125,8 +120,8 @@ public class Premium extends ModeleGenerique {
 			"C.M. : " + data.get("reference"),
 			"Date : " + dateFormat.format(date),
 			"Modèle : Premium",
-			"Dimensions : " + conf.get("hauteurVerriere") + " HT x " + conf.get("largeurVerriere") + " LARG",
-			"Partitions : " + conf.get("nbPartitions").intValue(),
+			"Dimensions : " + conf.getHauteurVerriere() + " HT x " + conf.getLargeurVerriere() + " LARG",
+			"Partitions : " + conf.getNbPartitions(),
 			"Nature vitrage : " + data.get("epaisseurVitrage") + " " + data.get("natureVitrage"),
 			"Finition : " + data.get("finition")
 		));

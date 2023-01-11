@@ -17,18 +17,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class ModeleGenerique {
-	protected Map<String, Double> conf;
 	protected Map<String, Object> data;
-	
 	protected Map<String, MyCustomSvg> svgToRender;
-	
+
 	public ModeleGenerique(Map<String, Object> data) {
 		this.data = data;
-		this.conf = new HashMap<>();
-		
+
 		this.svgToRender = new HashMap<>();
 	}
-	
+
 	public void generate(Path savePathTemp) {
 		Path savePath = savePathTemp.resolve(this.data.get("client")+"_"+this.data.get("reference"));
 
